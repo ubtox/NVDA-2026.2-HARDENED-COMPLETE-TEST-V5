@@ -1,0 +1,19 @@
+﻿Archive revision                 PASS  
+Pinned source dependencies       PASS  
+Dependencies                     PASS  
+Prepare generated source         PASS  
+Generated source readiness       PASS  
+Custom speech regression         PASS  
+Custom braille audit             PASS  
+Custom add-on cleanup regression PASS  
+Custom x86 synth runtime regression PASS  
+Ruff check                       PASS  
+Ruff format check                PASS  
+Pyright                          PASS  
+Unit tests                       PASS  
+System test preflight            FAIL  System-test desktop is not isolated. Close these processes first: nvda. Run in a dedicated Windows session/VM, or use -SkipSystemTests. -ForceSystemTests overrides this protection but can produce false failures.
+System tests                     SKIP  System-test preflight failed; no Robot tests were executed
+Translator comments POT          PASS  
+Dependency licenses              PASS  
+Build dist                       SKIP  Earlier validation step failed
+Build launcher                   SKIP  Earlier validation step failed

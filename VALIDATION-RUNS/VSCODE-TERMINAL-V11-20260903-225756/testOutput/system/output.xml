@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.13 on win32)" generated="2026-09-03T22:58:03.431022" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot" source="C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot">
+<suite id="s1-s1" name="vscodeTests" source="C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\vscodeTests.robot">
+<test id="s1-s1-t1" name="terminal panel" line="64">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:58:04.024702" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:58:04.024415" elapsed="0.000381"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:58:04.025133" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T22:58:04.025182" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T22:58:04.030003" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:58:04.031432" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:58:04.034875" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:58:04.044015" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:58:04.047097" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:58:04.050698" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:58:04.053762" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:58:04.053839" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T22:58:04.053946" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T22:58:04.054016" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:58:04.054364" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:58:04.055791" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T22:58:04.055877" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T22:58:04.070327" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T22:58:04.070450" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:58:08.142917" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T22:58:08.816480" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T22:58:08.843113" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T22:58:08.845024" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T22:58:08.845088" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T22:58:08.846408" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T22:58:04.024952" elapsed="4.821575"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:58:08.847055" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:58:08.846882" elapsed="0.000519"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T22:58:08.847531" elapsed="0.001172"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:58:04.023571" elapsed="4.825221"/>
+</kw>
+<kw name="Terminal Panel" owner="vscodeTests">
+<msg time="2026-09-03T22:58:08.861147" level="DEBUG">Starting Visual Studio Code: start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatesti_39vequ\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatesti_39vequ\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatesti_39vequ\testDirectory"</msg>
+<msg time="2026-09-03T22:58:08.861329" level="INFO">Starting process:
+start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatesti_39vequ\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatesti_39vequ\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatesti_39vequ\testDirectory"</msg>
+<msg time="2026-09-03T22:58:08.861384" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   vscodeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T22:58:08.880286" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:58:09.383433" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:58:09.881752" level="DEBUG">Found window (HWND: 2688698) (title: Visual Studio Code)</msg>
+<msg time="2026-09-03T22:58:09.881940" level="DEBUG">Window already focused, HWND '2688698' with title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:58:09.882010" level="INFO">Foreground window title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:58:09.882107" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:11.189345" level="INFO">emulateKeyPress ('control+shift+p',)</msg>
+<msg time="2026-09-03T22:58:12.319917" level="INFO">emulateKeyPress ('T',)</msg>
+<msg time="2026-09-03T22:58:12.843002" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:58:13.249136" level="INFO">emulateKeyPress ('r',)</msg>
+<msg time="2026-09-03T22:58:13.874068" level="INFO">emulateKeyPress ('m',)</msg>
+<msg time="2026-09-03T22:58:13.979784" level="INFO">emulateKeyPress ('i',)</msg>
+<msg time="2026-09-03T22:58:14.109795" level="INFO">emulateKeyPress ('n',)</msg>
+<msg time="2026-09-03T22:58:14.333746" level="INFO">emulateKeyPress ('a',)</msg>
+<msg time="2026-09-03T22:58:14.439596" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:58:14.645565" level="INFO">emulateKeyPress (':',)</msg>
+<msg time="2026-09-03T22:58:15.065480" level="INFO">emulateKeyPress (' ',)</msg>
+<msg time="2026-09-03T22:58:15.389165" level="INFO">emulateKeyPress ('C',)</msg>
+<msg time="2026-09-03T22:58:15.712208" level="INFO">emulateKeyPress ('r',)</msg>
+<msg time="2026-09-03T22:58:16.018698" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:58:16.124959" level="INFO">emulateKeyPress ('a',)</msg>
+<msg time="2026-09-03T22:58:16.230680" level="INFO">emulateKeyPress ('t',)</msg>
+<msg time="2026-09-03T22:58:16.436526" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:58:16.643063" level="INFO">emulateKeyPress (' ',)</msg>
+<msg time="2026-09-03T22:58:16.763600" level="INFO">emulateKeyPress ('N',)</msg>
+<msg time="2026-09-03T22:58:16.888305" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:58:17.006165" level="INFO">emulateKeyPress ('w',)</msg>
+<msg time="2026-09-03T22:58:17.111826" level="INFO">emulateKeyPress (' ',)</msg>
+<msg time="2026-09-03T22:58:17.319322" level="INFO">emulateKeyPress ('T',)</msg>
+<msg time="2026-09-03T22:58:17.436442" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:58:17.542433" level="INFO">emulateKeyPress ('r',)</msg>
+<msg time="2026-09-03T22:58:17.647610" level="INFO">emulateKeyPress ('m',)</msg>
+<msg time="2026-09-03T22:58:17.753500" level="INFO">emulateKeyPress ('i',)</msg>
+<msg time="2026-09-03T22:58:17.858691" level="INFO">emulateKeyPress ('n',)</msg>
+<msg time="2026-09-03T22:58:17.964183" level="INFO">emulateKeyPress ('a',)</msg>
+<msg time="2026-09-03T22:58:18.077832" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:58:18.934146" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T22:58:23.039946" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:58:23.269332" level="INFO">emulateKeyPress ('c',)</msg>
+<msg time="2026-09-03T22:58:23.375338" level="INFO">emulateKeyPress ('h',)</msg>
+<msg time="2026-09-03T22:58:23.481830" level="INFO">emulateKeyPress ('o',)</msg>
+<msg time="2026-09-03T22:58:23.587634" level="INFO">emulateKeyPress (' ',)</msg>
+<msg time="2026-09-03T22:58:23.803308" level="INFO">emulateKeyPress ('N',)</msg>
+<msg time="2026-09-03T22:58:23.929391" level="INFO">emulateKeyPress ('V',)</msg>
+<msg time="2026-09-03T22:58:24.043578" level="INFO">emulateKeyPress ('D',)</msg>
+<msg time="2026-09-03T22:58:24.186525" level="INFO">emulateKeyPress ('A',)</msg>
+<msg time="2026-09-03T22:58:24.423718" level="INFO">emulateKeyPress ('_',)</msg>
+<msg time="2026-09-03T22:58:24.530320" level="INFO">emulateKeyPress ('T',)</msg>
+<msg time="2026-09-03T22:58:24.673151" level="INFO">emulateKeyPress ('E',)</msg>
+<msg time="2026-09-03T22:58:24.792130" level="INFO">emulateKeyPress ('R',)</msg>
+<msg time="2026-09-03T22:58:25.018608" level="INFO">emulateKeyPress ('M',)</msg>
+<msg time="2026-09-03T22:58:25.235801" level="INFO">emulateKeyPress ('I',)</msg>
+<msg time="2026-09-03T22:58:25.366873" level="INFO">emulateKeyPress ('N',)</msg>
+<msg time="2026-09-03T22:58:25.505386" level="INFO">emulateKeyPress ('A',)</msg>
+<msg time="2026-09-03T22:58:25.628933" level="INFO">emulateKeyPress ('L',)</msg>
+<msg time="2026-09-03T22:58:25.856063" level="INFO">emulateKeyPress ('_',)</msg>
+<msg time="2026-09-03T22:58:25.976330" level="INFO">emulateKeyPress ('O',)</msg>
+<msg time="2026-09-03T22:58:26.096552" level="INFO">emulateKeyPress ('N',)</msg>
+<msg time="2026-09-03T22:58:26.238135" level="INFO">emulateKeyPress ('E',)</msg>
+<msg time="2026-09-03T22:58:26.362621" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T22:58:29.491859" level="INFO">emulateKeyPress ('alt+f2',)</msg>
+<msg time="2026-09-03T22:58:31.135400" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:31.138018" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:31.139557" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:31.327479" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 78}</msg>
+<msg time="2026-09-03T22:58:32.334176" level="INFO">get_speech_at_index_until_now (78,)</msg>
+<msg time="2026-09-03T22:58:32.336088" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:32.337473" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:32.338640" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:32.444138" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 79}</msg>
+<msg time="2026-09-03T22:58:33.451337" level="INFO">get_speech_at_index_until_now (79,)</msg>
+<msg time="2026-09-03T22:58:33.453165" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:33.475172" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:33.476953" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:33.682118" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 80}</msg>
+<msg time="2026-09-03T22:58:34.688153" level="INFO">get_speech_at_index_until_now (80,)</msg>
+<msg time="2026-09-03T22:58:34.690085" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:34.691477" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:34.692608" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:34.897356" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 81}</msg>
+<msg time="2026-09-03T22:58:35.905246" level="INFO">get_speech_at_index_until_now (81,)</msg>
+<msg time="2026-09-03T22:58:35.907037" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:35.908324" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:35.909483" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:36.114775" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 82}</msg>
+<msg time="2026-09-03T22:58:37.121649" level="INFO">get_speech_at_index_until_now (82,)</msg>
+<msg time="2026-09-03T22:58:37.136570" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:37.138539" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:37.139762" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:37.345186" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 83}</msg>
+<msg time="2026-09-03T22:58:38.351080" level="INFO">get_speech_at_index_until_now (83,)</msg>
+<msg time="2026-09-03T22:58:38.352904" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:38.354191" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:38.355381" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:38.560794" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 84}</msg>
+<msg time="2026-09-03T22:58:39.496492" level="INFO">get_speech_at_index_until_now (84,)</msg>
+<msg time="2026-09-03T22:58:39.520272" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:39.521978" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:39.523135" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:39.729699" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 85}</msg>
+<msg time="2026-09-03T22:58:40.693989" level="INFO">get_speech_at_index_until_now (85,)</msg>
+<msg time="2026-09-03T22:58:40.695892" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:40.697381" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:40.698630" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:40.903520" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 86}</msg>
+<msg time="2026-09-03T22:58:41.812142" level="INFO">get_speech_at_index_until_now (86,)</msg>
+<msg time="2026-09-03T22:58:41.813983" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:41.815304" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:41.816468" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:42.023951" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 87}</msg>
+<msg time="2026-09-03T22:58:42.930382" level="INFO">get_speech_at_index_until_now (87,)</msg>
+<msg time="2026-09-03T22:58:42.932080" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:42.933417" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:42.934648" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:43.139940" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 88}</msg>
+<msg time="2026-09-03T22:58:44.147646" level="INFO">get_speech_at_index_until_now (88,)</msg>
+<msg time="2026-09-03T22:58:44.149492" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:44.150785" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:44.151954" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:44.357049" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 89}</msg>
+<msg time="2026-09-03T22:58:45.363739" level="INFO">get_speech_at_index_until_now (89,)</msg>
+<msg time="2026-09-03T22:58:45.365425" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:45.366776" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:45.367920" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:45.573161" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 90}</msg>
+<msg time="2026-09-03T22:58:46.580414" level="INFO">get_speech_at_index_until_now (90,)</msg>
+<msg time="2026-09-03T22:58:46.582212" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:46.604106" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:46.605591" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:46.810585" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 91}</msg>
+<msg time="2026-09-03T22:58:47.737816" level="INFO">get_speech_at_index_until_now (91,)</msg>
+<msg time="2026-09-03T22:58:47.755190" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:58:47.757126" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:58:47.758312" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:58:47.963781" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 92}</msg>
+<msg time="2026-09-03T22:58:49.022429" level="INFO">get_speech_at_index_until_now (92,)</msg>
+<msg time="2026-09-03T22:58:49.024537" level="INFO">emulateKeyPress ('escape',)</msg>
+<msg time="2026-09-03T22:58:50.182726" level="FAIL">'NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE' does not contain 'NVDA_TERMINAL_ONE'</msg>
+<msg time="2026-09-03T22:58:50.186249" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\vscodeTests.py", line 216, in terminal_panel
+    _builtIn.should_contain(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+    	speech,
+     ^^^^^^^
+    	"NVDA_TERMINAL_ONE",
+     ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robot\libraries\BuiltIn.py", line 1279, in should_contain
+    raise AssertionError(
+    ...&lt;7 lines&gt;...
+    )
+AssertionError: 'NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE' does not contain 'NVDA_TERMINAL_ONE'</msg>
+<doc>Ensure VS Code integrated terminal output is accessible with NVDA.</doc>
+<status status="FAIL" start="2026-09-03T22:58:08.848958" elapsed="41.337449">'NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE' does not contain 'NVDA_TERMINAL_ONE'</status>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:58:50.187695" level="INFO">Foreground window title: testDirectory - Visual Studio Code [Administrator]</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:58:50.187491" elapsed="0.000273"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T22:58:50.188226" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T22:58:50.187893" elapsed="0.000364"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Take Screenshot" owner="ScreenCapLibrary">
+<msg time="2026-09-03T22:58:50.366592" level="INFO" html="true">&lt;a href="nvdaTestRunLogs/Robot.vscodeTests-terminal_panel-failedTest.png"&gt;&lt;img src="nvdaTestRunLogs/Robot.vscodeTests-terminal_panel-failedTest.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${screenshotName}</arg>
+<doc>Takes a screenshot in the specified format at library import and
+embeds it into the log file (PNG by default).</doc>
+<status status="PASS" start="2026-09-03T22:58:50.188590" elapsed="0.178220"/>
+</kw>
+<arg>Take Screenshot</arg>
+<arg>${screenshotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T22:58:50.188407" elapsed="0.178547"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:58:50.367283" elapsed="0.003132"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:58:50.370618" elapsed="0.026160"/>
+</kw>
+<kw name="Close Vscode" owner="VSCodeLib">
+<msg time="2026-09-03T22:58:50.897994" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:58:50.900307" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:58:50.900519" level="DEBUG">Cleaning up Visual Studio Code temp dir: C:\Users\adm\AppData\Local\Temp\nvdatesti_39vequ</msg>
+<status status="PASS" start="2026-09-03T22:58:50.397053" elapsed="0.545155"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:58:50.942700" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:58:50.947231" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T22:58:50.947374" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T22:58:50.962396" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:58:53.632324" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:58:53.632465" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:58:53.632704" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:58:53.632774" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T22:58:53.636622" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:58:53.636690" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-nvda.log</msg>
+<msg time="2026-09-03T22:58:53.636734" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T22:58:53.636865" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T22:58:53.636912" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T22:58:53.647499" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T22:58:50.942515" elapsed="2.705116"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:58:50.187044" elapsed="3.460718"/>
+</kw>
+<doc>Ensure terminal panel is accessible.</doc>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<tag>vscode</tag>
+<status status="FAIL" start="2026-09-03T22:58:04.022516" elapsed="49.625325">'NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE
+PS C: Users adm App Data Local Temp nvdatesti  39vequ test Directory greater  echo NVDA TERMINAL ONE' does not contain 'NVDA_TERMINAL_ONE'</status>
+</test>
+<doc>Visual Studio Code tests</doc>
+<status status="FAIL" start="2026-09-03T22:58:03.473581" elapsed="50.175170"/>
+</suite>
+<status status="FAIL" start="2026-09-03T22:58:03.433594" elapsed="50.215805"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">NVDA</stat>
+<stat pass="0" fail="1" skip="0">smoke test</stat>
+<stat pass="0" fail="1" skip="0">vscode</stat>
+</tag>
+<suite>
+<stat name="Robot" id="s1" pass="0" fail="1" skip="0">Robot</stat>
+<stat name="vscodeTests" id="s1-s1" pass="0" fail="1" skip="0">Robot.vscodeTests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

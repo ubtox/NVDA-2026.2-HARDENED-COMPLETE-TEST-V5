@@ -1,0 +1,256 @@
+==============================================================================
+Robot                                                                         
+==============================================================================
+Robot.chromeTests :: HTML test cases in Chrome                                
+==============================================================================
+Announce list item when moving by word or character :: Entering a ... | PASS |
+------------------------------------------------------------------------------
+i7562 :: List should not be announced on every line of a ul in a c... | PASS |
+------------------------------------------------------------------------------
+pr11606 :: Announce the correct line when placed at the end of a l... | PASS |
+------------------------------------------------------------------------------
+focus mode is turned on on focused read-only list item :: Focused ... | PASS |
+------------------------------------------------------------------------------
+ARIA details :: Ensure a summary of aria-details is read on comman... | PASS |
+------------------------------------------------------------------------------
+ARIA details with free review and nav :: Variation on the ARIA det... | PASS |
+------------------------------------------------------------------------------
+ARIA details noVbuf :: Test for retrieving ARIA details from a but... | PASS |
+------------------------------------------------------------------------------
+ARIA details noVbuf with free review and nav :: Test for retrievin... | PASS |
+------------------------------------------------------------------------------
+ARIA description Focus Mode :: Navigate to a span with aria-descri... | PASS |
+------------------------------------------------------------------------------
+ARIA description Browse Mode :: Navigate (down arrow, in browse mo... | PASS |
+------------------------------------------------------------------------------
+ARIA description Say All :: Say all, contents includes aria-descri... | PASS |
+------------------------------------------------------------------------------
+ARIA details role :: Test aria details roles being announced on di... | PASS |
+------------------------------------------------------------------------------
+multiple ARIA details targets :: Test multiple aria details target... | PASS |
+------------------------------------------------------------------------------
+i13307 :: ensure aria-labelledby on a landmark or region is automa... | PASS |
+------------------------------------------------------------------------------
+Table navigation with merged columns :: When navigating through a ... | PASS |
+------------------------------------------------------------------------------
+Table sayAll commands :: Table sayAll commands                        | PASS |
+------------------------------------------------------------------------------
+Table Speak All commands :: Table speak entire row/column commands    | PASS |
+------------------------------------------------------------------------------
+Table sayAll axis caching for merged cells :: Tests that axis cach... | PASS |
+------------------------------------------------------------------------------
+Table in style display: table :: Properly announce table row/colum... | PASS |
+------------------------------------------------------------------------------
+i10840 :: The name of table header cells should only be conveyed o... | PASS |
+------------------------------------------------------------------------------
+i10890 :: Test sort state is announced on column header when chang... | FAIL |
+speech Actual != Expected: No previous heading at level 3 != Example 2: Sortable Data Grid With Editable Cells  heading  level 3
+------------------------------------------------------------------------------
+Report language disabled :: Read a sentence with different languag... | PASS |
+------------------------------------------------------------------------------
+Report language enabled :: Read a sentence with different language... | PASS |
+------------------------------------------------------------------------------
+Report language without dialects :: Read a sentence with different... | PASS |
+------------------------------------------------------------------------------
+Report not supported language without other languages :: Read a se... | PASS |
+------------------------------------------------------------------------------
+Report not supported language and other languages :: Read a senten... | PASS |
+------------------------------------------------------------------------------
+ARIA roleDescription focus :: report focusing an element with a cu... | PASS |
+------------------------------------------------------------------------------
+ARIA roleDescription inline browse mode :: Read an inline element ... | PASS |
+------------------------------------------------------------------------------
+ARIA roleDescription block browse mode :: Read a block element wit... | PASS |
+------------------------------------------------------------------------------
+ARIA roleDescription inline content editable :: Read an inline ele... | PASS |
+------------------------------------------------------------------------------
+ARIA roleDescription block content editable :: Read an block eleme... | PASS |
+------------------------------------------------------------------------------
+ARIA treegrid :: Ensure that ARIA treegrids are accessible as a st... | PASS |
+------------------------------------------------------------------------------
+ARIA invalid spelling and grammar :: Tests ARIA invalid values of ... | PASS |
+------------------------------------------------------------------------------
+aria-errormessage :: Test that aria-errormessage is reported corre... | PASS |
+------------------------------------------------------------------------------
+ARIA checkbox :: Navigate to an unchecked checkbox in reading mode.   | PASS |
+------------------------------------------------------------------------------
+ARIA switch role :: Test aria switch control has appropriate role ... | FAIL |
+Move to first heading 2 in frame
+speech Actual != Expected: No previous heading at level 2 != Example  heading  level 2
+------------------------------------------------------------------------------
+Marked Browse mode :: Ensure that Marked content is read in browse... | PASS |
+------------------------------------------------------------------------------
+Marked Focus mode :: Ensure that Marked content is read in Focus mode | PASS |
+------------------------------------------------------------------------------
+checkbox labelled by inner element :: A checkbox labelled by an in... | PASS |
+------------------------------------------------------------------------------
+i12147 :: New focus target should be announced if the triggering e... | PASS |
+------------------------------------------------------------------------------
+Prevent Duplicate Speech From Description while in Focus mode         | PASS |
+------------------------------------------------------------------------------
+Prevent Duplicate Speech From Description while in Browse mode wit... | PASS |
+------------------------------------------------------------------------------
+Only report description in focus mode due to reportObjectDescripti... | PASS |
+------------------------------------------------------------------------------
+Quick Nav reports target first :: Quick Nav target should always b... | PASS |
+------------------------------------------------------------------------------
+Focus reports target first :: Focus target should always be report... | PASS |
+------------------------------------------------------------------------------
+textParagraphNavigation :: Text paragraph navigation                  | PASS |
+------------------------------------------------------------------------------
+styleNav :: Same style navigation                                     | PASS |
+------------------------------------------------------------------------------
+Report link destination plain link :: NVDA+K reports the URL of a ... | PASS |
+------------------------------------------------------------------------------
+Report link destination nested strong :: NVDA+K reports the URL wh... | PASS |
+------------------------------------------------------------------------------
+Report link destination nested em :: NVDA+K reports the URL when c... | PASS |
+------------------------------------------------------------------------------
+Report link destination deeply nested :: NVDA+K reports the URL wh... | PASS |
+------------------------------------------------------------------------------
+Report link destination image link :: NVDA+K reports the URL of an... | PASS |
+------------------------------------------------------------------------------
+Report link destination not a link :: NVDA+K reports 'Not a link' ... | PASS |
+------------------------------------------------------------------------------
+Robot.chromeTests :: HTML test cases in Chrome                        | FAIL |
+53 tests, 51 passed, 2 failed
+==============================================================================
+Robot.startupShutdownNVDA :: Basic start and exit tests                       
+==============================================================================
+Starts :: Ensure that NVDA can start                                  | PASS |
+------------------------------------------------------------------------------
+Starts from desktop shortcut :: Ensure that NVDA can start from de... | PASS |
+Desktop shortcut only exists on installed copies
+------------------------------------------------------------------------------
+Quits from keyboard :: Starts NVDA and ensures that it can be quit... | PASS |
+------------------------------------------------------------------------------
+Quits from keyboard with welcome dialog open :: Starts NVDA and en... | PASS |
+------------------------------------------------------------------------------
+Quits from keyboard with about dialog open :: Starts NVDA and ensu... | PASS |
+------------------------------------------------------------------------------
+Quits from menu :: Starts NVDA and ensures that it can be quit usi... | PASS |
+------------------------------------------------------------------------------
+Read welcome dialog :: Ensure that the welcome dialog can be read ... | PASS |
+------------------------------------------------------------------------------
+Restarts :: Ensure that NVDA can restart from keyboard                | PASS |
+------------------------------------------------------------------------------
+Restarts on crash :: Ensure NVDA restarts on crash.                   | PASS |
+------------------------------------------------------------------------------
+Restarts on io thread crash :: Ensure NVDA restarts on a crash on ... | PASS |
+------------------------------------------------------------------------------
+Restarts on UIAHandler crash :: Ensure NVDA restarts on crash on t... | PASS |
+------------------------------------------------------------------------------
+Robot.startupShutdownNVDA :: Basic start and exit tests               | PASS |
+11 tests, 11 passed, 0 failed
+==============================================================================
+Robot.symbolPronunciationTests :: Symbol pronunciation tests                  
+==============================================================================
+symbolInSpeechUI :: Ensure symbols aren't substituted within NVDA ... | PASS |
+------------------------------------------------------------------------------
+moveByWord :: Ensure symbols announced as expected when navigating... | FAIL |
+actual vs expected. With symbolLevel SymLevel.NONE: ['deux points', 'Say', 'parenthèse gauche', 'spelling error  quietly', 'out of spelling error\nparenthèse droite', 'guillemet', 'Hello', 'virgule', 'Jim', '.', "spelling error  don't", 'out of spelling error\nflèche droite', 'T-shirt', 'retour chariot', '1', 'barre verticale', '2', '', '3', 'arobase', '4', 'retour chariot'] != ['Say', '(quietly)', 'Hello,', 'Jim', '.', "don't", 'right-pointing arrow', 't-shirt', '1', 'bar', '2', '', '3', '', '4', 'blank', '', 'blank', 'right-pointing arrow', 't-shirt', 't-shirt', 'blank']
+------------------------------------------------------------------------------
+moveByLine :: Ensure symbols announced as expected when navigating... | FAIL |
+actual vs expected. With symbolLevel SymLevel.NONE: ['Say', '(  spelling error  quietly)', 'Hello,', 'Jim .', "spelling error  don't", '', 'T-shirt', '', 'T-shirt', 'T-shirt', '1   2    3  arobase     4', 'blank', '', 'blank', 'blank'] != ['Say', '(quietly)', 'Hello,', 'Jim .', "don't", '', 't-shirt', '', 't-shirt', 't-shirt', '1   2    3      4', 'blank', '', 'blank', 'blank']
+------------------------------------------------------------------------------
+moveByCharacter :: Ensure symbols announced as expected when navig... | FAIL |
+actual vs expected. With symbolLevel SymLevel.NONE: ['S', 'espace', 'parenthèse gauche', 'parenthèse droite', 'guillemet', 'apostrophe', 'e', 'virgule', 'flèche droite', 'T-shirt', 'tab', 'retour chariot', 'Right\nretour chariot'] != ['S', 'space', 'left paren', 'right paren', 'quote', 'tick', 'e', 'comma', 'right-pointing arrow', 't-shirt', 'tab', 'carriage return', 'line feed']
+------------------------------------------------------------------------------
+delayedCharacterDescriptions :: Ensure delayed character descripti... | PASS |
+------------------------------------------------------------------------------
+selectionByWord :: Ensure symbols announced as expected when selec... | FAIL |
+actual vs expected. With symbolLevel SymLevel.NONE: ['Test selected', ':  selected', 'Say  selected', 'left paren  selected', 'quietly selected', ')  selected', 'quote  selected', 'Hello selected', ',  selected', 'Jim  selected', '.  selected', "don't  selected", 'selected', 't-shirt   selected', 'carriage return  selected', '1  selected', 'selected', '2  selected', 'selected', '3  selected', 'selected', '4  selected', 'carriage return  selected', 'space  selected', 'carriage return  selected', 'tab  selected'] != ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim  selected', '.  selected', "don't  selected", 'selected', 't-shirt   selected', 'selected', '1  selected', 'selected', '2  selected', 'selected', '3  selected', 'selected', '4  selected', 'selected', 'selected', 'selected', 'selected', 'right-pointing arrow  selected', 'selected', 't-shirt  selected', 'selected', 't-shirt  selected']
+------------------------------------------------------------------------------
+selectionByLine :: Ensure symbols announced as expected when selec... | FAIL |
+actual vs expected. With symbolLevel SymLevel.NONE: ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim .  selected', "don't   selected", 'selected', 't-shirt   selected', 'selected', 't-shirt    selected', 't-shirt   selected', '1   2    3      4  selected', 'selected', 'selected', 'selected'] != ['Test:   selected', 'Say   selected', '(quietly)   selected', 'Hello,   selected', 'Jim .   selected', "don't    selected", 'selected', 't-shirt    selected', 'selected', 't-shirt     selected', 't-shirt    selected', '1   2    3      4   selected', 'selected', 'selected', 'selected']
+------------------------------------------------------------------------------
+selectionByCharacter :: Ensure symbols announced as expected when ... | FAIL |
+actual vs expected. With symbolLevel SymLevel.NONE: ['T  selected', 'S  selected', 'space  selected', 'left paren  selected\nChangement de tâche  window\nApplications en cours d’exécution  list\nTéléchargements : Explorateur de fichiers  row 1  column 2  2 of 6', 'about:blank - Google Chrome  column 3  3 of 6', 'C: Windows system 32 cmd exe  row 2  column 1  4 of 6\nAdministrateur : Windows Power Shell  column 2  5 of 6', 'Chat GPT Classic  column 3  6 of 6\nChat GPT Classic  window\nCorriger script Power Shell  document\nclickable  link  Ignorer et passer au contenu', 'I  selected', 'g  selected', 'n  selected', 'o  selected', 'r  selected', 'e  selected'] != ['T  selected', 'S  selected', 'space  selected', 'left paren  selected', 'right paren  selected', 'quote  selected', 'tick  selected', 'e  selected', 'comma  selected', 'right-pointing arrow  selected', 't-shirt  selected', 'tab  selected', 'selected']
+------------------------------------------------------------------------------
+tableHeaderSymbols :: Ensure symbols announced as expected in tabl... | FAIL |
+actual vs expected. With symbolLevel SymLevel.ALL: ['Démarrer  window\nRechercher  window\nZone de recherche  edit  blank\nNVDA Browser Test Case  left paren(7100729925344166655 right paren)  dash- Google Chrome  window\nNVDA Browser Test Case  left paren(7100729925344166655 right paren)  document\na', 'right-pointing arrow   t-shirt  column 2\nb\nNVDA Browser Test Case  left paren(7100729925344166655 right paren)  dash- Google Chrome  region\nNew tab Ctrl plus T  t1 of 23'] != ['right-pointing arrow   t-shirt  column 2\nb', 'Don tick t  column 3\nc']
+------------------------------------------------------------------------------
+ignoreBlankLinesForReportLineIndentation :: Ensure indentation ann... | FAIL |
+actual vs expected. With symbolLevel SymLevel.ALL: ['spelling error  def  spelling error  foo', 'tab  hello', 'no indent  blank', 'tab  world', 'no indent  blank', 'spelling error  def bar', 'blank'] != ['def foo', 'tab  hello', 'no indent  blank', 'tab  world', 'no indent  blank', 'def bar', 'blank']
+------------------------------------------------------------------------------
+Robot.symbolPronunciationTests :: Symbol pronunciation tests          | FAIL |
+10 tests, 2 passed, 8 failed
+==============================================================================
+Robot.vscodeTests :: Visual Studio Code tests                                 
+==============================================================================
+status line is available :: Ensure NVDA+end does not report "no st... | PASS |
+------------------------------------------------------------------------------
+sidebar toggle announced :: Ensure control+b announces sidebar sho... | FAIL |
+'pane
+Éditeur de texte  document  selected TS (' does not contain 'Side Bar hidden'
+------------------------------------------------------------------------------
+command palette :: Ensure the command palette is announced when ac... | FAIL |
+<class 'AttributeError'>:'StreamRedirector' object has no attribute 'getvalue'
+
+Also teardown failed:
+Several failures occurred:
+
+1) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+
+2) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+------------------------------------------------------------------------------
+file navigation :: Ensure file navigation works correctly.            | FAIL |
+<class 'AttributeError'>:'StreamRedirector' object has no attribute 'getvalue'
+
+Also teardown failed:
+Several failures occurred:
+
+1) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+
+2) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+------------------------------------------------------------------------------
+search panel :: Ensure the search panel is announced when activate... | FAIL |
+<class 'AttributeError'>:'StreamRedirector' object has no attribute 'getvalue'
+
+Also teardown failed:
+Several failures occurred:
+
+1) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+
+2) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+------------------------------------------------------------------------------
+file editor operations :: Ensure file editor operations such as na... | FAIL |
+<class 'AttributeError'>:'StreamRedirector' object has no attribute 'getvalue'
+
+Also teardown failed:
+Several failures occurred:
+
+1) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+
+2) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+------------------------------------------------------------------------------
+extensions panel :: Ensure extensions panel is accessible             | FAIL |
+Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+
+Also teardown failed:
+Several failures occurred:
+
+1) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+
+2) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+------------------------------------------------------------------------------
+terminal panel :: Ensure terminal panel is accessible.                | FAIL |
+<class 'AttributeError'>:'StreamRedirector' object has no attribute 'getvalue'
+
+Also teardown failed:
+Several failures occurred:
+
+1) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+
+2) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée
+------------------------------------------------------------------------------
+Robot.vscodeTests :: Visual Studio Code tests                         | FAIL |
+8 tests, 1 passed, 7 failed
+==============================================================================
+Robot                                                                 | FAIL |
+82 tests, 65 passed, 17 failed
+==============================================================================
+Output:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\output.xml
+XUnit:   C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\systemTests.xml
+Log:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\log.html
+Report:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\report.html

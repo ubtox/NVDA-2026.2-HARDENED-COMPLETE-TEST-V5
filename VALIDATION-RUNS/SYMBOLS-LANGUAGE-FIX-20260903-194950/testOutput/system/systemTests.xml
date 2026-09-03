@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Robot" tests="10" errors="0" failures="7" skipped="0" time="353.787" timestamp="2026-09-03T19:49:51.140219">
+<testsuite name="symbolPronunciationTests" tests="10" errors="0" failures="7" skipped="0" time="353.737" timestamp="2026-09-03T19:49:51.189363">
+<testcase classname="Robot.symbolPronunciationTests" name="symbolInSpeechUI" time="24.253">
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="moveByWord" time="47.077">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['deux points', 'Say', 'parenthèse gauche', 'spelling error  quietly', 'out of spelling error\nparenthèse droite', 'guillemet', 'Hello', 'virgule', 'Jim', '.', &quot;spelling error  don't&quot;, 'out of spelling error\nflèche droite', 'T-shirt', 'retour chariot', '1', 'barre verticale', '2', '', '3', 'arobase', '4', 'retour chariot'] != ['Say', '(quietly)', 'Hello,', 'Jim', '.', &quot;don't&quot;, 'right-pointing arrow', 't-shirt', '1', 'bar', '2', '', '3', '', '4', 'blank', '', 'blank', 'right-pointing arrow', 't-shirt', 't-shirt', 'blank']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="moveByLine" time="39.521">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['Say', '(  spelling error  quietly)', 'Hello,', 'Jim .', &quot;spelling error  don't&quot;, '', 'T-shirt', '', 'T-shirt', 'T-shirt', '1   2    3  arobase     4', 'blank', '', 'blank', 'blank'] != ['Say', '(quietly)', 'Hello,', 'Jim .', &quot;don't&quot;, '', 't-shirt', '', 't-shirt', 't-shirt', '1   2    3      4', 'blank', '', 'blank', 'blank']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="moveByCharacter" time="37.095">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['S', 'espace', 'parenthèse gauche', 'parenthèse droite', 'guillemet', 'apostrophe', 'e', 'virgule', 'flèche droite', 'T-shirt', 'tab', 'retour chariot', 'Right\nretour chariot'] != ['S', 'space', 'left paren', 'right paren', 'quote', 'tick', 'e', 'comma', 'right-pointing arrow', 't-shirt', 'tab', 'carriage return', 'line feed']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="delayedCharacterDescriptions" time="24.006">
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="selectionByWord" time="51.658">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['Test selected', ':  selected', 'Say  selected', 'left paren  selected', 'quietly selected', ')  selected', 'quote  selected', 'Hello selected', ',  selected', 'Jim  selected', '.  selected', &quot;don't  selected&quot;, 'selected', 't-shirt   selected', 'carriage return  selected', '1  selected', 'selected', '2  selected', 'selected', '3  selected', 'selected', '4  selected', 'carriage return  selected', 'space  selected', 'carriage return  selected', 'tab  selected'] != ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim  selected', '.  selected', &quot;don't  selected&quot;, 'selected', 't-shirt   selected', 'selected', '1  selected', 'selected', '2  selected', 'selected', '3  selected', 'selected', '4  selected', 'selected', 'selected', 'selected', 'selected', 'right-pointing arrow  selected', 'selected', 't-shirt  selected', 'selected', 't-shirt  selected']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="selectionByLine" time="27.984">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim .  selected', &quot;don't   selected&quot;, 'selected', 't-shirt   selected', 'selected', 't-shirt    selected', 't-shirt   selected', '1   2    3      4  selected', 'selected', 'selected', 'selected'] != ['Test:   selected', 'Say   selected', '(quietly)   selected', 'Hello,   selected', 'Jim .   selected', &quot;don't    selected&quot;, 'selected', 't-shirt    selected', 'selected', 't-shirt     selected', 't-shirt    selected', '1   2    3      4   selected', 'selected', 'selected', 'selected']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="selectionByCharacter" time="38.440">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['T  selected', 'S  selected', 'space  selected', 'left paren  selected', 'right paren  selected', 'quote  selected', 'tick  selected', 'e  selected', 'comma  selected', 'right-pointing arrow  selected', 't-shirt  selected', 'tab  selected', 'carriage return  selected'] != ['T  selected', 'S  selected', 'space  selected', 'left paren  selected', 'right paren  selected', 'quote  selected', 'tick  selected', 'e  selected', 'comma  selected', 'right-pointing arrow  selected', 't-shirt  selected', 'tab  selected', 'selected']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="tableHeaderSymbols" time="32.481">
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="ignoreBlankLinesForReportLineIndentation" time="30.568">
+<failure message="actual vs expected. With symbolLevel SymLevel.ALL: ['spelling error  def  spelling error  foo', 'tab  hello', 'no indent  blank', 'tab  world', 'no indent  blank', 'spelling error  def bar', 'blank'] != ['def foo', 'tab  hello', 'no indent  blank', 'tab  world', 'no indent  blank', 'def bar', 'blank']" type="AssertionError"/>
+</testcase>
+<properties>
+<property name="Documentation" value="Symbol pronunciation tests"/>
+</properties>
+</testsuite>
+</testsuite>

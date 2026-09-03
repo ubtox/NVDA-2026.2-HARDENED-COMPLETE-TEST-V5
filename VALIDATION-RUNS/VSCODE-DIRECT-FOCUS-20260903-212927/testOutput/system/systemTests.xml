@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Robot" tests="8" errors="0" failures="7" skipped="0" time="91.012" timestamp="2026-09-03T21:29:33.611906">
+<testsuite name="vscodeTests" tests="8" errors="0" failures="7" skipped="0" time="90.992" timestamp="2026-09-03T21:29:33.631426">
+<testcase classname="Robot.vscodeTests" name="status line is available" time="8.323">
+</testcase>
+<testcase classname="Robot.vscodeTests" name="sidebar toggle announced" time="10.189">
+<failure message="'Info: All installed extensions are temporarily disabled.' does not contain 'Side Bar shown'" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.vscodeTests" name="command palette" time="10.195">
+<failure message="'test Directory - Visual Studio Code  document&#10;Info: All installed extensions are temporarily disabled.' does not contain 'Type the name of a command'" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.vscodeTests" name="file navigation" time="15.212">
+<failure message="Speech did not finish before timeout" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.vscodeTests" name="search panel" time="9.716">
+<failure message="'Info: All installed extensions are temporarily disabled.' does not contain 'Search'" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.vscodeTests" name="file editor operations" time="15.192">
+<failure message="Speech did not finish before timeout" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.vscodeTests" name="extensions panel" time="13.693">
+<failure message="'Continue with Apple  button' does not contain 'Extensions  list'" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.vscodeTests" name="terminal panel" time="8.194">
+<failure message="'application&#10;Welcome to Visual Studio Code  dialog&#10;Continue with Git Hub  button' does not contain 'Terminal 1'" type="AssertionError"/>
+</testcase>
+<properties>
+<property name="Documentation" value="Visual Studio Code tests"/>
+</properties>
+</testsuite>
+</testsuite>

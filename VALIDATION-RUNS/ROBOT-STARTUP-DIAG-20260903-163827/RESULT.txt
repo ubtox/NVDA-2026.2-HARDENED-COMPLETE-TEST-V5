@@ -1,0 +1,12 @@
+NVDA ROBOT STARTUP DIAGNOSTIC
+Date: 2026-09-03 16:38:41 +02:00
+Commit: 6b76d33cd708d74a30b97412067133ce0230d1a6
+Test: startupShutdown / Starts
+Result: PASS
+ExitCode: 0
+Artifacts: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\VALIDATION-RUNS\ROBOT-STARTUP-DIAG-20260903-163827
+
+Interpretation:
+- PASS = NVDA source starts, SystemTestSpy exposes TCP 8270, Robot connects, and teardown succeeds.
+- FAIL = inspect ERROR-SUMMARY.txt, ROBOT-CONSOLE.log, testOutput-system and nvdaProfile-after-run.
+- This smoke test intentionally uses SpeechSpySynthDriver; audible speech is not expected during Robot.

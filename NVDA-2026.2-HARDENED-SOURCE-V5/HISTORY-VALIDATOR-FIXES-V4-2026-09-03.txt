@@ -1,0 +1,14 @@
+NVDA 2026.2 HARDENED - VALIDATOR FIXES 2026-09-03
+===================================================
+
+1. Native stderr is logged without being treated as a PowerShell failure.
+   Native process exit codes are now authoritative.
+2. Validation log output remains UTF-8 instead of mixing UTF-8 and UTF-16.
+3. scons source runs before Pyright so generated COM/UIA/Louis artifacts exist.
+4. System tests run with the required explicit tag: --include NVDA.
+5. License-check metadata exceptions are aligned with current upstream NVDA
+   for compatible packages whose PyPI metadata is incomplete or inaccurate:
+   pyphen, l2m4m, detect-secrets, fast-diff-match-patch, requests.
+
+Windows build/test results are not predeclared PASS. Run:
+  RUN-NVDA-HARDENED-TESTS.cmd

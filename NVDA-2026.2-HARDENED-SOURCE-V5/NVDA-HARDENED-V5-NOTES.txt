@@ -1,0 +1,60 @@
+NVDA 2026.2 HARDENED - VALIDATION V5
+====================================
+
+Revision: NVDA-2026.2-HARDENED-V5-20260903-R1
+Date: 2026-09-03
+Base: release-2026.2 / f62c980589d1ac30babf68ad48177e9ad29a2e84
+
+CAUSES CONFIRMEES PAR LE LOG V4
+-------------------------------
+1. Unit tests: 1195 tests executes, 1 echec dans test_markdownTranslate.
+   Le test officiel appelle git rev-parse / git log. Une archive source ZIP
+   n'a pas de .git top-level, donc ce test ne disposait pas de son contexte Git.
+2. System tests: 74 echecs sur 82, dont 53/53 Chrome avec
+   'Unable to get chrome window', puis erreurs nvdaSpy/WinError 10061 et timeouts.
+3. Les traces de parole contenaient des applications externes (dont JAWS et
+   ChatGPT), ce qui prouve que le bureau interactif a perturbe les assertions.
+
+CORRECTIONS V5
+--------------
+1. Unit tests archive-safe
+   - creation d'un .git top-level temporaire seulement si l'archive n'en a pas ;
+   - seuls tests/markdownTranslate sont commits dans ce contexte temporaire ;
+   - toute la suite rununittests.bat reste executee ;
+   - suppression garantie du .git temporaire en finally ;
+   - aucun changement de comportement dans source/markdownTranslate.py.
+
+2. Preflight Robot strict
+   - verification d'une session interactive ;
+   - detection de chrome.exe dans les emplacements Windows courants ;
+   - ajout du dossier Chrome au PATH pour le 'chrome' attendu par _chromeArgs.py ;
+   - blocage des environnements non isoles (NVDA, JAWS, Narrator, Chrome, VS Code,
+     Bloc-notes ou ChatGPT) sauf -ForceSystemTests ;
+   - verification de la presence de Visual Studio Code pour vscodeTests ;
+   - verification du port nvdaSpy TCP 8270 ;
+   - nettoyage d'un profil Robot %TEMP%\nvdaProfile stale.
+
+3. Chrome
+   - prechauffage avant Robot avec les arguments de NV Access CI :
+     --no-first-run, --force-renderer-accessibility, --browser-test,
+     --lang=en-US, etc. ;
+   - nettoyage des processus Chrome crees par la validation.
+
+4. Packaging
+   - version par defaut: 2026.2-hardened-test-v5 ;
+   - dist/launcher restent bloques si une barriere obligatoire echoue ;
+   - -SkipSystemTests permet un build deterministe sur poste interactif, mais
+     ce mode est explicitement non-equivalent a la validation Robot finale.
+
+5. Integrite
+   - marqueur archive/validator passe en V5 ;
+   - conserver les controles V4 deja valides: submodules epingles, scons source
+     avant Pyright, generated source readiness, regressions custom, Ruff,
+     Pyright, POT et licenses.
+
+AUCUN CONTOURNEMENT
+-------------------
+- aucun test officiel supprime ;
+- aucun FAIL Robot transforme artificiellement en PASS ;
+- aucun correctif du core NVDA applique pour un probleme de bureau de test ;
+- aucun resultat Windows predeclare.

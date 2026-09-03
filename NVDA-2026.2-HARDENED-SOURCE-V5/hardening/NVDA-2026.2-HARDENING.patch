@@ -1,0 +1,1743 @@
+--- /dev/null
++++ b/NVDA-HARDENED-PREPARE-SOURCE.ps1
+@@ -0,0 +1,129 @@
++#requires -Version 5.1
++[CmdletBinding()]
++param(
++    [switch]$ForceRefresh
++)
++
++Set-StrictMode -Version Latest
++$ErrorActionPreference = 'Stop'
++$ProgressPreference = 'SilentlyContinue'
++
++$Root = $PSScriptRoot
++$ManifestPath = Join-Path $Root 'NVDA-HARDENED-SUBMODULES.json'
++$Manifest = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
++
++function Invoke-GitChecked {
++    param(
++        [Parameter(Mandatory)][string[]]$Arguments
++    )
++    & git @Arguments
++    $code = $LASTEXITCODE
++    if ($null -eq $code) { $code = 0 }
++    if ($code -ne 0) {
++        throw "git $($Arguments -join ' ') failed with exit code $code"
++    }
++}
++
++function Test-DirectoryHasContent {
++    param([Parameter(Mandatory)][string]$Path)
++    if (-not (Test-Path -LiteralPath $Path -PathType Container)) {
++        return $false
++    }
++    return $null -ne (Get-ChildItem -LiteralPath $Path -Force | Select-Object -First 1)
++}
++
++if (-not (Get-Command git.exe -ErrorAction SilentlyContinue)) {
++    throw 'Git for Windows is required. Install Git, reopen PowerShell, then rerun this script.'
++}
++
++Write-Host "NVDA baseline tag: $($Manifest.baseline.tag)"
++Write-Host "NVDA baseline commit: $($Manifest.baseline.commit)"
++Write-Host "Preparing $($Manifest.submodules.Count) pinned submodules..."
++
++foreach ($dep in $Manifest.submodules) {
++    $relativePath = [string]$dep.path
++    $repo = [string]$dep.repository
++    $sha = [string]$dep.commit
++    $path = Join-Path $Root ($relativePath -replace '/', [IO.Path]::DirectorySeparatorChar)
++
++    Write-Host "`n=== $relativePath ==="
++    Write-Host "Repository: $repo"
++    Write-Host "Pinned SHA: $sha"
++
++    $gitDir = Join-Path $path '.git'
++    if ($ForceRefresh -and (Test-Path -LiteralPath $path)) {
++        Write-Host 'Removing existing dependency because -ForceRefresh was requested.'
++        Remove-Item -LiteralPath $path -Recurse -Force
++    }
++
++    if (Test-Path -LiteralPath $gitDir) {
++        $current = (& git -C $path rev-parse HEAD).Trim()
++        if ($LASTEXITCODE -ne 0) {
++            throw "Could not read HEAD for $relativePath"
++        }
++        if ($current -ne $sha) {
++            Write-Host "Current SHA differs ($current). Fetching pinned SHA..."
++            Invoke-GitChecked -Arguments @('-C', $path, 'fetch', '--depth', '1', 'origin', $sha)
++            Invoke-GitChecked -Arguments @('-C', $path, 'checkout', '--detach', $sha)
++        }
++        else {
++            Write-Host 'Pinned SHA already checked out.'
++        }
++        Invoke-GitChecked -Arguments @('-C', $path, 'submodule', 'sync', '--recursive')
++        Invoke-GitChecked -Arguments @('-C', $path, 'submodule', 'update', '--init', '--recursive')
++        continue
++    }
++
++    if (Test-DirectoryHasContent -Path $path) {
++        throw "$relativePath is not empty and is not a Git checkout. Move/remove it or rerun with -ForceRefresh."
++    }
++
++    if (Test-Path -LiteralPath $path) {
++        Remove-Item -LiteralPath $path -Recurse -Force
++    }
++    New-Item -ItemType Directory -Path $path -Force | Out-Null
++
++    Invoke-GitChecked -Arguments @('-C', $path, 'init')
++    Invoke-GitChecked -Arguments @('-C', $path, 'remote', 'add', 'origin', $repo)
++    try {
++        Invoke-GitChecked -Arguments @('-C', $path, 'fetch', '--depth', '1', 'origin', $sha)
++        Invoke-GitChecked -Arguments @('-C', $path, 'checkout', '--detach', 'FETCH_HEAD')
++    }
++    catch {
++        Write-Warning 'Direct shallow fetch by SHA failed. Falling back to a normal clone/fetch.'
++        Remove-Item -LiteralPath $path -Recurse -Force
++        Invoke-GitChecked -Arguments @('clone', '--no-checkout', $repo, $path)
++        Invoke-GitChecked -Arguments @('-C', $path, 'checkout', '--detach', $sha)
++    }
++
++    $checkedOut = (& git -C $path rev-parse HEAD).Trim()
++    if ($LASTEXITCODE -ne 0 -or $checkedOut -ne $sha) {
++        throw "Pinned SHA verification failed for $relativePath. Expected $sha, got $checkedOut"
++    }
++
++    Invoke-GitChecked -Arguments @('-C', $path, 'submodule', 'sync', '--recursive')
++    Invoke-GitChecked -Arguments @('-C', $path, 'submodule', 'update', '--init', '--recursive')
++    Write-Host "OK: $relativePath @ $checkedOut"
++}
++
++Write-Host "`n=== VERIFY ALL PINNED DEPENDENCIES ==="
++$errors = @()
++foreach ($dep in $Manifest.submodules) {
++    $path = Join-Path $Root (([string]$dep.path) -replace '/', [IO.Path]::DirectorySeparatorChar)
++    $expected = [string]$dep.commit
++    if (-not (Test-Path -LiteralPath (Join-Path $path '.git'))) {
++        $errors += "$($dep.path): missing Git checkout"
++        continue
++    }
++    $actual = (& git -C $path rev-parse HEAD).Trim()
++    if ($LASTEXITCODE -ne 0 -or $actual -ne $expected) {
++        $errors += "$($dep.path): expected $expected, got $actual"
++    }
++}
++
++if ($errors.Count -gt 0) {
++    $errors | ForEach-Object { Write-Error $_ }
++    throw 'One or more pinned dependencies failed verification.'
++}
++
++Write-Host 'All pinned NVDA 2026.2 dependencies are ready.' -ForegroundColor Green
+--- /dev/null
++++ b/NVDA-HARDENED-SUBMODULES.json
+@@ -0,0 +1,22 @@
++{
++  "baseline": {
++    "repository": "https://github.com/nvaccess/nvda.git",
++    "tag": "release-2026.2",
++    "commit": "f62c980589d1ac30babf68ad48177e9ad29a2e84"
++  },
++  "submodules": [
++    {"path":"include/detours","repository":"https://github.com/microsoft/Detours.git","commit":"9764cebcb1a75940e68fa83d6730ffaf0f669401"},
++    {"path":"include/espeak","repository":"https://github.com/espeak-ng/espeak-ng.git","commit":"b0b605c8a80f76c4c19e18033c6780c3cc4afc5b"},
++    {"path":"include/ia2","repository":"https://github.com/LinuxA11y/IAccessible2.git","commit":"c9ae003d9c85eb707716928de97e055f5b77189c"},
++    {"path":"include/javaAccessBridge32","repository":"https://github.com/nvaccess/javaAccessBridge32-bin.git","commit":"0cc5c9d0da3506eec03300d5118fd1db1097d903"},
++    {"path":"include/liblouis","repository":"https://github.com/liblouis/liblouis.git","commit":"2aa5f84b14de17bcfe8317862d11f6bd7d640e55"},
++    {"path":"include/nsis","repository":"https://github.com/nvaccess/nsis-build.git","commit":"f8571bbe74ff34e4f754e26855fc4a6b3340a9f5"},
++    {"path":"include/nvda-cldr","repository":"https://github.com/nvaccess/nvda-cldr.git","commit":"6d3ba86c3963f023550a4b1aa8160945e77ca423"},
++    {"path":"include/nvda-mathcat","repository":"https://github.com/nvaccess/nvda-mathcat.git","commit":"808cbe3e7dc407dba927e38e171c85a1348f2c8e"},
++    {"path":"include/sonic","repository":"https://github.com/waywardgeek/sonic.git","commit":"d2cdb40fbdc82b464be364a50b34e8dd82b6c80a"},
++    {"path":"include/w3c-aria-practices","repository":"https://github.com/w3c/aria-practices.git","commit":"84b921a0c6646d2ddabaa94d918e165a1093daeb"},
++    {"path":"include/wil","repository":"https://github.com/microsoft/wil.git","commit":"7cf41936c5b4ab79daf0d9437211380dc69fa958"},
++    {"path":"miscDeps","repository":"https://github.com/nvaccess/nvda-misc-deps.git","commit":"67c2e36deb524eff89d202e807d00c8d98f2a5b3"},
++    {"path":".vscode","repository":"https://github.com/nvaccess/vscode-nvda.git","commit":"22faeb775256e4e8fa9ba2d650da1666489ceaaf"}
++  ]
++}
+--- /dev/null
++++ b/NVDA-HARDENED-VALIDATE.ps1
+@@ -0,0 +1,196 @@
++#requires -Version 5.1
++[CmdletBinding()]
++param(
++    [switch]$SkipSystemTests,
++    [switch]$SkipPackaging,
++    [string]$PackageVersion = '2026.2-hardened-test'
++)
++
++Set-StrictMode -Version Latest
++$ErrorActionPreference = 'Stop'
++$ProgressPreference = 'SilentlyContinue'
++
++$Root = $PSScriptRoot
++$QaRoot = Join-Path $Root 'validation-artifacts'
++$Log = Join-Path $QaRoot 'NVDA-HARDENED-VALIDATION.log'
++$Summary = Join-Path $QaRoot 'NVDA-HARDENED-VALIDATION-SUMMARY.txt'
++New-Item -ItemType Directory -Path $QaRoot -Force | Out-Null
++Remove-Item -LiteralPath $Log, $Summary -Force -ErrorAction SilentlyContinue
++
++$results = New-Object 'System.Collections.Generic.List[string]'
++$failed = $false
++
++function Write-Result {
++    param([string]$Name, [string]$Status, [string]$Details = '')
++    $line = '{0,-30} {1,-5} {2}' -f $Name, $Status, $Details
++    $results.Add($line)
++    Write-Host $line
++}
++
++function Invoke-NativeChecked {
++    param(
++        [Parameter(Mandatory)][string]$FilePath,
++        [Parameter()][string[]]$Arguments = @()
++    )
++    & $FilePath @Arguments 2>&1 | Tee-Object -FilePath $Log -Append
++    $code = $LASTEXITCODE
++    if ($null -eq $code) { $code = 0 }
++    if ($code -ne 0) {
++        throw "$FilePath failed with exit code $code"
++    }
++}
++
++function Invoke-Step {
++    param(
++        [Parameter(Mandatory)][string]$Name,
++        [Parameter(Mandatory)][scriptblock]$Action
++    )
++    Write-Host "`n=== $Name ==="
++    try {
++        & $Action
++        Write-Result $Name 'PASS'
++    }
++    catch {
++        $script:failed = $true
++        Write-Result $Name 'FAIL' $_.Exception.Message
++        "[$Name] $($_ | Out-String)" | Out-File -LiteralPath $Log -Append -Encoding utf8
++    }
++}
++
++Set-Location $Root
++"NVDA hardened validation - $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz')" | Out-File $Log -Encoding utf8
++"Root: $Root" | Out-File $Log -Append -Encoding utf8
++
++$ensureUv = Join-Path $Root 'ensureuv.ps1'
++$submoduleManifest = Get-Content -LiteralPath (Join-Path $Root 'NVDA-HARDENED-SUBMODULES.json') -Raw | ConvertFrom-Json
++
++Invoke-Step 'Pinned source dependencies' {
++    if (-not (Get-Command git.exe -ErrorAction SilentlyContinue)) {
++        throw 'Git for Windows is required.'
++    }
++    foreach ($dep in $submoduleManifest.submodules) {
++        $path = Join-Path $Root (([string]$dep.path) -replace '/', [IO.Path]::DirectorySeparatorChar)
++        $gitDir = Join-Path $path '.git'
++        if (-not (Test-Path -LiteralPath $gitDir)) {
++            throw "$($dep.path) is not prepared. Run NVDA-HARDENED-PREPARE-SOURCE.ps1 first."
++        }
++        $actual = (& git -C $path rev-parse HEAD).Trim()
++        if ($LASTEXITCODE -ne 0 -or $actual -ne [string]$dep.commit) {
++            throw "$($dep.path) SHA mismatch. Expected $($dep.commit), got $actual"
++        }
++    }
++}
++
++Invoke-Step 'Dependencies' {
++    Invoke-NativeChecked 'powershell.exe' @(
++        '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $ensureUv,
++        'sync', '--frozen',
++        '--group', 'dev',
++        '--group', 'unit-tests',
++        '--group', 'system-tests',
++        '--group', 'lint',
++        '--group', 'license-check'
++    )
++}
++
++Invoke-Step 'Custom speech regression' {
++    Invoke-NativeChecked 'powershell.exe' @(
++        '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $ensureUv,
++        'run', '--directory', $Root, 'python', 'tests\zeroRegression_speakTypedCharacters.pyqa'
++    )
++}
++
++Invoke-Step 'Custom braille audit' {
++    Invoke-NativeChecked 'powershell.exe' @(
++        '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $ensureUv,
++        'run', '--directory', $Root, 'python', 'tests\zeroRegression_brailleSymbols.pyqa'
++    )
++}
++
++Invoke-Step 'Custom add-on cleanup regression' {
++    Invoke-NativeChecked 'powershell.exe' @(
++        '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $ensureUv,
++        'run', '--directory', $Root, 'python', 'tests\zeroRegression_addonCleanup.pyqa'
++    )
++}
++
++Invoke-Step 'Custom x86 synth runtime regression' {
++    Invoke-NativeChecked 'powershell.exe' @(
++        '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $ensureUv,
++        'run', '--directory', $Root, 'python', 'tests\zeroRegression_synthDriverHost32Runtime.pyqa'
++    )
++}
++
++Invoke-Step 'Ruff check' {
++    Invoke-NativeChecked 'powershell.exe' @(
++        '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $ensureUv,
++        'run', '--group', 'lint', '--directory', $Root, 'ruff', 'check', '.'
++    )
++}
++
++Invoke-Step 'Ruff format check' {
++    Invoke-NativeChecked 'powershell.exe' @(
++        '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $ensureUv,
++        'run', '--group', 'lint', '--directory', $Root, 'ruff', 'format', '--check', '.'
++    )
++}
++
++Invoke-Step 'Pyright' {
++    Invoke-NativeChecked 'powershell.exe' @(
++        '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $ensureUv,
++        'run', '--group', 'lint', '--directory', $Root, 'pyright'
++    )
++}
++
++Invoke-Step 'Build source' {
++    Invoke-NativeChecked (Join-Path $Root 'scons.bat') @('source')
++}
++
++Invoke-Step 'Unit tests' {
++    Invoke-NativeChecked (Join-Path $Root 'rununittests.bat')
++}
++
++if (-not $SkipSystemTests) {
++    Invoke-Step 'System tests' {
++        Invoke-NativeChecked (Join-Path $Root 'runsystemtests.bat')
++    }
++}
++else {
++    Write-Result 'System tests' 'SKIP' 'Requested by -SkipSystemTests'
++}
++
++Invoke-Step 'Translator comments POT' {
++    Invoke-NativeChecked (Join-Path $Root 'runcheckpot.bat')
++}
++
++Invoke-Step 'Dependency licenses' {
++    Invoke-NativeChecked (Join-Path $Root 'runlicensecheck.bat')
++}
++
++if ($failed) {
++    Write-Result 'Build dist' 'SKIP' 'Earlier validation step failed'
++    Write-Result 'Build launcher' 'SKIP' 'Earlier validation step failed'
++}
++elseif ($SkipPackaging) {
++    Write-Result 'Build dist' 'SKIP' 'Requested by -SkipPackaging'
++    Write-Result 'Build launcher' 'SKIP' 'Requested by -SkipPackaging'
++}
++else {
++    Invoke-Step 'Build dist' {
++        Invoke-NativeChecked (Join-Path $Root 'scons.bat') @('dist', "version=$PackageVersion")
++    }
++    Invoke-Step 'Build launcher' {
++        Invoke-NativeChecked (Join-Path $Root 'scons.bat') @('launcher', "version=$PackageVersion")
++    }
++}
++
++$results | Out-File -LiteralPath $Summary -Encoding utf8
++Write-Host "`n=== SUMMARY ==="
++$results | ForEach-Object { Write-Host $_ }
++Write-Host "`nLog: $Log"
++Write-Host "Summary: $Summary"
++
++if ($failed) {
++    exit 1
++}
++exit 0
+--- /dev/null
++++ b/RUN-NVDA-HARDENED-TESTS.cmd
+@@ -0,0 +1,24 @@
++@echo off
++setlocal
++cd /d "%~dp0"
++echo ============================================================
++echo NVDA 2026.2 HARDENED - PREPARE + FULL VALIDATION
++echo ============================================================
++echo.
++powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0NVDA-HARDENED-PREPARE-SOURCE.ps1"
++if errorlevel 1 goto :failed
++powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0NVDA-HARDENED-VALIDATE.ps1"
++if errorlevel 1 goto :failed
++echo.
++echo ============================================================
++echo ALL REQUESTED VALIDATION STEPS PASSED
++echo ============================================================
++pause
++exit /b 0
++:failed
++echo.
++echo ============================================================
++echo VALIDATION STOPPED OR FAILED - SEE validation-artifacts
++echo ============================================================
++pause
++exit /b 1
+--- /dev/null
++++ b/START-HERE.txt
+@@ -0,0 +1,64 @@
++NVDA 2026.2 HARDENED - SOURCE DE TEST
++=====================================
++
++Base : NVDA officiel release-2026.2.
++Commit officiel : f62c980589d1ac30babf68ad48177e9ad29a2e84
++
++Ce ZIP contient :
++- tout le code source principal NVDA 2026.2 modifie ;
++- les correctifs de durcissement retenus ;
++- les tests de non-regression ;
++- l'audit braille Unicode ;
++- le manifeste exact des 13 sous-modules officiels ;
++- un script qui recupere chaque sous-module au SHA exact de release-2026.2,
++  y compris ses sous-modules imbriques ;
++- la chaine de validation Windows ;
++- le rapport et le diff de reference dans le dossier hardening.
++
++IMPORTANT
++---------
++L'archive source GitHub officielle ne contient pas physiquement le contenu des
++sous-modules Git. Les repertoires correspondants sont donc vides au depart.
++Le lanceur ci-dessous les recupere aux SHA EXACTS de la release avant les tests.
++Il ne suit aucune branche flottante.
++
++PRE-REQUIS WINDOWS
++------------------
++- Windows 10/11 x64
++- Git for Windows
++- PowerShell 5.1 ou plus recent
++- environnement de developpement NVDA / Visual Studio requis par la documentation
++  officielle du projet
++- connexion Internet pour la premiere preparation des sous-modules et dependances
++
++TEST COMPLET
++------------
++1. Extraire tout le ZIP dans un chemin court, par exemple : C:\NVDA-2026.2-HARDENED
++2. Ouvrir le dossier extrait.
++3. Executer : RUN-NVDA-HARDENED-TESTS.cmd
++4. Laisser terminer la preparation des sous-modules puis les validations.
++5. Les resultats sont ecrits dans : validation-artifacts
++
++POUR PREPARER LE CODE SANS LANCER LES TESTS
++-------------------------------------------
++PowerShell :
++  .\NVDA-HARDENED-PREPARE-SOURCE.ps1
++
++POUR RELANCER SEULEMENT LES TESTS
++---------------------------------
++PowerShell :
++  .\NVDA-HARDENED-VALIDATE.ps1
++
++Options utiles :
++  .\NVDA-HARDENED-VALIDATE.ps1 -SkipSystemTests
++  .\NVDA-HARDENED-VALIDATE.ps1 -SkipPackaging
++
++Aucun resultat Windows n'est predeclare PASS : les tests Windows finaux sont a
++executer sur ta machine, comme demande.
++
++IDENTIFICATION DES BINAIRES DE TEST
++-----------------------------------
++Par defaut, la validation construit la distribution et le launcher avec la
++version : 2026.2-hardened-test
++Cela evite de confondre ces binaires de test avec le NVDA 2026.2 officiel.
++Aucun packaging n'est lance si une barriere de validation precedente echoue.
+--- a/runtime-builders/synthDriverHost32/setup-runtime.py
++++ b/runtime-builders/synthDriverHost32/setup-runtime.py
+@@ -53,6 +53,7 @@
+ from py2exe.dllfinder import DllFinder  # noqa: E402
+ 
+ RT_MANIFEST = 24
++VC_RUNTIME_DLL = "vcruntime140.dll"
+ manifestTemplateFilePath = os.path.join(nvdaSourceDir, "manifest.template.xml")
+ 
+ with open(manifestTemplateFilePath, "r", encoding="utf-8") as manifestTemplateFile:
+@@ -100,6 +101,14 @@
+ 	return rulesList
+ 
+ 
++def _getVCRuntimePath() -> str:
++	for runtimeDir in (sys.base_prefix, sys.base_exec_prefix, os.path.dirname(sys.executable)):
++		dllPath = os.path.join(runtimeDir, VC_RUNTIME_DLL)
++		if os.path.isfile(dllPath):
++			return dllPath
++	raise RuntimeError(f"Could not locate {VC_RUNTIME_DLL} in the active Python runtime")
++
++
+ sys.path.insert(0, runtimeSourceDir)
+ 
+ freeze(
+@@ -250,7 +259,7 @@
+ 		],
+ 	},
+ 	data_files=[
+-		(".", glob("*.dll") + glob("*.manifest")),
++		(".", glob("*.dll") + glob("*.manifest") + [_getVCRuntimePath()]),
+ 	]
+ 	+ getRecursiveDataFiles(
+ 		"synthDrivers",
+--- a/source/addonHandler/__init__.py
++++ b/source/addonHandler/__init__.py
+@@ -888,9 +888,11 @@
+ 			log.debug(f"removing imported add-on module {modName}")
+ 			del sys.modules[modName]
+ 		self._importedAddonModules.clear()
++		addonPathPrefix = os.path.join(os.path.normcase(self.path), "")
+ 		for modName in set(sys.modules.keys()) - self._modulesBeforeInstall:
+ 			module = sys.modules[modName]
+-			if module.__name__ and module.__name__.startswith(self.path):
++			moduleFile = getattr(module, "__file__", None)
++			if moduleFile and os.path.normcase(moduleFile).startswith(addonPathPrefix):
+ 				log.debug(f"Removing module {module} from cache of imported modules")
+ 				del sys.modules[modName]
+ 
+--- a/source/locale/bs/symbols.dic
++++ b/source/locale/bs/symbols.dic
+@@ -492,7 +492,7 @@
+ ⡵	brajeve tačkice 1 3 5 6 7
+ ⡶	brajeve tačkice 2 3 5 6 7
+ ⡷	brajeve tačkice 1 2 3 5 6 7
+-⡸	brajeve tačkice 1 2 3 7
++⡸	brajeve tačkice 4 5 6 7
+ ⡹	brajeve tačkice 1 4 5 6 7
+ ⡺	brajeve tačkice 2 4 5 6 7
+ ⡻	brajeve tačkice 1 2 4 5 6 7
+@@ -556,7 +556,7 @@
+ ⢵	brajeve tačkice 1 3 5 6 8
+ ⢶	brajeve tačkice 2 3 5 6 8
+ ⢷	brajeve tačkice 1 2 3 5 6 8
+-⢸	brajeve tačkice 1 2 3 8
++⢸	brajeve tačkice 4 5 6 8
+ ⢹	brajeve tačkice 1 4 5 6 8
+ ⢺	brajeve tačkice 2 4 5 6 8
+ ⢻	brajeve tačkice 1 2 4 5 6 8
+@@ -620,7 +620,7 @@
+ ⣵	brajeve tačkice 1 3 5 6 7 8
+ ⣶	brajeve tačkice 2 3 5 6 7 8
+ ⣷	brajeve tačkice 1 2 3 5 6 7 8
+-⣸	brajeve tačkice 1 2 3 7 8
++⣸	brajeve tačkice 4 5 6 7 8
+ ⣹	brajeve tačkice 1 4 5 6 7 8
+ ⣺	brajeve tačkice 2 4 5 6 7 8
+ ⣻	brajeve tačkice 1 2 4 5 6 7 8
+--- a/source/locale/da/symbols.dic
++++ b/source/locale/da/symbols.dic
+@@ -488,7 +488,7 @@
+ ⡵	braille 1 3 5 6 7
+ ⡶	braille 2 3 5 6 7
+ ⡷	braille 1 2 3 5 6 7
+-⡸	braille 1 2 3 7
++⡸	braille 4 5 6 7
+ ⡹	braille 1 4 5 6 7
+ ⡺	braille 2 4 5 6 7
+ ⡻	braille 1 2 4 5 6 7
+@@ -552,7 +552,7 @@
+ ⢵	braille 1 3 5 6 8
+ ⢶	braille 2 3 5 6 8
+ ⢷	braille 1 2 3 5 6 8
+-⢸	braille 1 2 3 8
++⢸	braille 4 5 6 8
+ ⢹	braille 1 4 5 6 8
+ ⢺	braille 2 4 5 6 8
+ ⢻	braille 1 2 4 5 6 8
+@@ -616,7 +616,7 @@
+ ⣵	braille 1 3 5 6 7 8
+ ⣶	braille 2 3 5 6 7 8
+ ⣷	braille 1 2 3 5 6 7 8
+-⣸	braille 1 2 3 7 8
++⣸	braille 4 5 6 7 8
+ ⣹	braille 1 4 5 6 7 8
+ ⣺	braille 2 4 5 6 7 8
+ ⣻	braille 1 2 4 5 6 7 8
+--- a/source/locale/de/symbols.dic
++++ b/source/locale/de/symbols.dic
+@@ -541,7 +541,7 @@
+ ⡵	Braille-Punkte 1 3 5 6 7
+ ⡶	Braille-Punkte 2 3 5 6 7
+ ⡷	Braille-Punkte 1 2 3 5 6 7
+-⡸	Braille-Punkte 1 2 3 7
++⡸	Braille-Punkte 4 5 6 7
+ ⡹	Braille-Punkte 1 4 5 6 7
+ ⡺	Braille-Punkte 2 4 5 6 7
+ ⡻	Braille-Punkte 1 2 4 5 6 7
+@@ -605,7 +605,7 @@
+ ⢵	Braille-Punkte 1 3 5 6 8
+ ⢶	Braille-Punkte 2 3 5 6 8
+ ⢷	Braille-Punkte 1 2 3 5 6 8
+-⢸	Braille-Punkte 1 2 3 8
++⢸	Braille-Punkte 4 5 6 8
+ ⢹	Braille-Punkte 1 4 5 6 8
+ ⢺	Braille-Punkte 2 4 5 6 8
+ ⢻	Braille-Punkte 1 2 4 5 6 8
+@@ -669,7 +669,7 @@
+ ⣵	Braille-Punkte 1 3 5 6 7 8
+ ⣶	Braille-Punkte 2 3 5 6 7 8
+ ⣷	Braille-Punkte 1 2 3 5 6 7 8
+-⣸	Braille-Punkte 1 2 3 7 8
++⣸	Braille-Punkte 4 5 6 7 8
+ ⣹	Braille-Punkte 1 4 5 6 7 8
+ ⣺	Braille-Punkte 2 4 5 6 7 8
+ ⣻	Braille-Punkte 1 2 4 5 6 7 8
+--- a/source/locale/en/symbols.dic
++++ b/source/locale/en/symbols.dic
+@@ -493,7 +493,7 @@
+ ⡵	braille 1 3 5 6 7
+ ⡶	braille 2 3 5 6 7
+ ⡷	braille 1 2 3 5 6 7
+-⡸	braille 1 2 3 7
++⡸	braille 4 5 6 7
+ ⡹	braille 1 4 5 6 7
+ ⡺	braille 2 4 5 6 7
+ ⡻	braille 1 2 4 5 6 7
+@@ -557,7 +557,7 @@
+ ⢵	braille 1 3 5 6 8
+ ⢶	braille 2 3 5 6 8
+ ⢷	braille 1 2 3 5 6 8
+-⢸	braille 1 2 3 8
++⢸	braille 4 5 6 8
+ ⢹	braille 1 4 5 6 8
+ ⢺	braille 2 4 5 6 8
+ ⢻	braille 1 2 4 5 6 8
+@@ -621,7 +621,7 @@
+ ⣵	braille 1 3 5 6 7 8
+ ⣶	braille 2 3 5 6 7 8
+ ⣷	braille 1 2 3 5 6 7 8
+-⣸	braille 1 2 3 7 8
++⣸	braille 4 5 6 7 8
+ ⣹	braille 1 4 5 6 7 8
+ ⣺	braille 2 4 5 6 7 8
+ ⣻	braille 1 2 4 5 6 7 8
+--- a/source/locale/es/symbols.dic
++++ b/source/locale/es/symbols.dic
+@@ -495,7 +495,7 @@
+ ⡵	braille 1 3 5 6 7
+ ⡶	braille 2 3 5 6 7
+ ⡷	braille 1 2 3 5 6 7
+-⡸	braille 1 2 3 7
++⡸	braille 4 5 6 7
+ ⡹	braille 1 4 5 6 7
+ ⡺	braille 2 4 5 6 7
+ ⡻	braille 1 2 4 5 6 7
+@@ -559,7 +559,7 @@
+ ⢵	braille 1 3 5 6 8
+ ⢶	braille 2 3 5 6 8
+ ⢷	braille 1 2 3 5 6 8
+-⢸	braille 1 2 3 8
++⢸	braille 4 5 6 8
+ ⢹	braille 1 4 5 6 8
+ ⢺	braille 2 4 5 6 8
+ ⢻	braille 1 2 4 5 6 8
+@@ -623,7 +623,7 @@
+ ⣵	braille 1 3 5 6 7 8
+ ⣶	braille 2 3 5 6 7 8
+ ⣷	braille 1 2 3 5 6 7 8
+-⣸	braille 1 2 3 7 8
++⣸	braille 4 5 6 7 8
+ ⣹	braille 1 4 5 6 7 8
+ ⣺	braille 2 4 5 6 7 8
+ ⣻	braille 1 2 4 5 6 7 8
+--- a/source/locale/fi/symbols.dic
++++ b/source/locale/fi/symbols.dic
+@@ -527,7 +527,7 @@
+ ⡵	pistekirjoitus 1 3 5 6 7
+ ⡶	pistekirjoitus 2 3 5 6 7
+ ⡷	pistekirjoitus 1 2 3 5 6 7
+-⡸	pistekirjoitus 1 2 3 7
++⡸	pistekirjoitus 4 5 6 7
+ ⡹	pistekirjoitus 1 4 5 6 7
+ ⡺	pistekirjoitus 2 4 5 6 7
+ ⡻	pistekirjoitus 1 2 4 5 6 7
+@@ -591,7 +591,7 @@
+ ⢵	pistekirjoitus 1 3 5 6 8
+ ⢶	pistekirjoitus 2 3 5 6 8
+ ⢷	pistekirjoitus 1 2 3 5 6 8
+-⢸	pistekirjoitus 1 2 3 8
++⢸	pistekirjoitus 4 5 6 8
+ ⢹	pistekirjoitus 1 4 5 6 8
+ ⢺	pistekirjoitus 2 4 5 6 8
+ ⢻	pistekirjoitus 1 2 4 5 6 8
+@@ -655,7 +655,7 @@
+ ⣵	pistekirjoitus 1 3 5 6 7 8
+ ⣶	pistekirjoitus 2 3 5 6 7 8
+ ⣷	pistekirjoitus 1 2 3 5 6 7 8
+-⣸	pistekirjoitus 1 2 3 7 8
++⣸	pistekirjoitus 4 5 6 7 8
+ ⣹	pistekirjoitus 1 4 5 6 7 8
+ ⣺	pistekirjoitus 2 4 5 6 7 8
+ ⣻	pistekirjoitus 1 2 4 5 6 7 8
+--- a/source/locale/gl/symbols.dic
++++ b/source/locale/gl/symbols.dic
+@@ -496,7 +496,7 @@
+ ⡵	braille 1 3 5 6 7
+ ⡶	braille 2 3 5 6 7
+ ⡷	braille 1 2 3 5 6 7
+-⡸	braille 1 2 3 7
++⡸	braille 4 5 6 7
+ ⡹	braille 1 4 5 6 7
+ ⡺	braille 2 4 5 6 7
+ ⡻	braille 1 2 4 5 6 7
+@@ -560,7 +560,7 @@
+ ⢵	braille 1 3 5 6 8
+ ⢶	braille 2 3 5 6 8
+ ⢷	braille 1 2 3 5 6 8
+-⢸	braille 1 2 3 8
++⢸	braille 4 5 6 8
+ ⢹	braille 1 4 5 6 8
+ ⢺	braille 2 4 5 6 8
+ ⢻	braille 1 2 4 5 6 8
+@@ -624,7 +624,7 @@
+ ⣵	braille 1 3 5 6 7 8
+ ⣶	braille 2 3 5 6 7 8
+ ⣷	braille 1 2 3 5 6 7 8
+-⣸	braille 1 2 3 7 8
++⣸	braille 4 5 6 7 8
+ ⣹	braille 1 4 5 6 7 8
+ ⣺	braille 2 4 5 6 7 8
+ ⣻	braille 1 2 4 5 6 7 8
+--- a/source/locale/hr/symbols.dic
++++ b/source/locale/hr/symbols.dic
+@@ -494,7 +494,7 @@
+ ⡵	točkica 1 3 5 6 7
+ ⡶	točkica 2 3 5 6 7
+ ⡷	točkica 1 2 3 5 6 7
+-⡸	točkica 1 2 3 7
++⡸	točkica 4 5 6 7
+ ⡹	točkica 1 4 5 6 7
+ ⡺	točkica 2 4 5 6 7
+ ⡻	točkica 1 2 4 5 6 7
+@@ -558,7 +558,7 @@
+ ⢵	točkica 1 3 5 6 8
+ ⢶	točkica 2 3 5 6 8
+ ⢷	točkica 1 2 3 5 6 8
+-⢸	točkica 1 2 3 8
++⢸	točkica 4 5 6 8
+ ⢹	točkica 1 4 5 6 8
+ ⢺	točkica 2 4 5 6 8
+ ⢻	točkica 1 2 4 5 6 8
+@@ -622,7 +622,7 @@
+ ⣵	točkica 1 3 5 6 7 8
+ ⣶	točkica 2 3 5 6 7 8
+ ⣷	točkica 1 2 3 5 6 7 8
+-⣸	točkica 1 2 3 7 8
++⣸	točkica 4 5 6 7 8
+ ⣹	točkica 1 4 5 6 7 8
+ ⣺	točkica 2 4 5 6 7 8
+ ⣻	točkica 1 2 4 5 6 7 8
+--- a/source/locale/it/symbols.dic
++++ b/source/locale/it/symbols.dic
+@@ -493,7 +493,7 @@
+ ⡵	braille 1 3 5 6 7
+ ⡶	braille 2 3 5 6 7
+ ⡷	braille 1 2 3 5 6 7
+-⡸	braille 1 2 3 7
++⡸	braille 4 5 6 7
+ ⡹	braille 1 4 5 6 7
+ ⡺	braille 2 4 5 6 7
+ ⡻	braille 1 2 4 5 6 7
+@@ -557,7 +557,7 @@
+ ⢵	braille 1 3 5 6 8
+ ⢶	braille 2 3 5 6 8
+ ⢷	braille 1 2 3 5 6 8
+-⢸	braille 1 2 3 8
++⢸	braille 4 5 6 8
+ ⢹	braille 1 4 5 6 8
+ ⢺	braille 2 4 5 6 8
+ ⢻	braille 1 2 4 5 6 8
+@@ -621,7 +621,7 @@
+ ⣵	braille 1 3 5 6 7 8
+ ⣶	braille 2 3 5 6 7 8
+ ⣷	braille 1 2 3 5 6 7 8
+-⣸	braille 1 2 3 7 8
++⣸	braille 4 5 6 7 8
+ ⣹	braille 1 4 5 6 7 8
+ ⣺	braille 2 4 5 6 7 8
+ ⣻	braille 1 2 4 5 6 7 8
+--- a/source/locale/ko/symbols.dic
++++ b/source/locale/ko/symbols.dic
+@@ -28694,7 +28694,7 @@
+ ⡵	 1 3 5 6 7 점
+ ⡶	 2 3 5 6 7 점
+ ⡷	 1 2 3 5 6 7 점
+-⡸	 1 2 3 7 점
++⡸	 4 5 6 7 점
+ ⡹	 1 4 5 6 7 점
+ ⡺	 2 4 5 6 7 점
+ ⡻	 1 2 4 5 6 7 점
+@@ -28758,7 +28758,7 @@
+ ⢵	 1 3 5 6 8 점
+ ⢶	 2 3 5 6 8 점
+ ⢷	 1 2 3 5 6 8 점
+-⢸	 1 2 3 8 점
++⢸	 4 5 6 8 점
+ ⢹	 1 4 5 6 8 점
+ ⢺	 2 4 5 6 8 점
+ ⢻	 1 2 4 5 6 8 점
+@@ -28822,7 +28822,7 @@
+ ⣵	 1 3 5 6 7 8 점
+ ⣶	 2 3 5 6 7 8 점
+ ⣷	 1 2 3 5 6 7 8 점
+-⣸	 1 2 3 7 8 점
++⣸	 4 5 6 7 8 점
+ ⣹	 1 4 5 6 7 8 점
+ ⣺	 2 4 5 6 7 8 점
+ ⣻	 1 2 4 5 6 7 8 점
+--- a/source/locale/pl/symbols.dic
++++ b/source/locale/pl/symbols.dic
+@@ -494,7 +494,7 @@
+ ⡵	punkt 1 3 5 6 7
+ ⡶	punkt 2 3 5 6 7
+ ⡷	punkt 1 2 3 5 6 7
+-⡸	punkt 1 2 3 7
++⡸	punkt 4 5 6 7
+ ⡹	punkt 1 4 5 6 7
+ ⡺	punkt 2 4 5 6 7
+ ⡻	punkt 1 2 4 5 6 7
+@@ -558,7 +558,7 @@
+ ⢵	punkt 1 3 5 6 8
+ ⢶	punkt 2 3 5 6 8
+ ⢷	punkt 1 2 3 5 6 8
+-⢸	punkt 1 2 3 8
++⢸	punkt 4 5 6 8
+ ⢹	punkt 1 4 5 6 8
+ ⢺	punkt 2 4 5 6 8
+ ⢻	punkt 1 2 4 5 6 8
+@@ -622,7 +622,7 @@
+ ⣵	punkt 1 3 5 6 7 8
+ ⣶	punkt 2 3 5 6 7 8
+ ⣷	punkt 1 2 3 5 6 7 8
+-⣸	punkt 1 2 3 7 8
++⣸	punkt 4 5 6 7 8
+ ⣹	punkt 1 4 5 6 7 8
+ ⣺	punkt 2 4 5 6 7 8
+ ⣻	punkt 1 2 4 5 6 7 8
+--- a/source/locale/pt_BR/symbols.dic
++++ b/source/locale/pt_BR/symbols.dic
+@@ -490,7 +490,7 @@
+ ⡵	braille 1 3 5 6 7
+ ⡶	braille 2 3 5 6 7
+ ⡷	braille 1 2 3 5 6 7
+-⡸	braille 1 2 3 7
++⡸	braille 4 5 6 7
+ ⡹	braille 1 4 5 6 7
+ ⡺	braille 2 4 5 6 7
+ ⡻	braille 1 2 4 5 6 7
+@@ -554,7 +554,7 @@
+ ⢵	braille 1 3 5 6 8
+ ⢶	braille 2 3 5 6 8
+ ⢷	braille 1 2 3 5 6 8
+-⢸	braille 1 2 3 8
++⢸	braille 4 5 6 8
+ ⢹	braille 1 4 5 6 8
+ ⢺	braille 2 4 5 6 8
+ ⢻	braille 1 2 4 5 6 8
+@@ -618,7 +618,7 @@
+ ⣵	braille 1 3 5 6 7 8
+ ⣶	braille 2 3 5 6 7 8
+ ⣷	braille 1 2 3 5 6 7 8
+-⣸	braille 1 2 3 7 8
++⣸	braille 4 5 6 7 8
+ ⣹	braille 1 4 5 6 7 8
+ ⣺	braille 2 4 5 6 7 8
+ ⣻	braille 1 2 4 5 6 7 8
+--- a/source/locale/ro/symbols.dic
++++ b/source/locale/ro/symbols.dic
+@@ -442,7 +442,7 @@
+ ⠵	braille 1 3 5 6
+ ⠶	braille 2 3 5 6
+ ⠷	braille 1 2 3 5 6
+-⠸	braille 1 2 3
++⠸	braille 4 5 6
+ ⠹	braille 1 4 5 6
+ ⠺	braille 2 4 5 6
+ ⠻	braille 1 2 4 5 6
+@@ -507,7 +507,7 @@
+ ⡵	braille 1 3 5 6 7
+ ⡶	braille 2 3 5 6 7
+ ⡷	braille 1 2 3 5 6 7
+-⡸	braille 1 2 3 7
++⡸	braille 4 5 6 7
+ ⡹	braille 1 4 5 6 7
+ ⡺	braille 2 4 5 6 7
+ ⡻	braille 1 2 4 5 6 7
+@@ -571,7 +571,7 @@
+ ⢵	braille 1 3 5 6 8
+ ⢶	braille 2 3 5 6 8
+ ⢷	braille 1 2 3 5 6 8
+-⢸	braille 1 2 3 8
++⢸	braille 4 5 6 8
+ ⢹	braille 1 4 5 6 8
+ ⢺	braille 2 4 5 6 8
+ ⢻	braille 1 2 4 5 6 8
+@@ -635,7 +635,7 @@
+ ⣵	braille 1 3 5 6 7 8
+ ⣶	braille 2 3 5 6 7 8
+ ⣷	braille 1 2 3 5 6 7 8
+-⣸	braille 1 2 3 7 8
++⣸	braille 4 5 6 7 8
+ ⣹	braille 1 4 5 6 7 8
+ ⣺	braille 2 4 5 6 7 8
+ ⣻	braille 1 2 4 5 6 7 8
+--- a/source/locale/sk/symbols.dic
++++ b/source/locale/sk/symbols.dic
+@@ -555,7 +555,7 @@
+ ⡵	brail  1 3 5 6 7
+ ⡶	brail  2 3 5 6 7
+ ⡷	brail  1 2 3 5 6 7
+-⡸	brail  1 2 3 7
++⡸	brail  4 5 6 7
+ ⡹	brail  1 4 5 6 7
+ ⡺	brail  2 4 5 6 7
+ ⡻	brail  1 2 4 5 6 7
+@@ -619,7 +619,7 @@
+ ⢵	brail  1 3 5 6 8
+ ⢶	brail  2 3 5 6 8
+ ⢷	brail  1 2 3 5 6 8
+-⢸	brail  1 2 3 8
++⢸	brail  4 5 6 8
+ ⢹	brail  1 4 5 6 8
+ ⢺	brail  2 4 5 6 8
+ ⢻	brail  1 2 4 5 6 8
+@@ -683,7 +683,7 @@
+ ⣵	brail  1 3 5 6 7 8
+ ⣶	brail  2 3 5 6 7 8
+ ⣷	brail  1 2 3 5 6 7 8
+-⣸	brail  1 2 3 7 8
++⣸	brail  4 5 6 7 8
+ ⣹	brail  1 4 5 6 7 8
+ ⣺	brail  2 4 5 6 7 8
+ ⣻	brail  1 2 4 5 6 7 8
+--- a/source/locale/sr/symbols.dic
++++ b/source/locale/sr/symbols.dic
+@@ -489,7 +489,7 @@
+ ⡵	Brajeve tačkice 1 3 5 6 7
+ ⡶	Brajeve tačkice 2 3 5 6 7
+ ⡷	Brajeve tačkice 1 2 3 5 6 7
+-⡸	Brajeve tačkice 1 2 3 7
++⡸	Brajeve tačkice 4 5 6 7
+ ⡹	Brajeve tačkice 1 4 5 6 7
+ ⡺	Brajeve tačkice 2 4 5 6 7
+ ⡻	Brajeve tačkice 1 2 4 5 6 7
+@@ -553,7 +553,7 @@
+ ⢵	Brajeve tačkice 1 3 5 6 8
+ ⢶	Brajeve tačkice 2 3 5 6 8
+ ⢷	Brajeve tačkice 1 2 3 5 6 8
+-⢸	Brajeve tačkice 1 2 3 8
++⢸	Brajeve tačkice 4 5 6 8
+ ⢹	Brajeve tačkice 1 4 5 6 8
+ ⢺	Brajeve tačkice 2 4 5 6 8
+ ⢻	Brajeve tačkice 1 2 4 5 6 8
+@@ -617,7 +617,7 @@
+ ⣵	Brajeve tačkice 1 3 5 6 7 8
+ ⣶	Brajeve tačkice 2 3 5 6 7 8
+ ⣷	Brajeve tačkice 1 2 3 5 6 7 8
+-⣸	Brajeve tačkice 1 2 3 7 8
++⣸	Brajeve tačkice 4 5 6 7 8
+ ⣹	Brajeve tačkice 1 4 5 6 7 8
+ ⣺	Brajeve tačkice 2 4 5 6 7 8
+ ⣻	Brajeve tačkice 1 2 4 5 6 7 8
+--- a/source/locale/ta/symbols.dic
++++ b/source/locale/ta/symbols.dic
+@@ -497,7 +497,7 @@
+ ⡵	பிரெயில் 1 3 5 6 7
+ ⡶	பிரெயில் 2 3 5 6 7
+ ⡷	பிரெயில் 1 2 3 5 6 7
+-⡸	பிரெயில் 1 2 3 7
++⡸	பிரெயில் 4 5 6 7
+ ⡹	பிரெயில் 1 4 5 6 7
+ ⡺	பிரெயில் 2 4 5 6 7
+ ⡻	பிரெயில் 1 2 4 5 6 7
+@@ -561,7 +561,7 @@
+ ⢵	பிரெயில் 1 3 5 6 8
+ ⢶	பிரெயில் 2 3 5 6 8
+ ⢷	பிரெயில் 1 2 3 5 6 8
+-⢸	பிரெயில் 1 2 3 8
++⢸	பிரெயில் 4 5 6 8
+ ⢹	பிரெயில் 1 4 5 6 8
+ ⢺	பிரெயில் 2 4 5 6 8
+ ⢻	பிரெயில் 1 2 4 5 6 8
+@@ -625,7 +625,7 @@
+ ⣵	பிரெயில் 1 3 5 6 7 8
+ ⣶	பிரெயில் 2 3 5 6 7 8
+ ⣷	பிரெயில் 1 2 3 5 6 7 8
+-⣸	பிரெயில் 1 2 3 7 8
++⣸	பிரெயில் 4 5 6 7 8
+ ⣹	பிரெயில் 1 4 5 6 7 8
+ ⣺	பிரெயில் 2 4 5 6 7 8
+ ⣻	பிரெயில் 1 2 4 5 6 7 8
+--- a/source/locale/tr/symbols.dic
++++ b/source/locale/tr/symbols.dic
+@@ -497,7 +497,7 @@
+ ⡵	braille 1 3 5 6 7
+ ⡶	braille 2 3 5 6 7
+ ⡷	braille 1 2 3 5 6 7
+-⡸	braille 1 2 3 7
++⡸	braille 4 5 6 7
+ ⡹	braille 1 4 5 6 7
+ ⡺	braille 2 4 5 6 7
+ ⡻	braille 1 2 4 5 6 7
+@@ -625,7 +625,7 @@
+ ⣵	braille 1 3 5 6 7 8
+ ⣶	braille 2 3 5 6 7 8
+ ⣷	braille 1 2 3 5 6 7 8
+-⣸	braille 1 2 3 7 8
++⣸	braille 4 5 6 7 8
+ ⣹	braille 1 4 5 6 7 8
+ ⣺	braille 2 4 5 6 7 8
+ ⣻	braille 1 2 4 5 6 7 8
+--- a/source/locale/uk/symbols.dic
++++ b/source/locale/uk/symbols.dic
+@@ -500,7 +500,7 @@
+ ⡵	брайлівські 1 3 5 6 7
+ ⡶	брайлівські 2 3 5 6 7
+ ⡷	брайлівські 1 2 3 5 6 7
+-⡸	брайлівські 1 2 3 7
++⡸	брайлівські 4 5 6 7
+ ⡹	брайлівські 1 4 5 6 7
+ ⡺	брайлівські 2 4 5 6 7
+ ⡻	брайлівські 1 2 4 5 6 7
+@@ -564,7 +564,7 @@
+ ⢵	брайлівські 1 3 5 6 8
+ ⢶	брайлівські 2 3 5 6 8
+ ⢷	брайлівські 1 2 3 5 6 8
+-⢸	брайлівські 1 2 3 8
++⢸	брайлівські 4 5 6 8
+ ⢹	брайлівські 1 4 5 6 8
+ ⢺	брайлівські 2 4 5 6 8
+ ⢻	брайлівські 1 2 4 5 6 8
+@@ -628,7 +628,7 @@
+ ⣵	брайлівські 1 3 5 6 7 8
+ ⣶	брайлівські 2 3 5 6 7 8
+ ⣷	брайлівські 1 2 3 5 6 7 8
+-⣸	брайлівські 1 2 3 7 8
++⣸	брайлівські 4 5 6 7 8
+ ⣹	брайлівські 1 4 5 6 7 8
+ ⣺	брайлівські 2 4 5 6 7 8
+ ⣻	брайлівські 1 2 4 5 6 7 8
+--- a/source/locale/vi/symbols.dic
++++ b/source/locale/vi/symbols.dic
+@@ -494,7 +494,7 @@
+ ⡵	braille 1 3 5 6 7
+ ⡶	braille 2 3 5 6 7
+ ⡷	braille 1 2 3 5 6 7
+-⡸	braille 1 2 3 7
++⡸	braille 4 5 6 7
+ ⡹	braille 1 4 5 6 7
+ ⡺	braille 2 4 5 6 7
+ ⡻	braille 1 2 4 5 6 7
+@@ -558,7 +558,7 @@
+ ⢵	braille 1 3 5 6 8
+ ⢶	braille 2 3 5 6 8
+ ⢷	braille 1 2 3 5 6 8
+-⢸	braille 1 2 3 8
++⢸	braille 4 5 6 8
+ ⢹	braille 1 4 5 6 8
+ ⢺	braille 2 4 5 6 8
+ ⢻	braille 1 2 4 5 6 8
+@@ -622,7 +622,7 @@
+ ⣵	braille 1 3 5 6 7 8
+ ⣶	braille 2 3 5 6 7 8
+ ⣷	braille 1 2 3 5 6 7 8
+-⣸	braille 1 2 3 7 8
++⣸	braille 4 5 6 7 8
+ ⣹	braille 1 4 5 6 7 8
+ ⣺	braille 2 4 5 6 7 8
+ ⣻	braille 1 2 4 5 6 7 8
+--- a/source/speech/speech.py
++++ b/source/speech/speech.py
+@@ -1440,30 +1440,46 @@
+ 
+ 
+ def speakTypedCharacters(ch: str):
+-	typingIsProtected = api.isTypingProtected()
+-	if typingIsProtected:
+-		realChar = PROTECTED_CHAR
++	wordEchoMode = config.conf["keyboard"]["speakTypedWords"]
++	characterEchoMode = config.conf["keyboard"]["speakTypedCharacters"]
++	typingIsProtected: bool | None = None
++
++	def getTypingIsProtected() -> bool:
++		"""Resolve protected-input state only when an enabled typing-echo path actually needs it."""
++		nonlocal typingIsProtected
++		if typingIsProtected is None:
++			typingIsProtected = api.isTypingProtected()
++		return typingIsProtected
++
++	# Maintain the typed-word buffer only when word echo is enabled.
++	# This avoids cross-process protection/state queries for a feature that is disabled,
++	# while ensuring protected input is never retained as clear text for later speech.
++	if wordEchoMode != TypingEcho.OFF.value:
++		if unicodedata.category(ch)[0] in "LMN":
++			realChar = PROTECTED_CHAR if getTypingIsProtected() else ch
++			_curWordChars.append(realChar)
++		elif ch == "\b":
++			# Backspace, so remove the last character from our buffer.
++			del _curWordChars[-1:]
++		elif ch == "\u007f":
++			# delete character produced in some apps with control+backspace
++			return
++		elif len(_curWordChars) > 0:
++			typedWord = "".join(_curWordChars)
++			clearTypedWordBuffer()
++			if log.isEnabledFor(log.IO):
++				log.io("typed word: %s" % typedWord)
++			if not getTypingIsProtected():
++				if wordEchoMode == TypingEcho.ALWAYS.value or (
++					wordEchoMode == TypingEcho.EDIT_CONTROLS.value and isFocusEditable()
++				):
++					speakText(typedWord)
+ 	else:
+-		realChar = ch
+-	if unicodedata.category(ch)[0] in "LMN":
+-		_curWordChars.append(realChar)
+-	elif ch == "\b":
+-		# Backspace, so remove the last character from our buffer.
+-		del _curWordChars[-1:]
+-	elif ch == "\u007f":
+-		# delete character produced in some apps with control+backspace
+-		return
+-	elif len(_curWordChars) > 0:
+-		typedWord = "".join(_curWordChars)
++		# Do not keep stale clear-text word data while word echo is disabled.
+ 		clearTypedWordBuffer()
+-		if log.isEnabledFor(log.IO):
+-			log.io("typed word: %s" % typedWord)
+-		typingEchoMode = config.conf["keyboard"]["speakTypedWords"]
+-		if typingEchoMode != TypingEcho.OFF.value and not typingIsProtected:
+-			if typingEchoMode == TypingEcho.ALWAYS.value or (
+-				typingEchoMode == TypingEcho.EDIT_CONTROLS.value and isFocusEditable()
+-			):
+-				speakText(typedWord)
++		if ch == "\u007f":
++			return
++
+ 	if _speechState._suppressSpeakTypedCharactersNumber > 0:
+ 		# We primarily suppress based on character count and still have characters to suppress.
+ 		# However, we time out after a short while just in case.
+@@ -1476,11 +1492,11 @@
+ 	else:
+ 		suppress = False
+ 
+-	typingEchoMode = config.conf["keyboard"]["speakTypedCharacters"]
+-	if not suppress and typingEchoMode != TypingEcho.OFF.value and ch >= FIRST_NONCONTROL_CHAR:
+-		if typingEchoMode == TypingEcho.ALWAYS.value or (
+-			typingEchoMode == TypingEcho.EDIT_CONTROLS.value and isFocusEditable()
++	if not suppress and characterEchoMode != TypingEcho.OFF.value and ch >= FIRST_NONCONTROL_CHAR:
++		if characterEchoMode == TypingEcho.ALWAYS.value or (
++			characterEchoMode == TypingEcho.EDIT_CONTROLS.value and isFocusEditable()
+ 		):
++			realChar = PROTECTED_CHAR if getTypingIsProtected() else ch
+ 			speakSpelling(realChar)
+ 
+ 
+--- /dev/null
++++ b/tests/unit/test_addonHandler/test_addonImports.py
+@@ -0,0 +1,105 @@
++# A part of NonVisual Desktop Access (NVDA)
++# Copyright (C) 2026 NV Access Limited, Leonard de Ruijter
++# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
++# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
++
++"""Unit tests for the cleanup of add-on modules imported into sys.modules."""
++
++import os
++import sys
++import tempfile
++import types
++import unittest
++
++import addonHandler
++
++MANIFEST_CONTENTS = """name = testAddon
++summary = Test add-on
++author = Test author
++version = 0.1
++"""
++
++ADDON_MODULE_CONTENTS: dict[str, str] = {
++	"__init__.py": "",
++	"sibling.py": "",
++	"mainMod.py": "from . import sibling\n",
++}
++
++
++class TestCleanupAddonImports(unittest.TestCase):
++	"""Tests for the removal of an add-on's modules from sys.modules by Addon._cleanupAddonImports."""
++
++	def setUp(self) -> None:
++		self._modulesBefore = set(sys.modules)
++		self._tempDir = tempfile.TemporaryDirectory()
++		addonPath = os.path.join(self._tempDir.name, "testAddon")
++		libPath = os.path.join(addonPath, "lib")
++		os.makedirs(libPath)
++		with open(os.path.join(addonPath, addonHandler.MANIFEST_FILENAME), "w", encoding="utf-8") as f:
++			f.write(MANIFEST_CONTENTS)
++		for fileName, contents in ADDON_MODULE_CONTENTS.items():
++			with open(os.path.join(libPath, fileName), "w", encoding="utf-8") as f:
++				f.write(contents)
++		self.addon = addonHandler.Addon(addonPath)
++		self.addon._modulesBeforeInstall = set(sys.modules)
++
++	def tearDown(self) -> None:
++		for modName in set(sys.modules) - self._modulesBefore:
++			del sys.modules[modName]
++		self._tempDir.cleanup()
++
++	def _injectModule(self, name: str) -> types.ModuleType:
++		"""Adds a synthetic module to sys.modules and returns it.
++
++		:param name: The name to register the module under.
++		:return: The registered module.
++		"""
++		module = types.ModuleType(name)
++		sys.modules[name] = module
++		return module
++
++	def test_transitivelyImportedAddonModuleRemoved(self):
++		"""A module imported by another add-on module rather than by loadModule is removed."""
++		self.addon.loadModule("lib.mainMod")
++		siblingName = "addons.testAddon.lib.sibling"
++		self.assertIn(siblingName, sys.modules)
++		self.assertNotIn(siblingName, self.addon._importedAddonModules)
++		self.addon._cleanupAddonImports()
++		self.assertNotIn(siblingName, sys.modules)
++
++	def test_addonModuleRemovedRegardlessOfPathCase(self):
++		"""A module whose file path differs from the add-on path only in case is removed."""
++		module = self._injectModule("fakeCasedAddonModule")
++		module.__file__ = os.path.join(self.addon.path.upper(), "lib", "mod.py")
++		self.addon._cleanupAddonImports()
++		self.assertNotIn("fakeCasedAddonModule", sys.modules)
++
++	def test_moduleWithoutFileAttributeKept(self):
++		"""A module without a __file__ attribute survives the cleanup."""
++		self._injectModule("fakeBuiltinModule")
++		self.addon._cleanupAddonImports()
++		self.assertIn("fakeBuiltinModule", sys.modules)
++
++	def test_moduleFromSiblingPathPrefixKept(self):
++		"""A module from a directory whose path starts with the add-on path survives the cleanup."""
++		module = self._injectModule("fakeSiblingPathModule")
++		module.__file__ = os.path.join(self.addon.path + "Extra", "mod.py")
++		self.addon._cleanupAddonImports()
++		self.assertIn("fakeSiblingPathModule", sys.modules)
++
++	def test_moduleWithNoneFileKept(self):
++		"""A module whose __file__ attribute is None survives the cleanup."""
++		module = self._injectModule("fakeNamespaceModule")
++		module.__file__ = None
++		self.addon._cleanupAddonImports()
++		self.assertIn("fakeNamespaceModule", sys.modules)
++
++	def test_recordedModulesRemovedAndListCleared(self):
++		"""Modules recorded by loadModule are removed and the record is emptied."""
++		self.addon.loadModule("lib.mainMod")
++		recordedNames = list(self.addon._importedAddonModules)
++		self.assertIn("addons.testAddon.lib.mainMod", recordedNames)
++		self.addon._cleanupAddonImports()
++		for modName in recordedNames:
++			self.assertNotIn(modName, sys.modules)
++		self.assertEqual(self.addon._importedAddonModules, [])
+--- a/tests/unit/test_characterProcessing.py
++++ b/tests/unit/test_characterProcessing.py
+@@ -183,3 +183,14 @@
+ 				CHAR_IN_SYMB_FILE_DESC,
+ 				msg=f'Test failure for locale={locale} with "{CHAR_IN_SYMB_FILE_DESC}"',
+ 			)
++
++
++class TestUnicodeBrailleSpeechSymbols(unittest.TestCase):
++	def test_allEnglishBrailleDotPatterns(self):
++		for codePoint in range(0x2801, 0x2900):
++			char = chr(codePoint)
++			mask = codePoint - 0x2800
++			dots = [str(dot) for dot in range(1, 9) if mask & (1 << (dot - 1))]
++			expected = f"braille {' '.join(dots)}"
++			with self.subTest(char=char, codePoint=f"U+{codePoint:04X}"):
++				self.assertEqual(expected, processSpeechSymbol("en", char))
+--- a/tests/unit/test_speech.py
++++ b/tests/unit/test_speech.py
+@@ -8,8 +8,11 @@
+ import gettext
+ import typing
+ import unittest
++from types import SimpleNamespace
++from unittest.mock import patch
+ 
+ import config
++import speech.speech as speechModule
+ from characterProcessing import processSpeechSymbol
+ from speech import (
+ 	_getSpellingCharAddCapNotification,
+@@ -648,3 +651,93 @@
+ 
+ 		with actionTester(self, post_speechPaused, switch=False):
+ 			pauseSpeech(False)
++
++
++class TestSpeakTypedCharactersProtectionQueries(unittest.TestCase):
++	"""Regression coverage for avoiding unnecessary cross-process protected-input queries."""
++
++	def setUp(self) -> None:
++		self._oldCharacterEcho = config.conf["keyboard"]["speakTypedCharacters"]
++		self._oldWordEcho = config.conf["keyboard"]["speakTypedWords"]
++		self._oldSpeechState = speechModule._speechState
++		speechModule._speechState = SimpleNamespace(
++			_suppressSpeakTypedCharactersNumber=0,
++			_suppressSpeakTypedCharactersTime=None,
++		)
++		speechModule.clearTypedWordBuffer()
++
++	def tearDown(self) -> None:
++		config.conf["keyboard"]["speakTypedCharacters"] = self._oldCharacterEcho
++		config.conf["keyboard"]["speakTypedWords"] = self._oldWordEcho
++		speechModule.clearTypedWordBuffer()
++		speechModule._speechState = self._oldSpeechState
++
++	def _setEcho(self, *, characters: int, words: int) -> None:
++		config.conf["keyboard"]["speakTypedCharacters"] = characters
++		config.conf["keyboard"]["speakTypedWords"] = words
++
++	def test_echoOffDoesNotQueryProtectedState(self) -> None:
++		self._setEcho(
++			characters=speechModule.TypingEcho.OFF.value,
++			words=speechModule.TypingEcho.OFF.value,
++		)
++		with patch.object(speechModule.api, "isTypingProtected") as isTypingProtected:
++			speechModule.speakTypedCharacters("a")
++			isTypingProtected.assert_not_called()
++		self.assertEqual([], speechModule._curWordChars)
++
++	def test_controlCharacterDoesNotQueryProtectedStateWithEmptyWordBuffer(self) -> None:
++		self._setEcho(
++			characters=speechModule.TypingEcho.ALWAYS.value,
++			words=speechModule.TypingEcho.ALWAYS.value,
++		)
++		with (
++			patch.object(speechModule.api, "isTypingProtected") as isTypingProtected,
++			patch.object(speechModule, "speakSpelling") as speakSpelling,
++		):
++			speechModule.speakTypedCharacters("\r")
++			isTypingProtected.assert_not_called()
++			speakSpelling.assert_not_called()
++
++	def test_characterEchoMasksProtectedInput(self) -> None:
++		self._setEcho(
++			characters=speechModule.TypingEcho.ALWAYS.value,
++			words=speechModule.TypingEcho.OFF.value,
++		)
++		with (
++			patch.object(speechModule.api, "isTypingProtected", return_value=True) as isTypingProtected,
++			patch.object(speechModule, "speakSpelling") as speakSpelling,
++		):
++			speechModule.speakTypedCharacters("a")
++			isTypingProtected.assert_called_once_with()
++			speakSpelling.assert_called_once_with(speechModule.PROTECTED_CHAR)
++
++	def test_wordBufferMasksProtectedInputAndNeverSpeaksIt(self) -> None:
++		self._setEcho(
++			characters=speechModule.TypingEcho.OFF.value,
++			words=speechModule.TypingEcho.ALWAYS.value,
++		)
++		with (
++			patch.object(speechModule.api, "isTypingProtected", return_value=True),
++			patch.object(speechModule, "speakText") as speakText,
++		):
++			speechModule.speakTypedCharacters("a")
++			self.assertEqual([speechModule.PROTECTED_CHAR], speechModule._curWordChars)
++			speechModule.speakTypedCharacters(" ")
++			speakText.assert_not_called()
++			self.assertEqual([], speechModule._curWordChars)
++
++	def test_suppressionBookkeepingStillRunsWhenEchoIsOff(self) -> None:
++		self._setEcho(
++			characters=speechModule.TypingEcho.OFF.value,
++			words=speechModule.TypingEcho.OFF.value,
++		)
++		speechModule._speechState._suppressSpeakTypedCharactersNumber = 1
++		with (
++			patch.object(speechModule.time, "time", return_value=1.0),
++			patch.object(speechModule.api, "isTypingProtected") as isTypingProtected,
++		):
++			speechModule._speechState._suppressSpeakTypedCharactersTime = 1.0
++			speechModule.speakTypedCharacters("a")
++			isTypingProtected.assert_not_called()
++		self.assertEqual(0, speechModule._speechState._suppressSpeakTypedCharactersNumber)
+--- /dev/null
++++ b/tests/zeroRegression_addonCleanup.pyqa
+@@ -0,0 +1,84 @@
++"""Standalone regression harness for Addon._cleanupAddonImports.
++
++This extracts the actual method from source/addonHandler/__init__.py and executes
++it on a minimal dummy class so the core path can be validated without importing
++NVDA's Windows-only runtime dependencies.
++"""
++from __future__ import annotations
++
++import ast
++import os
++from pathlib import Path
++import sys
++import tempfile
++import textwrap
++import types
++
++ROOT = Path(__file__).resolve().parents[1]
++SOURCE = ROOT / "source" / "addonHandler" / "__init__.py"
++text = SOURCE.read_text(encoding="utf-8")
++tree = ast.parse(text, filename=str(SOURCE))
++method = None
++for node in tree.body:
++    if isinstance(node, ast.ClassDef) and node.name == "Addon":
++        for child in node.body:
++            if isinstance(child, ast.FunctionDef) and child.name == "_cleanupAddonImports":
++                method = child
++                break
++if method is None:
++    raise AssertionError("Addon._cleanupAddonImports not found")
++method_source = ast.get_source_segment(text, method)
++if not method_source:
++    raise AssertionError("Unable to extract Addon._cleanupAddonImports source")
++
++class _Log:
++    def debug(self, *_args, **_kwargs):
++        pass
++
++namespace = {"os": os, "sys": sys, "log": _Log()}
++class_source = "class DummyAddon:\n" + textwrap.indent(textwrap.dedent(method_source), "    ")
++exec(compile(class_source, "<addon-cleanup-harness>", "exec"), namespace)
++DummyAddon = namespace["DummyAddon"]
++
++original_modules = set(sys.modules)
++try:
++    with tempfile.TemporaryDirectory() as temp:
++        addon_path = os.path.join(temp, "testAddon")
++        os.makedirs(addon_path)
++
++        direct_name = "qaAddonDirect"
++        transitive_name = "qaAddonTransitive"
++        sibling_name = "qaAddonSibling"
++        no_file_name = "qaAddonNoFile"
++        none_file_name = "qaAddonNoneFile"
++
++        direct = types.ModuleType(direct_name)
++        direct.__file__ = os.path.join(addon_path, "direct.py")
++        transitive = types.ModuleType(transitive_name)
++        transitive.__file__ = os.path.join(addon_path, "lib", "transitive.py")
++        sibling = types.ModuleType(sibling_name)
++        sibling.__file__ = os.path.join(addon_path + "Extra", "sibling.py")
++        no_file = types.ModuleType(no_file_name)
++        none_file = types.ModuleType(none_file_name)
++        none_file.__file__ = None
++
++        for mod in (direct, transitive, sibling, no_file, none_file):
++            sys.modules[mod.__name__] = mod
++
++        obj = DummyAddon()
++        obj.path = addon_path
++        obj._importedAddonModules = [direct_name]
++        obj._modulesBeforeInstall = original_modules
++        obj._cleanupAddonImports()
++
++        assert direct_name not in sys.modules, "directly tracked add-on module was not removed"
++        assert transitive_name not in sys.modules, "transitively imported add-on module was not removed"
++        assert sibling_name in sys.modules, "sibling path prefix was incorrectly removed"
++        assert no_file_name in sys.modules, "module without __file__ was incorrectly removed"
++        assert none_file_name in sys.modules, "module with __file__=None was incorrectly removed"
++        assert obj._importedAddonModules == [], "tracked add-on module list was not cleared"
++finally:
++    for name in set(sys.modules) - original_modules:
++        sys.modules.pop(name, None)
++
++print("PASS: add-on import cache cleanup zero-regression harness")
+--- /dev/null
++++ b/tests/zeroRegression_brailleSymbols.pyqa
+@@ -0,0 +1,77 @@
++# A part of NonVisual Desktop Access (NVDA)
++# Local zero-regression audit for Unicode braille speech symbols.
++from __future__ import annotations
++
++import re
++from pathlib import Path
++
++LOCALE_ROOT = Path(__file__).resolve().parents[1] / "source" / "locale"
++TARGETS = {
++    "⠸": [4, 5, 6],
++    "⡸": [4, 5, 6, 7],
++    "⢸": [4, 5, 6, 8],
++    "⣸": [4, 5, 6, 7, 8],
++}
++
++
++def _read(path: Path) -> str:
++    data = path.read_bytes()
++    if data.startswith(b"\xef\xbb\xbf"):
++        data = data[3:]
++    return data.decode("utf-8")
++
++
++def _explicitDots(text: str) -> list[int]:
++    return [int(x) for x in re.findall(r"(?<!\d)([1-8])(?!\d)", text)]
++
++
++def main() -> None:
++    failures: list[str] = []
++    explicitTargetsChecked = 0
++    for symbolsPath in sorted(LOCALE_ROOT.glob("*/symbols.dic")):
++        locale = symbolsPath.parent.name
++        for line in _read(symbolsPath).splitlines():
++            if "\t" not in line:
++                continue
++            symbol, replacement, *_ = line.split("\t")
++            expected = TARGETS.get(symbol)
++            if expected is None:
++                continue
++            dots = _explicitDots(replacement)
++            # Some translations spell dot numbers as words; only verify explicit numeric enumerations.
++            if len(dots) < 2:
++                continue
++            explicitTargetsChecked += 1
++            if dots != expected:
++                failures.append(f"{locale}: {symbol} => {dots}, expected {expected}")
++
++    # English enumerates all 255 nonblank braille patterns numerically, so verify all of them.
++    english = LOCALE_ROOT / "en" / "symbols.dic"
++    englishChecked = 0
++    for line in _read(english).splitlines():
++        if "\t" not in line:
++            continue
++        symbol, replacement, *_ = line.split("\t")
++        if len(symbol) != 1 or not 0x2801 <= ord(symbol) <= 0x28FF:
++            continue
++        dots = _explicitDots(replacement)
++        if not dots:
++            continue
++        englishChecked += 1
++        mask = ord(symbol) - 0x2800
++        expected = [dot for dot in range(1, 9) if mask & (1 << (dot - 1))]
++        if dots != expected:
++            failures.append(f"en: {symbol} => {dots}, expected {expected}")
++
++    if englishChecked != 255:
++        failures.append(f"en: expected 255 numeric braille entries, found {englishChecked}")
++    if failures:
++        raise SystemExit("FAIL:\n" + "\n".join(failures))
++    print(
++        "PASS: Unicode braille symbol audit "
++        f"(English={englishChecked}, localized explicit targets={explicitTargetsChecked})",
++    )
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/tests/zeroRegression_speakTypedCharacters.pyqa
+@@ -0,0 +1,147 @@
++# A part of NonVisual Desktop Access (NVDA)
++# Local zero-regression harness for speakTypedCharacters.
++from __future__ import annotations
++
++import ast
++import enum
++import time as _time
++import types
++import unicodedata
++from pathlib import Path
++
++SOURCE = Path(__file__).resolve().parents[1] / "source" / "speech" / "speech.py"
++
++
++class TypingEcho(enum.IntEnum):
++	OFF = 0
++	EDIT_CONTROLS = 1
++	ALWAYS = 2
++
++
++class FakeApi:
++	def __init__(self):
++		self.protected = False
++		self.calls = 0
++
++	def isTypingProtected(self):
++		self.calls += 1
++		return self.protected
++
++
++class FakeLog:
++	IO = 1
++
++	def isEnabledFor(self, level):
++		return False
++
++	def io(self, msg):
++		pass
++
++
++def load_function():
++	text = SOURCE.read_text(encoding="utf-8")
++	tree = ast.parse(text)
++	func = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "speakTypedCharacters")
++	module = ast.Module(body=[func], type_ignores=[])
++	ast.fix_missing_locations(module)
++
++	api = FakeApi()
++	config = types.SimpleNamespace(conf={"keyboard": {"speakTypedWords": 0, "speakTypedCharacters": 0}})
++	state = types.SimpleNamespace(
++		_suppressSpeakTypedCharactersNumber=0,
++		_suppressSpeakTypedCharactersTime=None,
++	)
++	word_chars = []
++	spoken_chars = []
++	spoken_words = []
++	editable_calls = []
++
++	def clear_word_buffer():
++		word_chars.clear()
++
++	def speak_spelling(ch):
++		spoken_chars.append(ch)
++
++	def speak_text(word):
++		spoken_words.append(word)
++
++	def is_focus_editable():
++		editable_calls.append(True)
++		return True
++
++	ns = {
++		"api": api,
++		"config": config,
++		"TypingEcho": TypingEcho,
++		"unicodedata": unicodedata,
++		"PROTECTED_CHAR": "*",
++		"_curWordChars": word_chars,
++		"clearTypedWordBuffer": clear_word_buffer,
++		"log": FakeLog(),
++		"speakText": speak_text,
++		"_speechState": state,
++		"time": _time,
++		"FIRST_NONCONTROL_CHAR": " ",
++		"isFocusEditable": is_focus_editable,
++		"speakSpelling": speak_spelling,
++	}
++	exec(compile(module, str(SOURCE), "exec"), ns)
++	return ns["speakTypedCharacters"], ns, api, spoken_chars, spoken_words, editable_calls
++
++
++def set_echo(ns, chars, words):
++	ns["config"].conf["keyboard"]["speakTypedCharacters"] = int(chars)
++	ns["config"].conf["keyboard"]["speakTypedWords"] = int(words)
++
++
++def run():
++	fn, ns, api, chars, words, editable = load_function()
++
++	set_echo(ns, TypingEcho.OFF, TypingEcho.OFF)
++	fn("a")
++	assert api.calls == 0, api.calls
++	assert ns["_curWordChars"] == []
++
++	set_echo(ns, TypingEcho.ALWAYS, TypingEcho.ALWAYS)
++	fn("\r")
++	assert api.calls == 0, api.calls
++	assert editable == []
++
++	set_echo(ns, TypingEcho.ALWAYS, TypingEcho.OFF)
++	api.protected = True
++	fn("a")
++	assert api.calls == 1, api.calls
++	assert chars[-1] == "*", chars
++	assert ns["_curWordChars"] == []
++
++	fn, ns, api, chars, words, editable = load_function()
++	set_echo(ns, TypingEcho.OFF, TypingEcho.ALWAYS)
++	api.protected = False
++	fn("a")
++	fn("b")
++	fn(" ")
++	assert words == ["ab"], words
++	assert api.calls == 3, api.calls
++	assert ns["_curWordChars"] == []
++
++	fn, ns, api, chars, words, editable = load_function()
++	set_echo(ns, TypingEcho.OFF, TypingEcho.ALWAYS)
++	api.protected = True
++	fn("a")
++	fn(" ")
++	assert words == [], words
++	assert ns["_curWordChars"] == []
++
++	fn, ns, api, chars, words, editable = load_function()
++	set_echo(ns, TypingEcho.OFF, TypingEcho.OFF)
++	ns["_speechState"]._suppressSpeakTypedCharactersNumber = 1
++	ns["_speechState"]._suppressSpeakTypedCharactersTime = _time.time()
++	fn("x")
++	assert ns["_speechState"]._suppressSpeakTypedCharactersNumber == 0
++	assert api.calls == 0
++
++	print("PASS: speakTypedCharacters zero-regression harness")
++
++
++if __name__ == "__main__":
++	run()
+--- /dev/null
++++ b/tests/zeroRegression_synthDriverHost32Runtime.pyqa
+@@ -0,0 +1,53 @@
++"""Standalone regression harness for the x86 synth-driver host VC runtime bundle."""
++from __future__ import annotations
++
++import ast
++import os
++from pathlib import Path
++from types import SimpleNamespace
++import tempfile
++import textwrap
++
++ROOT = Path(__file__).resolve().parents[1]
++SOURCE = ROOT / "runtime-builders" / "synthDriverHost32" / "setup-runtime.py"
++text = SOURCE.read_text(encoding="utf-8")
++tree = ast.parse(text, filename=str(SOURCE))
++function = next(
++    (node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "_getVCRuntimePath"),
++    None,
++)
++if function is None:
++    raise AssertionError("_getVCRuntimePath not found")
++source = ast.get_source_segment(text, function)
++if not source:
++    raise AssertionError("Unable to extract _getVCRuntimePath")
++if 'glob("*.manifest") + [_getVCRuntimePath()]' not in text:
++    raise AssertionError("vcruntime140.dll helper is not included in data_files")
++
++with tempfile.TemporaryDirectory() as temp:
++    root = Path(temp)
++    first = root / "first"
++    second = root / "second"
++    exe_dir = root / "exe"
++    for directory in (first, second, exe_dir):
++        directory.mkdir()
++    dll = second / "vcruntime140.dll"
++    dll.write_bytes(b"qa")
++    fake_sys = SimpleNamespace(
++        base_prefix=str(first),
++        base_exec_prefix=str(second),
++        executable=str(exe_dir / "python.exe"),
++    )
++    namespace = {"os": os, "sys": fake_sys, "VC_RUNTIME_DLL": "vcruntime140.dll"}
++    exec(compile(textwrap.dedent(source), "<vc-runtime-harness>", "exec"), namespace)
++    resolved = namespace["_getVCRuntimePath"]()
++    assert os.path.normpath(resolved) == os.path.normpath(str(dll)), resolved
++    dll.unlink()
++    try:
++        namespace["_getVCRuntimePath"]()
++    except RuntimeError:
++        pass
++    else:
++        raise AssertionError("missing vcruntime140.dll did not raise RuntimeError")
++
++print("PASS: synthDriverHost32 vcruntime140.dll zero-regression harness")

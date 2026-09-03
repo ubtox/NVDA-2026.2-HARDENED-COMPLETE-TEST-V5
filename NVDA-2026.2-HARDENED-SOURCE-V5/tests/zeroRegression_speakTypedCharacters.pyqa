@@ -1,0 +1,147 @@
+# A part of NonVisual Desktop Access (NVDA)
+# Local zero-regression harness for speakTypedCharacters.
+from __future__ import annotations
+
+import ast
+import enum
+import time as _time
+import types
+import unicodedata
+from pathlib import Path
+
+SOURCE = Path(__file__).resolve().parents[1] / "source" / "speech" / "speech.py"
+
+
+class TypingEcho(enum.IntEnum):
+	OFF = 0
+	EDIT_CONTROLS = 1
+	ALWAYS = 2
+
+
+class FakeApi:
+	def __init__(self):
+		self.protected = False
+		self.calls = 0
+
+	def isTypingProtected(self):
+		self.calls += 1
+		return self.protected
+
+
+class FakeLog:
+	IO = 1
+
+	def isEnabledFor(self, level):
+		return False
+
+	def io(self, msg):
+		pass
+
+
+def load_function():
+	text = SOURCE.read_text(encoding="utf-8")
+	tree = ast.parse(text)
+	func = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "speakTypedCharacters")
+	module = ast.Module(body=[func], type_ignores=[])
+	ast.fix_missing_locations(module)
+
+	api = FakeApi()
+	config = types.SimpleNamespace(conf={"keyboard": {"speakTypedWords": 0, "speakTypedCharacters": 0}})
+	state = types.SimpleNamespace(
+		_suppressSpeakTypedCharactersNumber=0,
+		_suppressSpeakTypedCharactersTime=None,
+	)
+	word_chars = []
+	spoken_chars = []
+	spoken_words = []
+	editable_calls = []
+
+	def clear_word_buffer():
+		word_chars.clear()
+
+	def speak_spelling(ch):
+		spoken_chars.append(ch)
+
+	def speak_text(word):
+		spoken_words.append(word)
+
+	def is_focus_editable():
+		editable_calls.append(True)
+		return True
+
+	ns = {
+		"api": api,
+		"config": config,
+		"TypingEcho": TypingEcho,
+		"unicodedata": unicodedata,
+		"PROTECTED_CHAR": "*",
+		"_curWordChars": word_chars,
+		"clearTypedWordBuffer": clear_word_buffer,
+		"log": FakeLog(),
+		"speakText": speak_text,
+		"_speechState": state,
+		"time": _time,
+		"FIRST_NONCONTROL_CHAR": " ",
+		"isFocusEditable": is_focus_editable,
+		"speakSpelling": speak_spelling,
+	}
+	exec(compile(module, str(SOURCE), "exec"), ns)
+	return ns["speakTypedCharacters"], ns, api, spoken_chars, spoken_words, editable_calls
+
+
+def set_echo(ns, chars, words):
+	ns["config"].conf["keyboard"]["speakTypedCharacters"] = int(chars)
+	ns["config"].conf["keyboard"]["speakTypedWords"] = int(words)
+
+
+def run():
+	fn, ns, api, chars, words, editable = load_function()
+
+	set_echo(ns, TypingEcho.OFF, TypingEcho.OFF)
+	fn("a")
+	assert api.calls == 0, api.calls
+	assert ns["_curWordChars"] == []
+
+	set_echo(ns, TypingEcho.ALWAYS, TypingEcho.ALWAYS)
+	fn("\r")
+	assert api.calls == 0, api.calls
+	assert editable == []
+
+	set_echo(ns, TypingEcho.ALWAYS, TypingEcho.OFF)
+	api.protected = True
+	fn("a")
+	assert api.calls == 1, api.calls
+	assert chars[-1] == "*", chars
+	assert ns["_curWordChars"] == []
+
+	fn, ns, api, chars, words, editable = load_function()
+	set_echo(ns, TypingEcho.OFF, TypingEcho.ALWAYS)
+	api.protected = False
+	fn("a")
+	fn("b")
+	fn(" ")
+	assert words == ["ab"], words
+	assert api.calls == 3, api.calls
+	assert ns["_curWordChars"] == []
+
+	fn, ns, api, chars, words, editable = load_function()
+	set_echo(ns, TypingEcho.OFF, TypingEcho.ALWAYS)
+	api.protected = True
+	fn("a")
+	fn(" ")
+	assert words == [], words
+	assert ns["_curWordChars"] == []
+
+	fn, ns, api, chars, words, editable = load_function()
+	set_echo(ns, TypingEcho.OFF, TypingEcho.OFF)
+	ns["_speechState"]._suppressSpeakTypedCharactersNumber = 1
+	ns["_speechState"]._suppressSpeakTypedCharactersTime = _time.time()
+	fn("x")
+	assert ns["_speechState"]._suppressSpeakTypedCharactersNumber == 0
+	assert api.calls == 0
+
+	print("PASS: speakTypedCharacters zero-regression harness")
+
+
+if __name__ == "__main__":
+	run()

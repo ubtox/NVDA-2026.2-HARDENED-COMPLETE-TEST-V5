@@ -1,0 +1,36 @@
+NVDA 2026.2 HARDENED - VALIDATION V4
+====================================
+
+Revision: NVDA-2026.2-HARDENED-V4-20260903-R1
+
+Corrections driven by Windows validation log 2026-09-03 11:36 +02:00
+-------------------------------------------------------------------
+1. Native stderr is no longer treated as a PowerShell failure. PASS/FAIL is
+   decided by the native process exit code. This fixes false NativeCommandError
+   failures seen with uv, SCons/MIDL, unit tests and runcheckpot.bat.
+2. Pinned submodules are prepared/verified before source generation.
+3. `scons.bat --all-cores source` is a critical prerequisite and runs before
+   Pyright/tests. Generated COM modules and source\louis are checked explicitly.
+4. Pyright keeps the repository-pinned version; the update notice is informational.
+5. System tests are called with `--include NVDA`, replacing Robot Framework's
+   intentional fakeTagToEnforceUsageOfInclude sentinel.
+6. The hardened pyproject license exceptions are retained for dependencies whose
+   compatible licenses are misreported by package metadata (including the packages
+   observed in the failed Windows license table).
+7. Packaging runs only when all required validation gates pass.
+8. A revision marker prevents accidentally validating a stale/mixed extracted tree.
+
+IMPORTANT
+---------
+Extract this ZIP into a NEW directory. Do not overwrite the old
+C:\NVDA-2026.2-HARDENED-SOURCE tree. The top directory is intentionally named
+NVDA-2026.2-HARDENED-SOURCE-V4.
+
+Run from an elevated Windows PowerShell:
+
+    Set-Location C:\NVDA-2026.2-HARDENED-SOURCE-V4
+    .\NVDA-HARDENED-VALIDATE.ps1
+
+Optional:
+    .\NVDA-HARDENED-VALIDATE.ps1 -SkipSystemTests
+    .\NVDA-HARDENED-VALIDATE.ps1 -SkipPackaging

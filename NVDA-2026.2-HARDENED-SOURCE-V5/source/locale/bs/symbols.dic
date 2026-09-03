@@ -1,0 +1,630 @@
+# A part of NonVisual Desktop Access (NVDA)
+# Copyright (c) 2011-2025 NVDA Contributors
+# This file is covered by the GNU General Public License.
+
+complexSymbols:
+# identifier	regexp
+# Sentence endings.
+. sentence ending	(?<=[^\s.])\.(?=[\"'”’)\s]|$)
+! sentence ending	(?<=[^\s!])\!(?=[\"'”’)\s]|$)
+? sentence ending	(?<=[^\s?])\?(?=[\"'”’)\s]|$)
+# Phrase endings.
+; phrase ending	(?<=[^\s;]);(?=\s|$)
+: phrase ending	(?<=[^\s:]):(?=\s|$)
+# Series of dots used for visual presentation, e.g. in table of contents
+multiple .	\.{4,}
+# Others
+decimal point	(?<![^\d -])\.(?=\d)
+in-word '	(?<=[^\W_])['’]
+negative number	(?<!\w)[-−]{1}(?=[$£€¥.]?\d)
+
+symbols:
+# identifier	replacement[[	level][	preserve]][	# display name]
+
+# Complex symbols
+. sentence ending	tačka	all	always
+! sentence ending	uskličnik	all	always
+? sentence ending	upitnik	all	always
+; phrase ending	tačka-zarez	most	always
+: phrase ending	dvotačka	most	always
+multiple .	više tačaka	all	always
+decimal point		none	always
+in-word '	apostrof	all	norep
+negative number	minus	none	norep
+
+# Whitespace
+\0	prazno	char	# null
+\t	tabulator
+\n	kraj reda	char
+\f	prekid stranice	none
+\r	kraj reda	char
+ 	razmak	char
+ 	razmak	char	# no-break space
+
+# Standard punctuation/symbols
+!	uskličnik	all
+！	prošireni uskličnik	all
+"	navodnici	most
+\#	taraba	some
+$	dolar	some	norep
+£	funta	some	norep
+€	euro	some	norep
+¢	centi	some	norep
+¥	jen	some	norep
+₹	rupija	some	norep
+ƒ	florin	some	norep
+¤	znak za valutu	all	norep
+%	posto	some
+‰	promil	some
+&	trgovačko i	some
+'	apostrof	all
+(	lijeva zagrada	most	always
+)	desna zagrada	most	always
+*	zvjezdica	some
+,	zarez	all	always
+、	ideografski zarez	all	always
+،	arapski zarez	all	always
+-	crtica	most	always
+.	tačka	some
+．	proširena tačka	some
+/	kosa crtica	some
+:	dvotačka	most	norep
+：	proširena dvotačka	most	norep
+;	tačka-zarez	most
+؛	arapski tačka-zarez	most
+；	prošireni tačka-zarez	most
+?	upitnik	all
+؟	arapski upitnik	all
+？	prošireni upitnik	all
+@	et	some
+[	lijeva uglasta zagrada	most
+]	desna uglasta zagrada	most
+\\	obrnuta kosa crtica	most
+^	krović	most
+_	donja crtica	most
+`	akcenat	most
+{	lijeva vitičasta zagrada	most
+}	desna vitičasta zagrada	most
+|	uspravna crtica	most
+¦	isprekidana crtica	most
+~	tilda	most
+¡	obrnuti uskličnik	some
+¿	obrnuti upitnik	some
+·	srednja tačka	most
+‚	donji navodnik	most
+„	donji navodnici	most
+′	minuta	some
+″	sekunda	some
+‴	treći prim	some
+
+# Other characters
+•	predznak	some
+…	trotačka	all	always
+...tri tačke	all	always
+“	lijevi navodnik	most
+”	desni navodnik	most
+‘	lijevi polunavodnik	most
+’	desni polunavodnik	most
+–	srednja crtica	most	always
+—	duga crtica	most	always
+­	uslovna crtica	most
+⁃	crtica za nabrajanje	none
+●	kružić	most
+○	bijeli kružić	most
+¨	prijeglas	most
+¯	makron	most
+´	akut	most
+¸	cedila	most
+‎	oznaka za lijevo na desno	char
+‏	oznaka za desno na lijevochar
+¶	oznaka odlomka	most
+■	crni kvadratić	some
+▪	crni kvadratić	some
+◾	crni kvadratić	some
+□	bijeli kvadratić	some
+◦	bijeli predznak	some
+⇨	bijela strelica desno	some
+➔	strelica koja pokazuje desnosome
+➢	desna strelica prema gore	some
+❖	crni romb minus bijeli X	some
+♣	crni tref	some
+♦	crni karo	some
+◆	crni romb	some
+§	odlomak	all
+°	stepeni	some
+«	francuski lijevi navodnikmost	always
+»	francuski desni navodnik	most	always
+µ	mikro	some
+⁰	eksponent 0	some
+¹	eksponent 1	some
+²	eksponent 2	some
+³	eksponent 3	some
+⁴	eksponent 4	some
+⁵	eksponent 5	some
+⁶	eksponent 6	some
+⁷	eksponent 7	some
+⁸	eksponent 8	some
+⁹	eksponent 9	some
+⁺	eksponent plus	some
+⁼	eksponent jednako	some
+⁽	eksponent lijeva zagrada	some
+⁾	eksponent desna zagrada	some
+ⁿ	eksponent n	some
+₀	indeks 0	some
+₁	indeks 1	some
+₂	indeks 2	some
+₃	indeks 3	some
+₄	indeks 4	some
+₅	indeks 5	some
+₆	indeks 6	some
+₇	indeks 7	some
+₈	indeks 8	some
+₉	indeks 9	some
+₊	indeks plus	some
+₋	indeks minus	some
+₌	indeks jednako	some
+₍	indeks lijeva zagrada	some
+₎	indeks desna zagrada	some
+®	registrovano	some
+™	zaštitni znak	some
+©	autorska prava	some
+℠	znak usluge	some
+←	strelica lijevo	some
+↑	strelica gore	some
+→	strelica desno	some
+↓	strelica dolje	some
+✓	kvačica	some
+✔	podebljana kvačica	some
+🡺	strelica desno	some
+†	bodež	some
+‡	dvostruki bodež	some
+‣	trokutasti predznak	none
+✗	predznak u obliku slova X	none
+⊕	zaokruženi plus	none
+⊖	zaokruženi minus	none
+⇄	strelica desno iznad strelice lijevo	none
+⇒	dvostruka strelica desno	none
+
+#Arithmetic operators
++	plus	some
+−	minus	some
+×	puta	some
+⋅	puta	some
+⨯	puta	none
+∕	kroz	some
+⁄	razlomačka crtica	some
+÷	podijeljeno sa	some
+∓	minus ili plus	some
+±	plus ili Minus	some
+
+#Set operations
+∖	set minus	none
+⊍	set union	none
+𝒫	power set of the set	none
+𝔓	power set of the set	none
+℘	power set of the set	none
+∁	complement of the set	none
+
+#Set relations and set constructions
+∅	empty set	none
+⊂	subset of	none
+⊄	not a subset of	none
+⊃	superset of	none
+⊅	not a superset of	none
+⊆	subset of or equal to	none
+⊈	neither a subset of nor equal to	none
+⊇	superset of or equal to	none
+⊉	neither a superset of nor equal to	none
+⊌	multiset	none
+
+#Equality signs
+=	jednako	some
+≃	asimptotički jednako	none
+≄	nije asimptotički jednako	none
+≅	približno jednako	none
+≆	približno, ali ne stvarno jednako	none
+≈	skoro jednako	none
+≌	sve jednako	none
+≍	ekvivalentno	none
+≭	nije ekvivalentno	none
+≎	geometrijski ekvivalentno	none
+≑	geometrijski jednako	none
+≚	ekvivalentno po uglovima	none
+≬	između	none
+≠	nije jednako	none
+≡	je identično	none
+≣	striktno identično	none
+≢	nije identično	none
+∼	slično	none
+≙	proračun	none
+≟	upitno jednako	none
+
+#comparison signs
+<	manje od	some
+>	veće od	some
+≤	manje ili jednako	none
+≦	manje ili jednako	none
+≪	mnogo manje od	none
+≥	veće ili jednako	none
+≧	veće ili jednako	none
+≫	mnogo veće od	none
+≶	manje ili veće od	none
+≷	veće ili manje od	none
+≮	nije manje od	none
+≯	nije veće od	none
+
+#Functions
+⁻	inverzija	some
+∘	asocijativnost	none
+∂	parcijalna derivacija	none
+∇	nabla	none
+
+#Geometry and linear Algebra
+⃗	vektor	none
+△	trougao	none
+▭	pravougao	none
+∟	desni ugao	none
+∠	ugao	none
+∥	paralelno	none
+∦	nije paralelno	none
+⊥	okomito	none
+⟂	ortogonalno	none
+‖	norma vektora	none
+̂	normalizacija	none
+∿	sinusna linija	none
+∡	izmjereni ugao	none
+∢	opruženi ugao	none
+
+#Logical operators
+∀	za sve	none
+∃	postoji	none
+∄	ne postoji	none
+⇏	određuje	none
+⇐	određeno sa	none
+
+#Other mathematical Operators
+∈	element	none
+∉	nije element	none
+∊	mali element	none
+∋	sadrži	none
+∌	ne sadrži	none
+∍	sadrži simbol manjih dimenzija	none
+∎	kraj dokaza	none
+∏	produkt	none
+∐	koprodukt	none
+∑	zbir	none
+√	kvadratni korijen	none
+∛	treći korijen	none
+∜	četvrti korijen	none
+∝	proporcionalno	none
+∞	beskonačno	none
+∧	logičko i	none
+∨	logičko ili	none
+¬	logičko ne	none
+∩	presjek	none
+∪	unija	none
+∫	integral	none
+∬	dvostruki integral	none
+∭	trostruki integral	none
+∮	obrnuti integral	none
+∯	integral površine	none
+∰	volumni integral	none
+∱	integral u smjeru kazaljke	none
+∲	obrnuti integral u smjeru kazaljke	none
+∳	obrnuti integral u smjeru suprotnom od smjera kazaljke	none
+∴	stoga	none
+∵	zbog	none
+∶	omjer	none
+∷	proporcija	none
+∹	višak	none
+∺	geometrijska proporcija	none
+≀	produkt	none
+≏	razlika između	none
+≐	približava se ograničenju	none
+∙	tačka za množenje	none
+∣	dijeli	none
+∤	ne dijeli	none
+≔	colon equals	none
+≕	equals colon	none
+≺	prethodi	none
+≻	slijedi	none
+⊀	ne prethodi	none
+⊁	ne slijedi	none
+
+# Vulgar Fractions U+2150 to U+215E
+¼	jedna četvrtina	none
+½	jedna polovina	none
+¾	tri četvrtine	none
+⅐	jedna sedmina	none
+⅑	jedna devetina	none
+⅒	jedna desetina	none
+⅓	jedna trećina	none
+⅔	dvije trećine	none
+⅕	jedna petina	none
+⅖	dvije petine	none
+⅗	tri petine	none
+⅘	četiri petine	none
+⅙	jedna šestina	none
+⅚	pet šestina	none
+⅛	jedna osmina	none
+⅜	tri osmine	none
+⅝	pet osmina	none
+⅞	sedam osmina	none
+
+#Number sets
+𝔸	algebarski brojevi	none
+ℂ	kompleksni brojevi	none
+ℑ	imaginarni dio kompleksnog broja	none
+ℍ	quaternions	none
+ℕ	prirodni brojevi	none
+𝕁	pozitivni (cijeli) brojevi	none
+ℚ	racionalni brojevi	none
+ℝ	realni brojevi	none
+ℜ	realni dio kompleksnog broja	none
+ℤ	cijeli brojevi	none
+ℵ	alef broj	none
+ℶ	bet broj	none
+
+# Miscellaneous Technical
+⌘	mac komandni taster	none
+⌥	mac taster opcije	none
+
+## 6-dot cell
+### note: the character on the next line is U+2800 (braille space), not U+0020 (ASCII space)
+⠀	razmak
+⠁	brajeva tačkica 1
+⠂	brajeva tačkica 2
+⠃	brajeve tačkice 1 2
+⠄	brajeva tačkica 3
+⠅	brajeve tačkice 1 3
+⠆	brajeve tačkice 2 3
+⠇	brajeve tačkice 1 2 3
+⠈	brajeva tačkica 4
+⠉	brajeve tačkice 1 4
+⠊	brajeve tačkice 2 4
+⠋	brajeve tačkice 1 2 4
+⠌	brajeve tačkice 3 4
+⠍	brajeve tačkice 1 3 4
+⠎	brajeve tačkice 2 3 4
+⠏	brajeve tačkice 1 2 3 4
+⠐	brajeva tačkica 5
+⠑	brajeve tačkice 1 5
+⠒	brajeve tačkice 2 5
+⠓	brajeve tačkice 1 2 5
+⠔	brajeve tačkice 3 5
+⠕	brajeve tačkice 1 3 5
+⠖	brajeve tačkice 2 3 5
+⠗	brajeve tačkice 1 2 3 5
+⠘	brajeve tačkice 4 5
+⠙	brajeve tačkice 1 4 5
+⠚	brajeve tačkice 2 4 5
+⠛	brajeve tačkice 1 2 4 5
+⠜	brajeve tačkice 3 4 5
+⠝	brajeve tačkice 1 3 4 5
+⠞	brajeve tačkice 2 3 4 5
+⠟	brajeve tačkice 1 2 3 4 5
+⠠	brajeva tačkica 6
+⠡	brajeve tačkice 1 6
+⠢	brajeve tačkice 2 6
+⠣	brajeve tačkice 1 2 6
+⠤	brajeve tačkice 3 6
+⠥	brajeve tačkice 1 3 6
+⠦	brajeve tačkice 2 3 6
+⠧	brajeve tačkice 1 2 3 6
+⠨	brajeve tačkice 4 6
+⠩	brajeve tačkice 1 4 6
+⠪	brajeve tačkice 2 4 6
+⠫	brajeve tačkice 1 2 4 6
+⠬	brajeve tačkice 3 4 6
+⠭	brajeve tačkice 1 3 4 6
+⠮	brajeve tačkice 2 3 4 6
+⠯	brajeve tačkice 1 2 3 4 6
+⠰	brajeve tačkice 5 6
+⠱	brajeve tačkice 1 5 6
+⠲	brajeve tačkice 2 5 6
+⠳	brajeve tačkice 1 2 5 6
+⠴	brajeve tačkice 3 5 6
+⠵	brajeve tačkice 1 3 5 6
+⠶	brajeve tačkice 2 3 5 6
+⠷	brajeve tačkice 1 2 3 5 6
+⠸	brajeve tačkice 4 5 6
+⠹	brajeve tačkice 1 4 5 6
+⠺	brajeve tačkice 2 4 5 6
+⠻	brajeve tačkice 1 2 4 5 6
+⠼	brajeve tačkice 3 4 5 6
+⠽	brajeve tačkice 1 3 4 5 6
+⠾	brajeve tačkice 2 3 4 5 6
+⠿	brajeve tačkice 1 2 3 4 5 6
+## 8-braille dot cell
+⡀	brajeva tačkica 7
+⡁	brajeve tačkice 1 7
+⡂	brajeve tačkice 2 7
+⡃	brajeve tačkice 1 2 7
+⡄	brajeve tačkice 3 7
+⡅	brajeve tačkice 1 3 7
+⡆	brajeve tačkice 2 3 7
+⡇	brajeve tačkice 1 2 3 7
+⡈	brajeve tačkice 4 7
+⡉	brajeve tačkice 1 4 7
+⡊	brajeve tačkice 2 4 7
+⡋	brajeve tačkice 1 2 4 7
+⡌	brajeve tačkice 3 4 7
+⡍	brajeve tačkice 1 3 4 7
+⡎	brajeve tačkice 2 3 4 7
+⡏	brajeve tačkice 1 2 3 4 7
+⡐	brajeve tačkice 5 7
+⡑	brajeve tačkice 1 5 7
+⡒	brajeve tačkice 2 5 7
+⡓	brajeve tačkice 1 2 5 7
+⡔	brajeve tačkice 3 5 7
+⡕	brajeve tačkice 1 3 5 7
+⡖	brajeve tačkice 2 3 5 7
+⡗	brajeve tačkice 1 2 3 5 7
+⡘	brajeve tačkice 4 5 7
+⡙	brajeve tačkice 1 4 5 7
+⡚	brajeve tačkice 2 4 5 7
+⡛	brajeve tačkice 1 2 4 5 7
+⡜	brajeve tačkice 3 4 5 7
+⡝	brajeve tačkice 1 3 4 5 7
+⡞	brajeve tačkice 2 3 4 5 7
+⡟	brajeve tačkice 1 2 3 4 5 7
+⡠	brajeve tačkice 6 7
+⡡	brajeve tačkice 1 6 7
+⡢	brajeve tačkice 2 6 7
+⡣	brajeve tačkice 1 2 6 7
+⡤	brajeve tačkice 3 6 7
+⡥	brajeve tačkice 1 3 6 7
+⡦	brajeve tačkice 2 3 6 7
+⡧	brajeve tačkice 1 2 3 6 7
+⡨	brajeve tačkice 4 6 7
+⡩	brajeve tačkice 1 4 6 7
+⡪	brajeve tačkice 2 4 6 7
+⡫	brajeve tačkice 1 2 4 6 7
+⡬	brajeve tačkice 3 4 6 7
+⡭	brajeve tačkice 1 3 4 6 7
+⡮	brajeve tačkice 2 3 4 6 7
+⡯	brajeve tačkice 1 2 3 4 6 7
+⡰	brajeve tačkice 5 6 7
+⡱	brajeve tačkice 1 5 6 7
+⡲	brajeve tačkice 2 5 6 7
+⡳	brajeve tačkice 1 2 5 6 7
+⡴	brajeve tačkice 3 5 6 7
+⡵	brajeve tačkice 1 3 5 6 7
+⡶	brajeve tačkice 2 3 5 6 7
+⡷	brajeve tačkice 1 2 3 5 6 7
+⡸	brajeve tačkice 4 5 6 7
+⡹	brajeve tačkice 1 4 5 6 7
+⡺	brajeve tačkice 2 4 5 6 7
+⡻	brajeve tačkice 1 2 4 5 6 7
+⡼	brajeve tačkice 3 4 5 6 7
+⡽	brajeve tačkice 1 3 4 5 6 7
+⡾	brajeve tačkice 2 3 4 5 6 7
+⡿	brajeve tačkice 1 2 3 4 5 6 7
+⢀	brajeva tačkica 8
+⢁	brajeve tačkice 1 8
+⢂	brajeve tačkice 2 8
+⢃	brajeve tačkice 1 2 8
+⢄	brajeve tačkice 3 8
+⢅	brajeve tačkice 1 3 8
+⢆	brajeve tačkice 2 3 8
+⢇	brajeve tačkice 1 2 3 8
+⢈	brajeve tačkice 4 8
+⢉	brajeve tačkice 1 4 8
+⢊	brajeve tačkice 2 4 8
+⢋	brajeve tačkice 1 2 4 8
+⢌	brajeve tačkice 3 4 8
+⢍	brajeve tačkice 1 3 4 8
+⢎	brajeve tačkice 2 3 4 8
+⢏	brajeve tačkice 1 2 3 4 8
+⢐	brajeve tačkice 5 8
+⢑	brajeve tačkice 1 5 8
+⢒	brajeve tačkice 2 5 8
+⢓	brajeve tačkice 1 2 5 8
+⢔	brajeve tačkice 3 5 8
+⢕	brajeve tačkice 1 3 5 8
+⢖	brajeve tačkice 2 3 5 8
+⢗	brajeve tačkice 1 2 3 5 8
+⢘	brajeve tačkice 4 5 8
+⢙	brajeve tačkice 1 4 5 8
+⢚	brajeve tačkice 2 4 5 8
+⢛	brajeve tačkice 1 2 4 5 8
+⢜	brajeve tačkice 3 4 5 8
+⢝	brajeve tačkice 1 3 4 5 8
+⢞	brajeve tačkice 2 3 4 5 8
+⢟	brajeve tačkice 1 2 3 4 5 8
+⢠	brajeve tačkice 6 8
+⢡	brajeve tačkice 1 6 8
+⢢	brajeve tačkice 2 6 8
+⢣	brajeve tačkice 1 2 6 8
+⢤	brajeve tačkice 3 6 8
+⢥	brajeve tačkice 1 3 6 8
+⢦	brajeve tačkice 2 3 6 8
+⢧	brajeve tačkice 1 2 3 6 8
+⢨	brajeve tačkice 4 6 8
+⢩	brajeve tačkice 1 4 6 8
+⢪	brajeve tačkice 2 4 6 8
+⢫	brajeve tačkice 1 2 4 6 8
+⢬	brajeve tačkice 3 4 6 8
+⢭	brajeve tačkice 1 3 4 6 8
+⢮	brajeve tačkice 2 3 4 6 8
+⢯	brajeve tačkice 1 2 3 4 6 8
+⢰	brajeve tačkice 5 6 8
+⢱	brajeve tačkice 1 5 6 8
+⢲	brajeve tačkice 2 5 6 8
+⢳	brajeve tačkice 1 2 5 6 8
+⢴	brajeve tačkice 3 5 6 8
+⢵	brajeve tačkice 1 3 5 6 8
+⢶	brajeve tačkice 2 3 5 6 8
+⢷	brajeve tačkice 1 2 3 5 6 8
+⢸	brajeve tačkice 4 5 6 8
+⢹	brajeve tačkice 1 4 5 6 8
+⢺	brajeve tačkice 2 4 5 6 8
+⢻	brajeve tačkice 1 2 4 5 6 8
+⢼	brajeve tačkice 3 4 5 6 8
+⢽	brajeve tačkice 1 3 4 5 6 8
+⢾	brajeve tačkice 2 3 4 5 6 8
+⢿	brajeve tačkice 1 2 3 4 5 6 8
+⣀	brajeve tačkice 7 8
+⣁	brajeve tačkice 1 7 8
+⣂	brajeve tačkice 2 7 8
+⣃	brajeve tačkice 1 2 7 8
+⣄	brajeve tačkice 3 7 8
+⣅	brajeve tačkice 1 3 7 8
+⣆	brajeve tačkice 2 3 7 8
+⣇	brajeve tačkice 1 2 3 7 8
+⣈	brajeve tačkice 4 7 8
+⣉	brajeve tačkice 1 4 7 8
+⣊	brajeve tačkice 2 4 7 8
+⣋	brajeve tačkice 1 2 4 7 8
+⣌	brajeve tačkice 3 4 7 8
+⣍	brajeve tačkice 1 3 4 7 8
+⣎	brajeve tačkice 2 3 4 7 8
+⣏	brajeve tačkice 1 2 3 4 7 8
+⣐	brajeve tačkice 5 7 8
+⣑	brajeve tačkice 1 5 7 8
+⣒	brajeve tačkice 2 5 7 8
+⣓	brajeve tačkice 1 2 5 7 8
+⣔	brajeve tačkice 3 5 7 8
+⣕	brajeve tačkice 1 3 5 7 8
+⣖	brajeve tačkice 2 3 5 7 8
+⣗	brajeve tačkice 1 2 3 5 7 8
+⣘	brajeve tačkice 4 5 7 8
+⣙	brajeve tačkice 1 4 5 7 8
+⣚	brajeve tačkice 2 4 5 7 8
+⣛	brajeve tačkice 1 2 4 5 7 8
+⣜	brajeve tačkice 3 4 5 7 8
+⣝	brajeve tačkice 1 3 4 5 7 8
+⣞	brajeve tačkice 2 3 4 5 7 8
+⣟	brajeve tačkice 1 2 3 4 5 7 8
+⣠	brajeve tačkice 6 7 8
+⣡	brajeve tačkice 1 6 7 8
+⣢	brajeve tačkice 2 6 7 8
+⣣	brajeve tačkice 1 2 6 7 8
+⣤	brajeve tačkice 3 6 7 8
+⣥	brajeve tačkice 1 3 6 7 8
+⣦	brajeve tačkice 2 3 6 7 8
+⣧	brajeve tačkice 1 2 3 6 7 8
+⣨	brajeve tačkice 4 6 7 8
+⣩	brajeve tačkice 1 4 6 7 8
+⣪	brajeve tačkice 2 4 6 7 8
+⣫	brajeve tačkice 1 2 4 6 7 8
+⣬	brajeve tačkice 3 4 6 7 8
+⣭	brajeve tačkice 1 3 4 6 7 8
+⣮	brajeve tačkice 2 3 4 6 7 8
+⣯	brajeve tačkice 1 2 3 4 6 7 8
+⣰	brajeve tačkice 5 6 7 8
+⣱	brajeve tačkice 1 5 6 7 8
+⣲	brajeve tačkice 2 5 6 7 8
+⣳	brajeve tačkice 1 2 5 6 7 8
+⣴	brajeve tačkice 3 5 6 7 8
+⣵	brajeve tačkice 1 3 5 6 7 8
+⣶	brajeve tačkice 2 3 5 6 7 8
+⣷	brajeve tačkice 1 2 3 5 6 7 8
+⣸	brajeve tačkice 4 5 6 7 8
+⣹	brajeve tačkice 1 4 5 6 7 8
+⣺	brajeve tačkice 2 4 5 6 7 8
+⣻	brajeve tačkice 1 2 4 5 6 7 8
+⣼	brajeve tačkice 3 4 5 6 7 8
+⣽	brajeve tačkice 1 3 4 5 6 7 8
+⣾	brajeve tačkice 2 3 4 5 6 7 8
+⣿	brajeve tačkice 1 2 3 4 5 6 7 8

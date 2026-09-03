@@ -1,0 +1,53 @@
+"""Standalone regression harness for the x86 synth-driver host VC runtime bundle."""
+from __future__ import annotations
+
+import ast
+import os
+from pathlib import Path
+from types import SimpleNamespace
+import tempfile
+import textwrap
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / "runtime-builders" / "synthDriverHost32" / "setup-runtime.py"
+text = SOURCE.read_text(encoding="utf-8")
+tree = ast.parse(text, filename=str(SOURCE))
+function = next(
+    (node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "_getVCRuntimePath"),
+    None,
+)
+if function is None:
+    raise AssertionError("_getVCRuntimePath not found")
+source = ast.get_source_segment(text, function)
+if not source:
+    raise AssertionError("Unable to extract _getVCRuntimePath")
+if 'glob("*.manifest") + [_getVCRuntimePath()]' not in text:
+    raise AssertionError("vcruntime140.dll helper is not included in data_files")
+
+with tempfile.TemporaryDirectory() as temp:
+    root = Path(temp)
+    first = root / "first"
+    second = root / "second"
+    exe_dir = root / "exe"
+    for directory in (first, second, exe_dir):
+        directory.mkdir()
+    dll = second / "vcruntime140.dll"
+    dll.write_bytes(b"qa")
+    fake_sys = SimpleNamespace(
+        base_prefix=str(first),
+        base_exec_prefix=str(second),
+        executable=str(exe_dir / "python.exe"),
+    )
+    namespace = {"os": os, "sys": fake_sys, "VC_RUNTIME_DLL": "vcruntime140.dll"}
+    exec(compile(textwrap.dedent(source), "<vc-runtime-harness>", "exec"), namespace)
+    resolved = namespace["_getVCRuntimePath"]()
+    assert os.path.normpath(resolved) == os.path.normpath(str(dll)), resolved
+    dll.unlink()
+    try:
+        namespace["_getVCRuntimePath"]()
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("missing vcruntime140.dll did not raise RuntimeError")
+
+print("PASS: synthDriverHost32 vcruntime140.dll zero-regression harness")

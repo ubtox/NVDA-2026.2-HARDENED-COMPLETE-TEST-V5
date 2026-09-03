@@ -1,0 +1,98 @@
+NVDA 2026.2 HARDENED - SOURCE DE TEST V5
+========================================
+
+Base : NVDA officiel release-2026.2.
+Commit officiel : f62c980589d1ac30babf68ad48177e9ad29a2e84
+Revision validation : NVDA-2026.2-HARDENED-V5-20260903-R1
+
+OBJECTIF V5
+-----------
+Cette revision corrige le pipeline de validation sans masquer les tests et sans
+modifier le core NVDA pour contourner des problemes d'environnement.
+
+Corrections V5 principales :
+- le test officiel markdownTranslate fonctionne depuis une archive ZIP sans
+  historique Git grace a un depot Git MINIMAL et TEMPORAIRE, supprime apres les
+  tests unitaires ;
+- aucun test unitaire officiel n'est exclu ;
+- Chrome est recherche automatiquement dans PATH, LOCALAPPDATA, Program Files
+  et Program Files (x86), puis son dossier est ajoute au PATH du validateur ;
+- Chrome est prechauffe avant Robot avec les arguments utilises par NV Access CI ;
+- un preflight bloque les tests Robot si le bureau n'est pas isole, au lieu de
+  produire des dizaines de faux FAIL en cascade ;
+- le port Robot nvdaSpy 8270 et le profil temporaire NVDA sont controles ;
+- les binaires de test portent la version 2026.2-hardened-test-v5.
+
+CONTENU
+-------
+- code source NVDA 2026.2 hardened ;
+- correctifs de durcissement retenus ;
+- tests de non-regression personnalises ;
+- audit braille Unicode ;
+- manifeste exact des 13 sous-modules officiels ;
+- preparation automatique des sous-modules aux SHA epingles ;
+- validation Windows V5 ;
+- rapports/diffs de reference dans hardening.
+
+PRE-REQUIS WINDOWS
+------------------
+- Windows 10/11 x64 ;
+- Git for Windows ;
+- PowerShell 5.1 ou plus recent ;
+- environnement Visual Studio / Windows SDK requis par NVDA ;
+- Google Chrome pour les tests Robot Chrome ;
+- Visual Studio Code pour la suite Robot vscodeTests ;
+- connexion Internet pour la premiere preparation des dependances.
+
+VALIDATION COMPLETE STRICTE
+---------------------------
+Les tests systeme Robot controlent le focus, le clavier, Chrome, Bloc-notes,
+VS Code et NVDA. Ils doivent tourner dans une session Windows dediee ou une VM.
+
+Avant le lancement des tests systeme :
+- fermer NVDA/JAWS/Narrator sur la session de test dediee ;
+- fermer Chrome, VS Code, Bloc-notes et ChatGPT ;
+- ne plus utiliser clavier ni souris pendant Robot ;
+- idealement utiliser une VM de test propre.
+
+1. Extraire le ZIP dans un NOUVEAU chemin court, par exemple :
+   C:\NVDA-2026.2-HARDENED-SOURCE-V5
+2. Ouvrir ce dossier.
+3. Executer : RUN-NVDA-HARDENED-TESTS.cmd
+4. Laisser la chaine aller jusqu'au bout sans utiliser le bureau pendant Robot.
+5. Lire validation-artifacts\NVDA-HARDENED-VALIDATION-SUMMARY.txt
+
+MODE MACHINE INTERACTIVE / LECTEUR D'ECRAN ACTIF
+-------------------------------------------------
+Pour compiler et lancer toutes les validations deterministes sans prendre le
+controle du bureau :
+
+  RUN-NVDA-HARDENED-INTERACTIVE-BUILD.cmd
+
+Ce mode utilise -SkipSystemTests. Il peut produire dist/launcher si tous les
+autres controles passent, mais il NE remplace PAS la validation Robot finale.
+
+COMMANDES POWERSHELL
+--------------------
+Validation complete :
+  .\NVDA-HARDENED-VALIDATE.ps1
+
+Sans Robot :
+  .\NVDA-HARDENED-VALIDATE.ps1 -SkipSystemTests
+
+Sans packaging :
+  .\NVDA-HARDENED-VALIDATE.ps1 -SkipPackaging
+
+Forcer Robot malgre les conflits detectes (deconseille) :
+  .\NVDA-HARDENED-VALIDATE.ps1 -ForceSystemTests
+
+PREPARATION SEULE
+-----------------
+  .\NVDA-HARDENED-PREPARE-SOURCE.ps1
+
+IMPORTANT
+---------
+Aucun resultat Windows n'est predeclare PASS. Le ZIP fournit la chaine de test
+corrigee ; les resultats runtime Windows doivent etre produits sur la machine de
+test. Les system tests ne sont pas consideres fiables lorsqu'une autre session
+d'accessibilite ou les applications ciblees perturbent le focus.

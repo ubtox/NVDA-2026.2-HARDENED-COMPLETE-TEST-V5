@@ -1,0 +1,84 @@
+"""Standalone regression harness for Addon._cleanupAddonImports.
+
+This extracts the actual method from source/addonHandler/__init__.py and executes
+it on a minimal dummy class so the core path can be validated without importing
+NVDA's Windows-only runtime dependencies.
+"""
+from __future__ import annotations
+
+import ast
+import os
+from pathlib import Path
+import sys
+import tempfile
+import textwrap
+import types
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / "source" / "addonHandler" / "__init__.py"
+text = SOURCE.read_text(encoding="utf-8")
+tree = ast.parse(text, filename=str(SOURCE))
+method = None
+for node in tree.body:
+    if isinstance(node, ast.ClassDef) and node.name == "Addon":
+        for child in node.body:
+            if isinstance(child, ast.FunctionDef) and child.name == "_cleanupAddonImports":
+                method = child
+                break
+if method is None:
+    raise AssertionError("Addon._cleanupAddonImports not found")
+method_source = ast.get_source_segment(text, method)
+if not method_source:
+    raise AssertionError("Unable to extract Addon._cleanupAddonImports source")
+
+class _Log:
+    def debug(self, *_args, **_kwargs):
+        pass
+
+namespace = {"os": os, "sys": sys, "log": _Log()}
+class_source = "class DummyAddon:\n" + textwrap.indent(textwrap.dedent(method_source), "    ")
+exec(compile(class_source, "<addon-cleanup-harness>", "exec"), namespace)
+DummyAddon = namespace["DummyAddon"]
+
+original_modules = set(sys.modules)
+try:
+    with tempfile.TemporaryDirectory() as temp:
+        addon_path = os.path.join(temp, "testAddon")
+        os.makedirs(addon_path)
+
+        direct_name = "qaAddonDirect"
+        transitive_name = "qaAddonTransitive"
+        sibling_name = "qaAddonSibling"
+        no_file_name = "qaAddonNoFile"
+        none_file_name = "qaAddonNoneFile"
+
+        direct = types.ModuleType(direct_name)
+        direct.__file__ = os.path.join(addon_path, "direct.py")
+        transitive = types.ModuleType(transitive_name)
+        transitive.__file__ = os.path.join(addon_path, "lib", "transitive.py")
+        sibling = types.ModuleType(sibling_name)
+        sibling.__file__ = os.path.join(addon_path + "Extra", "sibling.py")
+        no_file = types.ModuleType(no_file_name)
+        none_file = types.ModuleType(none_file_name)
+        none_file.__file__ = None
+
+        for mod in (direct, transitive, sibling, no_file, none_file):
+            sys.modules[mod.__name__] = mod
+
+        obj = DummyAddon()
+        obj.path = addon_path
+        obj._importedAddonModules = [direct_name]
+        obj._modulesBeforeInstall = original_modules
+        obj._cleanupAddonImports()
+
+        assert direct_name not in sys.modules, "directly tracked add-on module was not removed"
+        assert transitive_name not in sys.modules, "transitively imported add-on module was not removed"
+        assert sibling_name in sys.modules, "sibling path prefix was incorrectly removed"
+        assert no_file_name in sys.modules, "module without __file__ was incorrectly removed"
+        assert none_file_name in sys.modules, "module with __file__=None was incorrectly removed"
+        assert obj._importedAddonModules == [], "tracked add-on module list was not cleared"
+finally:
+    for name in set(sys.modules) - original_modules:
+        sys.modules.pop(name, None)
+
+print("PASS: add-on import cache cleanup zero-regression harness")

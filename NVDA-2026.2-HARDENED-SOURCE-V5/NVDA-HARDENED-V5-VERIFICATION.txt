@@ -1,0 +1,69 @@
+NVDA 2026.2 HARDENED V5 - VERIFICATION DU LIVRABLE
+==================================================
+Date : 2026-09-03
+Revision : NVDA-2026.2-HARDENED-V5-20260903-R1
+
+SOURCE DE DEPART
+----------------
+Archive : NVDA-2026.2-HARDENED-COMPLETE-TEST-V4.zip
+SHA-256 : f1173d82fd0cb6b034a6f8426921c537297dc8b8e6f61012a6a14dfc3edde781
+Taille  : 57 363 437 octets
+
+CONSTATS DU LOG WINDOWS V4
+--------------------------
+- dependances / generation source / regressions custom / Ruff / Pyright : PASS ;
+- unit tests : 1195 executes, 1 FAIL dans test_markdownTranslate ;
+- system tests Robot : 82 executes, 8 PASS / 74 FAIL ;
+- 53/53 tests Chrome ont echoue a obtenir la fenetre Chrome ;
+- nvdaSpy a ensuite montre des refus de connexion / timeouts ;
+- la parole capturee contenait des applications externes, signe d'un bureau
+  interactif non isole.
+
+VERIFICATION DU CORRECTIF UNIT TEST
+-----------------------------------
+Le comportement du correctif archive-safe a ete reproduit sur le vrai
+source/markdownTranslate.py de V4 :
+1. creation d'un depot Git top-level temporaire ;
+2. commit uniquement de tests/markdownTranslate ;
+3. generateXliff : PASS ;
+4. generateMarkdown : PASS ;
+5. ensureMarkdownFilesMatch : PASS ;
+6. suppression du .git temporaire : PASS.
+
+Le core source/markdownTranslate.py n'a pas ete modifie.
+
+VERIFICATION NV ACCESS
+----------------------
+La branche officielle release-2026.2 confirme que la CI systemTests.ps1
+prechauffe Chrome avant Robot avec les memes arguments que _chromeArgs.py,
+notamment --force-renderer-accessibility, --browser-test et --lang=en-US.
+La V5 reproduit ce prechauffage dans le validateur local.
+
+INTEGRITE DIFFERENTIELLE
+------------------------
+Aucun fichier du core NVDA, de source/, nvdaHelper/, site_scons/, include/,
+miscDeps/, tests officiels ou pyproject.toml n'a ete modifie par la V5.
+Les changements sont limites a :
+- NVDA-HARDENED-VALIDATE.ps1 ;
+- NVDA-HARDENED-REVISION.txt ;
+- START-HERE.txt ;
+- RUN-NVDA-HARDENED-TESTS.cmd ;
+- ajout RUN-NVDA-HARDENED-INTERACTIVE-BUILD.cmd ;
+- ajout NVDA-HARDENED-V5-NOTES.txt ;
+- archivage explicite des notes V4 historiques.
+
+CONTROLES STATIQUES EFFECTUES
+-----------------------------
+- structure parenthese/accolade/crochet/quotes du PowerShell V5 : PASS ;
+- test fonctionnel du contexte Git temporaire markdownTranslate : PASS ;
+- absence de .git top-level dans le livrable final : a verifier apres packaging ;
+- aucun resultat Windows natif n'est predeclare PASS.
+
+LIMITATION ENVIRONNEMENT DE PRODUCTION DU LIVRABLE
+--------------------------------------------------
+L'environnement de generation de cette archive n'est pas Windows et ne peut
+pas executer MIDL/MSVC/SCons Windows, NVDA UI Automation, Chrome Robot ou
+nvdaSpy. La preuve runtime finale reste donc le rapport produit sur Windows par
+NVDA-HARDENED-VALIDATE.ps1. Le validateur V5 est justement concu pour que les
+problemes d'environnement soient detectes avant Robot au lieu d'etre confondus
+avec des regressions du core.

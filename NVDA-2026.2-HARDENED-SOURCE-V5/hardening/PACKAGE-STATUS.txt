@@ -1,0 +1,40 @@
+NVDA 2026.2 HARDENED - PACKAGE STATUS
+=====================================
+Baseline: official NVDA release-2026.2
+Baseline commit: f62c980589d1ac30babf68ad48177e9ad29a2e84
+Baseline source ZIP SHA-256: 619ab1e13013d238098523ae3bc9cd6b74d292a7c831e52bd873cdc905e592ef
+
+Functional / QA delta versus official source:
+- 24 modified source/test/runtime-builder files
+- 5 added unit/zero-regression QA files
+- 0 deleted files
+
+Package tooling:
+- NVDA-HARDENED-PREPARE-SOURCE.ps1
+- NVDA-HARDENED-SUBMODULES.json
+- NVDA-HARDENED-VALIDATE.ps1
+- RUN-NVDA-HARDENED-TESTS.cmd
+- START-HERE.txt
+
+Pinned official root submodules: 13/13 represented in the manifest.
+Submodule contents are fetched by the included preparation script at the exact
+release-2026.2 commits and recursively initialized before Windows validation.
+
+Latest local checks in this environment:
+- speakTypedCharacters zero-regression harness: PASS
+- Unicode braille symbols audit: PASS (English=255, localized explicit targets=88)
+- add-on import cache cleanup harness: PASS
+- x86 synth VC runtime harness: PASS
+- Python AST syntax validation: 700 files, 0 errors
+- Reference patch dry-run against official source: PASS
+- Python cache cleanup: PASS before packaging
+
+Full Windows build/unit/system/packaging validation is intentionally left for
+the user's Windows NVDA development environment.
+
+Validator revision 2026-09-03:
+- Native stderr no longer creates false FAIL results; exit code is authoritative.
+- Validation log is consistently UTF-8.
+- scons source now precedes Pyright.
+- Robot system tests explicitly use --include NVDA.
+- licensecheck metadata exceptions aligned with current upstream NVDA.

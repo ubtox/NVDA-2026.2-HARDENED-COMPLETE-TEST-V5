@@ -1,0 +1,77 @@
+# A part of NonVisual Desktop Access (NVDA)
+# Local zero-regression audit for Unicode braille speech symbols.
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+LOCALE_ROOT = Path(__file__).resolve().parents[1] / "source" / "locale"
+TARGETS = {
+    "⠸": [4, 5, 6],
+    "⡸": [4, 5, 6, 7],
+    "⢸": [4, 5, 6, 8],
+    "⣸": [4, 5, 6, 7, 8],
+}
+
+
+def _read(path: Path) -> str:
+    data = path.read_bytes()
+    if data.startswith(b"\xef\xbb\xbf"):
+        data = data[3:]
+    return data.decode("utf-8")
+
+
+def _explicitDots(text: str) -> list[int]:
+    return [int(x) for x in re.findall(r"(?<!\d)([1-8])(?!\d)", text)]
+
+
+def main() -> None:
+    failures: list[str] = []
+    explicitTargetsChecked = 0
+    for symbolsPath in sorted(LOCALE_ROOT.glob("*/symbols.dic")):
+        locale = symbolsPath.parent.name
+        for line in _read(symbolsPath).splitlines():
+            if "\t" not in line:
+                continue
+            symbol, replacement, *_ = line.split("\t")
+            expected = TARGETS.get(symbol)
+            if expected is None:
+                continue
+            dots = _explicitDots(replacement)
+            # Some translations spell dot numbers as words; only verify explicit numeric enumerations.
+            if len(dots) < 2:
+                continue
+            explicitTargetsChecked += 1
+            if dots != expected:
+                failures.append(f"{locale}: {symbol} => {dots}, expected {expected}")
+
+    # English enumerates all 255 nonblank braille patterns numerically, so verify all of them.
+    english = LOCALE_ROOT / "en" / "symbols.dic"
+    englishChecked = 0
+    for line in _read(english).splitlines():
+        if "\t" not in line:
+            continue
+        symbol, replacement, *_ = line.split("\t")
+        if len(symbol) != 1 or not 0x2801 <= ord(symbol) <= 0x28FF:
+            continue
+        dots = _explicitDots(replacement)
+        if not dots:
+            continue
+        englishChecked += 1
+        mask = ord(symbol) - 0x2800
+        expected = [dot for dot in range(1, 9) if mask & (1 << (dot - 1))]
+        if dots != expected:
+            failures.append(f"en: {symbol} => {dots}, expected {expected}")
+
+    if englishChecked != 255:
+        failures.append(f"en: expected 255 numeric braille entries, found {englishChecked}")
+    if failures:
+        raise SystemExit("FAIL:\n" + "\n".join(failures))
+    print(
+        "PASS: Unicode braille symbol audit "
+        f"(English={englishChecked}, localized explicit targets={explicitTargetsChecked})",
+    )
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,1420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.13 on win32)" generated="2026-09-03T22:07:26.798230" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot" source="C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot">
+<suite id="s1-s1" name="vscodeTests" source="C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\vscodeTests.robot">
+<test id="s1-s1-t1" name="status line is available" line="36">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:07:27.115069" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:07:27.114913" elapsed="0.000211"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:07:27.115318" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T22:07:27.115344" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T22:07:27.117600" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:27.118262" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:27.119952" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:27.124113" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:27.125604" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:27.127323" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:27.129039" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:27.129085" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T22:07:27.129149" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T22:07:27.129190" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:07:27.129419" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:27.130109" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T22:07:27.130153" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-status_line_is_available-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-status_line_is_available-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T22:07:27.141219" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T22:07:27.141296" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:07:29.703071" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T22:07:30.063795" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T22:07:30.065184" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T22:07:30.066084" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T22:07:30.066113" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T22:07:30.066732" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T22:07:27.115213" elapsed="2.951573"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:07:30.067046" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:07:30.066952" elapsed="0.000262"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T22:07:30.067290" elapsed="0.000615"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:07:27.114456" elapsed="2.953499"/>
+</kw>
+<kw name="Status Line Is Available" owner="vscodeTests">
+<msg time="2026-09-03T22:07:30.078376" level="DEBUG">Starting Visual Studio Code: start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatest8eqj83b9\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatest8eqj83b9\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatest8eqj83b9\testDirectory"</msg>
+<msg time="2026-09-03T22:07:30.078460" level="INFO">Starting process:
+start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatest8eqj83b9\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatest8eqj83b9\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatest8eqj83b9\testDirectory"</msg>
+<msg time="2026-09-03T22:07:30.078511" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   vscodeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T22:07:30.088649" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:07:30.588525" level="DEBUG">Found window (HWND: 9044836) (title: Visual Studio Code)</msg>
+<msg time="2026-09-03T22:07:30.588635" level="DEBUG">Window already focused, HWND '9044836' with title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:07:30.588680" level="INFO">Foreground window title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:07:30.588729" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:30.593077" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:30.594603" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:07:30.595914" level="INFO">emulateKeyPress ('NVDA+end',)</msg>
+<msg time="2026-09-03T22:07:30.900281" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 3}</msg>
+<msg time="2026-09-03T22:07:33.007216" level="INFO">get_speech_at_index_until_now (3,)</msg>
+<doc>Ensure NVDA+end does not report "no status line found".</doc>
+<status status="PASS" start="2026-09-03T22:07:30.068045" elapsed="2.940652"/>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:07:33.009377" level="INFO">Foreground window title: testDirectory - Visual Studio Code</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:07:33.009291" elapsed="0.000124"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T22:07:33.009714" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-status_line_is_available-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T22:07:33.009500" elapsed="0.000243"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<arg>Take Screenshot</arg>
+<arg>${screenshotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T22:07:33.009839" elapsed="0.000065"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:07:33.009995" elapsed="0.025819"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:07:33.035997" elapsed="0.001152"/>
+</kw>
+<kw name="Close Vscode" owner="VSCodeLib">
+<msg time="2026-09-03T22:07:33.537626" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:07:33.538599" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:07:33.538694" level="DEBUG">Cleaning up Visual Studio Code temp dir: C:\Users\adm\AppData\Local\Temp\nvdatest8eqj83b9</msg>
+<status status="PASS" start="2026-09-03T22:07:33.037243" elapsed="0.520764"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:07:33.558266" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:07:33.560664" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T22:07:33.560710" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T22:07:33.568520" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:07:35.501748" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:07:35.501818" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:07:35.501935" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:07:35.501964" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T22:07:35.503782" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-status_line_is_available-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-status_line_is_available-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:35.503822" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-status_line_is_available-nvda.log</msg>
+<msg time="2026-09-03T22:07:35.503846" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T22:07:35.503927" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T22:07:35.503955" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T22:07:35.508875" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T22:07:33.558172" elapsed="1.950768"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:07:33.009019" elapsed="2.499991"/>
+</kw>
+<doc>Ensure NVDA+end does not report "no status line found".</doc>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<tag>vscode</tag>
+<status status="PASS" start="2026-09-03T22:07:27.113840" elapsed="8.395212"/>
+</test>
+<test id="s1-s1-t2" name="sidebar toggle announced" line="40">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:07:35.509905" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:07:35.509832" elapsed="0.000168"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:07:35.510163" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T22:07:35.510185" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T22:07:35.511756" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:35.512371" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:35.513957" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:35.525978" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:35.527377" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:35.528875" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:35.530457" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:35.530496" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T22:07:35.530559" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T22:07:35.530597" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:07:35.530633" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:07:35.531201" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T22:07:35.531238" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-sidebar_toggle_announced-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-sidebar_toggle_announced-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T22:07:35.533462" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T22:07:35.533512" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:07:37.572383" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T22:07:37.573375" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T22:07:37.588103" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T22:07:37.604481" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T22:07:37.604578" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T22:07:37.619560" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T22:07:35.510070" elapsed="2.109591"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:07:37.620082" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:07:37.619913" elapsed="0.000205"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T22:07:37.620201" elapsed="0.000731"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:07:35.509642" elapsed="2.111349"/>
+</kw>
+<kw name="Sidebar Toggle Announced" owner="vscodeTests">
+<msg time="2026-09-03T22:07:37.630975" level="DEBUG">Starting Visual Studio Code: start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestnx_9327e\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestnx_9327e\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestnx_9327e\testDirectory"</msg>
+<msg time="2026-09-03T22:07:37.631142" level="INFO">Starting process:
+start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestnx_9327e\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestnx_9327e\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestnx_9327e\testDirectory"</msg>
+<msg time="2026-09-03T22:07:37.631178" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   vscodeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T22:07:37.641482" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:07:38.142262" level="DEBUG">Found window (HWND: 7144120) (title: Visual Studio Code)</msg>
+<msg time="2026-09-03T22:07:38.142354" level="DEBUG">Window already focused, HWND '7144120' with title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:07:38.142381" level="INFO">Foreground window title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:07:38.142424" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:39.368655" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:39.371677" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:07:39.373528" level="INFO">emulateKeyPress ('control+b',)</msg>
+<msg time="2026-09-03T22:07:39.512418" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 6}</msg>
+<msg time="2026-09-03T22:07:40.517562" level="INFO">get_speech_at_index_until_now (6,)</msg>
+<msg time="2026-09-03T22:07:40.519017" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:40.520240" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:07:40.521151" level="INFO">emulateKeyPress ('control+b',)</msg>
+<msg time="2026-09-03T22:07:40.636427" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 8}</msg>
+<msg time="2026-09-03T22:07:41.643137" level="INFO">get_speech_at_index_until_now (8,)</msg>
+<doc>Ensure control+b announces sidebar shown/hidden.</doc>
+<status status="PASS" start="2026-09-03T22:07:37.621111" elapsed="4.023193"/>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:07:41.644912" level="INFO">Foreground window title: testDirectory - Visual Studio Code</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:07:41.644833" elapsed="0.000117"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T22:07:41.645257" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-sidebar_toggle_announced-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T22:07:41.645034" elapsed="0.000245"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<arg>Take Screenshot</arg>
+<arg>${screenshotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T22:07:41.645373" elapsed="0.000068"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:07:41.645528" elapsed="0.016542"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:07:41.662257" elapsed="0.001187"/>
+</kw>
+<kw name="Close Vscode" owner="VSCodeLib">
+<msg time="2026-09-03T22:07:42.163939" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:07:42.164754" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:07:42.164845" level="DEBUG">Cleaning up Visual Studio Code temp dir: C:\Users\adm\AppData\Local\Temp\nvdatestnx_9327e</msg>
+<status status="PASS" start="2026-09-03T22:07:41.663559" elapsed="0.518754"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:07:42.182585" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:07:42.184964" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T22:07:42.185007" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T22:07:42.187138" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:07:44.194756" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:07:44.194824" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:07:44.195011" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:07:44.195041" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T22:07:44.196867" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-sidebar_toggle_announced-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-sidebar_toggle_announced-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:44.196906" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-sidebar_toggle_announced-nvda.log</msg>
+<msg time="2026-09-03T22:07:44.196929" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T22:07:44.197004" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T22:07:44.197031" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T22:07:44.201964" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T22:07:42.182489" elapsed="2.019538"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:07:41.644585" elapsed="2.557506"/>
+</kw>
+<doc>Ensure control+b announces sidebar shown/hidden.</doc>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<tag>vscode</tag>
+<status status="PASS" start="2026-09-03T22:07:35.509307" elapsed="8.692823"/>
+</test>
+<test id="s1-s1-t3" name="command palette" line="44">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:07:44.202964" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:07:44.202892" elapsed="0.000104"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:07:44.203155" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T22:07:44.203176" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T22:07:44.204733" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:44.205355" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:44.206877" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:44.219000" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:44.220684" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:44.222232" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:44.223771" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:07:44.223810" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T22:07:44.223865" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T22:07:44.223903" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:07:44.223938" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:07:44.224501" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T22:07:44.224538" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-command_palette-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-command_palette-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T22:07:44.226456" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T22:07:44.226508" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:07:46.251839" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T22:07:46.252862" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T22:07:46.254301" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T22:07:46.267180" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T22:07:46.267231" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T22:07:46.268328" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T22:07:44.203062" elapsed="2.065335"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:07:46.268643" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:07:46.268550" elapsed="0.000135"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T22:07:46.268769" elapsed="0.000661"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:07:44.202706" elapsed="2.066775"/>
+</kw>
+<kw name="Command Palette" owner="vscodeTests">
+<msg time="2026-09-03T22:07:46.271660" level="DEBUG">Starting Visual Studio Code: start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatesto7phas_z\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatesto7phas_z\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatesto7phas_z\testDirectory"</msg>
+<msg time="2026-09-03T22:07:46.271713" level="INFO">Starting process:
+start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatesto7phas_z\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatesto7phas_z\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatesto7phas_z\testDirectory"</msg>
+<msg time="2026-09-03T22:07:46.271745" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   vscodeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T22:07:46.282816" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:07:46.783399" level="DEBUG">Found window (HWND: 9896742) (title: Visual Studio Code)</msg>
+<msg time="2026-09-03T22:07:46.783528" level="DEBUG">Window already focused, HWND '9896742' with title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:07:46.783575" level="INFO">Foreground window title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:07:46.783637" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:47.989772" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:47.992278" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:07:47.994549" level="INFO">emulateKeyPress ('control+shift+p',)</msg>
+<msg time="2026-09-03T22:07:48.312219" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 6}</msg>
+<msg time="2026-09-03T22:07:49.516680" level="INFO">get_speech_at_index_until_now (6,)</msg>
+<msg time="2026-09-03T22:07:49.517786" level="INFO">emulateKeyPress ('escape',)</msg>
+<msg time="2026-09-03T22:07:49.721813" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:50.727128" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:07:50.744720" level="INFO">emulateKeyPress ('f1',)</msg>
+<msg time="2026-09-03T22:07:50.847745" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 13}</msg>
+<msg time="2026-09-03T22:07:51.852937" level="INFO">get_speech_at_index_until_now (13,)</msg>
+<msg time="2026-09-03T22:07:51.878225" level="INFO">emulateKeyPress ('C',)</msg>
+<msg time="2026-09-03T22:07:51.993688" level="INFO">emulateKeyPress ('r',)</msg>
+<msg time="2026-09-03T22:07:52.097376" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:07:52.200927" level="INFO">emulateKeyPress ('a',)</msg>
+<msg time="2026-09-03T22:07:52.325787" level="INFO">emulateKeyPress ('t',)</msg>
+<msg time="2026-09-03T22:07:52.429772" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:07:52.533756" level="INFO">emulateKeyPress (':',)</msg>
+<msg time="2026-09-03T22:07:52.637514" level="INFO">emulateKeyPress (' ',)</msg>
+<msg time="2026-09-03T22:07:52.740982" level="INFO">emulateKeyPress ('N',)</msg>
+<msg time="2026-09-03T22:07:52.883375" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:07:52.987683" level="INFO">emulateKeyPress ('w',)</msg>
+<msg time="2026-09-03T22:07:53.091120" level="INFO">emulateKeyPress (' ',)</msg>
+<msg time="2026-09-03T22:07:53.194571" level="INFO">emulateKeyPress ('F',)</msg>
+<msg time="2026-09-03T22:07:53.333766" level="INFO">emulateKeyPress ('i',)</msg>
+<msg time="2026-09-03T22:07:53.437359" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:07:53.540341" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:07:53.643546" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:54.649673" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:07:54.650999" level="INFO">emulateKeyPress ('downArrow',)</msg>
+<msg time="2026-09-03T22:07:54.754492" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 28}</msg>
+<msg time="2026-09-03T22:07:55.760150" level="INFO">get_speech_at_index_until_now (28,)</msg>
+<msg time="2026-09-03T22:07:55.761789" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:55.762812" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:07:55.763682" level="INFO">emulateKeyPress ('upArrow',)</msg>
+<msg time="2026-09-03T22:07:55.867482" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 29}</msg>
+<msg time="2026-09-03T22:07:56.873062" level="INFO">get_speech_at_index_until_now (29,)</msg>
+<msg time="2026-09-03T22:07:56.874668" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T22:07:56.978151" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:07:57.984105" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:07:57.994420" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T22:07:58.098232" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 32}</msg>
+<msg time="2026-09-03T22:07:59.330237" level="INFO">get_speech_at_index_until_now (32,)</msg>
+<doc>Ensure the command palette is announced when activated and can be navigated.</doc>
+<status status="PASS" start="2026-09-03T22:07:46.269573" elapsed="13.061845"/>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:07:59.332049" level="INFO">Foreground window title: Untitled-1 - testDirectory - Visual Studio Code [Administrator]</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:07:59.331928" elapsed="0.000160"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T22:07:59.332390" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-command_palette-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T22:07:59.332173" elapsed="0.000238"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<arg>Take Screenshot</arg>
+<arg>${screenshotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T22:07:59.332508" elapsed="0.000063"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:07:59.332657" elapsed="0.001152"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:07:59.333924" elapsed="0.001000"/>
+</kw>
+<kw name="Close Vscode" owner="VSCodeLib">
+<msg time="2026-09-03T22:07:59.835628" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:07:59.836497" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:07:59.836582" level="DEBUG">Cleaning up Visual Studio Code temp dir: C:\Users\adm\AppData\Local\Temp\nvdatesto7phas_z</msg>
+<status status="PASS" start="2026-09-03T22:07:59.335014" elapsed="0.519814"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:07:59.855094" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:07:59.857420" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T22:07:59.857462" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T22:07:59.859453" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:01.927094" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:01.927165" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:01.927278" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:01.927305" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T22:08:01.929559" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-command_palette-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-command_palette-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:01.929624" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-command_palette-nvda.log</msg>
+<msg time="2026-09-03T22:08:01.929647" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T22:08:01.929723" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T22:08:01.929750" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T22:08:01.934796" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T22:07:59.854992" elapsed="2.079865"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:07:59.331686" elapsed="2.603229"/>
+</kw>
+<doc>Ensure the command palette is announced when activated and can be navigated.</doc>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<tag>vscode</tag>
+<status status="PASS" start="2026-09-03T22:07:44.202369" elapsed="17.732578"/>
+</test>
+<test id="s1-s1-t4" name="file navigation" line="48">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:01.935776" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:01.935671" elapsed="0.000140"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:08:01.935968" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T22:08:01.935989" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T22:08:01.937601" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:01.938203" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:01.939757" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:01.951710" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:01.953156" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:01.954612" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:01.956240" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:01.956277" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T22:08:01.956333" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T22:08:01.956370" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:08:01.956406" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:08:01.956969" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T22:08:01.957007" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_navigation-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_navigation-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T22:08:01.958761" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T22:08:01.958810" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:08:03.993377" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T22:08:03.994374" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T22:08:03.995742" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T22:08:03.996672" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T22:08:03.996713" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T22:08:04.007931" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T22:08:01.935879" elapsed="2.072130"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:04.008273" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:04.008165" elapsed="0.000152"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T22:08:04.008415" elapsed="0.000685"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:08:01.935482" elapsed="2.073673"/>
+</kw>
+<kw name="File Navigation" owner="vscodeTests">
+<msg time="2026-09-03T22:08:04.019236" level="DEBUG">Starting Visual Studio Code: start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestx7bvlkmq\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestx7bvlkmq\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestx7bvlkmq\testDirectory"</msg>
+<msg time="2026-09-03T22:08:04.019316" level="INFO">Starting process:
+start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestx7bvlkmq\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestx7bvlkmq\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestx7bvlkmq\testDirectory"</msg>
+<msg time="2026-09-03T22:08:04.019356" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   vscodeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T22:08:04.030072" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:08:04.530040" level="DEBUG">Found window (HWND: 10815644) (title: Visual Studio Code)</msg>
+<msg time="2026-09-03T22:08:04.530135" level="DEBUG">Window already focused, HWND '10815644' with title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:08:04.530166" level="INFO">Foreground window title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:08:04.530210" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:05.736806" level="INFO">emulateKeyPress ('control+n',)</msg>
+<msg time="2026-09-03T22:08:05.852599" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T22:08:06.079418" level="INFO">emulateKeyPress ('control+n',)</msg>
+<msg time="2026-09-03T22:08:06.296558" level="INFO">emulateKeyPress ('control+s',)</msg>
+<msg time="2026-09-03T22:08:07.320950" level="INFO">emulateKeyPress ('alt+s',)</msg>
+<msg time="2026-09-03T22:08:07.458841" level="INFO">emulateKeyPress ('control+w',)</msg>
+<msg time="2026-09-03T22:08:07.584290" level="INFO">emulateKeyPress ('control+s',)</msg>
+<msg time="2026-09-03T22:08:07.708548" level="INFO">emulateKeyPress ('alt+s',)</msg>
+<msg time="2026-09-03T22:08:07.836077" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:08.239544" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:08.240620" level="INFO">emulateKeyPress ('control+shift+e',)</msg>
+<msg time="2026-09-03T22:08:09.158111" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 12}</msg>
+<msg time="2026-09-03T22:08:14.181678" level="FAIL">Speech did not finish before timeout</msg>
+<msg time="2026-09-03T22:08:14.181738" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py", line 490, in wait_for_speech_to_finish
+    success, _value = _blockUntilConditionMet(
+                      ~~~~~~~~~~~~~~~~~~~~~~~^
+    	getValue=lambda: self._hasSpeechFinished(speechStartedIndex=speechStartedIndex),
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    	giveUpAfterSeconds=self._minTimeout(maxWaitSeconds),
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    	errorMessage=errorMessage,
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py", line 78, in _blockUntilConditionMet
+    raise AssertionError(errorMessage)
+</msg>
+<doc>Ensure file navigation works correctly.</doc>
+<status status="FAIL" start="2026-09-03T22:08:04.009243" elapsed="10.172525">Speech did not finish before timeout</status>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:14.182368" level="INFO">Foreground window title: Save As</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:14.182291" elapsed="0.000110"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T22:08:14.182652" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_navigation-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T22:08:14.182472" elapsed="0.000198"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Take Screenshot" owner="ScreenCapLibrary">
+<msg time="2026-09-03T22:08:14.275495" level="INFO" html="true">&lt;a href="nvdaTestRunLogs/Robot.vscodeTests-file_navigation-failedTest.png"&gt;&lt;img src="nvdaTestRunLogs/Robot.vscodeTests-file_navigation-failedTest.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${screenshotName}</arg>
+<doc>Takes a screenshot in the specified format at library import and
+embeds it into the log file (PNG by default).</doc>
+<status status="PASS" start="2026-09-03T22:08:14.182847" elapsed="0.092761"/>
+</kw>
+<arg>Take Screenshot</arg>
+<arg>${screenshotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T22:08:14.182745" elapsed="0.092936"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:08:14.275852" elapsed="0.022206"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:08:14.298214" elapsed="0.001042"/>
+</kw>
+<kw name="Close Vscode" owner="VSCodeLib">
+<msg time="2026-09-03T22:08:14.799533" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:14.800440" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:14.800525" level="DEBUG">Cleaning up Visual Studio Code temp dir: C:\Users\adm\AppData\Local\Temp\nvdatestx7bvlkmq</msg>
+<status status="PASS" start="2026-09-03T22:08:14.299343" elapsed="0.521975"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:08:14.821570" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:08:14.824040" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T22:08:14.824086" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T22:08:14.826133" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:17.116878" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:17.116947" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:17.117064" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:17.117093" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T22:08:17.119323" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_navigation-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_navigation-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:17.119363" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_navigation-nvda.log</msg>
+<msg time="2026-09-03T22:08:17.119385" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T22:08:17.119458" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T22:08:17.119485" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T22:08:17.124986" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T22:08:14.821476" elapsed="2.303573"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:08:14.182074" elapsed="2.943040"/>
+</kw>
+<doc>Ensure file navigation works correctly.</doc>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<tag>vscode</tag>
+<status status="FAIL" start="2026-09-03T22:08:01.935165" elapsed="15.189986">Speech did not finish before timeout</status>
+</test>
+<test id="s1-s1-t5" name="search panel" line="52">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:17.125967" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:17.125895" elapsed="0.000107"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:08:17.126158" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T22:08:17.126179" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T22:08:17.127942" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:17.128542" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:17.130095" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:17.133777" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:17.135207" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:17.136718" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:17.138356" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:17.138404" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T22:08:17.138472" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T22:08:17.138518" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:08:17.138565" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:08:17.139234" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T22:08:17.139273" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-search_panel-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-search_panel-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T22:08:17.141244" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T22:08:17.141292" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:08:19.168494" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T22:08:19.169702" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T22:08:19.171147" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T22:08:19.183307" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T22:08:19.183363" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T22:08:19.184431" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T22:08:17.126068" elapsed="2.058434"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:19.184795" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:19.184662" elapsed="0.000174"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T22:08:19.184923" elapsed="0.000693"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:08:17.125711" elapsed="2.059956"/>
+</kw>
+<kw name="Search Panel" owner="vscodeTests">
+<msg time="2026-09-03T22:08:19.187592" level="DEBUG">Starting Visual Studio Code: start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestod_0w7wk\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestod_0w7wk\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestod_0w7wk\testDirectory"</msg>
+<msg time="2026-09-03T22:08:19.187650" level="INFO">Starting process:
+start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestod_0w7wk\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestod_0w7wk\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestod_0w7wk\testDirectory"</msg>
+<msg time="2026-09-03T22:08:19.187687" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   vscodeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T22:08:19.198509" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:08:19.698981" level="DEBUG">Found window (HWND: 1311960) (title: Visual Studio Code)</msg>
+<msg time="2026-09-03T22:08:19.699064" level="DEBUG">Window already focused, HWND '1311960' with title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:08:19.699094" level="INFO">Foreground window title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:08:19.699135" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:20.903716" level="INFO">emulateKeyPress ('control+n',)</msg>
+<msg time="2026-09-03T22:08:21.026873" level="INFO">emulateKeyPress ('h',)</msg>
+<msg time="2026-09-03T22:08:21.255761" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:08:21.364041" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:08:21.468195" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:08:21.672137" level="INFO">emulateKeyPress ('o',)</msg>
+<msg time="2026-09-03T22:08:21.776063" level="INFO">emulateKeyPress (' ',)</msg>
+<msg time="2026-09-03T22:08:21.893170" level="INFO">emulateKeyPress ('w',)</msg>
+<msg time="2026-09-03T22:08:21.998265" level="INFO">emulateKeyPress ('o',)</msg>
+<msg time="2026-09-03T22:08:22.102043" level="INFO">emulateKeyPress ('r',)</msg>
+<msg time="2026-09-03T22:08:22.205352" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:08:22.308367" level="INFO">emulateKeyPress ('d',)</msg>
+<msg time="2026-09-03T22:08:22.431117" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:23.456363" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:23.457763" level="INFO">emulateKeyPress ('control+shift+f',)</msg>
+<msg time="2026-09-03T22:08:23.687074" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 27}</msg>
+<msg time="2026-09-03T22:08:25.595415" level="INFO">get_speech_at_index_until_now (27,)</msg>
+<msg time="2026-09-03T22:08:25.606786" level="INFO">emulateKeyPress ('h',)</msg>
+<msg time="2026-09-03T22:08:25.810392" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:08:26.014525" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:08:26.118010" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:08:26.221427" level="INFO">emulateKeyPress ('o',)</msg>
+<msg time="2026-09-03T22:08:26.325068" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T22:08:26.549487" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:27.755508" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:27.778878" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T22:08:27.982884" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 40}</msg>
+<msg time="2026-09-03T22:08:28.989026" level="INFO">get_speech_at_index_until_now (40,)</msg>
+<msg time="2026-09-03T22:08:29.011858" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:29.013304" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:29.014095" level="INFO">emulateKeyPress ('f4',)</msg>
+<msg time="2026-09-03T22:08:29.217557" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 41}</msg>
+<msg time="2026-09-03T22:08:30.223157" level="INFO">get_speech_at_index_until_now (41,)</msg>
+<doc>Ensure the search panel is announced when activated and can be navigated.</doc>
+<status status="PASS" start="2026-09-03T22:08:19.185756" elapsed="11.038605"/>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:30.225017" level="INFO">Foreground window title: ● hello world • Untitled-1 - testDirectory - Visual Studio Code [Administrator]</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:30.224895" elapsed="0.000167"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T22:08:30.225473" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-search_panel-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T22:08:30.225250" elapsed="0.000245"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<arg>Take Screenshot</arg>
+<arg>${screenshotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T22:08:30.225586" elapsed="0.000063"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:08:30.225731" elapsed="0.022302"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:08:30.248250" elapsed="0.001144"/>
+</kw>
+<kw name="Close Vscode" owner="VSCodeLib">
+<msg time="2026-09-03T22:08:30.749919" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:30.750845" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:30.750928" level="DEBUG">Cleaning up Visual Studio Code temp dir: C:\Users\adm\AppData\Local\Temp\nvdatestod_0w7wk</msg>
+<status status="PASS" start="2026-09-03T22:08:30.249485" elapsed="0.520836"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:08:30.770577" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:08:30.772686" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T22:08:30.772728" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T22:08:30.774731" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:32.809017" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:32.809090" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:32.809206" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:32.809234" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T22:08:32.811112" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-search_panel-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-search_panel-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:32.811162" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-search_panel-nvda.log</msg>
+<msg time="2026-09-03T22:08:32.811185" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T22:08:32.811258" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T22:08:32.811299" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T22:08:32.816484" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T22:08:30.770482" elapsed="2.046069"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:08:30.224650" elapsed="2.591968"/>
+</kw>
+<doc>Ensure the search panel is announced when activated and can be navigated.</doc>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<tag>vscode</tag>
+<status status="PASS" start="2026-09-03T22:08:17.125384" elapsed="15.691267"/>
+</test>
+<test id="s1-s1-t6" name="file editor operations" line="56">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:32.817953" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:32.817856" elapsed="0.000133"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:08:32.818141" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T22:08:32.818163" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T22:08:32.819916" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:32.820558" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:32.822100" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:32.825638" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:32.827045" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:32.828594" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:32.830186" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:32.830224" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T22:08:32.830282" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T22:08:32.830320" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:08:32.830357" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:08:32.830934" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T22:08:32.830976" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_editor_operations-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_editor_operations-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T22:08:32.832804" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T22:08:32.832848" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:08:34.864361" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T22:08:34.865288" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T22:08:34.879974" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T22:08:34.904601" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T22:08:34.904660" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T22:08:34.925090" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T22:08:32.818056" elapsed="2.107139"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:34.925520" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:34.925379" elapsed="0.000178"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T22:08:34.925639" elapsed="0.000686"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:08:32.817211" elapsed="2.109176"/>
+</kw>
+<kw name="File Editor Operations" owner="vscodeTests">
+<msg time="2026-09-03T22:08:34.937920" level="DEBUG">Starting Visual Studio Code: start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestdw57c5cr\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestdw57c5cr\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestdw57c5cr\testDirectory"</msg>
+<msg time="2026-09-03T22:08:34.938023" level="INFO">Starting process:
+start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestdw57c5cr\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestdw57c5cr\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestdw57c5cr\testDirectory"</msg>
+<msg time="2026-09-03T22:08:34.938064" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   vscodeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T22:08:34.947909" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:08:35.448196" level="DEBUG">Found window (HWND: 1443012) (title: Visual Studio Code)</msg>
+<msg time="2026-09-03T22:08:35.448284" level="DEBUG">Window already focused, HWND '1443012' with title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:08:35.448316" level="INFO">Foreground window title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:08:35.448361" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:36.654263" level="INFO">emulateKeyPress ('control+n',)</msg>
+<msg time="2026-09-03T22:08:36.774702" level="INFO">emulateKeyPress ('h',)</msg>
+<msg time="2026-09-03T22:08:36.982618" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:08:37.088318" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:08:37.193034" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:08:37.297210" level="INFO">emulateKeyPress ('o',)</msg>
+<msg time="2026-09-03T22:08:37.401338" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:38.424401" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:38.425559" level="INFO">emulateKeyPress ('leftArrow',)</msg>
+<msg time="2026-09-03T22:08:38.529118" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 16}</msg>
+<msg time="2026-09-03T22:08:39.534216" level="INFO">get_speech_at_index_until_now (16,)</msg>
+<msg time="2026-09-03T22:08:39.560873" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:39.561985" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:39.562619" level="INFO">emulateKeyPress ('rightArrow',)</msg>
+<msg time="2026-09-03T22:08:39.679005" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 18}</msg>
+<msg time="2026-09-03T22:08:40.698974" level="INFO">get_speech_at_index_until_now (18,)</msg>
+<msg time="2026-09-03T22:08:40.700151" level="INFO">emulateKeyPress ('control+home',)</msg>
+<msg time="2026-09-03T22:08:40.803508" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:41.810449" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:41.830146" level="INFO">emulateKeyPress ('NVDA+upArrow',)</msg>
+<msg time="2026-09-03T22:08:41.934013" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 20}</msg>
+<msg time="2026-09-03T22:08:42.839510" level="INFO">get_speech_at_index_until_now (20,)</msg>
+<msg time="2026-09-03T22:08:42.841043" level="INFO">emulateKeyPress ('control+end',)</msg>
+<msg time="2026-09-03T22:08:42.945072" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:43.973128" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:43.974325" level="INFO">emulateKeyPress ('leftArrow',)</msg>
+<msg time="2026-09-03T22:08:44.077653" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 22}</msg>
+<msg time="2026-09-03T22:08:45.083728" level="INFO">get_speech_at_index_until_now (22,)</msg>
+<msg time="2026-09-03T22:08:45.100144" level="INFO">emulateKeyPress ('control+f',)</msg>
+<msg time="2026-09-03T22:08:45.222778" level="INFO">emulateKeyPress ('h',)</msg>
+<msg time="2026-09-03T22:08:45.427316" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:08:45.530766" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:46.535243" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:46.536408" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:08:46.640123" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 34}</msg>
+<msg time="2026-09-03T22:08:47.672830" level="INFO">get_speech_at_index_until_now (34,)</msg>
+<msg time="2026-09-03T22:08:47.689855" level="INFO">emulateKeyPress ('escape',)</msg>
+<msg time="2026-09-03T22:08:47.797512" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:48.804316" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:48.805475" level="INFO">emulateKeyPress ('control+h',)</msg>
+<msg time="2026-09-03T22:08:48.921292" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 38}</msg>
+<msg time="2026-09-03T22:08:50.928855" level="INFO">get_speech_at_index_until_now (38,)</msg>
+<msg time="2026-09-03T22:08:50.929997" level="INFO">emulateKeyPress ('escape',)</msg>
+<msg time="2026-09-03T22:08:51.054351" level="INFO">emulateKeyPress ('control+end',)</msg>
+<msg time="2026-09-03T22:08:51.157790" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T22:08:51.261556" level="INFO">emulateKeyPress ('(',)</msg>
+<msg time="2026-09-03T22:08:51.379417" level="INFO">emulateKeyPress ('a',)</msg>
+<msg time="2026-09-03T22:08:51.509099" level="INFO">emulateKeyPress (')',)</msg>
+<msg time="2026-09-03T22:08:51.632360" level="INFO">emulateKeyPress ('control+shift+\\',)</msg>
+<msg time="2026-09-03T22:08:51.744239" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:08:52.548551" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:08:52.549567" level="INFO">emulateKeyPress ('numpad2',)</msg>
+<msg time="2026-09-03T22:08:52.653306" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 48}</msg>
+<msg time="2026-09-03T22:08:53.659341" level="INFO">get_speech_at_index_until_now (48,)</msg>
+<msg time="2026-09-03T22:08:53.680054" level="FAIL">'blank' does not contain 'left paren'</msg>
+<msg time="2026-09-03T22:08:53.682065" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\vscodeTests.py", line 144, in file_editor_operations
+    _builtIn.should_contain(speech, "left paren")
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robot\libraries\BuiltIn.py", line 1279, in should_contain
+    raise AssertionError(
+    ...&lt;7 lines&gt;...
+    )
+AssertionError: 'blank' does not contain 'left paren'</msg>
+<doc>Ensure file editor operations such as navigation, undo, and redo work correctly.</doc>
+<status status="FAIL" start="2026-09-03T22:08:34.926492" elapsed="18.755619">'blank' does not contain 'left paren'</status>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:53.682786" level="INFO">Foreground window title: ● hello • Untitled-1 - testDirectory - Visual Studio Code [Administrator]</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:53.682671" elapsed="0.000160"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T22:08:53.683125" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_editor_operations-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T22:08:53.682918" elapsed="0.000229"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Take Screenshot" owner="ScreenCapLibrary">
+<msg time="2026-09-03T22:08:53.786653" level="INFO" html="true">&lt;a href="nvdaTestRunLogs/Robot.vscodeTests-file_editor_operations-failedTest.png"&gt;&lt;img src="nvdaTestRunLogs/Robot.vscodeTests-file_editor_operations-failedTest.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${screenshotName}</arg>
+<doc>Takes a screenshot in the specified format at library import and
+embeds it into the log file (PNG by default).</doc>
+<status status="PASS" start="2026-09-03T22:08:53.683356" elapsed="0.103386"/>
+</kw>
+<arg>Take Screenshot</arg>
+<arg>${screenshotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T22:08:53.683237" elapsed="0.103559"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:08:53.786926" elapsed="0.001349"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:08:53.788385" elapsed="0.000833"/>
+</kw>
+<kw name="Close Vscode" owner="VSCodeLib">
+<msg time="2026-09-03T22:08:54.289864" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:54.291149" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:54.291292" level="DEBUG">Cleaning up Visual Studio Code temp dir: C:\Users\adm\AppData\Local\Temp\nvdatestdw57c5cr</msg>
+<status status="PASS" start="2026-09-03T22:08:53.789295" elapsed="0.528707"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:08:54.318299" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:08:54.320888" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T22:08:54.320948" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T22:08:54.323144" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:56.496582" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:56.496650" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:08:56.496767" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:08:56.496794" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T22:08:56.498605" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_editor_operations-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_editor_operations-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:56.498646" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-file_editor_operations-nvda.log</msg>
+<msg time="2026-09-03T22:08:56.498709" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T22:08:56.498784" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T22:08:56.498811" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T22:08:56.504069" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T22:08:54.318194" elapsed="2.185942"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:08:53.682426" elapsed="2.821778"/>
+</kw>
+<doc>Ensure file editor operations such as navigation, undo, and redo work correctly.</doc>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<tag>vscode</tag>
+<status status="FAIL" start="2026-09-03T22:08:32.816873" elapsed="23.687367">'blank' does not contain 'left paren'</status>
+</test>
+<test id="s1-s1-t7" name="extensions panel" line="60">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:56.505030" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:56.504958" elapsed="0.000105"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:08:56.505219" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T22:08:56.505241" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T22:08:56.506810" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:56.507413" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:56.509002" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:56.520906" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:56.522431" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:56.523931" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:56.525485" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:08:56.525523" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T22:08:56.525579" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T22:08:56.525616" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:08:56.525654" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:08:56.526352" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T22:08:56.526391" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-extensions_panel-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-extensions_panel-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T22:08:56.528119" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T22:08:56.528159" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:08:58.574288" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T22:08:58.575266" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T22:08:58.589545" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T22:08:58.606255" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T22:08:58.606316" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T22:08:58.607380" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T22:08:56.505130" elapsed="2.102323"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:08:58.607736" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:08:58.607620" elapsed="0.000176"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T22:08:58.607906" elapsed="0.000697"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:08:56.504781" elapsed="2.103874"/>
+</kw>
+<kw name="Extensions Panel" owner="vscodeTests">
+<msg time="2026-09-03T22:08:58.619297" level="DEBUG">Starting Visual Studio Code: start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestqmxw6hz3\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestqmxw6hz3\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestqmxw6hz3\testDirectory"</msg>
+<msg time="2026-09-03T22:08:58.619382" level="INFO">Starting process:
+start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestqmxw6hz3\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestqmxw6hz3\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestqmxw6hz3\testDirectory"</msg>
+<msg time="2026-09-03T22:08:58.619423" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   vscodeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T22:08:58.628593" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:08:59.129725" level="DEBUG">Found window (HWND: 1050256) (title: Visual Studio Code)</msg>
+<msg time="2026-09-03T22:08:59.129872" level="DEBUG">Window already focused, HWND '1050256' with title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:08:59.129922" level="INFO">Foreground window title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:08:59.129994" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:09:00.335788" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:09:00.338144" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:09:00.339323" level="INFO">emulateKeyPress ('control+shift+x',)</msg>
+<msg time="2026-09-03T22:09:00.458185" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 6}</msg>
+<msg time="2026-09-03T22:09:02.264682" level="INFO">get_speech_at_index_until_now (6,)</msg>
+<msg time="2026-09-03T22:09:02.282874" level="INFO">emulateKeyPress ('p',)</msg>
+<msg time="2026-09-03T22:09:02.386936" level="INFO">emulateKeyPress ('u',)</msg>
+<msg time="2026-09-03T22:09:02.490927" level="INFO">emulateKeyPress ('b',)</msg>
+<msg time="2026-09-03T22:09:02.614855" level="INFO">emulateKeyPress ('l',)</msg>
+<msg time="2026-09-03T22:09:02.718620" level="INFO">emulateKeyPress ('i',)</msg>
+<msg time="2026-09-03T22:09:02.838081" level="INFO">emulateKeyPress ('s',)</msg>
+<msg time="2026-09-03T22:09:02.963754" level="INFO">emulateKeyPress ('h',)</msg>
+<msg time="2026-09-03T22:09:03.067278" level="INFO">emulateKeyPress ('e',)</msg>
+<msg time="2026-09-03T22:09:03.170792" level="INFO">emulateKeyPress ('r',)</msg>
+<msg time="2026-09-03T22:09:03.274397" level="INFO">emulateKeyPress (':',)</msg>
+<msg time="2026-09-03T22:09:03.397290" level="INFO">emulateKeyPress ('"',)</msg>
+<msg time="2026-09-03T22:09:03.500673" level="INFO">emulateKeyPress ('M',)</msg>
+<msg time="2026-09-03T22:09:03.630398" level="INFO">emulateKeyPress ('i',)</msg>
+<msg time="2026-09-03T22:09:03.733994" level="INFO">emulateKeyPress ('c',)</msg>
+<msg time="2026-09-03T22:09:03.837990" level="INFO">emulateKeyPress ('r',)</msg>
+<msg time="2026-09-03T22:09:03.963857" level="INFO">emulateKeyPress ('o',)</msg>
+<msg time="2026-09-03T22:09:04.067415" level="INFO">emulateKeyPress ('s',)</msg>
+<msg time="2026-09-03T22:09:04.171208" level="INFO">emulateKeyPress ('o',)</msg>
+<msg time="2026-09-03T22:09:04.274971" level="INFO">emulateKeyPress ('f',)</msg>
+<msg time="2026-09-03T22:09:04.395469" level="INFO">emulateKeyPress ('t',)</msg>
+<msg time="2026-09-03T22:09:04.498787" level="INFO">emulateKeyPress ('"',)</msg>
+<msg time="2026-09-03T22:09:04.625692" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T22:09:04.829564" level="INFO">emulateKeyPress ('tab',)</msg>
+<msg time="2026-09-03T22:09:04.932696" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:09:06.239014" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:09:06.240369" level="INFO">emulateKeyPress ('tab',)</msg>
+<msg time="2026-09-03T22:09:06.344106" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 52}</msg>
+<msg time="2026-09-03T22:09:07.349474" level="INFO">get_speech_at_index_until_now (52,)</msg>
+<msg time="2026-09-03T22:09:07.350650" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:09:07.362885" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:09:07.378253" level="INFO">emulateKeyPress ('downArrow',)</msg>
+<msg time="2026-09-03T22:09:07.482005" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 53}</msg>
+<msg time="2026-09-03T22:09:08.787876" level="INFO">get_speech_at_index_until_now (53,)</msg>
+<msg time="2026-09-03T22:09:08.789246" level="FAIL">'349 extensions found in the Marketplace section.' does not contain 'Microsoft'</msg>
+<msg time="2026-09-03T22:09:08.789888" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\vscodeTests.py", line 177, in extensions_panel
+    _builtIn.should_contain(speech, "Microsoft")
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robot\libraries\BuiltIn.py", line 1279, in should_contain
+    raise AssertionError(
+    ...&lt;7 lines&gt;...
+    )
+AssertionError: '349 extensions found in the Marketplace section.' does not contain 'Microsoft'</msg>
+<doc>Ensure extensions panel is accessible.</doc>
+<status status="FAIL" start="2026-09-03T22:08:58.608742" elapsed="10.181184">'349 extensions found in the Marketplace section.' does not contain 'Microsoft'</status>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:09:08.790574" level="INFO">Foreground window title: testDirectory - Visual Studio Code [Administrator]</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:09:08.790460" elapsed="0.000158"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T22:09:08.790918" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-extensions_panel-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T22:09:08.790701" elapsed="0.000238"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Take Screenshot" owner="ScreenCapLibrary">
+<msg time="2026-09-03T22:09:08.886623" level="INFO" html="true">&lt;a href="nvdaTestRunLogs/Robot.vscodeTests-extensions_panel-failedTest.png"&gt;&lt;img src="nvdaTestRunLogs/Robot.vscodeTests-extensions_panel-failedTest.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${screenshotName}</arg>
+<doc>Takes a screenshot in the specified format at library import and
+embeds it into the log file (PNG by default).</doc>
+<status status="PASS" start="2026-09-03T22:09:08.791186" elapsed="0.095556"/>
+</kw>
+<arg>Take Screenshot</arg>
+<arg>${screenshotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T22:09:08.791075" elapsed="0.095746"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:09:08.886997" elapsed="0.015476"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:09:08.902687" elapsed="0.001386"/>
+</kw>
+<kw name="Close Vscode" owner="VSCodeLib">
+<msg time="2026-09-03T22:09:09.405086" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:09:09.406382" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:09:09.406526" level="DEBUG">Cleaning up Visual Studio Code temp dir: C:\Users\adm\AppData\Local\Temp\nvdatestqmxw6hz3</msg>
+<status status="PASS" start="2026-09-03T22:09:08.904185" elapsed="0.522315"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:09:09.426751" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:09:09.429041" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T22:09:09.429079" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T22:09:09.431026" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:09:11.674349" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:09:11.674421" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:09:11.674535" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:09:11.674563" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T22:09:11.676436" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-extensions_panel-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-extensions_panel-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:09:11.676476" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-extensions_panel-nvda.log</msg>
+<msg time="2026-09-03T22:09:11.676499" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T22:09:11.676571" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T22:09:11.676598" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T22:09:11.681864" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T22:09:09.426658" elapsed="2.255271"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:09:08.790218" elapsed="2.891776"/>
+</kw>
+<doc>Ensure extensions panel is accessible</doc>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<tag>vscode</tag>
+<status status="FAIL" start="2026-09-03T22:08:56.504476" elapsed="15.177552">'349 extensions found in the Marketplace section.' does not contain 'Microsoft'</status>
+</test>
+<test id="s1-s1-t8" name="terminal panel" line="64">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:09:11.682841" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:09:11.682767" elapsed="0.000107"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:09:11.683032" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T22:09:11.683053" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T22:09:11.684600" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:09:11.685212" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:09:11.686798" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:09:11.698846" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:09:11.700499" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:09:11.702050" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:09:11.703862" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:09:11.703910" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T22:09:11.703979" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T22:09:11.704026" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:09:11.704069" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T22:09:11.704669" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T22:09:11.704708" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T22:09:11.706445" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T22:09:11.706489" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:09:13.733161" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T22:09:13.734731" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T22:09:13.735926" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T22:09:13.736891" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T22:09:13.736924" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T22:09:13.737778" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T22:09:11.682943" elapsed="2.054890"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:09:13.738075" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:09:13.737957" elapsed="0.000156"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T22:09:13.738194" elapsed="0.000639"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:09:11.682563" elapsed="2.056317"/>
+</kw>
+<kw name="Terminal Panel" owner="vscodeTests">
+<msg time="2026-09-03T22:09:13.740804" level="DEBUG">Starting Visual Studio Code: start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestvjj6sanq\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestvjj6sanq\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestvjj6sanq\testDirectory"</msg>
+<msg time="2026-09-03T22:09:13.740878" level="INFO">Starting process:
+start "" /wait "C:\Users\adm\AppData\Local\Programs\Microsoft VS Code\Code.exe" --user-data-dir "C:\Users\adm\AppData\Local\Temp\nvdatestvjj6sanq\vscodeUserData" --disable-gpu --extensions-dir "C:\Users\adm\AppData\Local\Temp\nvdatestvjj6sanq\vscodeExtensions" --skip-welcome --disable-experiments --disable-workspace-trust --skip-add-to-recently-opened -n --wait "C:\Users\adm\AppData\Local\Temp\nvdatestvjj6sanq\testDirectory"</msg>
+<msg time="2026-09-03T22:09:13.740918" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   vscodeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T22:09:13.751358" level="DEBUG">No windows found matching the pattern: re.compile('Visual Studio Code', re.IGNORECASE)</msg>
+<msg time="2026-09-03T22:09:14.251918" level="DEBUG">Found window (HWND: 3212280) (title: Visual Studio Code)</msg>
+<msg time="2026-09-03T22:09:14.252041" level="DEBUG">Window already focused, HWND '3212280' with title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:09:14.252081" level="INFO">Foreground window title: Visual Studio Code</msg>
+<msg time="2026-09-03T22:09:14.252138" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:09:15.457894" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T22:09:15.459737" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T22:09:15.461155" level="INFO">emulateKeyPress ('control+`',)</msg>
+<msg time="2026-09-03T22:09:15.589539" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 6}</msg>
+<msg time="2026-09-03T22:09:16.494316" level="INFO">get_speech_at_index_until_now (6,)</msg>
+<msg time="2026-09-03T22:09:16.495552" level="FAIL">'application' does not contain 'Terminal 1'</msg>
+<msg time="2026-09-03T22:09:16.496097" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\vscodeTests.py", line 187, in terminal_panel
+    _builtIn.should_contain(speech, "Terminal 1")
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robot\libraries\BuiltIn.py", line 1279, in should_contain
+    raise AssertionError(
+    ...&lt;7 lines&gt;...
+    )
+AssertionError: 'application' does not contain 'Terminal 1'</msg>
+<doc>Ensure terminal panel is accessible.</doc>
+<status status="FAIL" start="2026-09-03T22:09:13.738967" elapsed="2.757168">'application' does not contain 'Terminal 1'</status>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T22:09:16.496724" level="INFO">Foreground window title: testDirectory - Visual Studio Code</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T22:09:16.496652" elapsed="0.000107"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T22:09:16.497003" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T22:09:16.496830" elapsed="0.000229"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Take Screenshot" owner="ScreenCapLibrary">
+<msg time="2026-09-03T22:09:16.597507" level="INFO" html="true">&lt;a href="nvdaTestRunLogs/Robot.vscodeTests-terminal_panel-failedTest.png"&gt;&lt;img src="nvdaTestRunLogs/Robot.vscodeTests-terminal_panel-failedTest.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${screenshotName}</arg>
+<doc>Takes a screenshot in the specified format at library import and
+embeds it into the log file (PNG by default).</doc>
+<status status="PASS" start="2026-09-03T22:09:16.497235" elapsed="0.100363"/>
+</kw>
+<arg>Take Screenshot</arg>
+<arg>${screenshotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T22:09:16.497140" elapsed="0.100514"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:09:16.597782" elapsed="0.001409"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T22:09:16.599281" elapsed="0.000881"/>
+</kw>
+<kw name="Close Vscode" owner="VSCodeLib">
+<msg time="2026-09-03T22:09:17.100539" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:09:17.101379" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:09:17.101466" level="DEBUG">Cleaning up Visual Studio Code temp dir: C:\Users\adm\AppData\Local\Temp\nvdatestvjj6sanq</msg>
+<status status="PASS" start="2026-09-03T22:09:16.600261" elapsed="0.519230"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T22:09:17.119750" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T22:09:17.122310" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T22:09:17.122379" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T22:09:17.124612" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:09:19.341274" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:09:19.341345" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T22:09:19.341505" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T22:09:19.341533" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T22:09:19.343307" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T22:09:19.343351" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.vscodeTests-terminal_panel-nvda.log</msg>
+<msg time="2026-09-03T22:09:19.343373" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T22:09:19.343446" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T22:09:19.343472" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T22:09:19.348435" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T22:09:17.119654" elapsed="2.228844"/>
+</kw>
+<status status="PASS" start="2026-09-03T22:09:16.496433" elapsed="2.852128"/>
+</kw>
+<doc>Ensure terminal panel is accessible.</doc>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<tag>vscode</tag>
+<status status="FAIL" start="2026-09-03T22:09:11.682259" elapsed="7.666339">'application' does not contain 'Terminal 1'</status>
+</test>
+<doc>Visual Studio Code tests</doc>
+<status status="FAIL" start="2026-09-03T22:07:26.820312" elapsed="112.528677"/>
+</suite>
+<status status="FAIL" start="2026-09-03T22:07:26.799506" elapsed="112.549869"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="4" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="4" fail="4" skip="0">NVDA</stat>
+<stat pass="4" fail="4" skip="0">smoke test</stat>
+<stat pass="4" fail="4" skip="0">vscode</stat>
+</tag>
+<suite>
+<stat name="Robot" id="s1" pass="4" fail="4" skip="0">Robot</stat>
+<stat name="vscodeTests" id="s1-s1" pass="4" fail="4" skip="0">Robot.vscodeTests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

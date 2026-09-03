@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Robot" tests="10" errors="0" failures="5" skipped="0" time="394.746" timestamp="2026-09-03T20:37:56.158066">
+<testsuite name="symbolPronunciationTests" tests="10" errors="0" failures="5" skipped="0" time="394.695" timestamp="2026-09-03T20:37:56.207809">
+<testcase classname="Robot.symbolPronunciationTests" name="symbolInSpeechUI" time="25.763">
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="moveByWord" time="46.741">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['colon', 'Say', 'left paren', 'quietly', 'right paren', 'quote', 'Hello', 'comma', 'Jim', '.', &quot;don't&quot;, 'right-pointing arrow', 't-shirt', 'carriage return', '1', 'bar', '2', '', '3', '', '4', 'carriage return'] != ['Say', '(quietly)', 'Hello,', 'Jim', '.', &quot;don't&quot;, 'right-pointing arrow', 't-shirt', '1', 'bar', '2', '', '3', '', '4', 'blank', '', 'blank', 'right-pointing arrow', 't-shirt', 't-shirt', 'blank']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="moveByLine" time="59.252">
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="moveByCharacter" time="36.578">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['S', 'space', 'left paren', 'right paren', 'quote', 'tick', 'e', 'comma', 'right-pointing arrow', 't-shirt', 'tab', 'carriage return', 'Right\ncarriage return'] != ['S', 'space', 'left paren', 'right paren', 'quote', 'tick', 'e', 'comma', 'right-pointing arrow', 't-shirt', 'tab', 'carriage return', 'line feed']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="delayedCharacterDescriptions" time="24.026">
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="selectionByWord" time="51.737">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['Test selected', ':  selected', 'Say  selected', 'left paren  selected', 'quietly selected', ')  selected', 'quote  selected', 'Hello selected', ',  selected', 'Jim  selected', '.  selected', &quot;don't  selected&quot;, 'selected', 't-shirt   selected', 'carriage return  selected', '1  selected', 'selected', '2  selected', 'selected', '3  selected', 'selected', '4  selected', 'carriage return  selected', 'space  selected', 'carriage return  selected', 'tab  selected'] != ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim  selected', '.  selected', &quot;don't  selected&quot;, 'selected', 't-shirt   selected', 'selected', '1  selected', 'selected', '2  selected', 'selected', '3  selected', 'selected', '4  selected', 'selected', 'selected', 'selected', 'selected', 'right-pointing arrow  selected', 'selected', 't-shirt  selected', 'selected', 't-shirt  selected']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="selectionByLine" time="38.734">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim .  selected', &quot;don't   selected&quot;, 'selected', 't-shirt   selected', 'selected', 't-shirt    selected', 't-shirt   selected', '1   2    3      4  selected', 'selected', 'selected', 'selected'] != ['Test:   selected', 'Say   selected', '(quietly)   selected', 'Hello,   selected', 'Jim .   selected', &quot;don't    selected&quot;, 'selected', 't-shirt    selected', 'selected', 't-shirt     selected', 't-shirt    selected', '1   2    3      4   selected', 'selected', 'selected', 'selected']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="selectionByCharacter" time="36.573">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['T  selected', 'S  selected', 'space  selected', 'left paren  selected', 'right paren  selected', 'quote  selected', 'tick  selected', 'e  selected', 'comma  selected', 'right-pointing arrow  selected', 't-shirt  selected', 'tab  selected', 'carriage return  selected'] != ['T  selected', 'S  selected', 'space  selected', 'left paren  selected', 'right paren  selected', 'quote  selected', 'tick  selected', 'e  selected', 'comma  selected', 'right-pointing arrow  selected', 't-shirt  selected', 'tab  selected', 'selected']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="tableHeaderSymbols" time="33.092">
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="ignoreBlankLinesForReportLineIndentation" time="41.619">
+</testcase>
+<properties>
+<property name="Documentation" value="Symbol pronunciation tests"/>
+</properties>
+</testsuite>
+</testsuite>

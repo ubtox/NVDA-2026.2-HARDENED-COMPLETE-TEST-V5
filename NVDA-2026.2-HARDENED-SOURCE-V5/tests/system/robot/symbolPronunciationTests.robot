@@ -26,7 +26,7 @@ default teardown
 
 default setup
 	logForegroundWindowTitle
-	start NVDA	standard-dontShowWelcomeDialog.ini
+	start NVDA	standard-symbolTests-local.ini
 	logForegroundWindowTitle
 	enable_verbose_debug_logging_if_requested
 

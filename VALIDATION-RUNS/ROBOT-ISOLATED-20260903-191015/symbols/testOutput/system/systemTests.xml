@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Robot" tests="10" errors="0" failures="8" skipped="0" time="319.009" timestamp="2026-09-03T19:34:04.192871">
+<testsuite name="symbolPronunciationTests" tests="10" errors="0" failures="8" skipped="0" time="318.962" timestamp="2026-09-03T19:34:04.238582">
+<testcase classname="Robot.symbolPronunciationTests" name="symbolInSpeechUI" time="25.649">
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="moveByWord" time="47.177">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['deux points', 'Say', 'parenthèse gauche', 'spelling error  quietly', 'out of spelling error\nparenthèse droite', 'guillemet', 'Hello', 'virgule', 'Jim', '.', &quot;spelling error  don't&quot;, 'out of spelling error\nflèche droite', 'T-shirt', 'retour chariot', '1', 'barre verticale', '2', '', '3', 'arobase', '4', 'retour chariot'] != ['Say', '(quietly)', 'Hello,', 'Jim', '.', &quot;don't&quot;, 'right-pointing arrow', 't-shirt', '1', 'bar', '2', '', '3', '', '4', 'blank', '', 'blank', 'right-pointing arrow', 't-shirt', 't-shirt', 'blank']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="moveByLine" time="38.395">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['Say', '(  spelling error  quietly)', 'Hello,', 'Jim .', &quot;spelling error  don't&quot;, '', 'T-shirt', '', 'T-shirt', 'T-shirt', '1   2    3  arobase     4', 'blank', '', 'blank', 'blank'] != ['Say', '(quietly)', 'Hello,', 'Jim .', &quot;don't&quot;, '', 't-shirt', '', 't-shirt', 't-shirt', '1   2    3      4', 'blank', '', 'blank', 'blank']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="moveByCharacter" time="36.401">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['S', 'espace', 'parenthèse gauche', 'parenthèse droite', 'guillemet', 'apostrophe', 'e', 'virgule', 'flèche droite', 'T-shirt', 'tab', 'retour chariot', 'Right\nretour chariot'] != ['S', 'space', 'left paren', 'right paren', 'quote', 'tick', 'e', 'comma', 'right-pointing arrow', 't-shirt', 'tab', 'carriage return', 'line feed']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="delayedCharacterDescriptions" time="23.946">
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="selectionByWord" time="51.090">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['Test selected', ':  selected', 'Say  selected', 'left paren  selected', 'quietly selected', ')  selected', 'quote  selected', 'Hello selected', ',  selected', 'Jim  selected', '.  selected', &quot;don't  selected&quot;, 'selected', 't-shirt   selected', 'carriage return  selected', '1  selected', 'selected', '2  selected', 'selected', '3  selected', 'selected', '4  selected', 'carriage return  selected', 'space  selected', 'carriage return  selected', 'tab  selected'] != ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim  selected', '.  selected', &quot;don't  selected&quot;, 'selected', 't-shirt   selected', 'selected', '1  selected', 'selected', '2  selected', 'selected', '3  selected', 'selected', '4  selected', 'selected', 'selected', 'selected', 'selected', 'right-pointing arrow  selected', 'selected', 't-shirt  selected', 'selected', 't-shirt  selected']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="selectionByLine" time="37.438">
+<failure message="actual vs expected. With symbolLevel SymLevel.NONE: ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim .  selected', &quot;don't   selected&quot;, 'selected', 't-shirt   selected', 'selected', 't-shirt    selected', 't-shirt   selected', '1   2    3      4  selected', 'selected', 'selected', 'selected'] != ['Test:   selected', 'Say   selected', '(quietly)   selected', 'Hello,   selected', 'Jim .   selected', &quot;don't    selected&quot;, 'selected', 't-shirt    selected', 'selected', 't-shirt     selected', 't-shirt    selected', '1   2    3      4   selected', 'selected', 'selected', 'selected']" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="selectionByCharacter" time="20.062">
+<failure message="&lt;class 'AttributeError'&gt;:'StreamRedirector' object has no attribute 'getvalue'&#10;&#10;Also teardown failed:&#10;Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="tableHeaderSymbols" time="16.401">
+<failure message="&lt;class 'AttributeError'&gt;:'StreamRedirector' object has no attribute 'getvalue'&#10;&#10;Also teardown failed:&#10;Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée" type="AssertionError"/>
+</testcase>
+<testcase classname="Robot.symbolPronunciationTests" name="ignoreBlankLinesForReportLineIndentation" time="21.853">
+<failure message="&lt;class 'AttributeError'&gt;:'StreamRedirector' object has no attribute 'getvalue'&#10;&#10;Also teardown failed:&#10;Several failures occurred:&#10;&#10;1) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée&#10;&#10;2) Connection to remote server broken: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée" type="AssertionError"/>
+</testcase>
+<properties>
+<property name="Documentation" value="Symbol pronunciation tests"/>
+</properties>
+</testsuite>
+</testsuite>

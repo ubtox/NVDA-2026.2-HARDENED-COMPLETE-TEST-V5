@@ -1,0 +1,28 @@
+﻿NVDA CHROME FINAL COMPATIBILITY VALIDATION
+Date=2026-09-04 00:26:57 +02:00
+PatchExitCode=0
+ARIA-Switch-Role-ExitCode=0
+ARIA-Switch-Summary:
+1 test, 1 passed, 0 failed
+1 test, 1 passed, 0 failed
+FullChromeExitCode=0
+FullChromeSummary:
+53 tests, 53 passed, 0 failed
+53 tests, 53 passed, 0 failed
+FinalStatus=CHROME_FULL_PASS
+PreviousEvidence:
+VSCode=8_OF_8_PASS
+i7562=PASS_ISOLATED
+i10890=PASS_WITH_COMPAT_HARNESS
+styleNav=PASS_WITH_COMPAT_HARNESS
+CoreNVDAChanged=NO
+SourceRestored=YES
+PowerShellKilled=NO
+WindowsTerminalKilled=NO
+FatalError:
+System.IO.DirectoryNotFoundException: Impossible de trouver une partie du chemin d'accès 'C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\VALIDATION-RUNS\CHROME-FINAL-COMPAT-20260904-000220\FULL-CHROME\testOutput\system\nvdaTestRunLogs\Robot.chromeTests-Prevent_Duplicate_Speech_From_Description_while_in_Browse_mode_with_tab_nav-nvda.log'.
+   à System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   à System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite, Boolean checkHost)
+   à System.IO.FileInfo.CopyTo(String destFileName, Boolean overwrite)
+   à Microsoft.PowerShell.Commands.FileSystemProvider.CopyFileInfoItem(FileInfo file, String destinationPath, Boolean force, PowerShell ps)
+   à Microsoft.PowerShell.Commands.FileSystemProvider.CopyDirectoryInfoItem(DirectoryInfo directory, String destination, Boolean recurse, Boolean force, PowerShell ps)

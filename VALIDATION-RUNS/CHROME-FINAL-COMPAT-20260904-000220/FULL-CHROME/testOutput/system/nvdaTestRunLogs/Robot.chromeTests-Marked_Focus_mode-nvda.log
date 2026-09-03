@@ -1,0 +1,1503 @@
+DEBUG - __main__ (00:20:11.896) - MainThread (11708):
+Provided arguments: ['--debug-logging', '-r', '-c', 'C:\\Users\\adm\\AppData\\Local\\Temp\\nvdaProfile', '--log-file', 'C:\\Users\\adm\\AppData\\Local\\Temp\\nvdaProfile\\nvda.log']
+INFO - __main__ (00:20:11.897) - MainThread (11708):
+Starting NVDA version 2026.2.0dev AMD64
+DEBUG - __main__ (00:20:11.897) - MainThread (11708):
+Debug level logging enabled
+DEBUG - core.main (00:20:11.984) - MainThread (11708):
+Core starting
+INFO - core.main (00:20:11.998) - MainThread (11708):
+Config dir: C:\Users\adm\AppData\Local\Temp\nvdaProfile
+DEBUG - core.main (00:20:11.999) - MainThread (11708):
+loading config
+INFO - config.ConfigManager._loadConfig (00:20:12.006) - MainThread (11708):
+Loading config: C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini
+DEBUG - config.profileUpgrader.upgrade (00:20:12.010) - MainThread (11708):
+Current config schema version: 2, latest: 24
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.010) - MainThread (11708):
+Upgrading from schema version 2 to 3
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_2_to_3 (00:20:12.010) - MainThread (11708):
+winConsoleSpeakPasswords not present, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.010) - MainThread (11708):
+Upgrading from schema version 3 to 4
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_3_to_4 (00:20:12.010) - MainThread (11708):
+reportFontAttributes not present, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.010) - MainThread (11708):
+Upgrading from schema version 4 to 5
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.010) - MainThread (11708):
+Upgrading from schema version 5 to 6
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.011) - MainThread (11708):
+Upgrading from schema version 6 to 7
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.011) - MainThread (11708):
+Upgrading from schema version 7 to 8
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_7_to_8 (00:20:12.011) - MainThread (11708):
+reportTableHeaders not present, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.011) - MainThread (11708):
+Upgrading from schema version 8 to 9
+DEBUG - config.profileUpgradeSteps._upgradeConfigFrom_8_to_9_lineIndent (00:20:12.011) - MainThread (11708):
+reportLineIndentation and reportLineIndentationWithTones not present, no action taken.
+DEBUG - config.profileUpgradeSteps._upgradeConfigFrom_8_to_9_cellBorders (00:20:12.011) - MainThread (11708):
+reportBorderStyle and reportBorderColor not present, no action taken.
+DEBUG - config.profileUpgradeSteps._upgradeConfigFrom_8_to_9_showMessages (00:20:12.011) - MainThread (11708):
+messageTimeout >= 1 or not present and noMessageTimeout not present, no action taken.
+DEBUG - config.profileUpgradeSteps._upgradeConfigFrom_8_to_9_tetherTo (00:20:12.011) - MainThread (11708):
+autoTether and tetherTo not present in config, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.011) - MainThread (11708):
+Upgrading from schema version 9 to 10
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_9_to_10 (00:20:12.011) - MainThread (11708):
+use*AsNVDAModifierKey values not present, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.011) - MainThread (11708):
+Upgrading from schema version 10 to 11
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_10_to_11 (00:20:12.011) - MainThread (11708):
+enableHidBrailleSupport not present in config, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.012) - MainThread (11708):
+Upgrading from schema version 11 to 12
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_11_to_12 (00:20:12.012) - MainThread (11708):
+reportFontAttributes not present in config, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.012) - MainThread (11708):
+Upgrading from schema version 12 to 13
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_12_to_13 (00:20:12.012) - MainThread (11708):
+includeCLDR not present in config, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.012) - MainThread (11708):
+Upgrading from schema version 13 to 14
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_13_to_14 (00:20:12.012) - MainThread (11708):
+Output device not present in config. Taking no action.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.012) - MainThread (11708):
+Upgrading from schema version 14 to 15
+DEBUG - config.profileUpgradeSteps._convertTypingEcho (00:20:12.012) - MainThread (11708):
+'speakTypedCharacters' not present in config, no action taken.
+DEBUG - config.profileUpgradeSteps._convertTypingEcho (00:20:12.012) - MainThread (11708):
+'speakTypedWords' not present in config, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.012) - MainThread (11708):
+Upgrading from schema version 15 to 16
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_15_to_16 (00:20:12.012) - MainThread (11708):
+No remote.ini found, no action taken. Checked C:\Users\adm\AppData\Local\Temp\nvdaProfile\remote.ini
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.013) - MainThread (11708):
+Upgrading from schema version 16 to 17
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_16_to_17 (00:20:12.013) - MainThread (11708):
+No remote section in config, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.013) - MainThread (11708):
+Upgrading from schema version 17 to 18
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_17_to_18 (00:20:12.013) - MainThread (11708):
+dotPad added to braille display auto detection excluded displays due to generic USB PID/VID. List is now: ['dotPad']
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.013) - MainThread (11708):
+Upgrading from schema version 18 to 19
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_18_to_19 (00:20:12.013) - MainThread (11708):
+'reportSpellingErrors' not present in config, no action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.013) - MainThread (11708):
+Upgrading from schema version 19 to 20
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_19_to_20 (00:20:12.013) - MainThread (11708):
+No vision enhancement provider-based Screen Curtain settings exist. No action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.013) - MainThread (11708):
+Upgrading from schema version 20 to 21
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.013) - MainThread (11708):
+Upgrading from schema version 21 to 22
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_21_to_22 (00:20:12.013) - MainThread (11708):
+No math section in profile. No action taken.
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.013) - MainThread (11708):
+Upgrading from schema version 22 to 23
+DEBUG - config.profileUpgrader._doConfigUpgrade (00:20:12.013) - MainThread (11708):
+Upgrading from schema version 23 to 24
+DEBUG - config.profileUpgradeSteps.upgradeConfigFrom_23_to_24 (00:20:12.014) - MainThread (11708):
+No magnifier section in profile. No action taken.
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.015) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.015) - MainThread (11708):
+Validating feature flag: DISABLED, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.015) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.016) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.016) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.016) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.017) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: ReviewRoutingMovesSystemCaretFlag, behaviorOfDefault: NEVER
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.017) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: ReviewRoutingMovesSystemCaretFlag, behaviorOfDefault: NEVER
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.017) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: DISABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.017) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: DISABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.018) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.018) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.018) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.018) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.018) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.018) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.018) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: FontFormattingBrailleModeFlag, behaviorOfDefault: LIBLOUIS
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.018) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: FontFormattingBrailleModeFlag, behaviorOfDefault: LIBLOUIS
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.020) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: ParagraphNavigationFlag, behaviorOfDefault: APPLICATION
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.020) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: ParagraphNavigationFlag, behaviorOfDefault: APPLICATION
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.020) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.020) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.020) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: WindowsTerminalStrategyFlag, behaviorOfDefault: DIFFING
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.020) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: WindowsTerminalStrategyFlag, behaviorOfDefault: DIFFING
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.021) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: DISABLED
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:12.021) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: DISABLED
+DEBUG - fileUtils.FaultTolerantFile (00:20:12.023) - MainThread (11708):
+C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini9r0ilxq3.tmp
+INFO - config.ConfigManager._loadConfig (00:20:12.242) - MainThread (11708):
+Config lo**** (****ter upgr****, and in the state it will **** us**** by NV****):
+{'schemaVersion': 24, 'general': {'language': 'en', 'showWelcom****ialogAtStartup': 'False'}, 'up****te': {'ask****AllowUsageStats': 'True', 'autoCh****k': 'False', 'startupNotifi****tion': 'False', 'allowUsageStats': 'False'}, 'spe****h': {'synth': 'spe****hSpySynthDriver', 'unicodeNormalization': 'DISABL****'}, 'development': {'enableScratchp****ir': 'True'}, 'virtualBu****rs': {'autoSayAllOnPageLo****': 'False', 'passThroughAudioIndi****tion': 'False'}, 'annotations': {}, 'vision': {'NV****Highlighter': {'enabl****': 'True', 'highlightFocus': 'True', 'highlightNavigator': 'True', 'highlightBrowseMode': 'True'}}, 'documentFormatting': {'reportLinkType': 'False'}, 'braille': {'auto': {'exclud****Displays': ['dotP****']}}}
+INFO - core.main (00:20:12.244) - MainThread (11708):
+Developer Scratchpad mode enabled
+DEBUG - core.main (00:20:12.244) - MainThread (11708):
+setting language to en
+DEBUG - languageHandler.setLocale (00:20:12.245) - MainThread (11708):
+Win32 locale string from locale code is English_United States.1252
+DEBUG - languageHandler._setPythonLocale (00:20:12.250) - MainThread (11708):
+set python locale to English_United States.1252
+DEBUG - core.main (00:20:13.518) - MainThread (11708):
+Initializing NVDAHelper
+DEBUG - NVDAHelper._RemoteLoader.__init__ (00:20:13.528) - MainThread (11708):
+Starting C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\source\lib\x86\nvdaHelperRemoteLoader.exe
+DEBUG - core.main (00:20:13.536) - MainThread (11708):
+initializing nvwave
+INFO - core.main (00:20:13.745) - MainThread (11708):
+Windows version: Windows 11 26H2 (10.0.26300.9278) workstation AMD64
+INFO - core.main (00:20:13.745) - MainThread (11708):
+Using Python version 3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]
+INFO - core.main (00:20:13.745) - MainThread (11708):
+Using comtypes version 1.4.13
+INFO - core.main (00:20:13.749) - MainThread (11708):
+Using configobj version 5.1.0 with validate version 1.0.1
+DEBUG - core.main (00:20:13.749) - MainThread (11708):
+Initializing add-ons system
+DEBUG - addonStore.dataManager.initialize (00:20:13.764) - MainThread (11708):
+initializing addonStore data manager
+DEBUG - addonStore.dataManager._DataManager._getCacheHash (00:20:13.766) - initialiseAvailableAddons (14208):
+Fetching add-on data from https://addonStore.nvaccess.org/cacheHash.json
+DEBUG - addonHandler.AddonsState.load (00:20:13.767) - MainThread (11708):
+BACK_COMPAT_TO API version for manual compatibility overrides has changed. NVDA API has been upgraded: from 2023.1.0 to (2026, 1, 0)
+DEBUG - addonHandler._getAvailableAddonsFromPath (00:20:13.767) - MainThread (11708):
+Listing add-ons from C:\Users\adm\AppData\Local\Temp\nvdaProfile\addons
+DEBUG - core.main (00:20:13.815) - MainThread (11708):
+Initializing appModule Handler
+DEBUG - core.main (00:20:13.815) - MainThread (11708):
+Initializing asyncio event loop
+INFO - _asyncioEventLoop.initialize (00:20:13.843) - MainThread (11708):
+Initializing asyncio event loop
+DEBUG - core.main (00:20:13.845) - MainThread (11708):
+initializing background i/o
+DEBUG - core.main (00:20:13.845) - MainThread (11708):
+Initializing background braille display detection
+DEBUG - brailleDisplayDrivers.papenmeier (00:20:13.960) - MainThread (11708):
+Failed to import ftdi2.
+Traceback (most recent call last):
+  File "C:\Program Files\Python313\Lib\ctypes\__init__.py", line 472, in __getattr__
+    dll = self._dlltype(name)
+  File "C:\Program Files\Python313\Lib\ctypes\__init__.py", line 361, in __init__
+    self._handle = self._load_library(name, mode, handle, winmode)
+                   ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\ctypes\__init__.py", line 379, in _load_library
+    return _LoadLibrary(self._name, winmode)
+FileNotFoundError: Could not find module 'ftd2xx' (or one of its dependencies). Try using the full path with constructor syntax.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "brailleDisplayDrivers\papenmeier.py", line 21, in <module>
+    import ftdi2
+  File "ftdi2\__init__.py", line 21, in <module>
+    from .ftd2xx import (
+    ...<23 lines>...
+    )
+  File "ftdi2\ftd2xx.py", line 24, in <module>
+    dll = windll.ftd2xx
+          ^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\ctypes\__init__.py", line 474, in __getattr__
+    raise AttributeError(name)
+AttributeError: ftd2xx
+DEBUG - core.main (00:20:13.966) - MainThread (11708):
+Initializing tones
+DEBUG - core.main (00:20:14.020) - MainThread (11708):
+Initializing sound split
+DEBUG - core.main (00:20:14.055) - MainThread (11708):
+Speech Dictionary processing
+DEBUG - speechDictHandler.types.SpeechDict.load (00:20:14.055) - MainThread (11708):
+Loading speech dictionary 'C:\\Users\\adm\\AppData\\Local\\Temp\\nvdaProfile\\speechDicts\\default.dic'...
+DEBUG - speechDictHandler.types.SpeechDict.load (00:20:14.055) - MainThread (11708):
+file 'C:\\Users\\adm\\AppData\\Local\\Temp\\nvdaProfile\\speechDicts\\default.dic' not found.
+DEBUG - speechDictHandler.types.SpeechDict.load (00:20:14.055) - MainThread (11708):
+Loading speech dictionary 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\source\\builtin.dic'...
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:14.056) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: DISABLED
+DEBUG - speechDictHandler.types.SpeechDict.load (00:20:14.056) - MainThread (11708):
+3 loaded records.
+DEBUG - core.main (00:20:14.056) - MainThread (11708):
+Character processing
+DEBUG - core.main (00:20:14.056) - MainThread (11708):
+Initializing speech
+DEBUG - autoSettingsUtils.autoSettings.AutoSettings._registerConfigSaveAction (00:20:14.063) - MainThread (11708):
+registering pre_configSave action: <class 'synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver'>
+INFO - speechDictHandler.dictFormatUpgrade._doSynthVoiceDictBackupAndMove (00:20:14.071) - MainThread (11708):
+Upgrading voice dictionaries for espeak
+DEBUG - speechDictHandler.dictFormatUpgrade._doSynthVoiceDictBackupAndMove (00:20:14.071) - MainThread (11708):
+voiceDictGlob: C:\Users\adm\AppData\Local\Temp\nvdaProfile\speechDicts\espeak*
+INFO - speechDictHandler.dictFormatUpgrade._doSynthVoiceDictBackupAndMove (00:20:14.072) - MainThread (11708):
+Upgrading voice dictionaries for SpeechSpySynthDriver
+DEBUG - speechDictHandler.dictFormatUpgrade._doSynthVoiceDictBackupAndMove (00:20:14.073) - MainThread (11708):
+voiceDictGlob: C:\Users\adm\AppData\Local\Temp\nvdaProfile\speechDicts\SpeechSpySynthDriver*
+DEBUG - speechDictHandler.types.SpeechDict.load (00:20:14.073) - MainThread (11708):
+Loading speech dictionary 'C:\\Users\\adm\\AppData\\Local\\Temp\\nvdaProfile\\speechDicts\\voiceDicts.v1\\SpeechSpySynthDriver\\SpeechSpySynthDriver.dic'...
+DEBUG - speechDictHandler.types.SpeechDict.load (00:20:14.073) - MainThread (11708):
+file 'C:\\Users\\adm\\AppData\\Local\\Temp\\nvdaProfile\\speechDicts\\voiceDicts.v1\\SpeechSpySynthDriver\\SpeechSpySynthDriver.dic' not found.
+INFO - synthDriverHandler.setSynth (00:20:14.073) - MainThread (11708):
+Loaded synthDriver SpeechSpySynthDriver
+DEBUG - speech.sayAll.initialize (00:20:14.074) - MainThread (11708):
+Initializing sayAllHandler
+DEBUG - core.main (00:20:14.077) - MainThread (11708):
+Initializing math presentation
+INFO - mathPres.MathCAT.MathCAT.MathCAT.__init__ (00:20:14.091) - MainThread (11708):
+MathCAT 0.7.2 installed. Using rules dir: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\include\nvda-mathcat\assets\Rules
+INFO - core._setUpWxApp (00:20:14.099) - MainThread (11708):
+Using wx version 4.2.4 msw (phoenix) wxWidgets 3.2.8
+DEBUG - core.main (00:20:14.101) - MainThread (11708):
+Initializing brailleTables
+DEBUG - core.main (00:20:14.101) - MainThread (11708):
+Initializing braille input
+INFO - brailleInput.initialize (00:20:14.102) - MainThread (11708):
+Braille input initialized
+DEBUG - core.main (00:20:14.102) - MainThread (11708):
+Initializing braille
+INFO - braille.initialize (00:20:14.102) - MainThread (11708):
+Using liblouis version 3.37.0
+INFO - braille.initialize (00:20:14.102) - MainThread (11708):
+Using pySerial version 3.5
+DEBUG - autoSettingsUtils.autoSettings.AutoSettings._registerConfigSaveAction (00:20:14.102) - MainThread (11708):
+registering pre_configSave action: <class 'brailleDisplayDrivers.noBraille.BrailleDisplayDriver'>
+INFO - braille.BrailleHandler._setDisplay (00:20:14.107) - MainThread (11708):
+Loaded braille display driver 'noBraille', current display has 0 cells.
+DEBUG - core.main (00:20:14.109) - MainThread (11708):
+Initializing Screen Curtain
+DEBUG - core.main (00:20:14.109) - MainThread (11708):
+Initializing vision
+DEBUG - core.main (00:20:14.109) - MainThread (11708):
+Initializing displayModel
+DEBUG - core.main (00:20:14.109) - MainThread (11708):
+Initializing GUI
+DEBUG - windowUtils._rawWindowProc (00:20:14.136) - MainThread (11708):
+CustomWindow rawWindowProc called for unknown window 10029074
+DEBUG - windowUtils._rawWindowProc (00:20:14.136) - MainThread (11708):
+CustomWindow rawWindowProc called for unknown window 10029074
+DEBUG - windowUtils._rawWindowProc (00:20:14.137) - MainThread (11708):
+CustomWindow rawWindowProc called for unknown window 10029074
+DEBUG - windowUtils._rawWindowProc (00:20:14.137) - MainThread (11708):
+CustomWindow rawWindowProc called for unknown window 10029074
+DEBUG - languageHandler.setLocale (00:20:14.166) - MainThread (11708):
+Win32 locale string from locale code is English_United States.1252
+DEBUG - languageHandler._setPythonLocale (00:20:14.166) - MainThread (11708):
+set python locale to English_United States.1252
+DEBUG - core.main (00:20:14.166) - MainThread (11708):
+Initializing garbageHandler
+DEBUGWARNING - appModuleHandler.getProcessHandleFromProcessId (00:20:14.173) - MainThread (11708):
+Unable to open process for processId 4400
+Traceback (most recent call last):
+  File "appModuleHandler.py", line 207, in getProcessHandleFromProcessId
+    raise ctypes.WinError()
+PermissionError: [WinError 5] Accès refusé.
+DEBUGWARNING - appModuleHandler.getProcessHandleFromProcessId (00:20:14.174) - MainThread (11708):
+Unable to get process handle for process 4400 using window enumeration and subsequently getting process handle from that window
+Traceback (most recent call last):
+  File "appModuleHandler.py", line 220, in getProcessHandleFromProcessId
+    raise RuntimeError(f"No window handle found for process {processId} to create process handle")
+RuntimeError: No window handle found for process 4400 to create process handle
+DEBUG - core.main (00:20:14.180) - MainThread (11708):
+initializing Java Access Bridge support
+DEBUG - addonStore.dataManager._DataManager._getLatestAddonsDataForVersion (00:20:14.240) - initialiseAvailableAddons (14208):
+Fetching add-on data from https://addonStore.nvaccess.org/en/all/2026.2.0.json
+INFO - core.main (00:20:14.327) - MainThread (11708):
+Java Access Bridge support initialized
+DEBUG - core.main (00:20:14.398) - MainThread (11708):
+Initializing legacy winConsole support
+DEBUG - core.main (00:20:14.477) - MainThread (11708):
+Initializing UIA support
+INFO - UIAHandler.UIAHandler.MTAThreadFunc (00:20:14.487) - UIAHandler.UIAHandler.MTAThread (9528):
+UIAutomation: IUIAutomation6
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:14.504) - UIAHandler.UIAHandler.MTAThread (9528):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - core.main (00:20:14.562) - MainThread (11708):
+Initializing IAccessible support
+DEBUG - core.main (00:20:14.563) - MainThread (11708):
+Initializing input core
+DEBUGWARNING - inputCore.InputManager.loadLocaleGestureMap (00:20:14.563) - MainThread (11708):
+No locale gesture map for language en
+DEBUGWARNING - inputCore.InputManager.loadUserGestureMap (00:20:14.564) - MainThread (11708):
+No user gesture map
+DEBUG - core.main (00:20:14.564) - MainThread (11708):
+Initializing keyboard handler
+DEBUG - core.main (00:20:14.564) - MainThread (11708):
+initializing mouse handler
+DEBUG - core.main (00:20:14.590) - MainThread (11708):
+Initializing touchHandler
+DEBUGWARNING - touchHandler.touchSupported (00:20:14.590) - MainThread (11708):
+Touch only supported on installed copies
+DEBUG - core.main (00:20:14.590) - MainThread (11708):
+Initializing global plugin handler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.SystemTestSpyServer._start (00:20:14.628) - MainThread (11708):
+SystemTestSpyServer started
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin._importRobotRemoteServer (00:20:14.629) - MainThread (11708):
+before path mod: ['C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\source', 'C:\\Program Files\\Python313\\python313.zip', 'C:\\Program Files\\Python313\\DLLs', 'C:\\Program Files\\Python313\\Lib', 'C:\\Program Files\\Python313', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv\\Lib\\site-packages', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\source', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\include\\nvda-mathcat\\assets', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\miscDeps\\python', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv\\Lib\\site-packages\\win32', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv\\Lib\\site-packages\\win32\\lib', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv\\Lib\\site-packages\\Pythonwin']
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin._importRobotRemoteServer (00:20:14.629) - MainThread (11708):
+after path mod: ['C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\source', 'C:\\Program Files\\Python313\\python313.zip', 'C:\\Program Files\\Python313\\DLLs', 'C:\\Program Files\\Python313\\Lib', 'C:\\Program Files\\Python313', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv\\Lib\\site-packages', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\source', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\include\\nvda-mathcat\\assets', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\miscDeps\\python', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv\\Lib\\site-packages\\win32', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv\\Lib\\site-packages\\win32\\lib', 'C:\\Users\\adm\\Downloads\\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\\NVDA-2026.2-HARDENED-SOURCE-V5\\.venv\\Lib\\site-packages\\Pythonwin', 'C:\\Users\\adm\\AppData\\Local\\Temp\\nvdaProfile\\scratchpad\\globalPlugins\\speechSpyGlobalPlugin\\libs']
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.SystemTestSpyServer._start (00:20:14.643) - MainThread (11708):
+Server address: ('127.0.0.1', 8270)
+WARNING - stdout (00:20:14.644) - RF Test Spy Thread (17728):
+Robot Framework remote server at 127.0.0.1:8270 started.
+DEBUG - _remoteClient.initialize (00:20:14.644) - MainThread (11708):
+Remote Access disabled. Not initializing.
+DEBUG - core.main (00:20:14.645) - MainThread (11708):
+Initializing core pump
+DEBUG - core.main (00:20:14.646) - MainThread (11708):
+Initializing watchdog
+DEBUG - core.main (00:20:14.647) - MainThread (11708):
+Update checking not supported
+DEBUG - _magnifier.initialize (00:20:14.647) - MainThread (11708):
+Initializing magnifier
+INFO - core.main (00:20:14.648) - MainThread (11708):
+NVDA initialized
+DEBUG - core.main (00:20:14.648) - MainThread (11708):
+entering wx application main loop
+DEBUG - autoSettingsUtils.autoSettings.AutoSettings._registerConfigSaveAction (00:20:14.674) - MainThread (11708):
+registering pre_configSave action: <class 'visionEnhancementProviders.NVDAHighlighter.NVDAHighlighterSettings'>
+DEBUG - autoSettingsUtils.autoSettings.AutoSettings._loadSpecificSettings (00:20:14.682) - MainThread (11708):
+loading vision NVDAHighlighter
+DEBUG - autoSettingsUtils.autoSettings.AutoSettings._loadSpecificSettings (00:20:14.682) - MainThread (11708):
+Loaded settings for NVDAHighlighterSettings
+DEBUG - visionEnhancementProviders.NVDAHighlighter.NVDAHighlighter.__init__ (00:20:14.683) - MainThread (11708):
+Starting NVDAHighlighter
+DEBUG - windowUtils._rawWindowProc (00:20:14.685) - visionEnhancementProviders.NVDAHighlighter.NVDAHighlighter (18312):
+CustomWindow rawWindowProc called for unknown window 7538448
+DEBUG - windowUtils._rawWindowProc (00:20:14.686) - visionEnhancementProviders.NVDAHighlighter.NVDAHighlighter (18312):
+CustomWindow rawWindowProc called for unknown window 7538448
+DEBUG - windowUtils._rawWindowProc (00:20:14.687) - visionEnhancementProviders.NVDAHighlighter.NVDAHighlighter (18312):
+CustomWindow rawWindowProc called for unknown window 7538448
+DEBUG - windowUtils._rawWindowProc (00:20:14.687) - visionEnhancementProviders.NVDAHighlighter.NVDAHighlighter (18312):
+CustomWindow rawWindowProc called for unknown window 7538448
+DEBUG - windowUtils._rawWindowProc (00:20:14.687) - visionEnhancementProviders.NVDAHighlighter.NVDAHighlighter (18312):
+CustomWindow rawWindowProc called for unknown window 7538448
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:14.710) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: WindowsTerminalStrategyFlag, behaviorOfDefault: DIFFING
+DEBUG - core._doPostNvdaStartupAction (00:20:14.715) - MainThread (11708):
+Notify of postNvdaStartup action
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:14.753) - MainThread (11708):
+Validating feature flag: DISABLED, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+IO - speech.speech.speak (00:20:14.754) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Administrateur\xa0: Windows PowerShell', CancellableSpeech (still valid)]
+DEBUG - characterProcessing.SymbolDictionaryDefinition._initSymbols (00:20:14.782) - MainThread (11708):
+No 'user' data for locale 'en'
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:14.825) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Administrateur : Windows Power Shell  ', IndexCommand(1)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:14.826) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Administrateur : Windows Power Shell  ', IndexCommand(1)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:14.826) - speech spy synth driver (11508):
+Speech IndexCommand reached: 1, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:14.827) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:14.827) - speech spy synth driver (11508):
+Appending to speech spy at index 1
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:14.827) - speech spy synth driver (11508):
+After post_speech notify
+IO - speech.speech.speak (00:20:14.838) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Windows PowerShell', 'terminal', 'Administrateur\xa0: Windows PowerShell', CancellableSpeech (still valid)]
+DEBUG - NVDAObjects.NVDAObject._get_placeholder (00:20:14.839) - MainThread (11708):
+Potential unimplemented child class: <NVDAObjects.IAccessible.IAccessible object at 0x000002D0827B7230>
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:14.840) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: DISABLED
+DEBUG - NVDAObjects.NVDAObject._get_placeholder (00:20:14.850) - MainThread (11708):
+Potential unimplemented child class: <NVDAObjects.Dynamic__DiffBasedWinTerminalUIAXamlEditableTextEditableTextWithAutoSelectDetectionUIA object at 0x000002D081BADE50>
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:14.858) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: FontFormattingBrailleModeFlag, behaviorOfDefault: LIBLOUIS
+IO - braille.BrailleBuffer.update (00:20:14.861) - MainThread (11708):
+Braille regions text: ['                                                                                                                         ']
+IO - braille.BrailleHandler.update (00:20:14.862) - MainThread (11708):
+Braille window dots: - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:14.865) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Windows Power Shell  ', 'terminal  ', 'Administrateur : Windows Power Shell  ', IndexCommand(2)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:14.866) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Windows Power Shell  ', 'terminal  ', 'Administrateur : Windows Power Shell  ', IndexCommand(2)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:14.866) - speech spy synth driver (11508):
+Speech IndexCommand reached: 2, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:14.867) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:14.867) - speech spy synth driver (11508):
+Appending to speech spy at index 2
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:14.867) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:14.919) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.05191439999907743
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.030) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.1625895999968634
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.140) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.2730322999996133
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:15.181) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.241) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.37334639999608044
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.341) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.4741649999996298
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.442) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.5747444999942672
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.542) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.6752138000010746
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.643) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.7756389999995008
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.743) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.8760550999941188
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.844) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 0.9764323999988846
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:15.944) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 3) elapsedSinceLastSpeech: 1.0770279999997001
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:16.451) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+DEBUG - NVDAObjects.IAccessible.chromium.Document._get_treeInterceptorClass (00:20:16.451) - MainThread (11708):
+loadChromiumVBufOnBusyState feature flag is True, vBuf WILL be loaded when state of the document is busy.
+DEBUG - treeInterceptorHandler.update (00:20:16.453) - MainThread (11708):
+Adding new treeInterceptor to runningTable: <NVDAObjects.IAccessible.chromium.ChromeVBuf object at 0x000002D085D8D940>
+DEBUG - virtualBuffers.VirtualBuffer._loadBuffer (00:20:16.456) - NVDAObjects.IAccessible.chromium.VirtualBuffer.loadBuffer (9852):
+Buffer load took 0.002 sec, 99 chars
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:16.468) - MainThread (11708):
+Cancelling
+IO - speech.speech.speak (00:20:16.475) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome', 'window', CancellableSpeech (still valid)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:16.476) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', 'window  ', IndexCommand(3)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:16.477) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', 'window  ', IndexCommand(3)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:16.477) - speech spy synth driver (11508):
+Speech IndexCommand reached: 3, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:16.477) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - browseMode.BrowseModeDocumentTreeInterceptor._getInitialCaretPos (00:20:16.478) - MainThread (11708):
+No saved caret position for file:///C:/Users/adm/AppData/Local/Temp/tmpg1iovrsm/test.html
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:16.478) - speech spy synth driver (11508):
+Appending to speech spy at index 3
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:16.478) - speech spy synth driver (11508):
+After post_speech notify
+IO - speech.speech.speak (00:20:16.488) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)', 'document', CancellableSpeech (still valid)]
+IO - speech.speech.speak (00:20:16.494) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Before Test Case Marker']
+DEBUG - NVDAObjects.NVDAObject._get_placeholder (00:20:16.495) - MainThread (11708):
+Potential unimplemented child class: <NVDAObjects.UIA.UIA object at 0x000002D0827EE140>
+IO - braille.BrailleBuffer.update (00:20:16.509) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) - Google Chrome wnd ', 'NVDA Browser Test Case (1424636674456128700) doc ', 'Before Test Case Marker ']
+IO - braille.BrailleHandler.update (00:20:16.510) - MainThread (11708):
+Braille window dots: 127 15 124 135 1235 15 - 6 2345 15 234 2345 - 6 14 1 234 15 - 6 134 1 1235 13 15 1235 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaBraille (00:20:16.511) - MainThread (11708):
+Appending to braille spy at index 1
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:16.512) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', IndexCommand(4)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:16.512) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', IndexCommand(4)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:16.512) - speech spy synth driver (11508):
+Speech IndexCommand reached: 4, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:16.513) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:16.513) - speech spy synth driver (11508):
+Appending to speech spy at index 4
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:16.513) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:16.559) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(5)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:16.559) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(5)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:16.561) - speech spy synth driver (11508):
+Speech IndexCommand reached: 5, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:16.561) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:16.561) - speech spy synth driver (11508):
+Appending to speech spy at index 5
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:16.562) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:16.863) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:16.956) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 6) elapsedSinceLastSpeech: 0.3944045999960508
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.056) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 6) elapsedSinceLastSpeech: 0.49471469999843976
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.157) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 6) elapsedSinceLastSpeech: 0.5955012999984319
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.258) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 6) elapsedSinceLastSpeech: 0.6959886999975424
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.358) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 6) elapsedSinceLastSpeech: 0.7963126999966335
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.458) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 6) elapsedSinceLastSpeech: 0.89685499999905
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.559) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 6) elapsedSinceLastSpeech: 0.997162899999239
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.659) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 6) elapsedSinceLastSpeech: 1.097503199998755
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:17.688) - RF Test Spy Thread (17728):
+Sending gesture NVDA+t
+IO - inputCore.InputManager.executeGesture (00:20:17.691) - RF Test Spy Thread (17728):
+Input: kb(desktop):NVDA+t
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:17.692) - MainThread (11708):
+Cancelling
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:17.692) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+IO - speech.speech.speak (00:20:17.693) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:17.694) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', IndexCommand(6)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:17.695) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', IndexCommand(6)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:17.695) - speech spy synth driver (11508):
+Speech IndexCommand reached: 6, notifying synthDriverHandler
+IO - braille.BrailleBuffer.update (00:20:17.695) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) - Google Chrome']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:17.695) - speech spy synth driver (11508):
+Before notify post_speech
+IO - braille.BrailleHandler.update (00:20:17.696) - MainThread (11708):
+Braille window dots: 6 6 1345 1236 145 1 - 6 12 1235 135 2456 234 15 1235 - 6 2345 15 234 2345 - 6 14 1 234 15 - 5 126 3456 1 145 12 145 124 14 124 124 1245 145 145 15 124 1 12 125 1245 245 245 5 345 - 36 - 6 1245 135 135 1245 123 15 - 6 14 125 1235 135 134 15 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:17.696) - speech spy synth driver (11508):
+Appending to speech spy at index 6
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaBraille (00:20:17.697) - MainThread (11708):
+Appending to braille spy at index 2
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:17.697) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:17.793) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:17.793) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.796) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 0.09939160000067204
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.896) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 0.20009930000378517
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:17.997) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:17.998) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 0.30134710000129417
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.098) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 0.4020483000058448
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.199) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 0.5028059000032954
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.299) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 0.6030793000027188
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.400) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 0.7038001000037184
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.500) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 0.8041603000019677
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.601) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 0.9044054000041797
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.701) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 6, nextIndex: 7) elapsedSinceLastSpeech: 1.0045956000030856
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.725) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 7) elapsedSinceLastSpeech: 1.0291012000016053
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.743) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 7) elapsedSinceLastSpeech: 1.0473017000040272
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.746) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 7) elapsedSinceLastSpeech: 1.0494420000031823
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:18.776) - RF Test Spy Thread (17728):
+Sending gesture nvda+tab
+IO - inputCore.InputManager.executeGesture (00:20:18.778) - RF Test Spy Thread (17728):
+Input: kb(desktop):NVDA+tab
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:18.779) - MainThread (11708):
+Cancelling
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:18.780) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+IO - speech.speech.speak (00:20:18.782) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)', 'document', 'focused', 'read only']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:18.784) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', 'focused  ', 'read only  ', IndexCommand(7)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:18.784) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', 'focused  ', 'read only  ', IndexCommand(7)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:18.784) - speech spy synth driver (11508):
+Speech IndexCommand reached: 7, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:18.785) - speech spy synth driver (11508):
+Before notify post_speech
+IO - braille.BrailleBuffer.update (00:20:18.785) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) document focused read only']
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:18.785) - speech spy synth driver (11508):
+Appending to speech spy at index 7
+IO - braille.BrailleHandler.update (00:20:18.786) - MainThread (11708):
+Braille window dots: 6 6 1345 1236 145 1 - 6 12 1235 135 2456 234 15 1235 - 6 2345 15 234 2345 - 6 14 1 234 15 - 5 126 3456 1 145 12 145 124 14 124 124 1245 145 145 15 124 1 12 125 1245 245 245 5 345 - 145 135 14 136 134 15 1345 2345 - 124 135 14 136 234 15 145 - 1235 15 1 145 - 135 1345 123 13456 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:18.786) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaBraille (00:20:18.786) - MainThread (11708):
+Appending to braille spy at index 3
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:18.880) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:18.881) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.884) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 0.09872499999619322
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:18.984) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 0.19912299999850802
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:19.084) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 0.2993600999980117
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:19.097) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:19.185) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 0.3997507999956724
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:19.285) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 0.4999954000013531
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:19.385) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 0.6002757000023848
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:19.485) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 0.7003660999980639
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:19.586) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 0.800687700000708
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:19.686) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 0.9009135000014794
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:19.786) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 7, nextIndex: 8) elapsedSinceLastSpeech: 1.0014370999997482
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:19.790) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 8) elapsedSinceLastSpeech: 1.0052780999976676
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:19.805) - RF Test Spy Thread (17728):
+Sending gesture alt+d
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:19.806) - MainThread (11708):
+Cancelling
+IO - inputCore.InputManager.executeGesture (00:20:19.806) - RF Test Spy Thread (17728):
+Input: kb(desktop):alt+d
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:19.818) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+IO - speech.speech.speak (00:20:19.892) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome', 'region', CancellableSpeech (still valid)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:19.893) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', 'region  ', IndexCommand(8)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:19.893) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', 'region  ', IndexCommand(8)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:19.894) - speech spy synth driver (11508):
+Speech IndexCommand reached: 8, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:19.894) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:19.894) - speech spy synth driver (11508):
+Appending to speech spy at index 8
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:19.894) - speech spy synth driver (11508):
+After post_speech notify
+IO - speech.speech.speak (00:20:19.914) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'tool bar', CancellableSpeech (still valid)]
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:19.919) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+IO - speech.speech.speak (00:20:19.930) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Address and search bar', 'edit', 'Press tab then enter to ask AI Mode', 'Ctrl+', CharacterModeCommand(True), 'L', CharacterModeCommand(False), CancellableSpeech (still valid), 'selected file:///C:/Users/adm/AppData/Local/Temp/tmpg1iovrsm/test.html']
+DEBUG - config.featureFlag._validateConfig_featureFlag (00:20:19.956) - MainThread (11708):
+Validating feature flag: DEFAULT, optionsEnum: BoolFlag, behaviorOfDefault: ENABLED
+IO - braille.BrailleBuffer.update (00:20:19.956) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) - Google Chrome wnd ', 'NVDA Browser Test Case (1424636674456128700) - Google Chrome rgn ', 'tlbar ', 'Address and search bar edt Press tab then enter to ask AI Mode Ctrl+L ', 'file:///C:/Users/adm/AppData/Local/Temp/tmpg1iovrsm/test.html ']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:19.958) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'tool bar  ', IndexCommand(9)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:19.959) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'tool bar  ', IndexCommand(9)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:19.959) - speech spy synth driver (11508):
+Speech IndexCommand reached: 9, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:19.960) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:19.960) - speech spy synth driver (11508):
+Appending to speech spy at index 9
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:19.960) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:19.974) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Address and search bar  ', 'edit  ', 'Press tab then enter to ask AI Mode  ', 'Ctrl plus  ', CharacterModeCommand(True), 'L', CharacterModeCommand(False), 'selected file: slash  slash  slash C: slash Users slash adm slash App Data slash Local slash Temp slash tmpg 1iovrsm slash test dot html  ', IndexCommand(10)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:19.975) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Address and search bar  ', 'edit  ', 'Press tab then enter to ask AI Mode  ', 'Ctrl plus  ', CharacterModeCommand(True), 'L', CharacterModeCommand(False), 'selected file: slash  slash  slash C: slash Users slash adm slash App Data slash Local slash Temp slash tmpg 1iovrsm slash test dot html  ', IndexCommand(10)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:19.975) - speech spy synth driver (11508):
+Speech IndexCommand reached: 10, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:19.976) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:19.976) - speech spy synth driver (11508):
+Appending to speech spy at index 10
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:19.976) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:20.020) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.023) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.04662419999658596
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.123) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.14689679999719374
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.223) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.24737819999427302
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:20.287) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.324) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.34791089999635005
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.424) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.44828949999646284
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.525) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.5486596999980975
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.625) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.6491876000000047
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.725) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.74939330000052
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.826) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.8495229999971343
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:20.926) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 0.9498584999964805
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:21.026) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 8, nextIndex: 11) elapsedSinceLastSpeech: 1.0502106999992975
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:21.052) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 11) elapsedSinceLastSpeech: 1.0762886999946204
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:21.070) - RF Test Spy Thread (17728):
+Sending gesture control+F6
+IO - inputCore.InputManager.executeGesture (00:20:21.071) - RF Test Spy Thread (17728):
+Input: kb(desktop):control+f6
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:21.071) - MainThread (11708):
+Cancelling
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:21.083) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:21.184) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+IO - speech.speech.speak (00:20:21.195) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)', 'document', CancellableSpeech (still valid)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:21.196) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', IndexCommand(11)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:21.196) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', IndexCommand(11)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:21.196) - speech spy synth driver (11508):
+Speech IndexCommand reached: 11, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:21.197) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:21.197) - speech spy synth driver (11508):
+Appending to speech spy at index 11
+IO - speech.speech.speak (00:20:21.198) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Before Test Case Marker']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:21.198) - speech spy synth driver (11508):
+After post_speech notify
+IO - braille.BrailleBuffer.update (00:20:21.202) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) - Google Chrome wnd ', 'NVDA Browser Test Case (1424636674456128700) doc ', 'Before Test Case Marker ']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:21.204) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(12)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:21.204) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(12)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:21.205) - speech spy synth driver (11508):
+Speech IndexCommand reached: 12, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:21.205) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:21.205) - speech spy synth driver (11508):
+Appending to speech spy at index 12
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:21.205) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:21.285) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:21.303) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 0.09716560000379104
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:21.403) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 0.1974640000044019
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:21.503) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 0.2978761000049417
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:21.506) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:21.604) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 0.39827270000387216
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:21.704) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 0.49867100000119535
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:21.804) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 0.5990155000035884
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:21.905) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 0.6995211000030395
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.005) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 0.7998994000008679
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.106) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 0.9005048000035458
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.206) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 11, nextIndex: 13) elapsedSinceLastSpeech: 1.0006665000037174
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.210) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 13) elapsedSinceLastSpeech: 1.0047120000017458
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:22.213) - RF Test Spy Thread (17728):
+Sending gesture upArrow
+IO - inputCore.InputManager.executeGesture (00:20:22.214) - RF Test Spy Thread (17728):
+Input: kb(desktop):upArrow
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:22.214) - MainThread (11708):
+Cancelling
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:22.214) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+IO - speech.speech.speak (00:20:22.216) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Before Test Case Marker']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:22.217) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(13)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:22.217) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(13)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:22.218) - speech spy synth driver (11508):
+Speech IndexCommand reached: 13, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:22.218) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:22.219) - speech spy synth driver (11508):
+Appending to speech spy at index 13
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:22.219) - speech spy synth driver (11508):
+After post_speech notify
+IO - braille.BrailleBuffer.update (00:20:22.273) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) - Google Chrome wnd ', 'NVDA Browser Test Case (1424636674456128700) doc ', 'Before Test Case Marker ']
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:22.315) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:22.316) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.331) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 0.11192740000115009
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.431) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 0.2123167999961879
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.532) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 0.3128123999995296
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:22.534) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.632) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 0.41324660000100266
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.732) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 0.51365000000078
+IO - braille.BrailleHandler.update (00:20:22.786) - MainThread (11708):
+Braille window dots: 127 15 124 135 1235 15 - 6 2345 15 234 2345 - 6 14 1 234 15 - 6 134 1 1235 13 15 1235 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaBraille (00:20:22.787) - MainThread (11708):
+Appending to braille spy at index 4
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.832) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 0.613734899998235
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:22.933) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 0.714087100001052
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.033) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 0.8144810000012512
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.133) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 0.9146474000008311
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.234) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 13, nextIndex: 14) elapsedSinceLastSpeech: 1.0149953000000096
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.261) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 14) elapsedSinceLastSpeech: 1.0422727999975905
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:23.277) - RF Test Spy Thread (17728):
+Sending gesture control+home
+IO - inputCore.InputManager.executeGesture (00:20:23.278) - RF Test Spy Thread (17728):
+Input: kb(desktop):control+home
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:23.279) - MainThread (11708):
+Cancelling
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:23.279) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+IO - speech.speech.speak (00:20:23.281) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Before Test Case Marker']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:23.281) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(14)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:23.282) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(14)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:23.282) - speech spy synth driver (11508):
+Speech IndexCommand reached: 14, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:23.282) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:23.283) - speech spy synth driver (11508):
+Appending to speech spy at index 14
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:23.283) - speech spy synth driver (11508):
+After post_speech notify
+IO - braille.BrailleBuffer.update (00:20:23.333) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) - Google Chrome wnd ', 'NVDA Browser Test Case (1424636674456128700) doc ', 'Before Test Case Marker ']
+IO - braille.BrailleHandler.update (00:20:23.334) - MainThread (11708):
+Braille window dots: 127 15 124 135 1235 15 - 6 2345 15 234 2345 - 6 14 1 234 15 - 6 134 1 1235 13 15 1235 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:23.380) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:23.380) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.399) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 0.1167799999966519
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.500) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 0.21719039999879897
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:23.591) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.600) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 0.31730229999811854
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.701) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 0.4178652999980841
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.801) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 0.5180442999990191
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:23.901) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 0.6184953999982099
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.002) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 0.7190050999997766
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.102) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 0.8191821000000346
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.203) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 0.9198401999965427
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.303) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 14, nextIndex: 15) elapsedSinceLastSpeech: 1.0199461999945925
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.307) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 15) elapsedSinceLastSpeech: 1.0240861999991466
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:24.309) - RF Test Spy Thread (17728):
+Sending gesture numpad8
+IO - inputCore.InputManager.executeGesture (00:20:24.310) - RF Test Spy Thread (17728):
+Input: kb(desktop):numpad8
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:24.311) - MainThread (11708):
+Cancelling
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:24.311) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+IO - braille.BrailleBuffer.update (00:20:24.316) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) doc ', 'Before Test Case Marker ']
+IO - braille.BrailleHandler.update (00:20:24.317) - MainThread (11708):
+Braille window dots: 127 15 124 135 1235 15 - 6 2345 15 234 2345 - 6 14 1 234 15 - 6 134 1 1235 13 15 1235 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+IO - speech.speech.speak (00:20:24.319) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Before Test Case Marker']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:24.319) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(15)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:24.320) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(15)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:24.320) - speech spy synth driver (11508):
+Speech IndexCommand reached: 15, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:24.320) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:24.320) - speech spy synth driver (11508):
+Appending to speech spy at index 15
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:24.320) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:24.412) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:24.412) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.415) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.0945034000033047
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.515) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.19478800000069896
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.616) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.2956259000056889
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:24.620) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.717) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.39609740000014426
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.817) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.49660270000458695
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:24.918) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.5974217000039062
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:25.019) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.6982354000065243
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:25.119) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.7985965000043507
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:25.219) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.8990634000001592
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:25.320) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 0.9993790000007721
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:25.420) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 15, nextIndex: 16) elapsedSinceLastSpeech: 1.099640600004932
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:25.444) - RF Test Spy Thread (17728):
+Sending gesture downArrow
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:25.446) - MainThread (11708):
+Cancelling
+IO - inputCore.InputManager.executeGesture (00:20:25.446) - RF Test Spy Thread (17728):
+Input: kb(desktop):downArrow
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:25.447) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+IO - speech.speech.speak (00:20:25.449) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Test page load complete']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:25.449) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Test page load complete  ', IndexCommand(16)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:25.450) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Test page load complete  ', IndexCommand(16)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:25.450) - speech spy synth driver (11508):
+Speech IndexCommand reached: 16, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:25.450) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:25.451) - speech spy synth driver (11508):
+Appending to speech spy at index 16
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:25.451) - speech spy synth driver (11508):
+After post_speech notify
+IO - braille.BrailleBuffer.update (00:20:25.465) - MainThread (11708):
+Braille regions text: ['Test page load complete ']
+IO - braille.BrailleHandler.update (00:20:25.466) - MainThread (11708):
+Braille window dots: 23457 15 234 2345 - 1234 1 1245 15 - 123 135 1 145 - 14 135 134 1234 123 15 2345 15 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaBraille (00:20:25.467) - MainThread (11708):
+Appending to braille spy at index 5
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:25.548) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:25.548) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:25.663) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 17) elapsedSinceLastSpeech: 0.2122693999990588
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:25.756) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:25.763) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 17) elapsedSinceLastSpeech: 0.3126697999978205
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:25.864) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 17) elapsedSinceLastSpeech: 0.4131837999957497
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:25.964) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 17) elapsedSinceLastSpeech: 0.5135795999958646
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.064) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 17) elapsedSinceLastSpeech: 0.6136850999973831
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.165) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 17) elapsedSinceLastSpeech: 0.7140684999976656
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.265) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 17) elapsedSinceLastSpeech: 0.8143482000014046
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.366) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 17) elapsedSinceLastSpeech: 0.9147297000017716
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.466) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 17) elapsedSinceLastSpeech: 1.0151642999990145
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:26.470) - RF Test Spy Thread (17728):
+Sending gesture NVDA+UpArrow
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:26.471) - MainThread (11708):
+Cancelling
+IO - inputCore.InputManager.executeGesture (00:20:26.472) - RF Test Spy Thread (17728):
+Input: kb(desktop):NVDA+upArrow
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:26.472) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+IO - speech.speech.speak (00:20:26.474) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Test page load complete']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:26.474) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Test page load complete  ', IndexCommand(17)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:26.475) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Test page load complete  ', IndexCommand(17)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:26.475) - speech spy synth driver (11508):
+Speech IndexCommand reached: 17, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:26.475) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:26.475) - speech spy synth driver (11508):
+Appending to speech spy at index 17
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:26.475) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:26.573) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:26.573) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.589) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 0.11328250000224216
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.689) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 0.21364919999905396
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:26.776) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.789) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 0.3139329999976326
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.890) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 0.4143015000008745
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:26.990) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 0.5146822000024258
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.091) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 0.6151924000005238
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.191) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 0.7155902000013157
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.291) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 0.8159367999978713
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.392) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 0.9168155000006664
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.493) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 17, nextIndex: 18) elapsedSinceLastSpeech: 1.0173967000009725
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.497) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 18) elapsedSinceLastSpeech: 1.0216848999989452
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:27.499) - RF Test Spy Thread (17728):
+Sending gesture NVDA+space
+IO - inputCore.InputManager.executeGesture (00:20:27.500) - RF Test Spy Thread (17728):
+Input: kb(desktop):NVDA+space
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:27.501) - MainThread (11708):
+Cancelling
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:27.501) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+IO - braille.BrailleBuffer.update (00:20:27.517) - MainThread (11708):
+Braille regions text: ['paragraph']
+IO - braille.BrailleHandler.update (00:20:27.517) - MainThread (11708):
+Braille window dots: 1234 1 1235 1 1245 1235 1 1234 125 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaBraille (00:20:27.518) - MainThread (11708):
+Appending to braille spy at index 6
+DEBUG - NVDAObjects.NVDAObject._get_placeholder (00:20:27.521) - MainThread (11708):
+Potential unimplemented child class: <NVDAObjects.UIA.UIA object at 0x000002D0827EE140>
+IO - braille.BrailleBuffer.update (00:20:27.529) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) - Google Chrome wnd ', 'NVDA Browser Test Case (1424636674456128700) doc ', '￼ ']
+IO - braille.BrailleHandler.update (00:20:27.530) - MainThread (11708):
+Braille window dots: 3 12567 1346 124 124 124 14 3 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaBraille (00:20:27.530) - MainThread (11708):
+Appending to braille spy at index 7
+IO - speech.speech.speak (00:20:27.540) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Focus mode']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:27.540) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Focus mode  ', IndexCommand(18)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:27.541) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Focus mode  ', IndexCommand(18)]
+IO - braille.BrailleBuffer.update (00:20:27.541) - MainThread (11708):
+Braille regions text: ['Focus mode']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:27.541) - speech spy synth driver (11508):
+Speech IndexCommand reached: 18, notifying synthDriverHandler
+IO - braille.BrailleHandler.update (00:20:27.542) - MainThread (11708):
+Braille window dots: 6 124 135 14 136 234 - 134 135 145 15 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:27.542) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaBraille (00:20:27.542) - MainThread (11708):
+Appending to braille spy at index 8
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:27.542) - speech spy synth driver (11508):
+Appending to speech spy at index 18
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:27.543) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:27.602) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:27.602) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.622) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.07935400000133086
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.723) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.1798800000033225
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.823) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.28036290000454755
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:27.847) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:27.923) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.38074870000127703
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.024) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.48123219999979483
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.124) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.5815106000009109
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.224) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.681868100000429
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.325) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.7823037000052864
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.425) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.882634000001417
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.526) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 0.9832380000007106
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.626) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 18, nextIndex: 19) elapsedSinceLastSpeech: 1.0835555000012391
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.648) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: None, nextIndex: 19) elapsedSinceLastSpeech: 1.1054203000021516
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:28.651) - RF Test Spy Thread (17728):
+Sending gesture tab
+IO - inputCore.InputManager.executeGesture (00:20:28.651) - RF Test Spy Thread (17728):
+Input: kb(desktop):tab
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:28.652) - MainThread (11708):
+Cancelling
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:28.653) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+DEBUG - utils.urlUtils.getLinkType (00:20:28.715) - MainThread (11708):
+getLinkType: file:///C:/Users/adm/AppData/Local/Temp/tmpg1iovrsm/test.html# is an internal link.
+DEBUG - utils.urlUtils.getLinkType (00:20:28.744) - MainThread (11708):
+getLinkType: file:///C:/Users/adm/AppData/Local/Temp/tmpg1iovrsm/test.html# is an internal link.
+IO - speech.speech.speak (00:20:28.748) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'highlighted', CancellableSpeech (still valid)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:28.748) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'highlighted  ', IndexCommand(19)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:28.749) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'highlighted  ', IndexCommand(19)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:28.749) - speech spy synth driver (11508):
+Speech IndexCommand reached: 19, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:28.749) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:28.749) - speech spy synth driver (11508):
+Appending to speech spy at index 19
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:28.750) - speech spy synth driver (11508):
+After post_speech notify
+IO - speech.speech.speak (00:20:28.751) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Kangaroo', 'link', CancellableSpeech (still valid)]
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:28.753) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+IO - braille.BrailleBuffer.update (00:20:28.757) - MainThread (11708):
+Braille regions text: ['NVDA Browser Test Case (1424636674456128700) - Google Chrome wnd ', 'NVDA Browser Test Case (1424636674456128700) doc ', 'hlght ', 'Kangaroo lnk']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:28.758) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Kangaroo  ', 'link  ', IndexCommand(20)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:28.758) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Kangaroo  ', 'link  ', IndexCommand(20)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:28.759) - speech spy synth driver (11508):
+Speech IndexCommand reached: 20, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:28.759) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:28.759) - speech spy synth driver (11508):
+Appending to speech spy at index 20
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:28.759) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:28.854) - RF Test Spy Thread (17728):
+Core sleeping
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.857) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 0.0977190999983577
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:28.958) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 0.19834979999723146
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:29.058) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 0.29874410000047646
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:29.070) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:29.158) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 0.399132999998983
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:29.259) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 0.49976459999743383
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:29.359) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 0.5999396999977762
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:29.460) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 0.7003871999986586
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:29.560) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 0.8007600999990245
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:29.660) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 0.9011861999970279
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._hasSpeechFinished (00:20:29.761) - RF Test Spy Thread (17728):
+started: True (speechStartedIndex: 19, nextIndex: 21) elapsedSinceLastSpeech: 1.001608500002476
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:29.828) - RF Test Spy Thread (17728):
+Sending gesture control+w
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._dump_speech_to_log (00:20:29.829) - MainThread (11708):
+dump_speech_to_log.
+IO - inputCore.InputManager.executeGesture (00:20:29.829) - RF Test Spy Thread (17728):
+Input: kb(desktop):control+w
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:29.842) - RF Test Spy Thread (17728):
+Waiting for gesture to be processed
+DEBUGWARNING - NVDAObjects.IAccessible.IAccessible._get_IA2Attributes (00:20:29.890) - MainThread (11708):
+IAccessibleObject.attributes COMError (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+DEBUGWARNING - NVDAObjects.IAccessible.IAccessible._get_IA2States (00:20:29.891) - MainThread (11708):
+could not get IAccessible2 states
+Traceback (most recent call last):
+  File "NVDAObjects\IAccessible\__init__.py", line 2222, in _get_IA2States
+    return self.IAccessibleObject.states
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ctypes.COMError: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+DEBUG - utils.urlUtils.getLinkType (00:20:29.895) - MainThread (11708):
+getLinkType: Either targetUrl None or rootUrl None is empty.
+DEBUGWARNING - RPC process 2024 (WindowsTerminal.exe) (00:20:29.897) - Dummy-13 (12972):
+Thread 18284, build\x86_64\remote\ia2Support.cpp, IA2Support_inProcess_initialize, 177:
+Not installing IA2 support as  process is suspendable
+
+DEBUG - NVDAObjects.IAccessible.IAccessible._get__IA2Relations (00:20:29.908) - MainThread (11708):
+Unable to get nRelations
+INFO - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._devInfoToLog (00:20:29.908) - MainThread (11708):
+Developer info for navigator object:
+name: None
+role: LINK
+processID: 9016
+roleText: None
+states: LINKED, FOCUSABLE, FOCUSED, DEFUNCT
+isFocusable: True
+hasFocus: True
+Python object: <NVDAObjects.IAccessible.ia2Web.Ia2Web object at 0x000002D082842210>
+Python class mro: (<class 'NVDAObjects.IAccessible.ia2Web.Ia2Web'>, <class 'NVDAObjects.IAccessible.IAccessible'>, <class 'NVDAObjects.window.Window'>, <class 'NVDAObjects.NVDAObject'>, <class 'documentBase.TextContainerObject'>, <class 'baseObject.ScriptableObject'>, <class 'baseObject.AutoPropertyObject'>, <class 'garbageHandler.TrackedObject'>, <class 'object'>)
+description: None
+location: None
+value: None
+TextInfo: <class 'NVDAObjects.IAccessible.IA2TextTextInfo'>
+appModule: AppModule(appModuleHandler, appName='chrome', processID=9016)
+appModule.productName: 'Google Chrome'
+appModule.productVersion: '152.0.7977.77'
+appModule.helperLocalBindingHandle: c_void_p(3095853173008)
+appModule.appArchitecture: 'AMD64'
+windowHandle: 5769200
+windowClassName: 'Chrome_RenderWidgetHostHWND'
+windowControlID: 0
+windowStyle: 0
+extendedWindowStyle: 0
+windowThreadID: 17600
+windowText: ''
+displayText: exception: cannot unpack non-iterable NoneType object
+IAccessibleObject: <POINTER(IAccessible2) ptr=0x2d0cf22df18 at 2d081691950>
+IAccessibleChildID: 0
+IAccessible event parameters: windowHandle=5769200, objectID=-4, childID=-47431
+IAccessible accName: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible accRole: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible accState: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible accDescription: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible accValue: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 windowHandle: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 uniqueID: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 role: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 states: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 attributes: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 relations: exception: 
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._dump_speech_to_log (00:20:29.909) - MainThread (11708):
+All speech:
+[[''], [LangChangeCommand ('en'), 'Administrateur : Windows Power Shell  ', IndexCommand(1)], [LangChangeCommand ('en'), 'Windows Power Shell  ', 'terminal  ', 'Administrateur : Windows Power Shell  ', IndexCommand(2)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', 'window  ', IndexCommand(3)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', IndexCommand(4)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(5)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', IndexCommand(6)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', 'focused  ', 'read only  ', IndexCommand(7)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', 'region  ', IndexCommand(8)], [LangChangeCommand ('en'), 'tool bar  ', IndexCommand(9)], [LangChangeCommand ('en'), 'Address and search bar  ', 'edit  ', 'Press tab then enter to ask AI Mode  ', 'Ctrl plus  ', CharacterModeCommand(True), 'L', CharacterModeCommand(False), 'selected file: slash  slash  slash C: slash Users slash adm slash App Data slash Local slash Temp slash tmpg 1iovrsm slash test dot html  ', IndexCommand(10)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', IndexCommand(11)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(12)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(13)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(14)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(15)], [LangChangeCommand ('en'), 'Test page load complete  ', IndexCommand(16)], [LangChangeCommand ('en'), 'Test page load complete  ', IndexCommand(17)], [LangChangeCommand ('en'), 'Focus mode  ', IndexCommand(18)], [LangChangeCommand ('en'), 'highlighted  ', IndexCommand(19)], [LangChangeCommand ('en'), 'Kangaroo  ', 'link  ', IndexCommand(20)]]
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._dump_speech_to_log (00:20:29.909) - MainThread (11708):
+dump_speech_to_log.
+INFO - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._devInfoToLog (00:20:29.909) - MainThread (11708):
+Developer info for navigator object:
+name: None
+role: LINK
+processID: 9016
+roleText: None
+states: LINKED, FOCUSABLE, FOCUSED, DEFUNCT
+isFocusable: True
+hasFocus: True
+Python object: <NVDAObjects.IAccessible.ia2Web.Ia2Web object at 0x000002D082842210>
+Python class mro: (<class 'NVDAObjects.IAccessible.ia2Web.Ia2Web'>, <class 'NVDAObjects.IAccessible.IAccessible'>, <class 'NVDAObjects.window.Window'>, <class 'NVDAObjects.NVDAObject'>, <class 'documentBase.TextContainerObject'>, <class 'baseObject.ScriptableObject'>, <class 'baseObject.AutoPropertyObject'>, <class 'garbageHandler.TrackedObject'>, <class 'object'>)
+description: None
+location: None
+value: None
+TextInfo: <class 'NVDAObjects.IAccessible.IA2TextTextInfo'>
+appModule: AppModule(appModuleHandler, appName='chrome', processID=9016)
+appModule.productName: 'Google Chrome'
+appModule.productVersion: '152.0.7977.77'
+appModule.helperLocalBindingHandle: c_void_p(3095853173008)
+appModule.appArchitecture: 'AMD64'
+windowHandle: 5769200
+windowClassName: 'Chrome_RenderWidgetHostHWND'
+windowControlID: 0
+windowStyle: 0
+extendedWindowStyle: 0
+windowThreadID: 17600
+windowText: ''
+displayText: exception: cannot unpack non-iterable NoneType object
+IAccessibleObject: <POINTER(IAccessible2) ptr=0x2d0cf22df18 at 2d081691950>
+IAccessibleChildID: 0
+IAccessible event parameters: windowHandle=5769200, objectID=-4, childID=-47431
+IAccessible accName: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible accRole: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible accState: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible accDescription: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible accValue: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 windowHandle: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 uniqueID: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 role: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 states: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 attributes: exception: (-2147467259, 'Erreur non spécifiée', (None, None, None, 0, None))
+IAccessible2 relations: exception: 
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._dump_speech_to_log (00:20:29.909) - MainThread (11708):
+All speech:
+[[''], [LangChangeCommand ('en'), 'Administrateur : Windows Power Shell  ', IndexCommand(1)], [LangChangeCommand ('en'), 'Windows Power Shell  ', 'terminal  ', 'Administrateur : Windows Power Shell  ', IndexCommand(2)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', 'window  ', IndexCommand(3)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', IndexCommand(4)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(5)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', IndexCommand(6)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', 'focused  ', 'read only  ', IndexCommand(7)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700) - Google Chrome  ', 'region  ', IndexCommand(8)], [LangChangeCommand ('en'), 'tool bar  ', IndexCommand(9)], [LangChangeCommand ('en'), 'Address and search bar  ', 'edit  ', 'Press tab then enter to ask AI Mode  ', 'Ctrl plus  ', CharacterModeCommand(True), 'L', CharacterModeCommand(False), 'selected file: slash  slash  slash C: slash Users slash adm slash App Data slash Local slash Temp slash tmpg 1iovrsm slash test dot html  ', IndexCommand(10)], [LangChangeCommand ('en'), 'NVDA Browser Test Case (1424636674456128700)  ', 'document  ', IndexCommand(11)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(12)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(13)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(14)], [LangChangeCommand ('en'), 'Before Test Case Marker  ', IndexCommand(15)], [LangChangeCommand ('en'), 'Test page load complete  ', IndexCommand(16)], [LangChangeCommand ('en'), 'Test page load complete  ', IndexCommand(17)], [LangChangeCommand ('en'), 'Focus mode  ', IndexCommand(18)], [LangChangeCommand ('en'), 'highlighted  ', IndexCommand(19)], [LangChangeCommand ('en'), 'Kangaroo  ', 'link  ', IndexCommand(20)]]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:29.909) - MainThread (11708):
+Cancelling
+DEBUG - browseMode.BrowseModeDocumentTreeInterceptor.terminate (00:20:29.928) - MainThread (11708):
+Saving caret position Offsets(startOffset=55, endOffset=55) for document at file:///C:/Users/adm/AppData/Local/Temp/tmpg1iovrsm/test.html
+DEBUG - treeInterceptorHandler.killTreeInterceptor (00:20:29.930) - MainThread (11708):
+Killed treeInterceptor: <NVDAObjects.IAccessible.chromium.ChromeVBuf object at 0x000002D085D8D940>
+IO - speech.speech.speak (00:20:29.935) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Administrateur\xa0: Windows PowerShell', CancellableSpeech (still valid)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:29.936) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Administrateur : Windows Power Shell  ', IndexCommand(21)]
+DEBUG - NVDAObjects.NVDAObject._get_placeholder (00:20:29.936) - MainThread (11708):
+Potential unimplemented child class: <NVDAObjects.IAccessible.IAccessible object at 0x000002D0827A69F0>
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:29.937) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Administrateur : Windows Power Shell  ', IndexCommand(21)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:29.937) - speech spy synth driver (11508):
+Speech IndexCommand reached: 21, notifying synthDriverHandler
+IO - braille.BrailleBuffer.update (00:20:29.937) - MainThread (11708):
+Braille regions text: ['Administrateur\xa0: Windows PowerShell']
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:29.938) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:29.939) - speech spy synth driver (11508):
+Appending to speech spy at index 21
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:29.939) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:29.943) - RF Test Spy Thread (17728):
+Waiting for core to sleep, to ensure all resulting events have been processed.
+IO - speech.speech.speak (00:20:29.993) - MainThread (11708):
+Speaking [LangChangeCommand ('en'), 'Windows PowerShell', 'terminal', 'Administrateur\xa0: Windows PowerShell', CancellableSpeech (still valid)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.speak (00:20:29.994) - MainThread (11708):
+Sequence: [LangChangeCommand ('en'), 'Windows Power Shell  ', 'terminal  ', 'Administrateur : Windows Power Shell  ', IndexCommand(22)]
+DEBUG - NVDAObjects.NVDAObject._get_placeholder (00:20:29.995) - MainThread (11708):
+Potential unimplemented child class: <NVDAObjects.IAccessible.IAccessible object at 0x000002D0827A69F0>
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeechSequence (00:20:29.995) - speech spy synth driver (11508):
+Sequence: [LangChangeCommand ('en'), 'Windows Power Shell  ', 'terminal  ', 'Administrateur : Windows Power Shell  ', IndexCommand(22)]
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doIndexReached (00:20:29.995) - speech spy synth driver (11508):
+Speech IndexCommand reached: 22, notifying synthDriverHandler
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:29.996) - speech spy synth driver (11508):
+Before notify post_speech
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib._onNvdaSpeech (00:20:29.996) - speech spy synth driver (11508):
+Appending to speech spy at index 22
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doNotifySequenceProcessed (00:20:29.996) - speech spy synth driver (11508):
+After post_speech notify
+DEBUG - NVDAObjects.NVDAObject._get_placeholder (00:20:29.997) - MainThread (11708):
+Potential unimplemented child class: <NVDAObjects.Dynamic__DiffBasedWinTerminalUIAXamlEditableTextEditableTextWithAutoSelectDetectionUIA object at 0x000002D0827EE7A0>
+IO - braille.BrailleBuffer.update (00:20:30.007) - MainThread (11708):
+Braille regions text: ['                                                                                                                         ']
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.NVDASpyLib.emulateKeyPress (00:20:30.044) - RF Test Spy Thread (17728):
+Core sleeping
+WARNING - stdout (00:20:30.051) - RF Test Spy Thread (17728):
+Robot Framework remote server at 127.0.0.1:8270 stopped.
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._doDoneSpeaking (00:20:30.308) - speech spy synth driver (11508):
+Done speaking, notifying synthDriverHandler
+INFO - core.main (00:20:30.633) - MainThread (11708):
+Exiting
+DEBUG - core.triggerNVDAExit (00:20:30.633) - MainThread (11708):
+_doShutdown has been queued
+DEBUG - core.main (00:20:30.634) - MainThread (11708):
+NVDA not already exiting, hit catch-all exit trigger. This likely indicates NVDA is exiting due to WM_QUIT.
+DEBUG - core._terminate (00:20:30.638) - MainThread (11708):
+Terminating watchdog
+DEBUG - core._terminate (00:20:30.638) - MainThread (11708):
+Terminating globalPluginHandler
+DEBUG - external:globalPlugins.speechSpyGlobalPlugin.SystemTestSpyServer.terminate (00:20:30.638) - MainThread (11708):
+Terminating the SystemTestSpyServer
+DEBUG - core._terminate (00:20:30.639) - MainThread (11708):
+Terminating _remoteClient
+DEBUG - _remoteClient.terminate (00:20:30.639) - MainThread (11708):
+Remote Access not running.
+DEBUG - core._closeAllWindows (00:20:30.639) - MainThread (11708):
+destroying system tray icon and menu
+DEBUG - core._closeAllWindows (00:20:30.641) - MainThread (11708):
+destroying main frame during exit process
+DEBUG - core._terminate (00:20:30.641) - MainThread (11708):
+Terminating gui
+DEBUG - core._terminate (00:20:30.641) - MainThread (11708):
+Terminating _magnifier
+DEBUG - _magnifier.terminate (00:20:30.641) - MainThread (11708):
+Terminating magnifier
+DEBUG - _magnifier.stop (00:20:30.641) - MainThread (11708):
+Attempted to stop magnifier, but it is not active.
+DEBUG - autoSettingsUtils.autoSettings.AutoSettings._saveSpecificSettings (00:20:30.641) - MainThread (11708):
+Saved settings for NVDAHighlighterSettings
+DEBUG - fileUtils.FaultTolerantFile (00:20:30.642) - MainThread (11708):
+C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.inids7on7se.tmp
+INFO - config.ConfigManager.save (00:20:30.653) - MainThread (11708):
+Base configuration saved
+DEBUG - core._doLoseFocus (00:20:30.653) - MainThread (11708):
+calling lose focus on object with focus
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:30.654) - MainThread (11708):
+Cancelling
+DEBUG - core._terminate (00:20:30.655) - MainThread (11708):
+Terminating treeInterceptorHandler
+DEBUG - core._terminate (00:20:30.655) - MainThread (11708):
+Terminating IAccessible support
+DEBUG - core._terminate (00:20:30.655) - MainThread (11708):
+Terminating UIA support
+DEBUG - UIAHandler.UIAHandler.terminate (00:20:30.655) - MainThread (11708):
+UIAHandler: Terminating enhanced event processing
+DEBUG - core._terminate (00:20:30.685) - MainThread (11708):
+Terminating Legacy winConsole support
+DEBUG - core._terminate (00:20:30.685) - MainThread (11708):
+Terminating Java Access Bridge support
+DEBUG - core._terminate (00:20:30.687) - MainThread (11708):
+Terminating app module handler
+DEBUG - core._terminate (00:20:30.687) - MainThread (11708):
+Terminating tones
+DEBUG - core._terminate (00:20:30.692) - MainThread (11708):
+Terminating touchHandler
+DEBUG - core._terminate (00:20:30.692) - MainThread (11708):
+Terminating keyboard handler
+DEBUG - core._terminate (00:20:30.692) - MainThread (11708):
+Terminating mouseHandler
+DEBUG - core._terminate (00:20:30.693) - MainThread (11708):
+Terminating inputCore
+DEBUG - core._terminate (00:20:30.693) - MainThread (11708):
+Terminating screenCurtain
+DEBUG - screenCurtain._screenCurtain.ScreenCurtain.disable (00:20:30.693) - MainThread (11708):
+ScreenCurtain is already disabled
+DEBUG - core._terminate (00:20:30.693) - MainThread (11708):
+Terminating vision
+DEBUG - visionEnhancementProviders.NVDAHighlighter.NVDAHighlighter.terminate (00:20:30.693) - MainThread (11708):
+Terminating NVDAHighlighter
+DEBUG - core._terminate (00:20:30.697) - MainThread (11708):
+Terminating brailleInput
+DEBUG - core._terminate (00:20:30.697) - MainThread (11708):
+Terminating braille
+DEBUG - core._terminate (00:20:30.698) - MainThread (11708):
+Terminating brailleTables
+DEBUG - core._terminate (00:20:30.698) - MainThread (11708):
+Terminating speech
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver.cancel (00:20:30.699) - MainThread (11708):
+Cancelling
+DEBUG - external:synthDrivers.speechSpySynthDriver.SpeechSpySynthDriver._processSpeech (00:20:30.934) - speech spy synth driver (11508):
+Stopping
+DEBUG - core._terminate (00:20:30.936) - MainThread (11708):
+Terminating characterProcessing
+DEBUG - core._terminate (00:20:30.936) - MainThread (11708):
+Terminating bdDetect
+DEBUG - core._terminate (00:20:30.937) - MainThread (11708):
+Terminating hwIo
+DEBUG - core._terminate (00:20:30.937) - MainThread (11708):
+Terminating asyncio event loop
+INFO - _asyncioEventLoop.terminate (00:20:30.937) - MainThread (11708):
+Terminating asyncio event loop
+DEBUG - _asyncioEventLoop.cancelAllTasks (00:20:30.938) - Thread-2 (run_forever) (2716):
+Stopping 0 tasks
+DEBUG - _asyncioEventLoop.cancelAllTasks (00:20:30.938) - Thread-2 (run_forever) (2716):
+Done stopping tasks
+DEBUG - core._terminate (00:20:30.939) - MainThread (11708):
+Terminating addonHandler
+DEBUG - core._terminate (00:20:30.939) - MainThread (11708):
+Terminating addon dataManager
+DEBUG - addonStore.dataManager.terminate (00:20:30.949) - MainThread (11708):
+terminating addonStore data manager
+DEBUG - core._terminate (00:20:30.949) - MainThread (11708):
+Terminating garbageHandler
+DEBUG - core._terminate (00:20:30.949) - MainThread (11708):
+Terminating task scheduler
+DEBUG - core._terminate (00:20:32.398) - MainThread (11708):
+Terminating nvwave
+DEBUG - core._terminate (00:20:32.399) - MainThread (11708):
+Terminating NVDAHelper
+DEBUG - core.main (00:20:32.401) - MainThread (11708):
+core done
+INFO - __main__ (00:20:32.452) - MainThread (11708):
+NVDA exit

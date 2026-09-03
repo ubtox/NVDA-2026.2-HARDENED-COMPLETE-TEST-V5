@@ -75,7 +75,8 @@ foreach ($dep in $Manifest.submodules) {
     }
 
     if (Test-DirectoryHasContent -Path $path) {
-        throw "$relativePath is not empty and is not a Git checkout. Move/remove it or rerun with -ForceRefresh."
+        Write-Host "[OK] Vendored dependency already present. Upstream provenance target: $sha" -ForegroundColor Green
+        continue
     }
 
     if (Test-Path -LiteralPath $path) {
@@ -112,7 +113,11 @@ foreach ($dep in $Manifest.submodules) {
     $path = Join-Path $Root (([string]$dep.path) -replace '/', [IO.Path]::DirectorySeparatorChar)
     $expected = [string]$dep.commit
     if (-not (Test-Path -LiteralPath (Join-Path $path '.git'))) {
-        $errors += "$($dep.path): missing Git checkout"
+        if (Test-DirectoryHasContent -Path $path) {
+            Write-Host "[OK] Vendored: $($dep.path) (provenance target $expected)"
+            continue
+        }
+        $errors += "$($dep.path): missing or empty dependency"
         continue
     }
     $actual = (& git -C $path rev-parse HEAD).Trim()

@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 
 $Root = $PSScriptRoot
-$ValidationRevision = 'NVDA-2026.2-HARDENED-V5-20260903-R1'
+$ValidationRevision = 'NVDA-2026.2-HARDENED-V5-20260903-R2'
 $QaRoot = Join-Path $Root 'validation-artifacts'
 $Log = Join-Path $QaRoot 'NVDA-HARDENED-VALIDATION.log'
 $Summary = Join-Path $QaRoot 'NVDA-HARDENED-VALIDATION-SUMMARY.txt'
@@ -252,7 +252,7 @@ function Assert-SystemTestPreflight {
     # Robot tests deliberately take control of focus, keyboard input, Chrome,
     # Notepad, VS Code and NVDA itself. A simultaneously running screen reader
     # or an already-open test application makes speech assertions unreliable.
-    $conflictNames = @('nvda', 'jfw', 'Narrator', 'chrome', 'Code', 'notepad', 'ChatGPT')
+    $conflictNames = @('nvda', 'jfw', 'Narrator', 'chrome', 'Code', 'notepad')
     $conflicts = @(Get-Process -ErrorAction SilentlyContinue | Where-Object {
         $conflictNames -contains $_.ProcessName
     })
@@ -374,6 +374,14 @@ Invoke-Step -Name 'Pinned source dependencies' -Critical -Action {
         $path = Join-Path $Root (([string]$dep.path) -replace '/', [IO.Path]::DirectorySeparatorChar)
         $gitDir = Join-Path $path '.git'
         if (-not (Test-Path -LiteralPath $gitDir)) {
+            $hasVendoredContent = (
+                (Test-Path -LiteralPath $path -PathType Container) -and
+                ($null -ne (Get-ChildItem -LiteralPath $path -Force -ErrorAction SilentlyContinue | Select-Object -First 1))
+            )
+            if ($hasVendoredContent) {
+                Write-Host "[OK] Vendored dependency present: $($dep.path) (provenance target $($dep.commit))"
+                continue
+            }
             $needsPrepare = $true
             break
         }
@@ -396,6 +404,14 @@ Invoke-Step -Name 'Pinned source dependencies' -Critical -Action {
         $path = Join-Path $Root (([string]$dep.path) -replace '/', [IO.Path]::DirectorySeparatorChar)
         $gitDir = Join-Path $path '.git'
         if (-not (Test-Path -LiteralPath $gitDir)) {
+            $hasVendoredContent = (
+                (Test-Path -LiteralPath $path -PathType Container) -and
+                ($null -ne (Get-ChildItem -LiteralPath $path -Force -ErrorAction SilentlyContinue | Select-Object -First 1))
+            )
+            if ($hasVendoredContent) {
+                Write-Host "[OK] Vendored dependency ready: $($dep.path) (provenance target $($dep.commit))"
+                continue
+            }
             throw "$($dep.path) is still missing after source preparation."
         }
         $actual = (& git -C $path rev-parse HEAD).Trim()

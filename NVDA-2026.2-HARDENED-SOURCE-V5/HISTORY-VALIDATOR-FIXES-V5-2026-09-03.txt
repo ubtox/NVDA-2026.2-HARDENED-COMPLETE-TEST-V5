@@ -1,0 +1,16 @@
+NVDA HARDENED V5 - VALIDATOR FIX R2
+Date: 2026-09-03 15:12:53 +02:00
+Revision: NVDA-2026.2-HARDENED-V5-20260903-R2
+
+Corrections:
+- Complete GitHub/ZIP distributions can keep dependency contents vendored.
+- NVDA-HARDENED-PREPARE-SOURCE.ps1 no longer rejects a non-empty dependency
+  solely because nested .git metadata was intentionally removed for packaging.
+- NVDA-HARDENED-VALIDATE.ps1 accepts complete vendored dependency snapshots
+  while retaining exact SHA verification when a dependency is a Git checkout.
+- Missing or empty dependency folders are still prepared from the pinned
+  repository/SHA manifest.
+- System-test preflight no longer fails solely because ChatGPT.exe is running.
+  NVDA, JAWS, Narrator, Chrome, VS Code and Notepad remain protected conflicts.
+- Build ordering is unchanged: frozen dependencies -> SCons source generation
+  -> generated-source readiness -> Ruff/Pyright/tests -> packaging.

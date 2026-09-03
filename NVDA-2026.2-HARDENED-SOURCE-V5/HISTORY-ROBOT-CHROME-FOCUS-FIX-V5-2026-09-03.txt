@@ -1,0 +1,23 @@
+NVDA HARDENED V5 - ROBOT CHROME FOCUS STABILITY
+Date: 2026-09-03 16:55:39 +02:00
+
+Cause observee:
+- NVDA source et SystemTestSpy demarrent correctement.
+- Le premier echec Chrome survenait apres ouverture reussie du bon onglet.
+- Le terminal PowerShell reprenait ensuite le premier plan avant les touches
+  de navigation Chrome.
+- Le teardown refusait alors de fermer l'onglet hors premier plan, provoquant
+  une accumulation d'onglets et une cascade d'echecs; les erreurs TCP 8270
+  apparaissaient plus tard comme consequences secondaires.
+
+Correction:
+- aucun changement du core NVDA;
+- ChromeLib recupere le premier plan de la fenetre de test via la primitive
+  Robot WindowsLib existante avant les touches critiques de preparation;
+- le teardown recupere egalement le premier plan avant Ctrl+W au lieu de
+  abandonner la fermeture de l'onglet;
+- le comportement fonctionnel des assertions NVDA reste inchange.
+
+Validation cible:
+- py_compile ChromeLib.py: PASS
+- Robot --include chrome_annotations: PASS

@@ -75,10 +75,10 @@ class ChromeLib:
 
 		if not windowsLib.isWindowInForeground(ChromeLib._chromeWindow):
 			builtIn.log(
-				"Unable to close tab, window not in foreground: "
-				f"({ChromeLib._chromeWindow.title} - {ChromeLib._chromeWindow.hwndVal})",
+				"Chrome test window lost foreground during teardown; recovering before closing tab.",
+				level="WARN",
 			)
-			return
+			self._ensureChromeForeground()
 
 		spy.emulateKeyPress("control+w")
 		process.wait_for_process(
@@ -170,6 +170,25 @@ class ChromeLib:
 			f.write(fileContents)
 		return filePath
 
+	def _ensureChromeForeground(self) -> None:
+		"""Ensure the current Chrome test window owns the foreground before sending test keys."""
+		chromeWindow = ChromeLib._chromeWindow
+		if chromeWindow is None:
+			raise AssertionError("Chrome test window is not initialized")
+		if windowsLib.isWindowInForeground(chromeWindow):
+			return
+		builtIn.log(
+			f"Chrome test window lost foreground; recovering: ({chromeWindow.title} - {chromeWindow.hwndVal})",
+			level="WARN",
+		)
+		targetWindowPattern = re.compile(re.escape(chromeWindow.title))
+		windowsLib.taskSwitchToItemMatching(targetWindowNamePattern=targetWindowPattern)
+		if not windowsLib.isWindowInForeground(chromeWindow):
+			raise AssertionError(
+			"Unable to restore Chrome test window foreground: "
+				f"{chromeWindow.title} - {chromeWindow.hwndVal}"
+			)
+
 	def _waitForStartMarker(self) -> bool:
 		"""Wait until the page loads and NVDA reads the start marker.
 		Depends on Chrome having focus, then tries to ensure that the document is focused and NVDA
@@ -178,6 +197,7 @@ class ChromeLib:
 		"""
 		spy = _NvdaLib.getSpyLib()
 		spy.wait_for_speech_to_finish()
+		self._ensureChromeForeground()
 		expectedAddressBarSpeech = "Address and search bar"
 		moveToAddressBarSpeech = _NvdaLib.getSpeechAfterKey("nvda+tab")  # report current focus.
 		if expectedAddressBarSpeech not in moveToAddressBarSpeech:
@@ -194,6 +214,7 @@ class ChromeLib:
 					)
 					return False
 
+		self._ensureChromeForeground()
 		afterControlF6Speech = _NvdaLib.getSpeechAfterKey("control+F6")  # focus web content, chrome shortcut.
 		if ChromeLib._testCaseTitle not in afterControlF6Speech:
 			builtIn.log(
@@ -202,6 +223,7 @@ class ChromeLib:
 			)
 			return False
 
+		self._ensureChromeForeground()
 		afterUpArrowSpeech = _NvdaLib.getSpeechAfterKey("upArrow")  # focus web content, chrome shortcut.
 		if ChromeLib._beforeMarker not in afterUpArrowSpeech:
 			builtIn.log(
@@ -210,8 +232,10 @@ class ChromeLib:
 			return False
 
 		# ensure we start at the top of the document
+		self._ensureChromeForeground()
 		_NvdaLib.getSpeechAfterKey("control+home")
 
+		self._ensureChromeForeground()
 		afterNumPad8Speech = _NvdaLib.getSpeechAfterKey("numpad8")  # report current line
 		if ChromeLib._beforeMarker not in afterNumPad8Speech:
 			builtIn.log(
@@ -272,9 +296,11 @@ class ChromeLib:
 			)
 		# Move to the loading status line, and wait for it to become complete
 		# the page has fully loaded.
+		self._ensureChromeForeground()
 		spy.emulateKeyPress("downArrow")
 		for x in range(10):
 			builtIn.sleep("0.1 seconds")
+			self._ensureChromeForeground()
 			actualSpeech = ChromeLib.getSpeechAfterKey("NVDA+UpArrow")
 			if actualSpeech == self._loadCompleteString:
 				break

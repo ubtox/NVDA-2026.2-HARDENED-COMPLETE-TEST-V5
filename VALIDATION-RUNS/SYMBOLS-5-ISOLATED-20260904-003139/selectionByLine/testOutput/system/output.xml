@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.13 on win32)" generated="2026-09-04T00:34:29.203039" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot" source="C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot">
+<suite id="s1-s1" name="symbolPronunciationTests" source="C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\symbolPronunciationTests.robot">
+<test id="s1-s1-t1" name="selectionByLine" line="57">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-04T00:34:29.672971" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-04T00:34:29.672616" elapsed="0.000476"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-04T00:34:29.673526" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-04T00:34:29.673581" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-04T00:34:29.677790" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-04T00:34:29.679294" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-04T00:34:29.683203" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-04T00:34:29.693008" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-04T00:34:29.695992" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-04T00:34:29.698951" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-04T00:34:29.702500" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-04T00:34:29.702602" level="DEBUG">Config copied</msg>
+<msg time="2026-09-04T00:34:29.702721" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-04T00:34:29.702800" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-04T00:34:29.703208" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;'.</msg>
+<msg time="2026-09-04T00:34:29.704510" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-04T00:34:29.704582" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.symbolPronunciationTests-selectionByLine-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.symbolPronunciationTests-selectionByLine-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-04T00:34:29.721131" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-04T00:34:29.721302" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-04T00:34:33.831143" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-04T00:34:34.567379" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-04T00:34:34.570400" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-04T00:34:34.572194" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-04T00:34:34.572245" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-04T00:34:34.573411" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-04T00:34:29.673304" elapsed="4.900209"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-04T00:34:34.574266" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-04T00:34:34.573815" elapsed="0.000511"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-04T00:34:34.574447" elapsed="0.001070"/>
+</kw>
+<status status="PASS" start="2026-09-04T00:34:29.671438" elapsed="4.904167"/>
+</kw>
+<kw name="Test SelByLine" owner="symbolPronunciationTests">
+<msg time="2026-09-04T00:34:34.576730" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:34.679876" level="INFO">starting notepad: C:\Users\adm\AppData\Local\Temp\tmpu0dhclro\test (5088674962768715583).txt</msg>
+<msg time="2026-09-04T00:34:34.680081" level="INFO">Starting process:
+start /wait notepad "C:\Users\adm\AppData\Local\Temp\tmpu0dhclro\test (5088674962768715583).txt"</msg>
+<msg time="2026-09-04T00:34:34.680165" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   NotepadAlias
+env:     None</msg>
+<msg time="2026-09-04T00:34:34.697451" level="DEBUG">No windows found matching the pattern: re.compile('^test \\(5088674962768715583\\)')</msg>
+<msg time="2026-09-04T00:34:35.196823" level="DEBUG">No windows found matching the pattern: re.compile('^test \\(5088674962768715583\\)')</msg>
+<msg time="2026-09-04T00:34:35.697519" level="DEBUG">No windows found matching the pattern: re.compile('^test \\(5088674962768715583\\)')</msg>
+<msg time="2026-09-04T00:34:36.197206" level="DEBUG">Found window (HWND: 3278762) (title: test (5088674962768715583).txt – Bloc-notes)</msg>
+<msg time="2026-09-04T00:34:36.198428" level="INFO">Found window (HWND: 3278762) (title: test (5088674962768715583).txt – Bloc-notes)</msg>
+<msg time="2026-09-04T00:34:36.198509" level="INFO">Foreground window title: test (5088674962768715583).txt – Bloc-notes</msg>
+<msg time="2026-09-04T00:34:36.198588" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:37.513955" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:37.516011" level="INFO">emulateKeyPress ('control+home',)</msg>
+<msg time="2026-09-04T00:34:37.722931" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 5}</msg>
+<msg time="2026-09-04T00:34:38.755081" level="INFO">get_speech_at_index_until_now (5,)</msg>
+<msg time="2026-09-04T00:34:38.756852" level="INFO">set_configValue (['documentFormatting', 'reportLineIndentation'], 0)</msg>
+<msg time="2026-09-04T00:34:38.770319" level="INFO">set_configValue (['documentFormatting', 'ignoreBlankLinesForRLI'], False)</msg>
+<msg time="2026-09-04T00:34:38.771902" level="INFO">set_configValue (['speech', 'symbolLevel'], 0)</msg>
+<msg time="2026-09-04T00:34:38.773220" level="INFO">Doing test at symbol level: SymLevel.NONE, line indentation reporting: ReportLineIndentation.OFF, ignore blank lines for line indentation reporting: False</msg>
+<msg time="2026-09-04T00:34:38.773304" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:38.786381" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:38.787987" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:38.917285" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 6}</msg>
+<msg time="2026-09-04T00:34:39.824358" level="INFO">get_speech_at_index_until_now (6,)</msg>
+<msg time="2026-09-04T00:34:39.826148" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:39.827571" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:39.828812" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:39.967724" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 7}</msg>
+<msg time="2026-09-04T00:34:40.974316" level="INFO">get_speech_at_index_until_now (7,)</msg>
+<msg time="2026-09-04T00:34:40.976076" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:40.977392" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:40.978581" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:41.096794" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 8}</msg>
+<msg time="2026-09-04T00:34:42.027852" level="INFO">get_speech_at_index_until_now (8,)</msg>
+<msg time="2026-09-04T00:34:42.042619" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:42.044419" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:42.058205" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:42.190672" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 9}</msg>
+<msg time="2026-09-04T00:34:43.119645" level="INFO">get_speech_at_index_until_now (9,)</msg>
+<msg time="2026-09-04T00:34:43.121454" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:43.140780" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:43.142315" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:43.273578" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 10}</msg>
+<msg time="2026-09-04T00:34:44.279750" level="INFO">get_speech_at_index_until_now (10,)</msg>
+<msg time="2026-09-04T00:34:44.281509" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:44.282890" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:44.284082" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:44.410901" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 11}</msg>
+<msg time="2026-09-04T00:34:45.417563" level="INFO">get_speech_at_index_until_now (11,)</msg>
+<msg time="2026-09-04T00:34:45.419501" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:45.420872" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:45.422042" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:45.541938" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 12}</msg>
+<msg time="2026-09-04T00:34:46.448077" level="INFO">get_speech_at_index_until_now (12,)</msg>
+<msg time="2026-09-04T00:34:46.450111" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:46.451497" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:46.452712" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:46.572731" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 13}</msg>
+<msg time="2026-09-04T00:34:47.501139" level="INFO">get_speech_at_index_until_now (13,)</msg>
+<msg time="2026-09-04T00:34:47.521146" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:47.523174" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:47.524374" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:47.653650" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 14}</msg>
+<msg time="2026-09-04T00:34:48.660600" level="INFO">get_speech_at_index_until_now (14,)</msg>
+<msg time="2026-09-04T00:34:48.662395" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:48.680592" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:48.682110" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:48.798795" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 15}</msg>
+<msg time="2026-09-04T00:34:49.805568" level="INFO">get_speech_at_index_until_now (15,)</msg>
+<msg time="2026-09-04T00:34:49.807325" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:49.831120" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:49.832632" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:49.963690" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 16}</msg>
+<msg time="2026-09-04T00:34:50.870170" level="INFO">get_speech_at_index_until_now (16,)</msg>
+<msg time="2026-09-04T00:34:50.897896" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:50.913744" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:50.928796" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:51.061212" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 17}</msg>
+<msg time="2026-09-04T00:34:52.068581" level="INFO">get_speech_at_index_until_now (17,)</msg>
+<msg time="2026-09-04T00:34:52.070320" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:52.071675" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:52.086920" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:52.203485" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 18}</msg>
+<msg time="2026-09-04T00:34:53.130529" level="INFO">get_speech_at_index_until_now (18,)</msg>
+<msg time="2026-09-04T00:34:53.132243" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:53.154374" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:53.169882" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:53.302112" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 19}</msg>
+<msg time="2026-09-04T00:34:54.208723" level="INFO">get_speech_at_index_until_now (19,)</msg>
+<msg time="2026-09-04T00:34:54.210502" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-04T00:34:54.211826" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-04T00:34:54.235867" level="INFO">emulateKeyPress ('shift+downArrow',)</msg>
+<msg time="2026-09-04T00:34:54.368991" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 20}</msg>
+<msg time="2026-09-04T00:34:55.280066" level="INFO">get_speech_at_index_until_now (20,)</msg>
+<msg time="2026-09-04T00:34:55.282092" level="DEBUG">Argument types are:
+&lt;class 'list'&gt;
+&lt;class 'list'&gt;</msg>
+<msg time="2026-09-04T00:34:55.282385" level="FAIL">actual vs expected. With symbolLevel SymLevel.NONE: ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim .  selected', "don't   selected", 'selected', 't-shirt   selected', 'selected', 't-shirt    selected', 't-shirt   selected', '1   2    3      4  selected', 'selected', 'selected', 'selected'] != ['Test:   selected', 'Say   selected', '(quietly)   selected', 'Hello,   selected', 'Jim .   selected', "don't    selected", 'selected', 't-shirt    selected', 'selected', 't-shirt     selected', 't-shirt    selected', '1   2    3      4   selected', 'selected', 'selected', 'selected']</msg>
+<msg time="2026-09-04T00:34:55.287025" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\symbolPronunciationTests.py", line 472, in test_selByLine
+    _doTest(
+    ~~~~~~~^
+    	navKey=Move.SEL_CARET_LINE,
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...&lt;25 lines&gt;...
+    	),
+     ^^
+    )
+    ^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\symbolPronunciationTests.py", line 657, in _doTest
+    _builtIn.should_be_equal(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+    	actual,
+     ^^^^^^^
+    	expectedSpeech,
+     ^^^^^^^^^^^^^^^
+    	msg=f"actual vs expected. With symbolLevel {symbolLevel}",
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robot\libraries\BuiltIn.py", line 680, in should_be_equal
+    self._should_be_equal(first, second, msg, values, formatter)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robot\libraries\BuiltIn.py", line 706, in _should_be_equal
+    assert_equal(first, second, msg, include_values, formatter)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robot\utils\asserts.py", line 180, in assert_equal
+    _report_inequality(first, second, "!=", msg, values, formatter)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robot\utils\asserts.py", line 237, in _report_inequality
+    raise AssertionError(msg)
+AssertionError: actual vs expected. With symbolLevel SymLevel.NONE: ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim .  selected', "don't   selected", 'selected', 't-shirt   selected', 'selected', 't-shirt    selected', 't-shirt   selected', '1   2    3      4  selected', 'selected', 'selected', 'selected'] != ['Test:   selected', 'Say   selected', '(quietly)   selected', 'Hello,   selected', 'Jim .   selected', "don't    selected", 'selected', 't-shirt    selected', 'selected', 't-shirt     selected', 't-shirt    selected', '1   2    3      4   selected', 'selected', 'selected', 'selected']</msg>
+<doc>Select line by line with symbol level 'none' and symbol level 'all'.
+Note: the number of spaces between speech content and 'selected' varies, possibly due to the number
+of times symbols are replaced.</doc>
+<status status="FAIL" start="2026-09-04T00:34:34.575752" elapsed="20.711352">actual vs expected. With symbolLevel SymLevel.NONE: ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim .  selected', "don't   selected", 'selected', 't-shirt   selected', 'selected', 't-shirt    selected', 't-shirt   selected', '1   2    3      4  selected', 'selected', 'selected', 'selected'] != ['Test:   selected', 'Say   selected', '(quietly)   selected', 'Hello,   selected', 'Jim .   selected', "don't    selected", 'selected', 't-shirt    selected', 'selected', 't-shirt     selected', 't-shirt    selected', '1   2    3      4   selected', 'selected', 'selected', 'selected']</status>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-04T00:34:55.288238" level="INFO">Foreground window title: test (5088674962768715583).txt – Bloc-notes</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-04T00:34:55.288069" elapsed="0.000235"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-04T00:34:55.288755" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.symbolPronunciationTests-selectionByLine-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-04T00:34:55.288429" elapsed="0.000358"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Take Screenshot" owner="ScreenCapLibrary">
+<msg time="2026-09-04T00:34:55.468707" level="INFO" html="true">&lt;a href="nvdaTestRunLogs/Robot.symbolPronunciationTests-selectionByLine-failedTest.png"&gt;&lt;img src="nvdaTestRunLogs/Robot.symbolPronunciationTests-selectionByLine-failedTest.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${screenShotName}</arg>
+<doc>Takes a screenshot in the specified format at library import and
+embeds it into the log file (PNG by default).</doc>
+<status status="PASS" start="2026-09-04T00:34:55.289102" elapsed="0.179771"/>
+</kw>
+<arg>Take Screenshot</arg>
+<arg>${screenShotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-04T00:34:55.288927" elapsed="0.180046"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-04T00:34:55.469275" elapsed="0.002631"/>
+</kw>
+<kw name="Exit Notepad" owner="NotepadLib">
+<msg time="2026-09-04T00:34:55.472254" level="INFO">Is Start process still running (True expected): True</msg>
+<msg time="2026-09-04T00:34:55.472336" level="INFO">Test case in foreground, trying to close</msg>
+<msg time="2026-09-04T00:34:55.472378" level="INFO">emulateKeyPress ('alt+f4',)</msg>
+<msg time="2026-09-04T00:34:55.598260" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-04T00:35:05.629121" level="INFO">Process did not complete in 10 seconds.</msg>
+<msg time="2026-09-04T00:35:05.629244" level="INFO">Leaving process intact.</msg>
+<msg time="2026-09-04T00:35:05.629299" level="INFO">Is Start process still running (False expected): True</msg>
+<status status="PASS" start="2026-09-04T00:34:55.472081" elapsed="10.157302"/>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-04T00:35:05.629783" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-04T00:35:05.633088" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-04T00:35:05.633148" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-04T00:35:05.648454" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-04T00:35:07.941424" level="INFO">Process completed.</msg>
+<msg time="2026-09-04T00:35:07.941542" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-04T00:35:07.941749" level="INFO">Process completed.</msg>
+<msg time="2026-09-04T00:35:07.941800" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-04T00:35:07.944993" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.symbolPronunciationTests-selectionByLine-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.symbolPronunciationTests-selectionByLine-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-04T00:35:07.945076" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.symbolPronunciationTests-selectionByLine-nvda.log</msg>
+<msg time="2026-09-04T00:35:07.945115" level="INFO">No py2exe log</msg>
+<msg time="2026-09-04T00:35:07.945229" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-04T00:35:07.945266" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-04T00:35:07.955190" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-04T00:35:05.629635" elapsed="2.325704"/>
+</kw>
+<status status="PASS" start="2026-09-04T00:34:55.287651" elapsed="12.667844"/>
+</kw>
+<doc>Ensure symbols announced as expected when selecting by line (shift+down arrow).</doc>
+<tag>NVDA</tag>
+<tag>selection</tag>
+<tag>smoke test</tag>
+<tag>symbols</tag>
+<status status="FAIL" start="2026-09-04T00:34:29.670058" elapsed="38.285530">actual vs expected. With symbolLevel SymLevel.NONE: ['Test:  selected', 'Say  selected', '(quietly)  selected', 'Hello,  selected', 'Jim .  selected', "don't   selected", 'selected', 't-shirt   selected', 'selected', 't-shirt    selected', 't-shirt   selected', '1   2    3      4  selected', 'selected', 'selected', 'selected'] != ['Test:   selected', 'Say   selected', '(quietly)   selected', 'Hello,   selected', 'Jim .   selected', "don't    selected", 'selected', 't-shirt    selected', 'selected', 't-shirt     selected', 't-shirt    selected', '1   2    3      4   selected', 'selected', 'selected', 'selected']</status>
+</test>
+<doc>Symbol pronunciation tests</doc>
+<status status="FAIL" start="2026-09-04T00:34:29.243902" elapsed="38.712443"/>
+</suite>
+<status status="FAIL" start="2026-09-04T00:34:29.205328" elapsed="38.751568"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">NVDA</stat>
+<stat pass="0" fail="1" skip="0">selection</stat>
+<stat pass="0" fail="1" skip="0">smoke test</stat>
+<stat pass="0" fail="1" skip="0">symbols</stat>
+</tag>
+<suite>
+<stat name="Robot" id="s1" pass="0" fail="1" skip="0">Robot</stat>
+<stat name="symbolPronunciationTests" id="s1-s1" pass="0" fail="1" skip="0">Robot.symbolPronunciationTests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

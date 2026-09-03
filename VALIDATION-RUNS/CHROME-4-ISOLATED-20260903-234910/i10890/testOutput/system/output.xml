@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.13 on win32)" generated="2026-09-03T23:50:03.575708" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot" source="C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot">
+<suite id="s1-s1" name="chromeTests" source="C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\chromeTests.robot">
+<test id="s1-s1-t1" name="i10890" line="128">
+<kw name="default setup" type="SETUP">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T23:50:04.136059" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T23:50:04.135734" elapsed="0.000441"/>
+</kw>
+<kw name="Start NVDA" owner="NvdaLib">
+<msg time="2026-09-03T23:50:04.136530" level="INFO">Starting NVDA with config: standard-dontShowWelcomeDialog.ini</msg>
+<msg time="2026-09-03T23:50:04.136577" level="DEBUG">Copying files into NVDA profile</msg>
+<msg time="2026-09-03T23:50:04.140204" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\nvdaSettingsFiles\standard-dontShowWelcomeDialog.ini&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.ini&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T23:50:04.141431" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T23:50:04.144653" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\.venv\Lib\site-packages\robotremoteserver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\robotremoteserver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T23:50:04.153646" level="INFO" html="true">Copied directory from '&lt;a href="file://C:\Program Files\Python313\Lib\xmlrpc"&gt;C:\Program Files\Python313\Lib\xmlrpc&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\libs\xmlrpc&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T23:50:04.156611" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpyGlobalPlugin.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\__init__.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T23:50:04.159424" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\blockUntilConditionMet.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\globalPlugins\speechSpyGlobalPlugin\blockUntilConditionMet.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T23:50:04.166245" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\SystemTestSpy\speechSpySynthDriver.py&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\scratchpad\synthDrivers\speechSpySynthDriver.py&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T23:50:04.166364" level="DEBUG">Config copied</msg>
+<msg time="2026-09-03T23:50:04.166481" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat&lt;/a&gt;' exists.</msg>
+<msg time="2026-09-03T23:50:04.166553" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;' already exists.</msg>
+<msg time="2026-09-03T23:50:04.166922" level="INFO" html="true">Created directory '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T23:50:04.168076" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat --debug-logging -r -c "C:\Users\adm\AppData\Local\Temp\nvdaProfile" --log-file "C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"</msg>
+<msg time="2026-09-03T23:50:04.168147" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.chromeTests-i10890-stdout.txt
+stderr:  C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.chromeTests-i10890-stderr.txt
+stdin:   None
+alias:   nvdaAlias
+env:     None</msg>
+<msg time="2026-09-03T23:50:04.183940" level="DEBUG">Started NVDA process</msg>
+<msg time="2026-09-03T23:50:04.184104" level="DEBUG">Waiting for nvdaSpyLib to be available at: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T23:50:07.717414" level="DEBUG">Connecting to nvdaSpyLib</msg>
+<msg time="2026-09-03T23:50:08.201269" level="DEBUG">Getting nvdaSpyLib library instance</msg>
+<msg time="2026-09-03T23:50:08.203962" level="INFO">init_max_keyword_duration {'maxSeconds': 30}</msg>
+<msg time="2026-09-03T23:50:08.205788" level="DEBUG">Connected to RF remote server</msg>
+<msg time="2026-09-03T23:50:08.205852" level="INFO">wait_for_NVDA_startup_to_complete</msg>
+<msg time="2026-09-03T23:50:08.270506" level="DEBUG">Startup complete</msg>
+<arg>standard-dontShowWelcomeDialog.ini</arg>
+<status status="PASS" start="2026-09-03T23:50:04.136347" elapsed="4.134312"/>
+</kw>
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T23:50:08.271178" level="INFO">Foreground window title: Administrateur : Windows PowerShell</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T23:50:08.271004" elapsed="0.000428"/>
+</kw>
+<kw name="Enable Verbose Debug Logging If Requested" owner="NvdaLib">
+<status status="PASS" start="2026-09-03T23:50:08.271569" elapsed="0.001043"/>
+</kw>
+<status status="PASS" start="2026-09-03T23:50:04.134668" elapsed="4.138028"/>
+</kw>
+<kw name="Test I10890" owner="chromeTests">
+<msg time="2026-09-03T23:50:08.272949" level="INFO">set_configValue (['documentFormatting', 'reportClickable'], False)</msg>
+<msg time="2026-09-03T23:50:08.317294" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T23:50:09.020651" level="INFO">starting chrome: C:\Users\adm\AppData\Local\Temp\tmp7yoys6it\test.html</msg>
+<msg time="2026-09-03T23:50:09.020798" level="INFO">Starting process:
+start /wait chrome --no-first-run --force-renderer-accessibility --ash-no-nudges --browser-test --disable-default-apps --keep-alive-for-test --suppress-message-center-popups --disable-notifications --no-experiments --no-default-browser-check --lang=en-US --disable-session-crashed-bubble "C:\Users\adm\AppData\Local\Temp\tmp7yoys6it\test.html"</msg>
+<msg time="2026-09-03T23:50:09.020846" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   chromeStartAlias
+env:     None</msg>
+<msg time="2026-09-03T23:50:09.040129" level="DEBUG">No windows found matching the pattern: re.compile('^NVDA Browser Test Case \\(6181654144324003502\\)')</msg>
+<msg time="2026-09-03T23:50:09.539260" level="DEBUG">No windows found matching the pattern: re.compile('^NVDA Browser Test Case \\(6181654144324003502\\)')</msg>
+<msg time="2026-09-03T23:50:10.040117" level="DEBUG">Found window (HWND: 15533340) (title: NVDA Browser Test Case (6181654144324003502) - Google Chrome)</msg>
+<msg time="2026-09-03T23:50:10.040254" level="INFO">Foreground window title: Restore pages?</msg>
+<msg time="2026-09-03T23:50:10.040494" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T23:50:11.045194" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:11.060399" level="INFO">emulateKeyPress ('NVDA+t',)</msg>
+<msg time="2026-09-03T23:50:11.411948" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 7}</msg>
+<msg time="2026-09-03T23:50:12.416501" level="INFO">get_speech_at_index_until_now (7,)</msg>
+<msg time="2026-09-03T23:50:12.418201" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T23:50:12.419576" level="DEBUG">Looking for window: re.compile('NVDA Browser Test Case .6181654144324003502.')</msg>
+<msg time="2026-09-03T23:50:12.419635" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:12.420743" level="INFO">emulateKeyPress ('control+alt+tab',)</msg>
+<msg time="2026-09-03T23:50:12.537508" level="INFO">wait_for_specific_speech_no_raise ('row 1',) {'afterIndex': 7, 'maxWaitSeconds': 5, 'intervalBetweenSeconds': 0.3}</msg>
+<msg time="2026-09-03T23:50:17.666317" level="DEBUG">indexOfSpeech 'row 1': </msg>
+<msg time="2026-09-03T23:50:17.666407" level="DEBUG">No speech for opening the task switcher, trying again</msg>
+<msg time="2026-09-03T23:50:17.666451" level="INFO">emulateKeyPress ('escape',)</msg>
+<msg time="2026-09-03T23:50:20.771220" level="INFO">Slept 3 seconds.</msg>
+<msg time="2026-09-03T23:50:20.771339" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:20.795223" level="INFO">emulateKeyPress ('control+alt+tab',)</msg>
+<msg time="2026-09-03T23:50:20.936430" level="INFO">wait_for_specific_speech_no_raise ('row 1',) {'afterIndex': 7, 'maxWaitSeconds': 5, 'intervalBetweenSeconds': 0.3}</msg>
+<msg time="2026-09-03T23:50:21.238385" level="DEBUG">indexOfSpeech 'row 1': 10</msg>
+<msg time="2026-09-03T23:50:21.238469" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 8}</msg>
+<msg time="2026-09-03T23:50:21.963389" level="INFO">get_speech_at_index_until_now (8,)</msg>
+<msg time="2026-09-03T23:50:21.978413" level="DEBUG">Open task switch speech: 'Changement de tâche  window
+Applications en cours d’exécution  list
+NVDA Browser Test Case (6181654144324003502) - Google Chrome  row 1  column 1  1 of 4'</msg>
+<msg time="2026-09-03T23:50:21.978709" level="DEBUG">Found target window in first item.</msg>
+<msg time="2026-09-03T23:50:21.978750" level="DEBUG">Found, attempting to select.</msg>
+<msg time="2026-09-03T23:50:21.978780" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:21.993621" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T23:50:22.198291" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 11, 'errorMessage': None}</msg>
+<msg time="2026-09-03T23:50:23.202959" level="INFO">Foreground window title: Restore pages?</msg>
+<msg time="2026-09-03T23:50:23.203043" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T23:50:23.217315" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:23.233292" level="INFO">emulateKeyPress ('NVDA+t',)</msg>
+<msg time="2026-09-03T23:50:23.351797" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 15}</msg>
+<msg time="2026-09-03T23:50:24.276876" level="INFO">get_speech_at_index_until_now (15,)</msg>
+<msg time="2026-09-03T23:50:24.278229" level="FAIL">NVDA unable to report chrome title</msg>
+<msg time="2026-09-03T23:50:24.280024" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\robot\chromeTests.py", line 2365, in test_i10890
+    _chrome.prepareChrome(
+    ~~~~~~~~~~~~~~~~~~~~~^
+    	f"""
+     ^^^^
+    		&lt;iframe src="{testFile}"&gt;&lt;/iframe&gt;
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    	""",
+     ^^^^
+    )
+    ^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\ChromeLib.py", line 289, in prepareChrome
+    raise AssertionError("NVDA unable to report chrome title")
+AssertionError: NVDA unable to report chrome title</msg>
+<doc>Ensure that sort state is announced on a column header when changed with inner button</doc>
+<status status="FAIL" start="2026-09-03T23:50:08.272840" elapsed="16.007227">NVDA unable to report chrome title</status>
+</kw>
+<kw name="default teardown" type="TEARDOWN">
+<kw name="Log Foreground Window Title" owner="WindowsLib">
+<msg time="2026-09-03T23:50:24.280798" level="INFO">Foreground window title: Restore pages?</msg>
+<doc>Debugging helper, log the current foreground window title to the robot framework log.
+See log.html.</doc>
+<status status="PASS" start="2026-09-03T23:50:24.280712" elapsed="0.000128"/>
+</kw>
+<kw name="Create Preserved Test Output Filename" owner="NvdaLib">
+<msg time="2026-09-03T23:50:24.281160" level="INFO">${screenshotName} = C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.chromeTests-i10890-failedTest.png</msg>
+<var>${screenshotName}</var>
+<arg>failedTest.png</arg>
+<doc>EG for nvda.log path will become:
+${OUTPUT DIR}/nvdaTestRunLogs/${SUITE NAME}-${TEST NAME}-nvda.log</doc>
+<status status="PASS" start="2026-09-03T23:50:24.280932" elapsed="0.000251"/>
+</kw>
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Take Screenshot" owner="ScreenCapLibrary">
+<msg time="2026-09-03T23:50:24.406831" level="INFO" html="true">&lt;a href="nvdaTestRunLogs/Robot.chromeTests-i10890-failedTest.png"&gt;&lt;img src="nvdaTestRunLogs/Robot.chromeTests-i10890-failedTest.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${screenShotName}</arg>
+<doc>Takes a screenshot in the specified format at library import and
+embeds it into the log file (PNG by default).</doc>
+<status status="PASS" start="2026-09-03T23:50:24.281411" elapsed="0.125555"/>
+</kw>
+<arg>Take Screenshot</arg>
+<arg>${screenShotName}</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2026-09-03T23:50:24.281286" elapsed="0.125775"/>
+</kw>
+<kw name="Dump Speech To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T23:50:24.407360" elapsed="0.001644"/>
+</kw>
+<kw name="Dump Braille To Log" owner="nvdaSpyLib">
+<status status="PASS" start="2026-09-03T23:50:24.409145" elapsed="0.013949"/>
+</kw>
+<kw name="Close Chrome Tab" owner="ChromeLib">
+<msg time="2026-09-03T23:50:24.423375" level="INFO">Is Start process still running (True expected): True</msg>
+<msg time="2026-09-03T23:50:24.423422" level="WARN">Chrome test window lost foreground during teardown; recovering before closing tab.</msg>
+<msg time="2026-09-03T23:50:24.423553" level="WARN">Chrome test window lost foreground; recovering: (NVDA Browser Test Case (6181654144324003502) - Google Chrome - 15533340)</msg>
+<msg time="2026-09-03T23:50:24.423839" level="INFO">wait_for_speech_to_finish</msg>
+<msg time="2026-09-03T23:50:24.439233" level="DEBUG">Looking for window: re.compile('NVDA\\ Browser\\ Test\\ Case\\ \\(6181654144324003502\\)\\ \\-\\ Google\\ Chrome')</msg>
+<msg time="2026-09-03T23:50:24.439318" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:24.454209" level="INFO">emulateKeyPress ('control+alt+tab',)</msg>
+<msg time="2026-09-03T23:50:24.687034" level="INFO">wait_for_specific_speech_no_raise ('row 1',) {'afterIndex': 15, 'maxWaitSeconds': 5, 'intervalBetweenSeconds': 0.3}</msg>
+<msg time="2026-09-03T23:50:24.705533" level="DEBUG">indexOfSpeech 'row 1': 18</msg>
+<msg time="2026-09-03T23:50:24.705612" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 16}</msg>
+<msg time="2026-09-03T23:50:25.725145" level="INFO">get_speech_at_index_until_now (16,)</msg>
+<msg time="2026-09-03T23:50:25.726369" level="DEBUG">Open task switch speech: 'Changement de tâche  window
+Applications en cours d’exécution  list
+Administrateur : Windows Power Shell  row 1  column 2  2 of 4'</msg>
+<msg time="2026-09-03T23:50:25.726435" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:25.727319" level="INFO">emulateKeyPress ('rightArrow',)</msg>
+<msg time="2026-09-03T23:50:25.830794" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 19}</msg>
+<msg time="2026-09-03T23:50:26.835072" level="INFO">get_speech_at_index_until_now (19,)</msg>
+<msg time="2026-09-03T23:50:26.836229" level="DEBUG">next window: 'Chat GPT Classic  column 3  3 of 4'</msg>
+<msg time="2026-09-03T23:50:26.836271" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:26.847935" level="INFO">emulateKeyPress ('rightArrow',)</msg>
+<msg time="2026-09-03T23:50:26.966550" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 20}</msg>
+<msg time="2026-09-03T23:50:27.971839" level="INFO">get_speech_at_index_until_now (20,)</msg>
+<msg time="2026-09-03T23:50:27.973132" level="DEBUG">next window: 'Téléchargements : Explorateur de fichiers  column 4  4 of 4'</msg>
+<msg time="2026-09-03T23:50:27.973176" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:27.987071" level="INFO">emulateKeyPress ('rightArrow',)</msg>
+<msg time="2026-09-03T23:50:28.105535" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 21}</msg>
+<msg time="2026-09-03T23:50:29.033215" level="INFO">get_speech_at_index_until_now (21,)</msg>
+<msg time="2026-09-03T23:50:29.056714" level="DEBUG">next window: 'NVDA Browser Test Case (6181654144324003502) - Google Chrome  column 1  1 of 4'</msg>
+<msg time="2026-09-03T23:50:29.056772" level="DEBUG">Found target window at item 3</msg>
+<msg time="2026-09-03T23:50:29.056802" level="DEBUG">Found, attempting to select.</msg>
+<msg time="2026-09-03T23:50:29.056827" level="INFO">get_next_speech_index</msg>
+<msg time="2026-09-03T23:50:29.057878" level="INFO">emulateKeyPress ('enter',)</msg>
+<msg time="2026-09-03T23:50:29.261517" level="INFO">wait_for_speech_to_finish {'speechStartedIndex': 22, 'errorMessage': None}</msg>
+<msg time="2026-09-03T23:50:30.275673" level="FAIL">Unable to restore Chrome test window foreground: NVDA Browser Test Case (6181654144324003502) - Google Chrome - 15533340</msg>
+<msg time="2026-09-03T23:50:30.276411" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\ChromeLib.py", line 81, in close_chrome_tab
+    self._ensureChromeForeground()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\tests\system\libraries\ChromeLib.py", line 187, in _ensureChromeForeground
+    raise AssertionError(
+    ...&lt;2 lines&gt;...
+    )
+AssertionError: Unable to restore Chrome test window foreground: NVDA Browser Test Case (6181654144324003502) - Google Chrome - 15533340</msg>
+<status status="FAIL" start="2026-09-03T23:50:24.423233" elapsed="5.853237">Unable to restore Chrome test window foreground: NVDA Browser Test Case (6181654144324003502) - Google Chrome - 15533340</status>
+</kw>
+<kw name="Quit NVDA" owner="NvdaLib">
+<msg time="2026-09-03T23:50:30.276793" level="INFO">Stopping nvdaSpy server: http://127.0.0.1:8270</msg>
+<msg time="2026-09-03T23:50:30.279443" level="INFO">Starting process:
+C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\runnvda.bat -q --disable-addons</msg>
+<msg time="2026-09-03T23:50:30.279488" level="DEBUG">Process configuration:
+cwd:     C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5
+shell:   True
+stdout:  PIPE
+stderr:  PIPE
+stdin:   None
+alias:   None
+env:     None</msg>
+<msg time="2026-09-03T23:50:30.288904" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T23:50:32.210270" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T23:50:32.210351" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-09-03T23:50:32.210487" level="INFO">Process completed.</msg>
+<msg time="2026-09-03T23:50:32.210528" level="INFO">Saving NVDA log</msg>
+<msg time="2026-09-03T23:50:32.213262" level="INFO" html="true">Copied file from '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda.log&lt;/a&gt;' to '&lt;a href="file://C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.chromeTests-i10890-nvda.log"&gt;C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.chromeTests-i10890-nvda.log&lt;/a&gt;'.</msg>
+<msg time="2026-09-03T23:50:32.213326" level="DEBUG">Log saved to: C:\Users\adm\Downloads\NVDA-2026.2-HARDENED-COMPLETE-TEST-V5\NVDA-2026.2-HARDENED-SOURCE-V5\testOutput\system\nvdaTestRunLogs\Robot.chromeTests-i10890-nvda.log</msg>
+<msg time="2026-09-03T23:50:32.213366" level="INFO">No py2exe log</msg>
+<msg time="2026-09-03T23:50:32.213483" level="INFO" html="true">File '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile\nvda_crash.dmp&lt;/a&gt;' does not exist.</msg>
+<msg time="2026-09-03T23:50:32.213527" level="DEBUG">Cleaning up NVDA profile</msg>
+<msg time="2026-09-03T23:50:32.221541" level="INFO" html="true">Removed directory '&lt;a href="file://C:\Users\adm\AppData\Local\Temp\nvdaProfile"&gt;C:\Users\adm\AppData\Local\Temp\nvdaProfile&lt;/a&gt;'.</msg>
+<status status="PASS" start="2026-09-03T23:50:30.276668" elapsed="1.944966"/>
+</kw>
+<status status="FAIL" start="2026-09-03T23:50:24.280426" elapsed="7.941414">Unable to restore Chrome test window foreground: NVDA Browser Test Case (6181654144324003502) - Google Chrome - 15533340</status>
+</kw>
+<doc>Test sort state is announced on column header when changed with inner button</doc>
+<tag>browser</tag>
+<tag>chrome</tag>
+<tag>chrome_table</tag>
+<tag>NVDA</tag>
+<tag>smoke test</tag>
+<status status="FAIL" start="2026-09-03T23:50:04.133617" elapsed="28.088319">NVDA unable to report chrome title
+
+Also teardown failed:
+Unable to restore Chrome test window foreground: NVDA Browser Test Case (6181654144324003502) - Google Chrome - 15533340</status>
+</test>
+<doc>HTML test cases in Chrome</doc>
+<status status="FAIL" start="2026-09-03T23:50:03.625407" elapsed="28.597237"/>
+</suite>
+<status status="FAIL" start="2026-09-03T23:50:03.578243" elapsed="28.645047"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">browser</stat>
+<stat pass="0" fail="1" skip="0">chrome</stat>
+<stat pass="0" fail="1" skip="0">chrome_table</stat>
+<stat pass="0" fail="1" skip="0">NVDA</stat>
+<stat pass="0" fail="1" skip="0">smoke test</stat>
+</tag>
+<suite>
+<stat name="Robot" id="s1" pass="0" fail="1" skip="0">Robot</stat>
+<stat name="chromeTests" id="s1-s1" pass="0" fail="1" skip="0">Robot.chromeTests</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-09-03T23:50:24.423422" level="WARN">Chrome test window lost foreground during teardown; recovering before closing tab.</msg>
+<msg time="2026-09-03T23:50:24.423553" level="WARN">Chrome test window lost foreground; recovering: (NVDA Browser Test Case (6181654144324003502) - Google Chrome - 15533340)</msg>
+</errors>
+</robot>

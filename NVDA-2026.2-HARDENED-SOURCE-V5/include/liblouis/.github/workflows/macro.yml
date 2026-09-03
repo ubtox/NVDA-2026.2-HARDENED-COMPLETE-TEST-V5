@@ -1,0 +1,42 @@
+name: Test macro feature
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - README
+      - NEWS
+
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
+jobs:
+  build:
+    name: Test macro feature
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
+      with:
+        egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
+    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+    - name: Install dependencies
+      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev
+    - name: Autogen && configure
+      run: |
+        ./autogen.sh
+        ./configure --enable-macros
+    - name: Make
+      run: make
+    - name: Make check
+      run: make check
+    - name: Store the test log
+      if: ${{ always() }} # store the test log even if the tests failed
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+      with:
+        name: test-suite-macro.log
+        path: tests/test-suite.log

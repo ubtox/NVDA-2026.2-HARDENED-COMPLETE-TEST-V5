@@ -1,0 +1,116 @@
+name: Fetch Assets
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-commit-assets:
+    runs-on: ubuntu-latest
+
+    env:
+      REQUIRED_ASSETS: |
+        Rules.zip
+        libmathcat_py-64-3.13-win.zip
+      RELEASE_URL: https://api.github.com/repos/NSoiffer/MathCATForPython/releases/latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Delete previously downloaded assets
+        run: rm -rf assets/*
+      - name: Download assets
+        run: |
+          echo "REQUIRED_ASSETS=$REQUIRED_ASSETS"
+          release_data=$(curl -s -H 'Accept: application/vnd.github.v3+json' "$RELEASE_URL")
+
+          if [[ ! -d assets ]] ; then
+            echo 'Directory "assets" does not exist. Creating it.'
+            mkdir assets
+          else
+            echo 'Directory "assets" exists.'
+          fi
+
+          while IFS= read -r asset_name; do
+            if [[ "$asset_name" =~ ^[[:space:]]*$ ]]; then
+              continue
+            fi
+            echo "asset_name=$asset_name"
+            asset_url=$(echo "$release_data" | jq -r ".assets[] | select(.name == \"$asset_name\") | .url")
+            if [[ "$asset_url" != "null" ]]; then
+              echo "Downloading $asset_name"
+              curl -L -H "Accept: application/octet-stream" -o "$asset_name" "$asset_url"
+            else
+              echo "Asset $asset_name not found in the latest release."
+              exit 1
+            fi
+            unzip -o "$asset_name" -d assets
+            rm -f "$asset_name"
+          done <<< "$REQUIRED_ASSETS"
+          # Extract nested zip files inside Rules directory
+          find assets/Rules -type f -name '*.zip' -print0 \
+          | xargs -0 -I {} sh -c 'unzip "{}" -d "$(dirname "{}")" && rm -f "{}"'
+      - name: Commit and push downloaded assets
+        run: |
+          git add assets
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git commit -m "Add downloaded assets"
+          git push
+      - name: Open PR to nvda repo
+        env:
+          GH_PUSH_TOKEN: ${{ secrets.NVDA_PUSH_TOKEN }}
+          GH_PR_TOKEN: ${{ secrets.NVDA_PR_TOKEN }}
+        run: |
+          # Authenticate with GitHub CLI
+          gh auth login --with-token <<< "${GH_PUSH_TOKEN}"
+          # Get the fork owner (the authenticated user/organization)
+          fork_owner=$(gh api user --jq '.login')
+
+          # Clone the fork
+          git clone https://x-access-token:${GH_PUSH_TOKEN}@github.com/${fork_owner}/nvda.git
+          cd nvda
+
+          # Configure git
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+
+          # Add upstream remote
+          git remote add upstream https://github.com/nvaccess/nvda.git
+
+          # Fetch latest changes from upstream
+          git fetch upstream master
+
+          # Create new branch for our changes
+          new_branch="update-mathcat-submodule-$(date +%Y-%m-%d_%H-%M-%S)"
+          git checkout -b "$new_branch" upstream/master
+
+          # Update the submodule
+          git submodule sync --recursive
+          git submodule update --init --recursive
+          cd include/nvda-mathcat
+          git pull origin main
+          cd ../..
+          git add include/nvda-mathcat
+
+          # Check if there are any changes to commit
+          git diff --cached --quiet && echo 'No submodule updates; skipping PR.' && exit 0
+
+          # Commit and push to fork
+          git commit -m "Update nvda-mathcat submodule"
+          # Authenticate with GitHub CLI
+          gh auth login --with-token <<< "${GH_PR_TOKEN}"
+          git push origin "$new_branch"
+
+          # Create PR from fork to upstream
+          gh pr create \
+            --repo nvaccess/nvda \
+            --title "Update nvda-mathcat submodule" \
+            --body "Automated update of the nvda-mathcat submodule with latest assets. Reminder: the changelog needs to be updated manually to reflect these changes." \
+            --head "${fork_owner}:${new_branch}" \
+            --base master

@@ -1,0 +1,17 @@
+[project]
+name = "nvda-mathcat"
+version = "20250714"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+
+[project.urls]
+Homepage = "https://www.nvaccess.org/"
+Repository = "https://github.com/nvaccess/nvda-mathcat.git"
+
+[build-system]
+requires = ["setuptools~=72.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "assets"}
+include-package-data = true

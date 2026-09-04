@@ -67,6 +67,8 @@ Status:
 - NV Access SelectionContainer provider-failure handling (#20255) ported: a provider `COMError` is treated as a missing selection container instead of aborting the entire focus-speech path.
 - A dedicated regression test forces a SelectionItem provider `COMError` and verifies the UIA object boundary returns `None` cleanly.
 - The existing `_getUIACacheablePropertyValue_handlesCOMErrors` boundary for UIA state retrieval was audited and retained; no duplicate port was needed.
+- NV Access current-focus validation (#20764) ported: UIA focus events now validate live `currentHasKeyboardFocus` instead of trusting the event sender's potentially stale cache.
+- A dedicated regression test verifies stale cached focus state cannot admit an intermediate provider focus event.
 - Broader disconnected-provider recovery, property batching and event-storm measurements remain planned.
 
 ## Track 3 - Speech and braille responsiveness

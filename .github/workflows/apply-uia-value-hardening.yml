@@ -1,0 +1,150 @@
+name: Apply UIA value hardening once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/apply-uia-value-hardening.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Harden UIA string boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          root = Path('NVDA-2026.2-HARDENED-SOURCE-V5')
+          uia_path = root / 'source/NVDAObjects/UIA/__init__.py'
+          utils_path = root / 'source/UIAHandler/utils.py'
+
+          uia = uia_path.read_text(encoding='utf-8')
+          old_property = '''\tdef _getUIACacheablePropertyValue(self, ID, ignoreDefault=False):
+\t\t\"\"\"
+\t\tFetches the value for a UI Automation property from an element cache available in this core cycle. If not cached then a new value will be fetched.
+\t\t\"\"\"
+\t\telementCache = self._coreCycleUIAPropertyCacheElementCache
+\t\t# If we have a UIAElement whos own cache contains the property, fetch the value from there
+\t\tcacheElement = elementCache.get(ID, None)
+\t\tif cacheElement:
+\t\t\tvalue = cacheElement.getCachedPropertyValueEx(ID, ignoreDefault)
+\t\telse:
+\t\t\t# The value is cached nowhere, so ask the UIAElement for its current value for the property
+\t\t\tvalue = self.UIAElement.getCurrentPropertyValueEx(ID, ignoreDefault)
+\t\treturn value
+'''
+          new_property = '''\tdef _getUIACacheablePropertyValue(self, ID, ignoreDefault=False):
+\t\t\"\"\"
+\t\tFetch a UI Automation property value, using the per-core-cycle cache when available.
+\t\tString values are normalized at this provider boundary so malformed UTF-16 cannot
+\t\tescape into NVDA object properties, speech, braille, or logging.
+\t\t\"\"\"
+\t\telementCache = self._coreCycleUIAPropertyCacheElementCache
+\t\t# If we have a UIAElement whos own cache contains the property, fetch the value from there
+\t\tcacheElement = elementCache.get(ID, None)
+\t\tif cacheElement:
+\t\t\tvalue = cacheElement.getCachedPropertyValueEx(ID, ignoreDefault)
+\t\telse:
+\t\t\t# The value is cached nowhere, so ask the UIAElement for its current value for the property
+\t\t\tvalue = self.UIAElement.getCurrentPropertyValueEx(ID, ignoreDefault)
+\t\treturn normalizeUIAText(value) if isinstance(value, str) else value
+'''
+          if uia.count(old_property) != 1:
+              raise SystemExit(f'Expected one UIA property getter block, got {uia.count(old_property)}')
+          uia = uia.replace(old_property, new_property, 1)
+
+          old_text_doc = '''\tdef _getTextFromUIARange(self, textRange: IUIAutomationTextRangeT) -> str:
+\t\t\"\"\"
+\t\tFetches plain text from the given UI Automation text range.
+\t\tJust calls getText(-1). This only exists to be overridden for filtering.
+\t\t\"\"\"
+\t\treturn normalizeUIAText(textRange.getText(-1))
+'''
+          new_text_doc = '''\tdef _getTextFromUIARange(self, textRange: IUIAutomationTextRangeT) -> str:
+\t\t\"\"\"
+\t\tFetch plain text from the given UI Automation text range and normalize malformed
+\t\tUTF-16 before it reaches Python text consumers. Subclasses may override this for filtering.
+\t\t\"\"\"
+\t\treturn normalizeUIAText(textRange.getText(-1))
+'''
+          if uia.count(old_text_doc) != 1:
+              raise SystemExit(f'Expected one UIA text retrieval block, got {uia.count(old_text_doc)}')
+          uia = uia.replace(old_text_doc, new_text_doc, 1)
+          uia_path.write_text(uia, encoding='utf-8', newline='\n')
+
+          utils = utils_path.read_text(encoding='utf-8')
+          old_direct = '''\tif val == UIAHandler.handler.ReservedMixedAttributeValue:
+\t\tif not ignoreMixedValues:
+\t\t\traise UIAMixedAttributeError
+\treturn val
+
+
+def iterUIARangeByUnit'''
+          new_direct = '''\tif val == UIAHandler.handler.ReservedMixedAttributeValue:
+\t\tif not ignoreMixedValues:
+\t\t\traise UIAMixedAttributeError
+\treturn normalizeUIAText(val) if isinstance(val, str) else val
+
+
+def iterUIARangeByUnit'''
+          if utils.count(old_direct) != 1:
+              raise SystemExit(f'Expected one direct UIA attribute return, got {utils.count(old_direct)}')
+          utils = utils.replace(old_direct, new_direct, 1)
+
+          old_fetcher = '''\t\tif not ignoreMixedValues and val == UIAHandler.handler.ReservedMixedAttributeValue:
+\t\t\traise UIAMixedAttributeError
+\t\treturn val
+
+
+class BulkUIATextRangeAttributeValueFetcher'''
+          new_fetcher = '''\t\tif not ignoreMixedValues and val == UIAHandler.handler.ReservedMixedAttributeValue:
+\t\t\traise UIAMixedAttributeError
+\t\treturn normalizeUIAText(val) if isinstance(val, str) else val
+
+
+class BulkUIATextRangeAttributeValueFetcher'''
+          if utils.count(old_fetcher) != 1:
+              raise SystemExit(f'Expected one UIA attribute fetcher return, got {utils.count(old_fetcher)}')
+          utils = utils.replace(old_fetcher, new_fetcher, 1)
+
+          old_bulk = '''\t\tval = self.IDsToValues[ID]
+\t\tif not ignoreMixedValues and val == UIAHandler.handler.ReservedMixedAttributeValue:
+\t\t\traise UIAMixedAttributeError
+\t\treturn val
+
+
+class FakeEventHandlerGroup'''
+          new_bulk = '''\t\tval = self.IDsToValues[ID]
+\t\tif not ignoreMixedValues and val == UIAHandler.handler.ReservedMixedAttributeValue:
+\t\t\traise UIAMixedAttributeError
+\t\treturn normalizeUIAText(val) if isinstance(val, str) else val
+
+
+class FakeEventHandlerGroup'''
+          if utils.count(old_bulk) != 1:
+              raise SystemExit(f'Expected one bulk UIA attribute return, got {utils.count(old_bulk)}')
+          utils = utils.replace(old_bulk, new_bulk, 1)
+          utils_path.write_text(utils, encoding='utf-8', newline='\n')
+          PY
+
+          git diff --check
+          git diff -- NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py NVDA-2026.2-HARDENED-SOURCE-V5/source/UIAHandler/utils.py
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py NVDA-2026.2-HARDENED-SOURCE-V5/source/UIAHandler/utils.py
+          git rm -- .github/workflows/apply-uia-value-hardening.yml
+          git commit -m 'UIA: normalize string values at provider boundaries'
+          git push origin HEAD:main

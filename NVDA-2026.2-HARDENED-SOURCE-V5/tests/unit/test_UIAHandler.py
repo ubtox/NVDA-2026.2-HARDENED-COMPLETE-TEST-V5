@@ -11,7 +11,7 @@ from comtypes import COMError
 
 import textInfos
 import UIAHandler
-from NVDAObjects.UIA import UIATextInfo
+from NVDAObjects.UIA import UIA, UIATextInfo
 from UIAHandler import NVDAUnitsToUIAUnits, getUIAUnitFromNVDAUnit, utils
 
 
@@ -50,6 +50,61 @@ class TestUIATextInfoNormalization(TestCase):
 
 		self.assertEqual(textInfo._getTextFromUIARange(textRange), "A\ufffdB")
 		textRange.getText.assert_called_once_with(-1)
+
+
+class TestUIAPropertyValueNormalization(TestCase):
+	def test_currentStringPropertyIsNormalized(self):
+		uiObject = Mock()
+		uiObject._coreCycleUIAPropertyCacheElementCache = {}
+		uiObject.UIAElement = Mock()
+		uiObject.UIAElement.getCurrentPropertyValueEx.return_value = "A\ud83dB"
+
+		self.assertEqual(UIA._getUIACacheablePropertyValue(uiObject, 123), "A\ufffdB")
+		uiObject.UIAElement.getCurrentPropertyValueEx.assert_called_once_with(123, False)
+
+	def test_cachedStringPropertyIsNormalized(self):
+		cacheElement = Mock()
+		cacheElement.getCachedPropertyValueEx.return_value = "\ud83d\ude00"
+		uiObject = Mock()
+		uiObject._coreCycleUIAPropertyCacheElementCache = {123: cacheElement}
+		uiObject.UIAElement = Mock()
+
+		self.assertEqual(UIA._getUIACacheablePropertyValue(uiObject, 123), "😀")
+		cacheElement.getCachedPropertyValueEx.assert_called_once_with(123, False)
+		uiObject.UIAElement.getCurrentPropertyValueEx.assert_not_called()
+
+	def test_nonStringPropertyIsReturnedUnchanged(self):
+		value = object()
+		uiObject = Mock()
+		uiObject._coreCycleUIAPropertyCacheElementCache = {}
+		uiObject.UIAElement = Mock()
+		uiObject.UIAElement.getCurrentPropertyValueEx.return_value = value
+
+		self.assertIs(UIA._getUIACacheablePropertyValue(uiObject, 123), value)
+
+
+class TestUIATextAttributeNormalization(TestCase):
+	def test_directAttributeStringIsNormalized(self):
+		textRange = Mock()
+		textRange.GetAttributeValue.return_value = "A\ude00B"
+
+		self.assertEqual(
+			utils.getUIATextAttributeValueFromRange(textRange, 123),
+			"A\ufffdB",
+		)
+
+	def test_attributeFetcherStringIsNormalized(self):
+		textRange = Mock()
+		textRange.getAttributeValue.return_value = "A\ud83dB"
+		fetcher = utils.UIATextRangeAttributeValueFetcher(textRange)
+
+		self.assertEqual(fetcher.getValue(123), "A\ufffdB")
+
+	def test_bulkAttributeFetcherStringIsNormalized(self):
+		fetcher = object.__new__(utils.BulkUIATextRangeAttributeValueFetcher)
+		fetcher.IDsToValues = {123: "\ud83d\ude00"}
+
+		self.assertEqual(fetcher.getValue(123), "😀")
 
 
 class TestUIATextRangeFromElement(TestCase):

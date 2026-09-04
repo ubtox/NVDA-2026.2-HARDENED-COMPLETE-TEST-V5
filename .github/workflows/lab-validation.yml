@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - 'rc/**'
     paths-ignore:
       - 'VALIDATION-RUNS/**'
       - 'PATCH-BACKUP-*/**'
@@ -17,6 +18,9 @@ on:
         options:
           - Source
           - All
+
+permissions:
+  contents: read
 
 concurrency:
   group: nvda-lab-all-${{ github.ref }}
@@ -93,6 +97,35 @@ jobs:
             throw
           }
 
+      - name: Verify RC executables and SHA-256
+        if: ${{ success() && steps.mode.outputs.mode == 'All' }}
+        shell: pwsh
+        run: |
+          $sourceRoot = Join-Path $PWD 'NVDA-2026.2-HARDENED-SOURCE-V5'
+          $exeFiles = @()
+          foreach ($relativeRoot in @('output', 'dist')) {
+            $root = Join-Path $sourceRoot $relativeRoot
+            if (Test-Path -LiteralPath $root) {
+              $exeFiles += Get-ChildItem -LiteralPath $root -Filter '*.exe' -File -Recurse -ErrorAction Stop
+            }
+          }
+          $exeFiles = @($exeFiles | Sort-Object FullName -Unique)
+          if ($exeFiles.Count -eq 0) {
+            throw 'RC validation failed: no executable was produced.'
+          }
+
+          $hashFile = Join-Path $PWD 'LAB-LOCAL-OUTPUT\RC-EXE-SHA256.txt'
+          $exeFiles |
+            Get-FileHash -Algorithm SHA256 |
+            ForEach-Object {
+              $relative = $_.Path.Substring($sourceRoot.Length).TrimStart('\')
+              "$($_.Hash) *$relative"
+            } |
+            Set-Content -LiteralPath $hashFile -Encoding ASCII
+
+          Write-Host "Validated RC executables: $($exeFiles.Count)" -ForegroundColor Green
+          Get-Content -LiteralPath $hashFile | ForEach-Object { Write-Host $_ }
+
       - name: Upload validation evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -108,10 +141,11 @@ jobs:
         if: ${{ success() && steps.mode.outputs.mode == 'All' }}
         uses: actions/upload-artifact@v4
         with:
-          name: nvda-2026.2-lab-${{ github.run_id }}
+          name: nvda-2026.2-rc-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
           path: |
             NVDA-2026.2-HARDENED-SOURCE-V5/output/*.exe
             NVDA-2026.2-HARDENED-SOURCE-V5/dist/**
             LAB-LOCAL-OUTPUT/LAB-ARTIFACT-SHA256-*.txt
+            LAB-LOCAL-OUTPUT/RC-EXE-SHA256.txt

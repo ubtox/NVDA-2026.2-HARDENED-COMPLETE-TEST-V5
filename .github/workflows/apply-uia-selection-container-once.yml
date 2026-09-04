@@ -14,7 +14,7 @@ permissions:
 jobs:
   apply:
     runs-on: windows-2022
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - name: Enable Windows Git long paths
         shell: pwsh
@@ -32,6 +32,13 @@ jobs:
           python-version: '3.13.13'
           architecture: x64
           update-environment: true
+
+      - name: Install CPython 3.13.13 x86 helper
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.13'
+          architecture: x86
+          update-environment: false
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
@@ -100,7 +107,7 @@ jobs:
           git diff --check
           if ($LASTEXITCODE -ne 0) { throw "git diff --check failed: $LASTEXITCODE" }
 
-      - name: Validate formatting and targeted unit test
+      - name: Validate formatting and source build
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
@@ -114,12 +121,8 @@ jobs:
           uvx --from ruff==0.15.9 ruff format --check @files
           if ($LASTEXITCODE -ne 0) { throw "Ruff format check failed: $LASTEXITCODE" }
 
-          $outDir = Join-Path $sourceRoot 'testOutput\unit'
-          New-Item -ItemType Directory -Force -Path $outDir | Out-Null
-          uv run --group unit-tests --directory $sourceRoot -m xmlrunner discover -b `
-            -s (Join-Path $sourceRoot 'tests\unit') -t $sourceRoot `
-            -p 'test_UIAHandler.py' --output-file (Join-Path $outDir 'uiaSelectionContainer.xml')
-          if ($LASTEXITCODE -ne 0) { throw "Targeted UIA unit test failed: $LASTEXITCODE" }
+          & .\LAB-BUILD.ps1 -Mode Source -Parallel -SkipQuality
+          if ($LASTEXITCODE -ne 0) { throw "Source build/unit validation failed: $LASTEXITCODE" }
 
       - name: Commit validated change and remove one-shot workflow
         shell: pwsh

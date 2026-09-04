@@ -144,9 +144,8 @@ def getUIATextAttributeValueFromRange(rangeObj, attrib, ignoreMixedValues=False)
 		val = rangeObj.GetAttributeValue(attrib)
 	except COMError:
 		return UIAHandler.handler.reservedNotSupportedValue
-	if val == UIAHandler.handler.ReservedMixedAttributeValue:
-		if not ignoreMixedValues:
-			raise UIAMixedAttributeError
+	if not ignoreMixedValues and val == UIAHandler.handler.ReservedMixedAttributeValue:
+		raise UIAMixedAttributeError
 	return normalizeUIAText(val) if isinstance(val, str) else val
 
 

@@ -1,0 +1,55 @@
+name: Apply UIA wiring once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/apply-uia-wiring.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Wire UIA text normalization into production path
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py'
+          $text = [System.IO.File]::ReadAllText($path)
+
+          $oldImport = "`titerUIARangeByUnit,`n`tUIAMixedAttributeError,"
+          $newImport = "`titerUIARangeByUnit,`n`tnormalizeUIAText,`n`tUIAMixedAttributeError,"
+          $oldReturn = "`t`treturn textRange.getText(-1)"
+          $newReturn = "`t`treturn normalizeUIAText(textRange.getText(-1))"
+
+          $importCount = ([regex]::Matches($text, [regex]::Escape($oldImport))).Count
+          $returnCount = ([regex]::Matches($text, [regex]::Escape($oldReturn))).Count
+          if ($importCount -ne 1) {
+            throw "Expected exactly one UIA utils import insertion point, got $importCount"
+          }
+          if ($returnCount -ne 1) {
+            throw "Expected exactly one UIA text retrieval return, got $returnCount"
+          }
+
+          $text = $text.Replace($oldImport, $newImport)
+          $text = $text.Replace($oldReturn, $newReturn)
+          [System.IO.File]::WriteAllText($path, $text, [System.Text.UTF8Encoding]::new($false))
+
+          git diff --check
+          git diff -- $path
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- $path
+          git rm -- .github/workflows/apply-uia-wiring.yml
+          git commit -m 'UIA: normalize provider text at retrieval boundary'
+          git push origin HEAD:main

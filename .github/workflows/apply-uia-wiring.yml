@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   apply:
-    runs-on: windows-2022
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,36 +20,36 @@ jobs:
           fetch-depth: 0
 
       - name: Wire UIA text normalization into production path
-        shell: pwsh
+        shell: bash
         run: |
-          $ErrorActionPreference = 'Stop'
-          $path = 'NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py'
-          $text = [System.IO.File]::ReadAllText($path)
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
 
-          $oldImport = "`titerUIARangeByUnit,`n`tUIAMixedAttributeError,"
-          $newImport = "`titerUIARangeByUnit,`n`tnormalizeUIAText,`n`tUIAMixedAttributeError,"
-          $oldReturn = "`t`treturn textRange.getText(-1)"
-          $newReturn = "`t`treturn normalizeUIAText(textRange.getText(-1))"
+          path = Path('NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py')
+          text = path.read_text(encoding='utf-8')
 
-          $importCount = ([regex]::Matches($text, [regex]::Escape($oldImport))).Count
-          $returnCount = ([regex]::Matches($text, [regex]::Escape($oldReturn))).Count
-          if ($importCount -ne 1) {
-            throw "Expected exactly one UIA utils import insertion point, got $importCount"
-          }
-          if ($returnCount -ne 1) {
-            throw "Expected exactly one UIA text retrieval return, got $returnCount"
-          }
+          old_import = '\titerUIARangeByUnit,\n\tUIAMixedAttributeError,'
+          new_import = '\titerUIARangeByUnit,\n\tnormalizeUIAText,\n\tUIAMixedAttributeError,'
+          old_return = '\t\treturn textRange.getText(-1)'
+          new_return = '\t\treturn normalizeUIAText(textRange.getText(-1))'
 
-          $text = $text.Replace($oldImport, $newImport)
-          $text = $text.Replace($oldReturn, $newReturn)
-          [System.IO.File]::WriteAllText($path, $text, [System.Text.UTF8Encoding]::new($false))
+          if text.count(old_import) != 1:
+              raise SystemExit(f'Expected exactly one UIA utils import insertion point, got {text.count(old_import)}')
+          if text.count(old_return) != 1:
+              raise SystemExit(f'Expected exactly one UIA text retrieval return, got {text.count(old_return)}')
+
+          text = text.replace(old_import, new_import, 1)
+          text = text.replace(old_return, new_return, 1)
+          path.write_text(text, encoding='utf-8', newline='\n')
+          PY
 
           git diff --check
-          git diff -- $path
+          git diff -- NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py
 
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- $path
+          git add -- NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py
           git rm -- .github/workflows/apply-uia-wiring.yml
           git commit -m 'UIA: normalize provider text at retrieval boundary'
           git push origin HEAD:main

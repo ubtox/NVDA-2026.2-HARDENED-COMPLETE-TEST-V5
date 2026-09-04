@@ -646,8 +646,8 @@ class UIATextInfo(textInfos.TextInfo):
 
 	def _getTextFromUIARange(self, textRange: IUIAutomationTextRangeT) -> str:
 		"""
-		Fetches plain text from the given UI Automation text range.
-		Just calls getText(-1). This only exists to be overridden for filtering.
+		Fetch plain text from the given UI Automation text range and normalize malformed
+		UTF-16 before it reaches Python text consumers. Subclasses may override this for filtering.
 		"""
 		return normalizeUIAText(textRange.getText(-1))
 
@@ -1165,7 +1165,9 @@ class UIA(Window):
 
 	def _getUIACacheablePropertyValue(self, ID, ignoreDefault=False):
 		"""
-		Fetches the value for a UI Automation property from an element cache available in this core cycle. If not cached then a new value will be fetched.
+		Fetch a UI Automation property value, using the per-core-cycle cache when available.
+		String values are normalized at this provider boundary so malformed UTF-16 cannot
+		escape into NVDA object properties, speech, braille, or logging.
 		"""
 		elementCache = self._coreCycleUIAPropertyCacheElementCache
 		# If we have a UIAElement whos own cache contains the property, fetch the value from there
@@ -1175,7 +1177,7 @@ class UIA(Window):
 		else:
 			# The value is cached nowhere, so ask the UIAElement for its current value for the property
 			value = self.UIAElement.getCurrentPropertyValueEx(ID, ignoreDefault)
-		return value
+		return normalizeUIAText(value) if isinstance(value, str) else value
 
 	def _prefetchUIACacheForPropertyIDs(self, IDs):
 		"""

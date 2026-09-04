@@ -147,7 +147,7 @@ def getUIATextAttributeValueFromRange(rangeObj, attrib, ignoreMixedValues=False)
 	if val == UIAHandler.handler.ReservedMixedAttributeValue:
 		if not ignoreMixedValues:
 			raise UIAMixedAttributeError
-	return val
+	return normalizeUIAText(val) if isinstance(val, str) else val
 
 
 def iterUIARangeByUnit(rangeObj, unit, reverse=False):
@@ -283,7 +283,7 @@ class UIATextRangeAttributeValueFetcher(object):
 			return UIAHandler.handler.reservedNotSupportedValue
 		if not ignoreMixedValues and val == UIAHandler.handler.ReservedMixedAttributeValue:
 			raise UIAMixedAttributeError
-		return val
+		return normalizeUIAText(val) if isinstance(val, str) else val
 
 
 class BulkUIATextRangeAttributeValueFetcher(UIATextRangeAttributeValueFetcher):
@@ -299,7 +299,7 @@ class BulkUIATextRangeAttributeValueFetcher(UIATextRangeAttributeValueFetcher):
 		val = self.IDsToValues[ID]
 		if not ignoreMixedValues and val == UIAHandler.handler.ReservedMixedAttributeValue:
 			raise UIAMixedAttributeError
-		return val
+		return normalizeUIAText(val) if isinstance(val, str) else val
 
 
 class FakeEventHandlerGroup:

@@ -151,6 +151,28 @@ class TestEventQueuePriority(unittest.TestCase):
 		self.assertEqual(diagnostics.normalPendingAfter, 0)
 		debug.assert_called_once()
 
+	def test_largeNormalBacklogDrainsAcrossFairSlicesWithoutLoss(self):
+		calls = []
+		limit = queueHandler._MAX_NORMAL_EVENT_ITEMS_PER_PUMP
+		total = (limit * 16) + 7
+		for index in range(total):
+			self._putRaw(queueHandler.eventQueue, calls.append, index)
+
+		cycles = 0
+		with (
+			patch.object(queueHandler, "generators", {}),
+			patch.object(queueHandler.core, "requestPump"),
+			patch.object(queueHandler.watchdog, "alive"),
+			patch.object(queueHandler.log, "debug"),
+		):
+			while queueHandler.isPendingItems(queueHandler.eventQueue):
+				queueHandler.pumpAll()
+				cycles += 1
+
+		self.assertEqual(calls, list(range(total)))
+		self.assertEqual(cycles, 17)
+		self.assertFalse(queueHandler.isPendingItems(queueHandler.eventQueue))
+
 	def test_directFlushQueueKeepsFullSnapshotBehaviour(self):
 		calls = []
 		limit = queueHandler._MAX_NORMAL_EVENT_ITEMS_PER_PUMP

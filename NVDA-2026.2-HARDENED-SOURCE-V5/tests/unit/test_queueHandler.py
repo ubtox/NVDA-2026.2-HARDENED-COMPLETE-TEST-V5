@@ -21,6 +21,10 @@ class TestEventQueuePriority(unittest.TestCase):
 	def _putRaw(queue, func, *args):
 		queue.put_nowait((func, args, {}))
 
+	@staticmethod
+	def _putTimedRaw(queue, queuedAt, func, *args):
+		queue.put_nowait((func, args, {}, queuedAt))
+
 	def setUp(self):
 		self._drain(queueHandler.eventQueue)
 		self._drain(queueHandler._immediateEventQueue)
@@ -74,6 +78,17 @@ class TestEventQueuePriority(unittest.TestCase):
 		self.assertFalse(queueHandler.eventQueue.empty())
 		self.assertTrue(queueHandler._immediateEventQueue.empty())
 
+	def test_eventQueueItemsCarryLatencyTimestamp(self):
+		with (
+			patch.object(queueHandler.core, "requestPump"),
+			patch.object(queueHandler, "perf_counter", return_value=12.5),
+		):
+			queueHandler.queueFunction(queueHandler.eventQueue, lambda: None)
+
+		item = queueHandler.eventQueue.get_nowait()
+		self.assertEqual(len(item), 4)
+		self.assertEqual(item[3], 12.5)
+
 	def test_pumpAllLimitsNormalWorkPerCycle(self):
 		calls = []
 		limit = queueHandler._MAX_NORMAL_EVENT_ITEMS_PER_PUMP
@@ -110,6 +125,31 @@ class TestEventQueuePriority(unittest.TestCase):
 		self.assertEqual(calls[:2], ["immediate-1", "immediate-2"])
 		self.assertEqual(len(calls), limit + 2)
 		self.assertTrue(queueHandler.isPendingItems(queueHandler.eventQueue))
+
+	def test_pumpDiagnosticsMeasureBacklogWorkAndLatency(self):
+		calls = []
+		self._putTimedRaw(queueHandler._immediateEventQueue, 9.5, calls.append, "immediate")
+		self._putTimedRaw(queueHandler.eventQueue, 9.0, calls.append, "normal")
+
+		with (
+			patch.object(queueHandler, "generators", {}),
+			patch.object(queueHandler.core, "requestPump"),
+			patch.object(queueHandler.watchdog, "alive"),
+			patch.object(queueHandler.log, "debug") as debug,
+			patch.object(queueHandler, "perf_counter", side_effect=[10.0, 10.1, 10.2, 10.3]),
+		):
+			queueHandler.pumpAll()
+
+		diagnostics = queueHandler._getEventQueueDiagnostics()
+		self.assertEqual(calls, ["immediate", "normal"])
+		self.assertEqual(diagnostics.immediatePendingBefore, 1)
+		self.assertEqual(diagnostics.normalPendingBefore, 1)
+		self.assertEqual(diagnostics.immediateProcessed, 1)
+		self.assertEqual(diagnostics.normalProcessed, 1)
+		self.assertAlmostEqual(diagnostics.maxWaitMs, 1200.0)
+		self.assertAlmostEqual(diagnostics.pumpDurationMs, 300.0)
+		self.assertEqual(diagnostics.normalPendingAfter, 0)
+		debug.assert_called_once()
 
 	def test_directFlushQueueKeepsFullSnapshotBehaviour(self):
 		calls = []

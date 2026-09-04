@@ -1,0 +1,330 @@
+name: One-shot UIA cache and focus performance hardening
+
+on:
+  push:
+    branches:
+      - 'evolution/2026.2-uia-cache-focus'
+    paths:
+      - '.github/workflows/apply-uia-cache-focus-once.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: windows-2022
+    timeout-minutes: 120
+    steps:
+      - name: Enable Windows Git long paths
+        shell: pwsh
+        run: git config --global core.longpaths true
+
+      - name: Checkout staging branch
+        uses: actions/checkout@v6
+        with:
+          ref: evolution/2026.2-uia-cache-focus
+          fetch-depth: 0
+
+      - name: Install CPython 3.13.13 x64
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.13'
+          architecture: x64
+          update-environment: true
+
+      - name: Install CPython 3.13.13 x86 helper
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.13'
+          architecture: x86
+          update-environment: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: cpython-3.13.13-windows-x86_64-none
+
+      - name: Apply exact cache runtime deltas and tests
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          @'
+          from pathlib import Path
+
+          root = Path('NVDA-2026.2-HARDENED-SOURCE-V5')
+          uia_handler = root / 'source/UIAHandler/__init__.py'
+          uia_object = root / 'source/NVDAObjects/UIA/__init__.py'
+          uia_web = root / 'source/NVDAObjects/UIA/web.py'
+          tests = root / 'tests/unit/test_NVDAObjects_UIA_cache.py'
+
+          def replace_once(path: Path, old: str, new: str, label: str) -> None:
+              text = path.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected one anchor, found {count}')
+              path.write_text(text.replace(old, new, 1), encoding='utf-8', newline='\n')
+
+          replace_once(
+              uia_handler,
+              '\tUIA.UIA_LocalizedControlTypePropertyId,\n}\n\n#: The window class name for Microsoft Word documents.',
+              '\tUIA.UIA_LocalizedControlTypePropertyId,\n'
+              '\tUIA.UIA_HasKeyboardFocusPropertyId,\n'
+              '}\n'
+              '"""UIA property IDs included in the handler\'s base cache request.\n'
+              'The base cache request is attached to all event handler registrations and to the base tree walker,\n'
+              'so event senders and elements fetched through them carry these properties in their element cache.\n'
+              '"""\n\n'
+              '#: The window class name for Microsoft Word documents.',
+              'base cache keyboard focus',
+          )
+
+          replace_once(
+              uia_object,
+              '\t\tUIAHandler.UIA_LevelPropertyId,\n\t\tUIAHandler.UIA_IsEnabledPropertyId,\n\t}\n\n\tdef _get__controlFieldUIACacheRequest(self):',
+              '\t\tUIAHandler.UIA_LevelPropertyId,\n'
+              '\t\tUIAHandler.UIA_IsEnabledPropertyId,\n'
+              '\t\tUIAHandler.UIA.UIA_SelectionCanSelectMultiplePropertyId,\n'
+              '\t\tUIAHandler.UIA_IsOffscreenPropertyId,\n'
+              '\t\tUIAHandler.UIA_AnnotationTypesPropertyId,\n'
+              '\t\tUIAHandler.UIA_DragIsGrabbedPropertyId,\n'
+              '\t}\n\n\tdef _get__controlFieldUIACacheRequest(self):',
+              'control field cache expansion',
+          )
+
+          replace_once(
+              uia_object,
+              '\t\tif not UIAElement:\n\t\t\traise ValueError("needs a UIA element")\n\n\t\tself.UIAElement = UIAElement',
+              '\t\tif not UIAElement:\n'
+              '\t\t\traise ValueError("needs a UIA element")\n\n'
+              '\t\tif initialUIACachedPropertyIDs is None:\n'
+              '\t\t\tinitialUIACachedPropertyIDs = UIAHandler.baseCachePropertyIDs\n\n'
+              '\t\tself.UIAElement = UIAElement',
+              'constructor base cache default',
+          )
+
+          replace_once(
+              uia_object,
+              '\tdef event_gainFocus(self):\n'
+              '\t\tUIAHandler.handler.addLocalEventHandlerGroupToElement(self.UIAElement, isFocus=True)\n'
+              '\t\tsuper().event_gainFocus()',
+              '\tdef event_gainFocus(self):\n'
+              '\t\tUIAHandler.handler.addLocalEventHandlerGroupToElement(self.UIAElement, isFocus=True)\n'
+              '\t\tself._prefetchUIACacheForPropertyIDs(self._focusPrefetchUIAPropertyIDs | self._UIAStatesPropertyIDs)\n'
+              '\t\tsuper().event_gainFocus()',
+              'focus prefetch call',
+          )
+
+          state_block = '''\t_UIAStatesPropertyIDs = {
+          \t\tUIAHandler.UIA_HasKeyboardFocusPropertyId,
+          \t\tUIAHandler.UIA.UIA_SelectionCanSelectMultiplePropertyId,
+          \t\tUIAHandler.UIA_SelectionItemIsSelectedPropertyId,
+          \t\tUIAHandler.UIA_IsDataValidForFormPropertyId,
+          \t\tUIAHandler.UIA_IsRequiredForFormPropertyId,
+          \t\tUIAHandler.UIA_ValueIsReadOnlyPropertyId,
+          \t\tUIAHandler.UIA_ExpandCollapseExpandCollapseStatePropertyId,
+          \t\tUIAHandler.UIA_ToggleToggleStatePropertyId,
+          \t\tUIAHandler.UIA_IsKeyboardFocusablePropertyId,
+          \t\tUIAHandler.UIA_IsPasswordPropertyId,
+          \t\tUIAHandler.UIA_IsSelectionItemPatternAvailablePropertyId,
+          \t\tUIAHandler.UIA_IsEnabledPropertyId,
+          \t\tUIAHandler.UIA_IsOffscreenPropertyId,
+          \t\tUIAHandler.UIA_AnnotationTypesPropertyId,
+          \t\tUIAHandler.UIA_DragIsGrabbedPropertyId,
+          \t}
+
+          \tdef _get_states(self):'''.replace('          ', '')
+          focus_block = '''\t_UIAStatesPropertyIDs = {
+          \t\tUIAHandler.UIA_HasKeyboardFocusPropertyId,
+          \t\tUIAHandler.UIA.UIA_SelectionCanSelectMultiplePropertyId,
+          \t\tUIAHandler.UIA_SelectionItemIsSelectedPropertyId,
+          \t\tUIAHandler.UIA_IsDataValidForFormPropertyId,
+          \t\tUIAHandler.UIA_IsRequiredForFormPropertyId,
+          \t\tUIAHandler.UIA_ValueIsReadOnlyPropertyId,
+          \t\tUIAHandler.UIA_ExpandCollapseExpandCollapseStatePropertyId,
+          \t\tUIAHandler.UIA_ToggleToggleStatePropertyId,
+          \t\tUIAHandler.UIA_IsKeyboardFocusablePropertyId,
+          \t\tUIAHandler.UIA_IsPasswordPropertyId,
+          \t\tUIAHandler.UIA_IsSelectionItemPatternAvailablePropertyId,
+          \t\tUIAHandler.UIA_IsEnabledPropertyId,
+          \t\tUIAHandler.UIA_IsOffscreenPropertyId,
+          \t\tUIAHandler.UIA_AnnotationTypesPropertyId,
+          \t\tUIAHandler.UIA_DragIsGrabbedPropertyId,
+          \t}
+
+          \t_focusPrefetchUIAPropertyIDs = {
+          \t\tUIAHandler.UIA_FullDescriptionPropertyId,
+          \t\tUIAHandler.UIA_HelpTextPropertyId,
+          \t\tUIAHandler.UIA_AccessKeyPropertyId,
+          \t\tUIAHandler.UIA_AcceleratorKeyPropertyId,
+          \t\tUIAHandler.UIA_PositionInSetPropertyId,
+          \t\tUIAHandler.UIA_SizeOfSetPropertyId,
+          \t\tUIAHandler.UIA_LevelPropertyId,
+          \t\tUIAHandler.UIA.UIA_ValueValuePropertyId,
+          \t\tUIAHandler.UIA.UIA_RangeValueValuePropertyId,
+          \t\tUIAHandler.UIA_ToggleToggleStatePropertyId,
+          \t\tUIAHandler.UIA_BoundingRectanglePropertyId,
+          \t}
+          \t"""UIA property IDs prefetched in a single cache request when this object gains focus.
+          \tSubclasses may extend this set with the properties they report on focus.
+          \t"""
+
+          \tdef _get_states(self):'''.replace('          ', '')
+          replace_once(uia_object, state_block, focus_block, 'focus prefetch property set')
+
+          replace_once(
+              uia_web,
+              '\t_TextInfo = UIAWebTextInfo\n\n\tdef _isIframe(self):',
+              '\t_TextInfo = UIAWebTextInfo\n\n'
+              '\t_focusPrefetchUIAPropertyIDs = UIA._focusPrefetchUIAPropertyIDs | {\n'
+              '\t\tUIAHandler.UIA_AriaPropertiesPropertyId,\n'
+              '\t\tUIAHandler.UIA_AriaRolePropertyId,\n'
+              '\t\tUIAHandler.UIA_LandmarkTypePropertyId,\n'
+              '\t}\n\n'
+              '\tdef _isIframe(self):',
+              'web focus prefetch set',
+          )
+          replace_once(
+              uia_web,
+              '\tdef _get_ariaProperties(self):\n\t\treturn splitUIAElementAttribs(self.UIAElement.currentAriaProperties)',
+              '\tdef _get_ariaProperties(self):\n'
+              '\t\treturn splitUIAElementAttribs(\n'
+              '\t\t\tself._getUIACacheablePropertyValue(UIAHandler.UIA_AriaPropertiesPropertyId),\n'
+              '\t\t)',
+              'web aria properties cache',
+          )
+
+          if tests.exists():
+              raise SystemExit(f'test file unexpectedly exists: {tests}')
+          tests.write_text('''# A part of NonVisual Desktop Access (NVDA)
+          # Copyright (C) 2026 NVDA Evolution contributors
+          # This file is covered by the GNU General Public License.
+          # See the file COPYING for more details.
+
+          import unittest
+          from unittest.mock import Mock, patch
+
+          import UIAHandler
+          from NVDAObjects.UIA import UIA
+          from NVDAObjects.UIA.web import UIAWeb
+          from NVDAObjects.window import Window
+
+
+          class TestUIACachePerformance(unittest.TestCase):
+          \tdef test_baseCacheIncludesKeyboardFocus(self) -> None:
+          \t\tself.assertIn(UIAHandler.UIA_HasKeyboardFocusPropertyId, UIAHandler.baseCachePropertyIDs)
+
+          \tdef test_constructorDefaultsInitialCacheToBaseCache(self) -> None:
+          \t\telement = Mock(cachedNativeWindowHandle=1)
+          \t\twith patch.object(Window, "__init__", return_value=None):
+          \t\t\tobj = object.__new__(UIA)
+          \t\t\tUIA.__init__(obj, windowHandle=1, UIAElement=element)
+          \t\tself.assertEqual(UIAHandler.baseCachePropertyIDs, obj.initialUIACachedPropertyIDs)
+
+          \tdef test_focusPrefetchContainsSpeechCriticalProperties(self) -> None:
+          \t\texpected = {
+          \t\t\tUIAHandler.UIA_FullDescriptionPropertyId,
+          \t\t\tUIAHandler.UIA_HelpTextPropertyId,
+          \t\t\tUIAHandler.UIA_AccessKeyPropertyId,
+          \t\t\tUIAHandler.UIA_AcceleratorKeyPropertyId,
+          \t\t\tUIAHandler.UIA_PositionInSetPropertyId,
+          \t\t\tUIAHandler.UIA_SizeOfSetPropertyId,
+          \t\t\tUIAHandler.UIA_LevelPropertyId,
+          \t\t\tUIAHandler.UIA_BoundingRectanglePropertyId,
+          \t\t}
+          \t\tself.assertTrue(expected.issubset(UIA._focusPrefetchUIAPropertyIDs))
+
+          \tdef test_webFocusPrefetchContainsAriaProperties(self) -> None:
+          \t\texpected = {
+          \t\t\tUIAHandler.UIA_AriaPropertiesPropertyId,
+          \t\t\tUIAHandler.UIA_AriaRolePropertyId,
+          \t\t\tUIAHandler.UIA_LandmarkTypePropertyId,
+          \t\t}
+          \t\tself.assertTrue(expected.issubset(UIAWeb._focusPrefetchUIAPropertyIDs))
+
+          \tdef test_webAriaPropertiesUsesCoreCycleCache(self) -> None:
+          \t\tobj = object.__new__(UIAWeb)
+          \t\twith patch.object(UIAWeb, "_getUIACacheablePropertyValue", return_value="") as getter:
+          \t\t\tobj._get_ariaProperties()
+          \t\tgetter.assert_called_once_with(UIAHandler.UIA_AriaPropertiesPropertyId)
+          '''.replace('          ', ''), encoding='utf-8', newline='\n')
+
+          source_text = uia_object.read_text(encoding='utf-8')
+          if 'return bool(self.UIAElement.currentHasKeyboardFocus)' not in source_text:
+              raise SystemExit('Live focus-state regression guard is missing')
+          if 'except COMError:\n\t\t\t# Some providers (e.g. Qt\'s QWindowsUiaSelectionItemProvider' not in source_text:
+              raise SystemExit('SelectionContainer provider-failure guard is missing')
+          '@ | Set-Content -LiteralPath .apply-uia-cache-focus.py -Encoding utf8
+
+          python .apply-uia-cache-focus.py
+          Remove-Item -LiteralPath .apply-uia-cache-focus.py -Force
+
+          $expected = @(
+            'NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/web.py',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/source/UIAHandler/__init__.py',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/tests/unit/test_NVDAObjects_UIA_cache.py'
+          )
+          $changed = @(git status --short | ForEach-Object { $_.Substring(3).Replace('\','/') })
+          if ($changed.Count -ne $expected.Count) {
+            throw "Unexpected changed-file count: $($changed -join ', ')"
+          }
+          foreach ($path in $expected) {
+            if ($changed -notcontains $path) { throw "Expected changed file missing: $path" }
+          }
+          git diff --check
+          if ($LASTEXITCODE -ne 0) { throw "git diff --check failed: $LASTEXITCODE" }
+
+      - name: Format exact changed Python files
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $files = @(
+            'NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/web.py',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/source/UIAHandler/__init__.py',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/tests/unit/test_NVDAObjects_UIA_cache.py'
+          )
+          uvx --from ruff==0.15.9 ruff format @files
+          if ($LASTEXITCODE -ne 0) { throw "Ruff format failed: $LASTEXITCODE" }
+          uvx --from ruff==0.15.9 ruff check @files
+          if ($LASTEXITCODE -ne 0) { throw "Ruff check failed: $LASTEXITCODE" }
+          git diff --check
+          if ($LASTEXITCODE -ne 0) { throw "git diff --check after format failed: $LASTEXITCODE" }
+
+      - name: Full Evolution validation with cache changes
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & .\LAB-BUILD.ps1 -Mode All -Parallel
+          if ($LASTEXITCODE -ne 0) { throw "Full Evolution validation failed: $LASTEXITCODE" }
+
+      - name: Commit only fully validated runtime changes
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git rm -- '.github/workflows/apply-uia-cache-focus-once.yml'
+          $expected = @(
+            '.github/workflows/apply-uia-cache-focus-once.yml',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/__init__.py',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/UIA/web.py',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/source/UIAHandler/__init__.py',
+            'NVDA-2026.2-HARDENED-SOURCE-V5/tests/unit/test_NVDAObjects_UIA_cache.py'
+          )
+          $changed = @(git diff --name-only HEAD)
+          if ($changed.Count -ne $expected.Count) {
+            throw "Unexpected final changed-file count: $($changed -join ', ')"
+          }
+          foreach ($path in $expected) {
+            if ($changed -notcontains $path) { throw "Expected final changed file missing: $path" }
+          }
+          git diff --check
+          if ($LASTEXITCODE -ne 0) { throw "Final git diff --check failed: $LASTEXITCODE" }
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'UIA evolution: batch focus properties and reuse event caches'
+          if ($LASTEXITCODE -ne 0) { throw "git commit failed: $LASTEXITCODE" }
+          git push origin 'HEAD:evolution/2026.2-uia-cache-focus'
+          if ($LASTEXITCODE -ne 0) { throw "git push failed: $LASTEXITCODE" }

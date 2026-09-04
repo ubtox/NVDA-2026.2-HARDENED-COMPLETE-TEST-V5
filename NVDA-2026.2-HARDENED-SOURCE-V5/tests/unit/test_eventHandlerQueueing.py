@@ -92,7 +92,10 @@ class TestEventQueueCoalescing(unittest.TestCase):
 		self.assertEqual(self._pendingCount("visibleDataChange", self.obj), 1)
 
 	def test_focus_is_preserved_and_prioritized_during_state_event_storm(self) -> None:
-		with patch.object(eventHandler.queueHandler, "queueFunction") as queueFunction:
+		with (
+			patch.object(eventHandler.queueHandler, "queueFunction") as queueFunction,
+			patch.object(eventHandler, "objectBelowLockScreenAndWindowsIsLocked", return_value=False),
+		):
 			for _ in range(1000):
 				eventHandler.queueEvent("locationChange", self.obj)
 			eventHandler.queueEvent("gainFocus", self.obj)

@@ -1,5 +1,6 @@
 # A part of NonVisual Desktop Access (NVDA)
 # Copyright (C) 2006-2025 NV Access Limited
+# Copyright (C) 2026 NVDA Hardened contributors
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
@@ -34,7 +35,9 @@ def _updateVersionFromVCS():
 
 
 def _formatDevVersionString():
-	return "{y}.{M}.{m}dev".format(y=version_year, M=version_major, m=version_minor)
+	# Evolution builds must be unmistakably distinguishable from RC/stable builds,
+	# including when the source tree is nested and VCS metadata is not available.
+	return "{y}.{M}.{m}dev-evolution".format(y=version_year, M=version_major, m=version_minor)
 
 
 def formatBuildVersionString():

@@ -24,6 +24,11 @@ eventQueue = SimpleQueue()
 # while allowing latency-sensitive work to bypass normal backlog at the next pump.
 _immediateEventQueue = SimpleQueue()
 
+# The core pump services several subsystems sequentially. A very large normal eventQueue backlog should not
+# monopolise a whole core cycle, otherwise mouse, braille, vision and other pumps can become visibly stale.
+# Direct flushQueue callers still retain the historical full-snapshot flush semantics.
+_MAX_NORMAL_EVENT_ITEMS_PER_PUMP = 64
+
 generators = {}
 lastGeneratorObjID = 0
 
@@ -66,14 +71,20 @@ def isRunningGenerators():
 	log.debug("generators running: %s" % res)
 
 
-def _flushSingleQueue(queue):
-	"""Flush the items that were pending when this flush started.
+def _flushSingleQueue(queue, maxItems: int | None = None) -> bool:
+	"""Flush a snapshot of queued work.
+
+	@param maxItems: Optional upper bound for work executed during this call.
+	@return: C{True} if items remain after the flush.
 
 	Items queued while the flush is running are intentionally left for a subsequent pump,
 	matching the historical eventQueue behaviour and preventing an event producer from
 	monopolising NVDA's main thread indefinitely.
 	"""
-	for count in range(queue.qsize() + 1):
+	itemsToProcess = queue.qsize() + 1
+	if maxItems is not None:
+		itemsToProcess = min(itemsToProcess, maxItems)
+	for count in range(itemsToProcess):
 		if not queue.empty():
 			(func, args, kwargs) = queue.get_nowait()
 			watchdog.alive()
@@ -81,6 +92,7 @@ def _flushSingleQueue(queue):
 				func(*args, **kwargs)
 			except:  # noqa: E722
 				log.exception(f"Error in func {func.__qualname__}")
+	return not queue.empty()
 
 
 def flushQueue(queue):
@@ -89,6 +101,15 @@ def flushQueue(queue):
 	if queue is eventQueue:
 		_flushSingleQueue(_immediateEventQueue)
 	_flushSingleQueue(queue)
+
+
+def _flushEventQueueForPump() -> None:
+	"""Flush event work for one core pump cycle with fairness between NVDA subsystems."""
+	_flushSingleQueue(_immediateEventQueue)
+	itemsRemain = _flushSingleQueue(eventQueue, maxItems=_MAX_NORMAL_EVENT_ITEMS_PER_PUMP)
+	if itemsRemain:
+		# Continue promptly, but return control to core first so the remaining subsystem pumps get a turn.
+		core.requestPump()
 
 
 def isPendingItems(queue):
@@ -119,4 +140,4 @@ def pumpAll():
 		del gen
 	if generators:
 		core.requestPump()
-	flushQueue(eventQueue)
+	_flushEventQueueForPump()

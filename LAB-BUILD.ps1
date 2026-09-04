@@ -100,8 +100,22 @@ function Invoke-SConsTarget {
 
     Write-Host "`n=== SCons $Target ===" -ForegroundColor Cyan
     $global:LASTEXITCODE = 0
-    & uv run scons @args 2>&1 | Tee-Object -FilePath $buildLog -Append
-    $code = $LASTEXITCODE
+
+    # Windows PowerShell 5.1 converts native stderr merged with 2>&1 into
+    # ErrorRecord objects. With the script-wide ErrorActionPreference=Stop,
+    # a successful SCons process can therefore terminate this script before
+    # LASTEXITCODE is checked. Keep the merged stream for the build log, but
+    # make only this native pipeline non-terminating; the explicit exit-code
+    # and completion-marker checks below remain fail-closed.
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        & uv run scons @args 2>&1 | Tee-Object -FilePath $buildLog -Append
+        $code = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+
     if ($code -ne 0) {
         throw "SCons $Target failed with exit code $code"
     }

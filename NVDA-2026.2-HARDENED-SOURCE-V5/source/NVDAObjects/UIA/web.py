@@ -133,7 +133,7 @@ class UIAWebTextInfo(UIATextInfo):
 					textRange = self.obj.UIATextPattern.rangeFromChild(element)
 				except COMError:
 					return
-				text = textRange.getText(-1)
+				text = self._getTextFromUIARange(textRange)
 				if not text or text.isspace():
 					return element
 			element = walker.getParentElementBuildCache(element, cacheRequest)

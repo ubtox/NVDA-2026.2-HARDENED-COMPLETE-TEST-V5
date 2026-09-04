@@ -127,7 +127,7 @@ class EdgeTextInfo_preGapRemoval(EdgeTextInfo):
 			return
 		if log.isEnabledFor(log.DEBUG):
 			log.debug(f"rootElement: {rootElement.currentLocalizedControlType}")
-			log.debug(f"full text: {textRange.getText(-1)}")
+			log.debug(f"full text: {self._getTextFromUIARange(textRange)}")
 			log.debug(f"includeRoot: {includeRoot}")
 		startRange = textRange.clone()
 		startRange.MoveEndpointByRange(

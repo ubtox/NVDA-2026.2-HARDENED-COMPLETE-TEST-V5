@@ -133,7 +133,7 @@ class ReferenceUIATextInfoQuickNavItem(TextAttribUIATextInfoQuickNavItem):
 	def label(self) -> str:
 		obj = getReferenceFromPosition(self.textInfo)
 		if obj:
-			text = obj.UIATextPattern.DocumentRange.GetText(-1).strip()
+			text = UIATextInfo(obj, textInfos.POSITION_ALL).text.strip()
 			match obj.UIAElement.GetCurrentPropertyValue(UIAHandler.UIA_AnnotationAnnotationTypeIdPropertyId):
 				case UIAHandler.UIA.AnnotationType_Footnote:
 					# Translators: The label shown for a footnote in the NVDA Elements List dialog in Microsoft Word.

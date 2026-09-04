@@ -27,6 +27,11 @@ from ._remoteOps.lowLevel import (
 	AttributeId,
 	StyleId,
 )
+from .utils import normalizeUIAText
+
+
+def _normalizeProviderText(text: str) -> str:
+	return normalizeUIAText(text)
 
 
 _isSupported: bool = False
@@ -322,7 +327,7 @@ def collectAllHeadingsInTextRange(
 					ra.Yield(level, label, paragraphRange)
 
 	for level, label, paragraphRange in op.iterExecute(maxTries=20):
-		yield level, label, paragraphRange
+		yield level, _normalizeProviderText(cast(str, label)), paragraphRange
 
 
 def findFirstHeadingInTextRange(
@@ -364,6 +369,6 @@ def findFirstHeadingInTextRange(
 		return None
 	return (
 		cast(int, level),
-		cast(str, label),
+		_normalizeProviderText(cast(str, label)),
 		cast(UIA.IUIAutomationTextRange, paragraphRange),
 	)

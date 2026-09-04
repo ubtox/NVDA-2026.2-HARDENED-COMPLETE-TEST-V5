@@ -105,7 +105,7 @@ class VsWpfTextViewTextInfo(UIATextInfo):
 			lineNumberRange,
 			UIAHandler.TextPatternRangeEndpoint_Start,
 		)
-		return lineNumberRange.GetText(-1)
+		return super()._getTextFromUIARange(lineNumberRange)
 
 	def _getFormatFieldAtRange(self, textRange, formatConfig, ignoreMixedValues=False):
 		formatField = super()._getFormatFieldAtRange(

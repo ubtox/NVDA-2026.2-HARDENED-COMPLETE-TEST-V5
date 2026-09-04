@@ -303,12 +303,12 @@ class ConsoleUIATextInfoWorkaroundEndInclusive(ConsoleUIATextInfo):
 		# position a textInfo from the start of the line up to the current position.
 		charInfo = lineInfo.copy()
 		charInfo.setEndPoint(self, "endToStart")
-		text = charInfo._rangeObj.getText(-1)
+		text = charInfo._getTextFromUIARange(charInfo._rangeObj)
 		offset = textUtils.WideStringOffsetConverter(text).encodedStringLength
 		return offset
 
 	def _getWordOffsetsInThisLine(self, offset, lineInfo):
-		lineText = lineInfo._rangeObj.getText(-1)
+		lineText = lineInfo._getTextFromUIARange(lineInfo._rangeObj)
 		# Convert NULL and non-breaking space to space to make sure
 		# that words will break on them
 		lineText = lineText.translate({0: " ", 0xA0: " "})

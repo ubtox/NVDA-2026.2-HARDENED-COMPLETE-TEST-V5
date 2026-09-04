@@ -49,6 +49,51 @@ function Get-GitBlobSha {
     return $sha.ToLowerInvariant()
 }
 
+function Write-GitBlobToFile {
+    param(
+        [Parameter(Mandatory)][string]$RepositoryPath,
+        [Parameter(Mandatory)][string]$BlobSha,
+        [Parameter(Mandatory)][string]$DestinationPath
+    )
+
+    $parent = Split-Path -Parent $DestinationPath
+    New-Item -ItemType Directory -Force -Path $parent | Out-Null
+
+    $gitCommand = (Get-Command git -ErrorAction Stop).Source
+    $startInfo = New-Object System.Diagnostics.ProcessStartInfo
+    $startInfo.FileName = $gitCommand
+    $startInfo.Arguments = "-C `"$RepositoryPath`" cat-file blob $BlobSha"
+    $startInfo.UseShellExecute = $false
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+    $startInfo.CreateNoWindow = $true
+
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $startInfo
+    $fileStream = $null
+    try {
+        if (-not $process.Start()) {
+            throw "Unable to start git cat-file for blob $BlobSha"
+        }
+        $fileStream = [System.IO.File]::Create($DestinationPath)
+        $process.StandardOutput.BaseStream.CopyTo($fileStream)
+        $fileStream.Flush()
+        $fileStream.Dispose()
+        $fileStream = $null
+
+        $stderr = $process.StandardError.ReadToEnd()
+        $process.WaitForExit()
+        if ($process.ExitCode -ne 0) {
+            throw "git cat-file failed for blob $BlobSha with exit code $($process.ExitCode): $stderr"
+        }
+    } finally {
+        if ($null -ne $fileStream) {
+            $fileStream.Dispose()
+        }
+        $process.Dispose()
+    }
+}
+
 function Ensure-PinnedDependencyFile {
     param(
         [Parameter(Mandatory)][string]$RelativePath,
@@ -98,7 +143,6 @@ function Ensure-PinnedGitDependencyTree {
 
     $destination = Join-Path $sourceRoot $RelativePath
     $temporary = Join-Path ([System.IO.Path]::GetTempPath()) ("nvda-lab-dependency-{0}-{1}" -f $PID, [Guid]::NewGuid().ToString('N'))
-    $archivePath = Join-Path $temporary 'pinned-dependency.zip'
     $expectedCommit = $Commit.ToLowerInvariant()
 
     Write-Host "Hydrating pinned dependency tree: $RelativePath @ $Commit" -ForegroundColor Yellow
@@ -120,20 +164,14 @@ function Ensure-PinnedGitDependencyTree {
             throw "Unable to enumerate pinned tree for $RelativePath"
         }
 
-        # Do not use a Windows working-tree checkout here. Git's text checkout
-        # conversion can change CRLF/LF bytes even when the committed blob is
-        # correct. git archive emits the committed blob payloads directly, so
-        # the byte-level Git blob verification below remains deterministic.
-        Invoke-NativeChecked "Git archive $RelativePath" {
-            git -C $temporary archive --format=zip "--output=$archivePath" $Commit
-        }
-
         if (Test-Path -LiteralPath $destination) {
             Remove-Item -LiteralPath $destination -Recurse -Force
         }
         New-Item -ItemType Directory -Force -Path $destination | Out-Null
-        Expand-Archive -LiteralPath $archivePath -DestinationPath $destination -Force
 
+        # Materialize each committed Git blob directly from the object database.
+        # This bypasses Windows checkout and archive text transformations, so the
+        # copied dependency is byte-identical to the pinned upstream commit.
         $verifiedBlobCount = 0
         foreach ($entry in $treeEntries) {
             if ($entry -notmatch '^[0-9]+\s+blob\s+([0-9a-f]{40})\t(.+)$') {
@@ -142,6 +180,12 @@ function Ensure-PinnedGitDependencyTree {
             $expectedBlob = $Matches[1].ToLowerInvariant()
             $entryPath = $Matches[2] -replace '/', '\'
             $localPath = Join-Path $destination $entryPath
+
+            Write-GitBlobToFile `
+                -RepositoryPath $temporary `
+                -BlobSha $expectedBlob `
+                -DestinationPath $localPath
+
             if (-not (Test-Path -LiteralPath $localPath -PathType Leaf)) {
                 throw "Pinned dependency file missing after hydration: $RelativePath\$entryPath"
             }

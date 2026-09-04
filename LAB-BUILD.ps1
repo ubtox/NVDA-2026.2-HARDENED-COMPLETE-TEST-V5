@@ -42,7 +42,7 @@ function Get-GitBlobSha {
     param([Parameter(Mandatory)][string]$Path)
 
     $global:LASTEXITCODE = 0
-    $sha = (& git hash-object -- $Path).Trim()
+    $sha = (& git hash-object --no-filters -- $Path).Trim()
     if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($sha)) {
         throw "Unable to calculate Git blob SHA for $Path"
     }

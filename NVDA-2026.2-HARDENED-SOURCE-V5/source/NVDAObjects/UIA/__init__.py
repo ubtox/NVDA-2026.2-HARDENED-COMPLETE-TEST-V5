@@ -45,6 +45,7 @@ from UIAHandler.utils import (
 	getChildrenWithCacheFromUIATextRange,
 	getEnclosingElementWithCacheFromUIATextRange,
 	iterUIARangeByUnit,
+	normalizeUIAText,
 	UIAMixedAttributeError,
 	UIATextRangeFromElement,
 	_shouldUseWindowsTerminalNotifications,
@@ -648,7 +649,7 @@ class UIATextInfo(textInfos.TextInfo):
 		Fetches plain text from the given UI Automation text range.
 		Just calls getText(-1). This only exists to be overridden for filtering.
 		"""
-		return textRange.getText(-1)
+		return normalizeUIAText(textRange.getText(-1))
 
 	def _getTextWithFields_text(
 		self,

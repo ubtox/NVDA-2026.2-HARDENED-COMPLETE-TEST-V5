@@ -37,7 +37,10 @@ Status:
 - NV Access cooperative LiveText flood handling ported exactly, yielding between announcement batches and bounding stale terminal output.
 - Conservative coalescing implemented for duplicate payload-free `locationChange` and `visibleDataChange` events targeting the same object.
 - Six regression tests protect coalescing boundaries: payload events, caret events, separate objects and re-queue after callback completion remain uncoalesced.
-- Queue backlog telemetry and broader stress tests remain planned.
+- Per-pump queue diagnostics now capture priority/normal backlog depth, processed counts, maximum queue wait, pump duration and remaining normal backlog.
+- Pressure diagnostics are logged only when backlog or latency thresholds are exceeded, avoiding normal-log noise.
+- Deterministic stress coverage now includes 1,000-event redundant-state storms, preservation of priority `gainFocus`, and multi-slice draining of large normal backlogs without loss or reordering.
+- The scheduler/event-pipeline changes, telemetry and stress suite passed the full Evolution validation pipeline on commit `39b44de7c45ecbd1b2ef4d348217e3e82377f340`.
 
 ## Track 2 - UI Automation pipeline v2
 
@@ -61,6 +64,9 @@ Status:
 - The high-frequency UIA text-change path uses the cached class name rather than a live cross-process fetch.
 - Official hung-window guard regression tests retained in a separate test module alongside the fork's existing UIA normalization tests.
 - NV Access watchdog cancellation safeguards (#20170) ported for blocking UiaHasServerSideProvider and Word in-process text calls.
+- NV Access SelectionContainer provider-failure handling (#20255) ported: a provider `COMError` is treated as a missing selection container instead of aborting the entire focus-speech path.
+- A dedicated regression test forces a SelectionItem provider `COMError` and verifies the UIA object boundary returns `None` cleanly.
+- The existing `_getUIACacheablePropertyValue_handlesCOMErrors` boundary for UIA state retrieval was audited and retained; no duplicate port was needed.
 - Broader disconnected-provider recovery, property batching and event-storm measurements remain planned.
 
 ## Track 3 - Speech and braille responsiveness
@@ -98,6 +104,8 @@ Acceptance criteria:
 Status:
 - Blocking UIA and Word accessibility calls covered by the existing watchdog cancellation mechanism where upstream identified uncancellable cross-process calls.
 - Hung UIA/MSAA applications are rejected early instead of repeatedly entering blocking provider calls.
+- UIA SelectionItem provider disconnections no longer propagate through `selectionContainer` and silence the whole focus event.
+- Magnifier repeated-error recovery and COM/UIA disconnection handling were audited and are already present in the Evolution baseline, so no redundant port was applied.
 - General subsystem failure-domain and retry policy work remains planned.
 
 ## Track 5 - Security boundary hardening
@@ -137,7 +145,8 @@ Status:
 - Dedicated Evolution CI is active and isolated from RC validation.
 - Full build, unit, Ruff, format, Pyright, source, dist and launcher validation is executed by LAB-BUILD.
 - Evolution binaries identify themselves as `2026.2.0dev-evolution`; CI rejects ambiguous installer identities.
-- Event-pipeline stress coverage and quantitative latency baselines remain planned.
+- Event-pipeline stress coverage and queue-pressure diagnostics are active in the normal unit/validation pipeline.
+- Quantitative performance baselines and trend comparison remain planned.
 
 ## Promotion model
 

@@ -1,0 +1,83 @@
+name: NVDA Evolution validation
+
+on:
+  push:
+    branches:
+      - 'evolution/**'
+    paths-ignore:
+      - 'VALIDATION-RUNS/**'
+      - 'PATCH-BACKUP-*/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nvda-evolution-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VSCMD_SKIP_SENDTELEMETRY: 1
+  SCONS_CACHE_MSVC_CONFIG: '.scons_msvc_cache.json'
+
+jobs:
+  validate:
+    name: Validate NVDA Evolution
+    runs-on: windows-2022
+    timeout-minutes: 120
+
+    steps:
+      - name: Enable Windows Git long paths
+        shell: pwsh
+        run: git config --global core.longpaths true
+
+      - name: Checkout evolution source
+        uses: actions/checkout@v6
+
+      - name: Install CPython 3.13.13 x64
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.13'
+          architecture: x64
+          update-environment: true
+
+      - name: Install CPython 3.13.13 x86 helper
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.13'
+          architecture: x86
+          update-environment: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: cpython-3.13.13-windows-x86_64-none
+
+      - name: Full evolution validation
+        shell: pwsh
+        run: |
+          $logRoot = Join-Path $PWD 'LAB-LOCAL-OUTPUT'
+          New-Item -ItemType Directory -Force -Path $logRoot | Out-Null
+          $workflowLog = Join-Path $logRoot 'EVOLUTION-WORKFLOW-COMPLETE.log'
+          try {
+            & .\LAB-BUILD.ps1 -Mode All -Parallel *>&1 |
+              Tee-Object -FilePath $workflowLog
+          } catch {
+            $_ | Out-String |
+              Tee-Object -FilePath $workflowLog -Append |
+              Write-Host
+            throw
+          }
+
+      - name: Upload evolution evidence and binaries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nvda-evolution-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            LAB-LOCAL-OUTPUT/**
+            NVDA-2026.2-HARDENED-SOURCE-V5/testOutput/unit/**
+            NVDA-2026.2-HARDENED-SOURCE-V5/output/**
+            NVDA-2026.2-HARDENED-SOURCE-V5/dist/**

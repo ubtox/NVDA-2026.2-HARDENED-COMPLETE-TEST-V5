@@ -89,7 +89,7 @@ class TestUIATextAttributeNormalization(TestCase):
 		textRange.GetAttributeValue.return_value = "A\ude00B"
 
 		self.assertEqual(
-			utils.getUIATextAttributeValueFromRange(textRange, 123),
+			utils.getUIATextAttributeValueFromRange(textRange, 123, ignoreMixedValues=True),
 			"A\ufffdB",
 		)
 
@@ -98,13 +98,13 @@ class TestUIATextAttributeNormalization(TestCase):
 		textRange.getAttributeValue.return_value = "A\ud83dB"
 		fetcher = utils.UIATextRangeAttributeValueFetcher(textRange)
 
-		self.assertEqual(fetcher.getValue(123), "A\ufffdB")
+		self.assertEqual(fetcher.getValue(123, ignoreMixedValues=True), "A\ufffdB")
 
 	def test_bulkAttributeFetcherStringIsNormalized(self):
 		fetcher = object.__new__(utils.BulkUIATextRangeAttributeValueFetcher)
 		fetcher.IDsToValues = {123: "\ud83d\ude00"}
 
-		self.assertEqual(fetcher.getValue(123), "😀")
+		self.assertEqual(fetcher.getValue(123, ignoreMixedValues=True), "😀")
 
 
 class TestUIAProviderTextBoundaryRegressions(TestCase):

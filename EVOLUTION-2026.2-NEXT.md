@@ -87,7 +87,9 @@ Acceptance criteria:
 
 Status:
 - LiveText burst reporting is cooperative and cancellable rather than synchronously monopolizing the main thread.
-- General speech and braille stale-output policies remain planned.
+- Braille region refresh scheduling was audited: repeated updates are already coalesced by `_regionsPendingUpdate`, and one core pump performs a single buffer/display refresh after updating all distinct pending regions.
+- Deterministic regression coverage now protects duplicate-region coalescing under a 1,000-update burst and verifies multiple distinct regions share one buffer/display refresh per core pump.
+- General speech stale-output policy and broader rapid focus/text synchronization tests remain planned.
 
 ## Track 4 - Resilience and self-recovery
 

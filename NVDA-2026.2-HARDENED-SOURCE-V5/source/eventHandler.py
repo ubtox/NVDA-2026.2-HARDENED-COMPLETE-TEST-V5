@@ -2,6 +2,7 @@
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2007-2025 NV Access Limited, Babbage B.V., Joseph Lee
+# Copyright (C) 2026 NVDA Evolution contributors
 
 import threading
 import typing
@@ -37,6 +38,13 @@ _pendingEventCountsByNameAndObj = {}
 # Needed to ensure updates are atomic, as these might be updated from multiple threads simultaneously.
 _pendingEventCountsLock = threading.RLock()
 
+# Only state-notification events whose handler observes the object's current state are eligible.
+# Focus, caret, text, live-region and payload-carrying events must never be coalesced here.
+_COALESCIBLE_EVENT_NAMES = frozenset({
+	"locationChange",
+	"visibleDataChange",
+})
+
 #: the last object queued for a gainFocus event. Useful for code running outside NVDA's core queue
 lastQueuedFocusObject = None
 
@@ -53,6 +61,16 @@ def queueEvent(eventName, obj, **kwargs):
 	"""
 	_trackFocusObject(eventName, obj)
 	with _pendingEventCountsLock:
+		# locationChange and visibleDataChange describe current object state rather than
+		# an ordered payload. If one is already pending for this object, a later duplicate
+		# can be dropped because the eventual handler observes the newest object state.
+		# Events carrying kwargs are deliberately excluded because their payload may differ.
+		if (
+			eventName in _COALESCIBLE_EVENT_NAMES
+			and not kwargs
+			and _pendingEventCountsByNameAndObj.get((eventName, obj), 0)
+		):
+			return
 		_pendingEventCountsByName[eventName] = _pendingEventCountsByName.get(eventName, 0) + 1
 		_pendingEventCountsByObj[obj] = _pendingEventCountsByObj.get(obj, 0) + 1
 		_pendingEventCountsByNameAndObj[(eventName, obj)] = (

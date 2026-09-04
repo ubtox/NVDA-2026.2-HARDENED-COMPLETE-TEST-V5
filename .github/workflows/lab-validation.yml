@@ -19,7 +19,7 @@ on:
           - All
 
 concurrency:
-  group: nvda-lab-${{ github.ref }}
+  group: nvda-lab-all-${{ github.ref }}
   cancel-in-progress: true
 
 env:

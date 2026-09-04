@@ -1,5 +1,5 @@
 # A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2015-2021 NV Access Limited, Bill Dengler
+# Copyright (C) 2015-2026 NV Access Limited, Bill Dengler, Tobias Heath
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
@@ -57,13 +57,51 @@ def createUIAMultiPropertyCondition(*dicts):
 	return condition
 
 
+def normalizeUIAText(text: str) -> str:
+	"""Normalize malformed UTF-16 surrogate data returned by UIA providers.
+
+	Valid surrogate pairs are converted to their Unicode scalar value. Isolated
+	surrogate halves are replaced with U+FFFD so they cannot break UTF-8 logging,
+	speech, or other Python text consumers. Strings without surrogates are returned
+	unchanged and avoid the encode/decode path.
+	"""
+	if not text or not any(0xD800 <= ord(ch) <= 0xDFFF for ch in text):
+		return text
+	return text.encode("utf-16-le", errors="surrogatepass").decode("utf-16-le", errors="replace")
+
+
 def UIATextRangeFromElement(documentTextPattern, element):
-	"""Wraps IUIAutomationTextRange::getEnclosingElement, returning None on  COMError."""
+	"""Return the text range representing ``element`` within ``documentTextPattern``.
+
+	Prefer TextPattern.RangeFromChild, preserving the established NVDA path. Some modern
+	UIA providers advertise the relationship but fail or return NULL. In that case,
+	TextChildPattern can expose an equivalent range directly. The fallback is accepted only
+	when its range can be compared with the document text provider, preventing cross-provider
+	ranges from leaking into callers that expect one coordinate space.
+	"""
 	try:
 		childRange = documentTextPattern.rangeFromChild(element)
 	except COMError:
 		childRange = None
-	return childRange
+	if childRange:
+		return childRange
+	try:
+		punk = element.GetCurrentPattern(UIAHandler.UIA_TextChildPatternId)
+		if not punk:
+			return None
+		textChildPattern = punk.QueryInterface(UIAHandler.IUIAutomationTextChildPattern)
+		textChildRange = textChildPattern.TextRange
+		if not textChildRange:
+			return None
+		documentRange = documentTextPattern.documentRange
+		textChildRange.CompareEndpoints(
+			UIAHandler.TextPatternRangeEndpoint_Start,
+			documentRange,
+			UIAHandler.TextPatternRangeEndpoint_Start,
+		)
+		return textChildRange
+	except (COMError, AttributeError):
+		return None
 
 
 def isUIAElementInWalker(element, walker):
@@ -146,8 +184,6 @@ def iterUIARangeByUnit(rangeObj, unit, reverse=False):
 		if pastEnd:
 			tempRange.MoveEndpointByRange(Endpoint_relativeEnd, rangeObj, Endpoint_relativeEnd)
 		if yieldRange and bool(yieldRange.compare(tempRange)):
-			# we've looped onto range we've already yielded previously - shortcircuit to prevent
-			# infinite loop
 			return
 		yieldRange = tempRange.clone()
 		yield yieldRange
@@ -156,10 +192,7 @@ def iterUIARangeByUnit(rangeObj, unit, reverse=False):
 		tempRange.MoveEndpointByRange(Endpoint_relativeStart, tempRange, Endpoint_relativeEnd)
 		delta = tempRange.CompareEndpoints(Endpoint_relativeStart, rangeObj, Endpoint_relativeEnd)
 		if relativeGTOperator(delta, -1):
-			# tempRange is now already entirely past the end of the given range.
-			# Can be seen with MS Word bullet points: #9613
 			return
-	# Ensure that we always reach the end of the outer range, even if the units seem to stop somewhere inside
 	if relativeLTOperator(
 		tempRange.CompareEndpoints(Endpoint_relativeEnd, rangeObj, Endpoint_relativeEnd),
 		0,
@@ -167,8 +200,6 @@ def iterUIARangeByUnit(rangeObj, unit, reverse=False):
 		tempRange.MoveEndpointByRange(Endpoint_relativeEnd, rangeObj, Endpoint_relativeEnd)
 		yield tempRange.clone()
 	elif loopCount == 0:
-		# We Could not walk at all.
-		# So just yield the original range
 		yield rangeObj
 
 
@@ -238,7 +269,6 @@ def isTextRangeOffscreen(textRange, visiRanges):
 			>= 0
 		)
 	else:
-		# Visible textRanges not available.
 		raise RuntimeError("Visible textRanges array is empty or invalid.")
 
 
@@ -250,7 +280,6 @@ class UIATextRangeAttributeValueFetcher(object):
 		try:
 			val = self.textRange.getAttributeValue(ID)
 		except COMError:
-			# #7124: some text attributes are not supported in  older Operating Systems
 			return UIAHandler.handler.reservedNotSupportedValue
 		if not ignoreMixedValues and val == UIAHandler.handler.ReservedMixedAttributeValue:
 			raise UIAMixedAttributeError
@@ -343,8 +372,6 @@ def _shouldUseUIAConsole(hwnd: int) -> bool:
 	elif setting == "legacy":
 		return False
 	else:
-		# #7497: the UIA implementation in old conhost is incomplete, therefore we
-		# should ignore it.
 		return _getConhostAPILevel(hwnd) >= WinConsoleAPILevel.FORMATTED
 
 
@@ -355,9 +382,6 @@ def _getConhostAPILevel(hwnd: int) -> WinConsoleAPILevel:
 	needed in a given conhost instance.
 	See the comments on the WinConsoleAPILevel enum for details.
 	"""
-	# microsoft/terminal#4495: In IMPROVED consoles,
-	# IUIAutomationTextRange::getVisibleRanges returns one visible range.
-	# Therefore, if exactly one range is returned, it is almost definitely an IMPROVED console.
 	try:
 		UIAElement = UIAHandler.handler.clientObject.ElementFromHandleBuildCache(
 			hwnd,
@@ -381,8 +405,6 @@ def _getConhostAPILevel(hwnd: int) -> WinConsoleAPILevel:
 		).QueryInterface(UIAHandler.IUIAutomationTextPattern)
 		visiRanges = UIATextPattern.GetVisibleRanges()
 		if visiRanges.length == 1:
-			# Microsoft/terminal#2161: FORMATTED consoles expose text formatting
-			# information to UIA.
 			if isinstance(
 				visiRanges.GetElement(0).GetAttributeValue(UIAHandler.UIA_FontNameAttributeId),
 				str,

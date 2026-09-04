@@ -31,8 +31,6 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $mutable = @(
-            '.github/workflows/evolution-validation.yml',
-            '.github/workflows/lab-validation.yml',
             'LAB-BUILD.ps1',
             'README.md',
             'NVDA-2026.2-HARDENED-SOURCE-V5/.github/workflows/add-new-language.yml',
@@ -43,6 +41,8 @@ jobs:
             'NVDA-2026.2-HARDENED-SOURCE-V5/runtime-builders/synthDriverHost32/.python-version'
           )
           $allowedLegacy = @(
+            '.github/workflows/evolution-validation.yml',
+            '.github/workflows/lab-validation.yml',
             '.github/workflows/port-python-31315-once.yml',
             '.github/workflows/rc2-upstream-hardening.yml'
           )
@@ -99,13 +99,13 @@ jobs:
             throw "Unexpected changed files: $($actual -join ', ')"
           }
 
-      - name: Commit exact Python port
+      - name: Commit exact non-root-workflow Python port
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- 'EVOLUTION-2026.2-NEXT.md' '.github/workflows/evolution-validation.yml' '.github/workflows/lab-validation.yml' 'LAB-BUILD.ps1' 'README.md' 'NVDA-2026.2-HARDENED-SOURCE-V5/.github/workflows/add-new-language.yml' 'NVDA-2026.2-HARDENED-SOURCE-V5/.github/workflows/fetch-crowdin-translations.yml' 'NVDA-2026.2-HARDENED-SOURCE-V5/.github/workflows/testAndPublish.yml' 'NVDA-2026.2-HARDENED-SOURCE-V5/.python-versions' 'NVDA-2026.2-HARDENED-SOURCE-V5/projectDocs/dev/createDevEnvironment.md' 'NVDA-2026.2-HARDENED-SOURCE-V5/runtime-builders/synthDriverHost32/.python-version'
+          git add -- 'EVOLUTION-2026.2-NEXT.md' 'LAB-BUILD.ps1' 'README.md' 'NVDA-2026.2-HARDENED-SOURCE-V5/.github/workflows/add-new-language.yml' 'NVDA-2026.2-HARDENED-SOURCE-V5/.github/workflows/fetch-crowdin-translations.yml' 'NVDA-2026.2-HARDENED-SOURCE-V5/.github/workflows/testAndPublish.yml' 'NVDA-2026.2-HARDENED-SOURCE-V5/.python-versions' 'NVDA-2026.2-HARDENED-SOURCE-V5/projectDocs/dev/createDevEnvironment.md' 'NVDA-2026.2-HARDENED-SOURCE-V5/runtime-builders/synthDriverHost32/.python-version'
           git commit -m 'Build: port Python 3.13.15 from NV Access #20634'
           if ($LASTEXITCODE -ne 0) { throw "git commit failed: $LASTEXITCODE" }
           git push origin 'HEAD:evolution/2026.2-next'

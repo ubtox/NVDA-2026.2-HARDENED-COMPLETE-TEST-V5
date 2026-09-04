@@ -12,7 +12,7 @@ on:
       buildMode:
         description: LAB build mode
         required: true
-        default: Source
+        default: All
         type: choice
         options:
           - Source
@@ -30,7 +30,7 @@ jobs:
   validate:
     name: Validate NVDA 2026.2 LAB
     runs-on: windows-2022
-    timeout-minutes: 90
+    timeout-minutes: 120
 
     steps:
       - name: Enable Windows Git long paths
@@ -73,7 +73,7 @@ jobs:
         run: |
           $mode = '${{ github.event.inputs.buildMode }}'
           if ([string]::IsNullOrWhiteSpace($mode)) {
-            $mode = 'Source'
+            $mode = 'All'
           }
           "mode=$mode" >> $env:GITHUB_OUTPUT
 
@@ -84,7 +84,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path $logRoot | Out-Null
           $workflowLog = Join-Path $logRoot 'LAB-WORKFLOW-COMPLETE.log'
           try {
-            & .\LAB-BUILD.ps1 -Mode '${{ steps.mode.outputs.mode }}' *>&1 |
+            & .\LAB-BUILD.ps1 -Mode '${{ steps.mode.outputs.mode }}' -Parallel *>&1 |
               Tee-Object -FilePath $workflowLog
           } catch {
             $_ | Out-String |
@@ -105,7 +105,7 @@ jobs:
             NVDA-2026.2-HARDENED-SOURCE-V5/testOutput/unit/**
 
       - name: Upload LAB binaries
-        if: ${{ success() && github.event_name == 'workflow_dispatch' && github.event.inputs.buildMode == 'All' }}
+        if: ${{ success() && steps.mode.outputs.mode == 'All' }}
         uses: actions/upload-artifact@v4
         with:
           name: nvda-2026.2-lab-${{ github.run_id }}

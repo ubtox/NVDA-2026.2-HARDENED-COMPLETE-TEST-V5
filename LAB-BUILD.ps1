@@ -104,6 +104,7 @@ function Ensure-PinnedGitDependencyTree {
     try {
         New-Item -ItemType Directory -Force -Path $temporary | Out-Null
         Invoke-NativeChecked "Git init $RelativePath" { git -C $temporary init --quiet }
+        Invoke-NativeChecked "Git config $RelativePath" { git -C $temporary config core.autocrlf false }
         Invoke-NativeChecked "Git remote $RelativePath" { git -C $temporary remote add origin $RepositoryUri }
         Invoke-NativeChecked "Git fetch $RelativePath" { git -C $temporary fetch --quiet --depth 1 origin $Commit }
 
@@ -246,7 +247,7 @@ if ($Mode -in @('Dist', 'Launcher', 'All')) {
         -RelativePath 'include\nsis' `
         -RepositoryUri 'https://github.com/nvaccess/nsis-build' `
         -Commit 'f8571bbe74ff34e4f754e26855fc4a6b3340a9f5' `
-        -RequiredRelativePaths @('NSIS\Bin\makensis.exe', 'NSIS\Plugins')
+        -RequiredRelativePaths @('NSIS\makensis.exe', 'NSIS\Bin\makensis.exe', 'NSIS\Plugins')
 }
 
 Invoke-NativeChecked 'Git integrity (diff --check)' { git diff --check }

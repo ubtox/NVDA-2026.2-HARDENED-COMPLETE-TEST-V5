@@ -38,6 +38,56 @@ function Invoke-NativeChecked {
     }
 }
 
+function Get-GitBlobSha {
+    param([Parameter(Mandatory)][string]$Path)
+
+    $global:LASTEXITCODE = 0
+    $sha = (& git hash-object -- $Path).Trim()
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($sha)) {
+        throw "Unable to calculate Git blob SHA for $Path"
+    }
+    return $sha.ToLowerInvariant()
+}
+
+function Ensure-PinnedDependencyFile {
+    param(
+        [Parameter(Mandatory)][string]$RelativePath,
+        [Parameter(Mandatory)][string]$Uri,
+        [Parameter(Mandatory)][string]$ExpectedBlobSha
+    )
+
+    $destination = Join-Path $sourceRoot $RelativePath
+    $expected = $ExpectedBlobSha.ToLowerInvariant()
+
+    if (Test-Path -LiteralPath $destination) {
+        $actual = Get-GitBlobSha -Path $destination
+        if ($actual -eq $expected) {
+            Write-Host "Pinned dependency OK: $RelativePath ($actual)"
+            return
+        }
+        throw "Pinned dependency mismatch: $RelativePath expected $expected but got $actual"
+    }
+
+    $parent = Split-Path -Parent $destination
+    New-Item -ItemType Directory -Force -Path $parent | Out-Null
+    $temporary = "$destination.download-$PID"
+
+    Write-Host "Restoring pinned dependency: $RelativePath" -ForegroundColor Yellow
+    try {
+        Invoke-WebRequest -UseBasicParsing -Uri $Uri -OutFile $temporary
+        $actual = Get-GitBlobSha -Path $temporary
+        if ($actual -ne $expected) {
+            throw "Downloaded dependency verification failed: $RelativePath expected $expected but got $actual"
+        }
+        Move-Item -LiteralPath $temporary -Destination $destination -Force
+        Write-Host "Restored and verified: $RelativePath ($actual)" -ForegroundColor Green
+    } finally {
+        if (Test-Path -LiteralPath $temporary) {
+            Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+
 function Invoke-SConsTarget {
     param([Parameter(Mandatory)][string]$Target)
 
@@ -65,6 +115,20 @@ Write-Host "Repository: $repoRoot"
 Write-Host "Source:     $sourceRoot"
 Write-Host "Mode:       $Mode"
 Write-Host "Parallel:   $Parallel"
+
+# The V5 archive flattened this NVDA submodule but omitted its binary DLLs.
+# Restore only the exact files from the signed upstream NV Access commit and
+# verify Git blob identities before SCons is allowed to consume them.
+$javaAccessBridgeCommit = '0cc5c9d0da3506eec03300d5118fd1db1097d903'
+$javaAccessBridgeBaseUri = "https://raw.githubusercontent.com/nvaccess/javaAccessBridge32-bin/$javaAccessBridgeCommit"
+Ensure-PinnedDependencyFile `
+    -RelativePath 'include\javaAccessBridge32\windowsaccessbridge-32.dll' `
+    -Uri "$javaAccessBridgeBaseUri/windowsaccessbridge-32.dll" `
+    -ExpectedBlobSha '249ccb329662ab9fdd208a7532637e360661bbd7'
+Ensure-PinnedDependencyFile `
+    -RelativePath 'include\javaAccessBridge32\windowsaccessbridge-64.dll' `
+    -Uri "$javaAccessBridgeBaseUri/windowsaccessbridge-64.dll" `
+    -ExpectedBlobSha 'ed5378f9750130a7c134e5463485cd0130ed9239'
 
 Invoke-NativeChecked 'Git integrity (diff --check)' { git diff --check }
 Invoke-NativeChecked 'uv lock verification' { uv lock --check }

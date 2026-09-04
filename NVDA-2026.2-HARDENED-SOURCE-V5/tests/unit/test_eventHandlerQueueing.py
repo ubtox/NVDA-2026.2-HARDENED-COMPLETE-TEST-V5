@@ -12,12 +12,14 @@ import eventHandler
 class TestEventQueueCoalescing(unittest.TestCase):
 	def setUp(self) -> None:
 		self.obj = object()
+		self._previousLastQueuedFocusObject = eventHandler.lastQueuedFocusObject
 		with eventHandler._pendingEventCountsLock:
 			eventHandler._pendingEventCountsByName.clear()
 			eventHandler._pendingEventCountsByObj.clear()
 			eventHandler._pendingEventCountsByNameAndObj.clear()
 
 	def tearDown(self) -> None:
+		eventHandler.lastQueuedFocusObject = self._previousLastQueuedFocusObject
 		with eventHandler._pendingEventCountsLock:
 			eventHandler._pendingEventCountsByName.clear()
 			eventHandler._pendingEventCountsByObj.clear()
@@ -80,3 +82,25 @@ class TestEventQueueCoalescing(unittest.TestCase):
 
 		self.assertEqual(queueFunction.call_count, 2)
 		self.assertEqual(self._pendingCount("locationChange", self.obj), 1)
+
+	def test_large_duplicate_state_burst_collapses_to_single_pending_event(self) -> None:
+		with patch.object(eventHandler.queueHandler, "queueFunction") as queueFunction:
+			for _ in range(1000):
+				eventHandler.queueEvent("visibleDataChange", self.obj)
+
+		self.assertEqual(queueFunction.call_count, 1)
+		self.assertEqual(self._pendingCount("visibleDataChange", self.obj), 1)
+
+	def test_focus_is_preserved_and_prioritized_during_state_event_storm(self) -> None:
+		with patch.object(eventHandler.queueHandler, "queueFunction") as queueFunction:
+			for _ in range(1000):
+				eventHandler.queueEvent("locationChange", self.obj)
+			eventHandler.queueEvent("gainFocus", self.obj)
+
+		self.assertEqual(queueFunction.call_count, 2)
+		self.assertEqual(self._pendingCount("locationChange", self.obj), 1)
+		self.assertEqual(self._pendingCount("gainFocus", self.obj), 1)
+		self.assertIs(eventHandler.lastQueuedFocusObject, self.obj)
+		focusCall = queueFunction.call_args_list[-1]
+		self.assertEqual(focusCall.args[2], "gainFocus")
+		self.assertTrue(focusCall.kwargs["_immediate"])

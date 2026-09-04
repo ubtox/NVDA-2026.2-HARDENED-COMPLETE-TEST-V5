@@ -57,10 +57,10 @@ jobs:
           foreach ($commit in $commits) {
             $patch = Join-Path $env:RUNNER_TEMP "$commit.patch"
             Invoke-WebRequest -Uri "https://github.com/nvaccess/nvda/commit/$commit.patch" -OutFile $patch
-            Write-Host "Applying upstream commit $commit"
-            & git apply --3way --directory=$sourcePrefix $patch
+            Write-Host "Applying source changes from upstream commit $commit"
+            & git apply --3way --directory=$sourcePrefix --include='source/**' $patch
             if ($LASTEXITCODE -ne 0) {
-              throw "Failed to apply upstream commit $commit"
+              throw "Failed to apply source changes from upstream commit $commit"
             }
           }
           git diff --check

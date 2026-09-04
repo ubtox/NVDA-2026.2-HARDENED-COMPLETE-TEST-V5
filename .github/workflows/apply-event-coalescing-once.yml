@@ -1,0 +1,109 @@
+name: One-shot conservative event coalescing
+
+on:
+  push:
+    branches:
+      - 'evolution/2026.2-next'
+    paths:
+      - '.github/workflows/apply-event-coalescing-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    name: Apply conservative event coalescing with regression tests
+    runs-on: windows-2022
+    timeout-minutes: 15
+
+    steps:
+      - name: Enable Windows Git long paths
+        shell: pwsh
+        run: git config --global core.longpaths true
+
+      - name: Checkout Evolution branch
+        uses: actions/checkout@v6
+        with:
+          ref: evolution/2026.2-next
+          fetch-depth: 0
+
+      - name: Apply guarded scheduler evolution
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $sourceRoot = 'NVDA-2026.2-HARDENED-SOURCE-V5'
+          $eventHandler = "$sourceRoot/source/eventHandler.py"
+          $testFile = "$sourceRoot/tests/unit/test_eventHandlerQueueing.py"
+          $expectedBefore = '39e29456d82c05b996307b6d859c158bdc14c530'
+
+          $before = (git hash-object -- $eventHandler).Trim()
+          if ($before -ne $expectedBefore) {
+            throw "Unexpected eventHandler.py preimage: $before"
+          }
+          if (Test-Path $testFile) {
+            throw "Refusing to overwrite existing test file: $testFile"
+          }
+
+          $script = Join-Path $env:RUNNER_TEMP 'apply_event_coalescing.py'
+          @'
+          from pathlib import Path
+
+          event_handler = Path(r"NVDA-2026.2-HARDENED-SOURCE-V5/source/eventHandler.py")
+          test_file = Path(r"NVDA-2026.2-HARDENED-SOURCE-V5/tests/unit/test_eventHandlerQueueing.py")
+          text = event_handler.read_text(encoding="utf-8")
+
+          copyright_line = "# Copyright (C) 2007-2025 NV Access Limited, Babbage B.V., Joseph Lee\n"
+          if text.count(copyright_line) != 1:
+              raise RuntimeError("Unexpected eventHandler copyright anchor")
+          text = text.replace(
+              copyright_line,
+              copyright_line + "# Copyright (C) 2026 NVDA Evolution contributors\n",
+              1,
+          )
+
+          lock_anchor = "_pendingEventCountsLock = threading.RLock()\n\n#: the last object queued for a gainFocus event. Useful for code running outside NVDA's core queue\n"
+          lock_replacement = """_pendingEventCountsLock = threading.RLock()\n\n# Only state-notification events whose handler observes the object's current state are eligible.\n# Focus, caret, text, live-region and payload-carrying events must never be coalesced here.\n_COALESCIBLE_EVENT_NAMES = frozenset({\n\t\"locationChange\",\n\t\"visibleDataChange\",\n})\n\n#: the last object queued for a gainFocus event. Useful for code running outside NVDA's core queue\n"""
+          if text.count(lock_anchor) != 1:
+              raise RuntimeError("Unexpected pending-event lock anchor")
+          text = text.replace(lock_anchor, lock_replacement, 1)
+
+          queue_anchor = """\t_trackFocusObject(eventName, obj)\n\twith _pendingEventCountsLock:\n\t\t_pendingEventCountsByName[eventName] = _pendingEventCountsByName.get(eventName, 0) + 1\n\t\t_pendingEventCountsByObj[obj] = _pendingEventCountsByObj.get(obj, 0) + 1\n\t\t_pendingEventCountsByNameAndObj[(eventName, obj)] = (\n\t\t\t_pendingEventCountsByNameAndObj.get((eventName, obj), 0) + 1\n\t\t)\n"""
+          queue_replacement = """\t_trackFocusObject(eventName, obj)\n\twith _pendingEventCountsLock:\n\t\t# locationChange and visibleDataChange describe current object state rather than\n\t\t# an ordered payload. If one is already pending for this object, a later duplicate\n\t\t# can be dropped because the eventual handler observes the newest object state.\n\t\t# Events carrying kwargs are deliberately excluded because their payload may differ.\n\t\tif (\n\t\t\teventName in _COALESCIBLE_EVENT_NAMES\n\t\t\tand not kwargs\n\t\t\tand _pendingEventCountsByNameAndObj.get((eventName, obj), 0)\n\t\t):\n\t\t\treturn\n\t\t_pendingEventCountsByName[eventName] = _pendingEventCountsByName.get(eventName, 0) + 1\n\t\t_pendingEventCountsByObj[obj] = _pendingEventCountsByObj.get(obj, 0) + 1\n\t\t_pendingEventCountsByNameAndObj[(eventName, obj)] = (\n\t\t\t_pendingEventCountsByNameAndObj.get((eventName, obj), 0) + 1\n\t\t)\n"""
+          if text.count(queue_anchor) != 1:
+              raise RuntimeError("Unexpected queueEvent anchor")
+          text = text.replace(queue_anchor, queue_replacement, 1)
+          event_handler.write_text(text, encoding="utf-8", newline="\n")
+
+          test_file.write_text(
+              '''# A part of NonVisual Desktop Access (NVDA)\n# Copyright (C) 2026 NVDA Evolution contributors\n# This file is covered by the GNU General Public License.\n# See the file COPYING for more details.\n\nimport unittest\nfrom unittest.mock import patch\n\nimport eventHandler\n\n\nclass TestEventQueueCoalescing(unittest.TestCase):\n\tdef setUp(self) -> None:\n\t\tself.obj = object()\n\t\twith eventHandler._pendingEventCountsLock:\n\t\t\teventHandler._pendingEventCountsByName.clear()\n\t\t\teventHandler._pendingEventCountsByObj.clear()\n\t\t\teventHandler._pendingEventCountsByNameAndObj.clear()\n\n\tdef tearDown(self) -> None:\n\t\twith eventHandler._pendingEventCountsLock:\n\t\t\teventHandler._pendingEventCountsByName.clear()\n\t\t\teventHandler._pendingEventCountsByObj.clear()\n\t\t\teventHandler._pendingEventCountsByNameAndObj.clear()\n\n\tdef _pendingCount(self, eventName: str, obj: object) -> int:\n\t\treturn eventHandler._pendingEventCountsByNameAndObj.get((eventName, obj), 0)\n\n\tdef test_locationChange_duplicate_without_payload_is_coalesced(self) -> None:\n\t\twith patch.object(eventHandler.queueHandler, \"queueFunction\") as queueFunction:\n\t\t\teventHandler.queueEvent(\"locationChange\", self.obj)\n\t\t\teventHandler.queueEvent(\"locationChange\", self.obj)\n\n\t\tself.assertEqual(queueFunction.call_count, 1)\n\t\tself.assertEqual(self._pendingCount(\"locationChange\", self.obj), 1)\n\n\tdef test_visibleDataChange_duplicate_without_payload_is_coalesced(self) -> None:\n\t\twith patch.object(eventHandler.queueHandler, \"queueFunction\") as queueFunction:\n\t\t\teventHandler.queueEvent(\"visibleDataChange\", self.obj)\n\t\t\teventHandler.queueEvent(\"visibleDataChange\", self.obj)\n\n\t\tself.assertEqual(queueFunction.call_count, 1)\n\t\tself.assertEqual(self._pendingCount(\"visibleDataChange\", self.obj), 1)\n\n\tdef test_payload_carrying_event_is_never_coalesced(self) -> None:\n\t\twith patch.object(eventHandler.queueHandler, \"queueFunction\") as queueFunction:\n\t\t\teventHandler.queueEvent(\"locationChange\", self.obj, revision=1)\n\t\t\teventHandler.queueEvent(\"locationChange\", self.obj, revision=2)\n\n\t\tself.assertEqual(queueFunction.call_count, 2)\n\t\tself.assertEqual(self._pendingCount(\"locationChange\", self.obj), 2)\n\n\tdef test_non_coalescible_event_remains_fifo(self) -> None:\n\t\twith patch.object(eventHandler.queueHandler, \"queueFunction\") as queueFunction:\n\t\t\teventHandler.queueEvent(\"caret\", self.obj)\n\t\t\teventHandler.queueEvent(\"caret\", self.obj)\n\n\t\tself.assertEqual(queueFunction.call_count, 2)\n\t\tself.assertEqual(self._pendingCount(\"caret\", self.obj), 2)\n\n\tdef test_same_event_for_different_objects_is_not_coalesced(self) -> None:\n\t\totherObj = object()\n\t\twith patch.object(eventHandler.queueHandler, \"queueFunction\") as queueFunction:\n\t\t\teventHandler.queueEvent(\"visibleDataChange\", self.obj)\n\t\t\teventHandler.queueEvent(\"visibleDataChange\", otherObj)\n\n\t\tself.assertEqual(queueFunction.call_count, 2)\n\t\tself.assertEqual(self._pendingCount(\"visibleDataChange\", self.obj), 1)\n\t\tself.assertEqual(self._pendingCount(\"visibleDataChange\", otherObj), 1)\n\n\tdef test_event_can_be_queued_again_after_pending_callback_runs(self) -> None:\n\t\twith (\n\t\t\tpatch.object(eventHandler.queueHandler, \"queueFunction\") as queueFunction,\n\t\t\tpatch.object(eventHandler, \"executeEvent\"),\n\t\t):\n\t\t\teventHandler.queueEvent(\"locationChange\", self.obj)\n\t\t\teventHandler._queueEventCallback(\"locationChange\", self.obj, {})\n\t\t\tself.assertFalse(eventHandler.isPendingEvents(\"locationChange\", self.obj))\n\t\t\teventHandler.queueEvent(\"locationChange\", self.obj)\n\n\t\tself.assertEqual(queueFunction.call_count, 2)\n\t\tself.assertEqual(self._pendingCount(\"locationChange\", self.obj), 1)\n''',
+              encoding="utf-8",
+              newline="\n",
+          )
+          '@ | Set-Content -Path $script -Encoding utf8NoBOM
+
+          python $script
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to apply conservative event coalescing.' }
+
+          python -m py_compile $eventHandler $testFile
+          if ($LASTEXITCODE -ne 0) { throw 'Python syntax validation failed.' }
+
+          git add -- $eventHandler $testFile
+          git diff --cached --check
+          if ($LASTEXITCODE -ne 0) { throw 'git diff --check failed for event coalescing.' }
+
+          $expectedFiles = @($eventHandler, $testFile) | Sort-Object
+          $actualFiles = @(git diff --cached --name-only | Sort-Object)
+          $difference = @(Compare-Object -ReferenceObject $expectedFiles -DifferenceObject $actualFiles)
+          if ($difference.Count -ne 0) {
+            $difference | Format-Table | Out-String | Write-Host
+            throw 'Unexpected staged file set; refusing to commit.'
+          }
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Core evolution: coalesce safe redundant state events'
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to commit event coalescing.' }
+          git push origin HEAD:evolution/2026.2-next
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to push event coalescing.' }
+
+          Write-Host 'Conservative event coalescing applied with regression tests.'

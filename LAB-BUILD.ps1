@@ -228,7 +228,8 @@ Ensure-PinnedDependencyFile `
     -ExpectedBlobSha 'ed5378f9750130a7c134e5463485cd0130ed9239'
 
 $miscDepsCommit = '67c2e36deb524eff89d202e807d00c8d98f2a5b3'
-$miscDepsBaseUri = "https://raw.githubusercontent.com/nvaccess/nvda-misc-deps/$miscDepsCommit/tools"
+$miscDepsRootUri = "https://raw.githubusercontent.com/nvaccess/nvda-misc-deps/$miscDepsCommit"
+$miscDepsBaseUri = "$miscDepsRootUri/tools"
 Ensure-PinnedDependencyFile `
     -RelativePath 'miscDeps\tools\m4.exe' `
     -Uri "$miscDepsBaseUri/m4.exe" `
@@ -245,6 +246,14 @@ Ensure-PinnedDependencyFile `
     -RelativePath 'miscDeps\tools\xgettext.exe' `
     -Uri "$miscDepsBaseUri/xgettext.exe" `
     -ExpectedBlobSha '57b6bad5d119c5fe9d6d80375b703dd163f42432'
+Ensure-PinnedDependencyFile `
+    -RelativePath 'miscDeps\python\brlapi-0.8.dll' `
+    -Uri "$miscDepsRootUri/python/brlapi-0.8.dll" `
+    -ExpectedBlobSha 'c026b4d51a77a2a5a3943ec977abfbb4c93f0ecd'
+Ensure-PinnedDependencyFile `
+    -RelativePath 'miscDeps\source\brailleDisplayDrivers\lilli.dll' `
+    -Uri "$miscDepsRootUri/source/brailleDisplayDrivers/lilli.dll" `
+    -ExpectedBlobSha 'ffa2a6f6b5ff8b248bb543a79ee9beec94053470'
 
 if ($Mode -in @('Dist', 'Launcher', 'All')) {
     Ensure-PinnedGitDependencyTree `

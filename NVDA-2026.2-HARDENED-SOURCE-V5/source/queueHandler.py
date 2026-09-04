@@ -1,6 +1,7 @@
 # queueHandler.py
 # A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2006-2026 NV Access Limited
+# Copyright (C) 2006-2018 NV Access Limited
+# Copyright (C) 2026 NVDA Hardened contributors
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 

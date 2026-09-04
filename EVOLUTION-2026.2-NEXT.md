@@ -35,7 +35,9 @@ Status:
 - Normal event work bounded per pump cycle so one event backlog cannot monopolize the core thread.
 - Fair-pump slicing unit tests added.
 - NV Access cooperative LiveText flood handling ported exactly, yielding between announcement batches and bounding stale terminal output.
-- Conservative event coalescing, backlog telemetry and broader stress tests remain planned.
+- Conservative coalescing implemented for duplicate payload-free `locationChange` and `visibleDataChange` events targeting the same object.
+- Six regression tests protect coalescing boundaries: payload events, caret events, separate objects and re-queue after callback completion remain uncoalesced.
+- Queue backlog telemetry and broader stress tests remain planned.
 
 ## Track 2 - UI Automation pipeline v2
 

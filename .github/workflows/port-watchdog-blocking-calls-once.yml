@@ -1,0 +1,96 @@
+name: One-shot guarded watchdog blocking-call port
+
+on:
+  push:
+    branches:
+      - 'evolution/2026.2-next'
+    paths:
+      - '.github/workflows/port-watchdog-blocking-calls-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  port:
+    name: Port watchdog cancellation for blocking accessibility calls
+    runs-on: windows-2022
+    timeout-minutes: 15
+
+    steps:
+      - name: Enable Windows Git long paths
+        shell: pwsh
+        run: git config --global core.longpaths true
+
+      - name: Checkout Evolution branch
+        uses: actions/checkout@v6
+        with:
+          ref: evolution/2026.2-next
+          fetch-depth: 0
+
+      - name: Apply verified upstream watchdog patch without overwriting fork changes
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $sourceRoot = 'NVDA-2026.2-HARDENED-SOURCE-V5'
+          $upstreamParent = '5344d4bdab360be099b45ba2b21565ebf662fe89'
+          $upstreamCommit = '961db0e66cdb079144d49ca4b8b505a3a65741d3'
+          $sourceFiles = @(
+            'source/NVDAObjects/window/winword.py',
+            'source/UIAHandler/__init__.py'
+          )
+          $repoSourceFiles = @($sourceFiles | ForEach-Object { "$sourceRoot/$_" })
+          $expectedFiles = @($repoSourceFiles | Sort-Object)
+
+          git remote remove nvaccess 2>$null
+          if ($LASTEXITCODE -ne 0) { $global:LASTEXITCODE = 0 }
+          git remote add nvaccess https://github.com/nvaccess/nvda.git
+          git fetch --no-tags --depth=2 nvaccess $upstreamCommit
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to fetch verified NV Access watchdog commit.' }
+
+          $resolvedCommit = (git rev-parse FETCH_HEAD).Trim()
+          if ($resolvedCommit -ne $upstreamCommit) {
+            throw "Unexpected fetched commit: $resolvedCommit"
+          }
+          $resolvedParent = (git rev-parse "$upstreamCommit^").Trim()
+          if ($resolvedParent -ne $upstreamParent) {
+            throw "Unexpected upstream parent: $resolvedParent"
+          }
+
+          $upstreamChangedSourceFiles = @(git diff --name-only $upstreamParent $upstreamCommit -- @sourceFiles | Sort-Object)
+          $sourceDifference = @(Compare-Object -ReferenceObject ($sourceFiles | Sort-Object) -DifferenceObject $upstreamChangedSourceFiles)
+          if ($sourceDifference.Count -ne 0) {
+            $sourceDifference | Format-Table | Out-String | Write-Host
+            throw 'Unexpected source-file set in upstream watchdog patch.'
+          }
+
+          $patch = Join-Path $env:RUNNER_TEMP 'nvda-watchdog-blocking-calls.patch'
+          git diff --binary --output=$patch $upstreamParent $upstreamCommit -- @sourceFiles
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to generate verified upstream watchdog patch.' }
+
+          git apply --check --directory=$sourceRoot $patch
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Upstream watchdog patch conflicts with Evolution changes; nothing was applied.'
+          }
+          git apply --directory=$sourceRoot $patch
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to apply verified upstream watchdog patch.' }
+          git add -- @repoSourceFiles
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to stage watchdog source files.' }
+
+          git diff --cached --check
+          if ($LASTEXITCODE -ne 0) { throw 'git diff --check failed for watchdog port.' }
+
+          $actualFiles = @(git diff --cached --name-only | Sort-Object)
+          $difference = @(Compare-Object -ReferenceObject $expectedFiles -DifferenceObject $actualFiles)
+          if ($difference.Count -ne 0) {
+            $difference | Format-Table | Out-String | Write-Host
+            throw 'Unexpected staged file set; refusing to commit.'
+          }
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Core: make blocking accessibility calls watchdog-cancellable'
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to commit watchdog accessibility safeguards.' }
+          git push origin HEAD:evolution/2026.2-next
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to push watchdog accessibility safeguards.' }
+
+          Write-Host 'Verified watchdog cancellation port complete.'

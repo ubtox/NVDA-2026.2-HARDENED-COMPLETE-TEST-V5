@@ -33,8 +33,20 @@ jobs:
     timeout-minutes: 90
 
     steps:
-      - name: Checkout LAB repository
+      - name: Enable Windows Git long paths
+        shell: pwsh
+        run: git config --global core.longpaths true
+
+      - name: Checkout LAB source only
         uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            NVDA-2026.2-HARDENED-SOURCE-V5
+            LAB-BUILD.ps1
+            LAB-RUN.ps1
+            README.md
+            .gitignore
+          sparse-checkout-cone-mode: false
 
       - name: Install CPython 3.13.13 x64
         uses: actions/setup-python@v6

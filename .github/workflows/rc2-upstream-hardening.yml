@@ -1,0 +1,93 @@
+name: RC2 upstream responsiveness hardening
+
+on:
+  push:
+    branches:
+      - 'rc/2026.2-hardened-rc2'
+    paths:
+      - '.github/workflows/rc2-upstream-hardening.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  port-and-validate:
+    runs-on: windows-2022
+    timeout-minutes: 120
+    steps:
+      - name: Enable Windows Git long paths
+        shell: pwsh
+        run: git config --global core.longpaths true
+
+      - name: Checkout RC2
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install CPython 3.13.13 x64
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.13'
+          architecture: x64
+          update-environment: true
+
+      - name: Install CPython 3.13.13 x86 helper
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.13'
+          architecture: x86
+          update-environment: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: cpython-3.13.13-windows-x86_64-none
+
+      - name: Port selected NV Access hardening commits
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $sourcePrefix = 'NVDA-2026.2-HARDENED-SOURCE-V5'
+          $commits = @(
+            'e5abefc19d4ddf95bea7ba9af1dde702eddf8e95',
+            '5344d4bdab360be099b45ba2b21565ebf662fe89',
+            '961db0e66cdb079144d49ca4b8b505a3a65741d3',
+            '1c29cf37bf3c09cbd8e6801fa6942d5ff92a443f'
+          )
+          foreach ($commit in $commits) {
+            $patch = Join-Path $env:RUNNER_TEMP "$commit.patch"
+            Invoke-WebRequest -Uri "https://github.com/nvaccess/nvda/commit/$commit.patch" -OutFile $patch
+            Write-Host "Applying upstream commit $commit"
+            & git apply --3way --directory=$sourcePrefix $patch
+            if ($LASTEXITCODE -ne 0) {
+              throw "Failed to apply upstream commit $commit"
+            }
+          }
+          git diff --check
+          if ($LASTEXITCODE -ne 0) {
+            throw 'git diff --check failed after RC2 ports'
+          }
+          git status --short
+
+      - name: Full RC2 validation before commit
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & .\LAB-BUILD.ps1 -Mode All -Parallel
+          if ($LASTEXITCODE -ne 0) {
+            throw "LAB validation failed with exit code $LASTEXITCODE"
+          }
+
+      - name: Commit validated RC2 hardening
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add NVDA-2026.2-HARDENED-SOURCE-V5
+          if (-not (git diff --cached --quiet)) {
+            git commit -m 'RC2: port upstream responsiveness hardening'
+            git push origin HEAD:rc/2026.2-hardened-rc2
+          } else {
+            Write-Host 'No source changes to commit.'
+          }

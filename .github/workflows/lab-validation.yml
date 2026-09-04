@@ -97,11 +97,51 @@ jobs:
             throw
           }
 
+      - name: Build true RC-labelled distribution and installer
+        if: ${{ success() && steps.mode.outputs.mode == 'All' }}
+        shell: pwsh
+        run: |
+          $sourceRoot = Join-Path $PWD 'NVDA-2026.2-HARDENED-SOURCE-V5'
+          Set-Location $sourceRoot
+
+          foreach ($relative in @('output', 'dist')) {
+            $path = Join-Path $sourceRoot $relative
+            if (Test-Path -LiteralPath $path) {
+              Remove-Item -LiteralPath $path -Recurse -Force
+            }
+          }
+
+          $sconsArgs = @(
+            'dist',
+            'launcher',
+            'version=2026.2rc1',
+            'release=1',
+            'updateVersionType=rc',
+            'publisher=NVDA Hardened LAB',
+            'version_build=${{ github.run_number }}',
+            '--all-cores'
+          )
+          & uv run scons @sconsArgs
+          if ($LASTEXITCODE -ne 0) {
+            throw "RC SCons build failed with exit code $LASTEXITCODE"
+          }
+
+          $expectedInstaller = Join-Path $sourceRoot 'output\nvda_2026.2rc1.exe'
+          if (-not (Test-Path -LiteralPath $expectedInstaller -PathType Leaf)) {
+            throw "Expected RC installer was not produced: $expectedInstaller"
+          }
+          Write-Host "RC installer produced: $expectedInstaller" -ForegroundColor Green
+
       - name: Verify RC executables and SHA-256
         if: ${{ success() && steps.mode.outputs.mode == 'All' }}
         shell: pwsh
         run: |
           $sourceRoot = Join-Path $PWD 'NVDA-2026.2-HARDENED-SOURCE-V5'
+          $installer = Join-Path $sourceRoot 'output\nvda_2026.2rc1.exe'
+          if (-not (Test-Path -LiteralPath $installer -PathType Leaf)) {
+            throw 'RC validation failed: nvda_2026.2rc1.exe is missing.'
+          }
+
           $exeFiles = @()
           foreach ($relativeRoot in @('output', 'dist')) {
             $root = Join-Path $sourceRoot $relativeRoot
@@ -137,15 +177,14 @@ jobs:
             LAB-LOCAL-OUTPUT/**
             NVDA-2026.2-HARDENED-SOURCE-V5/testOutput/unit/**
 
-      - name: Upload LAB binaries
+      - name: Upload RC binaries
         if: ${{ success() && steps.mode.outputs.mode == 'All' }}
         uses: actions/upload-artifact@v4
         with:
-          name: nvda-2026.2-rc-${{ github.run_id }}
+          name: nvda-2026.2-hardened-rc1-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
           path: |
-            NVDA-2026.2-HARDENED-SOURCE-V5/output/*.exe
+            NVDA-2026.2-HARDENED-SOURCE-V5/output/nvda_2026.2rc1.exe
             NVDA-2026.2-HARDENED-SOURCE-V5/dist/**
-            LAB-LOCAL-OUTPUT/LAB-ARTIFACT-SHA256-*.txt
             LAB-LOCAL-OUTPUT/RC-EXE-SHA256.txt

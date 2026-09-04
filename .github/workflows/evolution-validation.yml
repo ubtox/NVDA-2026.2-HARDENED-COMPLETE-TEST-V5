@@ -69,6 +69,23 @@ jobs:
             throw
           }
 
+      - name: Verify Evolution binary identity
+        shell: pwsh
+        run: |
+          $outputRoot = Join-Path $PWD 'NVDA-2026.2-HARDENED-SOURCE-V5\output'
+          $installers = @(Get-ChildItem -LiteralPath $outputRoot -Filter 'nvda*.exe' -File -ErrorAction Stop)
+          if ($installers.Count -eq 0) {
+            throw 'No NVDA installer was produced.'
+          }
+          $wrongIdentity = @($installers | Where-Object { $_.Name -notmatch 'evolution' })
+          if ($wrongIdentity.Count -gt 0) {
+            $names = ($wrongIdentity.Name -join ', ')
+            throw "Evolution workflow produced ambiguously named installer(s): $names"
+          }
+          $installers | ForEach-Object {
+            Write-Host "Evolution installer verified: $($_.Name)"
+          }
+
       - name: Upload evolution evidence and binaries
         if: always()
         uses: actions/upload-artifact@v4

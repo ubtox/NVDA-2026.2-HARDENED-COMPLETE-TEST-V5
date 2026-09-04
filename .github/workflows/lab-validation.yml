@@ -114,7 +114,7 @@ jobs:
           $sconsArgs = @(
             'dist',
             'launcher',
-            'version=2026.2rc1',
+            'version=2026.2rc2',
             'release=1',
             'updateVersionType=rc',
             'publisher=NVDA Hardened LAB',
@@ -126,7 +126,7 @@ jobs:
             throw "RC SCons build failed with exit code $LASTEXITCODE"
           }
 
-          $expectedInstaller = Join-Path $sourceRoot 'output\nvda_2026.2rc1.exe'
+          $expectedInstaller = Join-Path $sourceRoot 'output\nvda_2026.2rc2.exe'
           if (-not (Test-Path -LiteralPath $expectedInstaller -PathType Leaf)) {
             throw "Expected RC installer was not produced: $expectedInstaller"
           }
@@ -137,9 +137,9 @@ jobs:
         shell: pwsh
         run: |
           $sourceRoot = Join-Path $PWD 'NVDA-2026.2-HARDENED-SOURCE-V5'
-          $installer = Join-Path $sourceRoot 'output\nvda_2026.2rc1.exe'
+          $installer = Join-Path $sourceRoot 'output\nvda_2026.2rc2.exe'
           if (-not (Test-Path -LiteralPath $installer -PathType Leaf)) {
-            throw 'RC validation failed: nvda_2026.2rc1.exe is missing.'
+            throw 'RC validation failed: nvda_2026.2rc2.exe is missing.'
           }
 
           $exeFiles = @()
@@ -181,10 +181,10 @@ jobs:
         if: ${{ success() && steps.mode.outputs.mode == 'All' }}
         uses: actions/upload-artifact@v4
         with:
-          name: nvda-2026.2-hardened-rc1-${{ github.run_id }}
+          name: nvda-2026.2-hardened-rc2-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
           path: |
-            NVDA-2026.2-HARDENED-SOURCE-V5/output/nvda_2026.2rc1.exe
+            NVDA-2026.2-HARDENED-SOURCE-V5/output/nvda_2026.2rc2.exe
             NVDA-2026.2-HARDENED-SOURCE-V5/dist/**
             LAB-LOCAL-OUTPUT/RC-EXE-SHA256.txt

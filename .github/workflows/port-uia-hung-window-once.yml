@@ -1,0 +1,119 @@
+name: One-shot guarded UIA hung-window anti-freeze port
+
+on:
+  push:
+    branches:
+      - 'evolution/2026.2-next'
+    paths:
+      - '.github/workflows/port-uia-hung-window-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  port:
+    name: Port upstream hung-window safeguards without overwriting fork changes
+    runs-on: windows-2022
+    timeout-minutes: 15
+
+    steps:
+      - name: Enable Windows Git long paths
+        shell: pwsh
+        run: git config --global core.longpaths true
+
+      - name: Checkout Evolution branch
+        uses: actions/checkout@v6
+        with:
+          ref: evolution/2026.2-next
+          fetch-depth: 0
+
+      - name: Apply verified upstream hung-window source patch and isolated tests
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $sourceRoot = 'NVDA-2026.2-HARDENED-SOURCE-V5'
+          $upstreamParent = 'b30df391c0e1fbdd812e68e736fbcd7db3f48f7f'
+          $upstreamCommit = 'e5abefc19d4ddf95bea7ba9af1dde702eddf8e95'
+          $expectedTestBlob = '4c9c2b1046f620ee97cb3232baafbe33e13db3d8'
+          $sourceFiles = @(
+            'source/IAccessibleHandler/__init__.py',
+            'source/NVDAObjects/window/__init__.py',
+            'source/UIAHandler/__init__.py',
+            'source/UIAHandler/utils.py',
+            'source/winBindings/user32.py',
+            'source/winUser.py'
+          )
+          $repoSourceFiles = @($sourceFiles | ForEach-Object { "$sourceRoot/$_" })
+          $testTarget = "$sourceRoot/tests/unit/test_UIAHandler_hungWindow.py"
+          $expectedFiles = @($repoSourceFiles + $testTarget) | Sort-Object
+
+          if (Test-Path $testTarget) {
+            throw "Refusing to overwrite existing test target: $testTarget"
+          }
+
+          git remote remove nvaccess 2>$null
+          if ($LASTEXITCODE -ne 0) { $global:LASTEXITCODE = 0 }
+          git remote add nvaccess https://github.com/nvaccess/nvda.git
+          git fetch --no-tags --depth=2 nvaccess $upstreamCommit
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to fetch verified NV Access commit.' }
+
+          $resolvedCommit = (git rev-parse FETCH_HEAD).Trim()
+          if ($resolvedCommit -ne $upstreamCommit) {
+            throw "Unexpected fetched commit: $resolvedCommit"
+          }
+          $resolvedParent = (git rev-parse "$upstreamCommit^").Trim()
+          if ($resolvedParent -ne $upstreamParent) {
+            throw "Unexpected upstream parent: $resolvedParent"
+          }
+
+          $upstreamChangedSourceFiles = @(git diff --name-only $upstreamParent $upstreamCommit -- @sourceFiles | Sort-Object)
+          $sourceDifference = @(Compare-Object -ReferenceObject ($sourceFiles | Sort-Object) -DifferenceObject $upstreamChangedSourceFiles)
+          if ($sourceDifference.Count -ne 0) {
+            $sourceDifference | Format-Table | Out-String | Write-Host
+            throw 'Unexpected source-file set in upstream anti-freeze patch.'
+          }
+
+          $patch = Join-Path $env:RUNNER_TEMP 'nvda-uia-hung-window.patch'
+          git diff --binary --output=$patch $upstreamParent $upstreamCommit -- @sourceFiles
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to generate verified upstream source patch.' }
+
+          git apply --check --directory=$sourceRoot $patch
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Upstream hung-window patch conflicts with Evolution changes; nothing was applied.'
+          }
+          git apply --directory=$sourceRoot $patch
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to apply verified upstream hung-window patch.' }
+          git add -- @repoSourceFiles
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to stage anti-freeze source files.' }
+
+          $testBlob = (git rev-parse "${upstreamCommit}:tests/unit/test_UIAHandler.py").Trim()
+          if ($testBlob -ne $expectedTestBlob) {
+            throw "Unexpected upstream hung-window test blob: $testBlob"
+          }
+          git update-index --add --cacheinfo 100644 $testBlob $testTarget
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to stage exact upstream hung-window tests.' }
+          git checkout-index -f -- $testTarget
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to materialize exact upstream hung-window tests.' }
+          $materializedTestBlob = (git hash-object -- $testTarget).Trim()
+          if ($materializedTestBlob -ne $expectedTestBlob) {
+            throw "Materialized hung-window tests differ from upstream: $materializedTestBlob"
+          }
+
+          git diff --cached --check
+          if ($LASTEXITCODE -ne 0) { throw 'git diff --check failed for hung-window port.' }
+
+          $actualFiles = @(git diff --cached --name-only | Sort-Object)
+          $difference = @(Compare-Object -ReferenceObject $expectedFiles -DifferenceObject $actualFiles)
+          if ($difference.Count -ne 0) {
+            $difference | Format-Table | Out-String | Write-Host
+            throw 'Unexpected staged file set; refusing to commit.'
+          }
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'UIA: port hung-application fast-fail safeguards'
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to commit UIA hung-window safeguards.' }
+          git push origin HEAD:evolution/2026.2-next
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to push UIA hung-window safeguards.' }
+
+          Write-Host 'Verified UIA/MSAA hung-window anti-freeze port complete.'

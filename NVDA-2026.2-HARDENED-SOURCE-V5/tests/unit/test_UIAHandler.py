@@ -11,6 +11,7 @@ from comtypes import COMError
 
 import textInfos
 import UIAHandler
+from NVDAObjects.UIA import UIATextInfo
 from UIAHandler import NVDAUnitsToUIAUnits, getUIAUnitFromNVDAUnit, utils
 
 
@@ -39,6 +40,16 @@ class TestNormalizeUIAText(TestCase):
 
 	def test_isolatedLowSurrogateIsReplaced(self):
 		self.assertEqual(utils.normalizeUIAText("A\ude00B"), "A\ufffdB")
+
+
+class TestUIATextInfoNormalization(TestCase):
+	def test_textRetrievalNormalizesMalformedProviderText(self):
+		textInfo = object.__new__(UIATextInfo)
+		textRange = Mock()
+		textRange.getText.return_value = "A\ud83dB"
+
+		self.assertEqual(textInfo._getTextFromUIARange(textRange), "A\ufffdB")
+		textRange.getText.assert_called_once_with(-1)
 
 
 class TestUIATextRangeFromElement(TestCase):

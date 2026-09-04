@@ -32,6 +32,10 @@ Acceptance criteria:
 Status:
 - Priority event lane implemented.
 - Priority scheduling unit tests added.
+- Normal event work bounded per pump cycle so one event backlog cannot monopolize the core thread.
+- Fair-pump slicing unit tests added.
+- NV Access cooperative LiveText flood handling ported exactly, yielding between announcement batches and bounding stale terminal output.
+- Conservative event coalescing, backlog telemetry and broader stress tests remain planned.
 
 ## Track 2 - UI Automation pipeline v2
 
@@ -48,6 +52,15 @@ Acceptance criteria:
 - Fewer redundant UIA object/property fetches under synthetic event storms.
 - No regression in focus, live regions, text controls, Chromium, Edge, Office or Windows shell navigation.
 
+Status:
+- NV Access hung-application fast-fail safeguards (#20168) ported by guarded source hunks without overwriting fork-specific UIA hardening.
+- UIA events now use cached window information to reject events from applications Windows marks as not responding.
+- MSAA events and higher-API object construction now avoid windows belonging to hung applications.
+- The high-frequency UIA text-change path uses the cached class name rather than a live cross-process fetch.
+- Official hung-window guard regression tests retained in a separate test module alongside the fork's existing UIA normalization tests.
+- NV Access watchdog cancellation safeguards (#20170) ported for blocking UiaHasServerSideProvider and Word in-process text calls.
+- Broader disconnected-provider recovery, property batching and event-storm measurements remain planned.
+
 ## Track 3 - Speech and braille responsiveness
 
 Goal: prevent stale output from competing with current user context.
@@ -61,6 +74,10 @@ Planned work:
 Acceptance criteria:
 - Obsolete output is cancelled without suppressing the final current state.
 - Braille and speech remain synchronized with current focus/review context.
+
+Status:
+- LiveText burst reporting is cooperative and cancellable rather than synchronously monopolizing the main thread.
+- General speech and braille stale-output policies remain planned.
 
 ## Track 4 - Resilience and self-recovery
 
@@ -76,6 +93,11 @@ Acceptance criteria:
 - Recoverable subsystem failures do not crash or deadlock the whole process.
 - Repeated fatal failure is surfaced clearly rather than causing uncontrolled restart loops.
 
+Status:
+- Blocking UIA and Word accessibility calls covered by the existing watchdog cancellation mechanism where upstream identified uncancellable cross-process calls.
+- Hung UIA/MSAA applications are rejected early instead of repeatedly entering blocking provider calls.
+- General subsystem failure-domain and retry policy work remains planned.
+
 ## Track 5 - Security boundary hardening
 
 Goal: make lock-screen and secure-desktop boundaries explicit and testable across object layers.
@@ -88,6 +110,11 @@ Planned work:
 Acceptance criteria:
 - No object content from below the lock screen is exposed through alternate object layers.
 - Security regression tests run in the normal evolution validation pipeline.
+
+Status:
+- NV Access TreeInterceptor lock-screen boundary hardening (#20678) ported byte-for-byte for source and unit tests.
+- TreeInterceptors are resolved through their root NVDAObject for lock-screen checks, closing the alternate object-layer gap.
+- Global plugin/add-on secure-context exposure audit and broader cached-object security tests remain planned.
 
 ## Track 6 - Build, quality and observability
 
@@ -103,6 +130,12 @@ Planned work:
 Acceptance criteria:
 - Every evolution commit is validated independently from RC.
 - No evolution artifact is presented as a release candidate.
+
+Status:
+- Dedicated Evolution CI is active and isolated from RC validation.
+- Full build, unit, Ruff, format, Pyright, source, dist and launcher validation is executed by LAB-BUILD.
+- Evolution binaries identify themselves as `2026.2.0dev-evolution`; CI rejects ambiguous installer identities.
+- Event-pipeline stress coverage and quantitative latency baselines remain planned.
 
 ## Promotion model
 

@@ -98,13 +98,13 @@ function Ensure-PinnedGitDependencyTree {
 
     $destination = Join-Path $sourceRoot $RelativePath
     $temporary = Join-Path ([System.IO.Path]::GetTempPath()) ("nvda-lab-dependency-{0}-{1}" -f $PID, [Guid]::NewGuid().ToString('N'))
+    $archivePath = Join-Path $temporary 'pinned-dependency.zip'
     $expectedCommit = $Commit.ToLowerInvariant()
 
     Write-Host "Hydrating pinned dependency tree: $RelativePath @ $Commit" -ForegroundColor Yellow
     try {
         New-Item -ItemType Directory -Force -Path $temporary | Out-Null
         Invoke-NativeChecked "Git init $RelativePath" { git -C $temporary init --quiet }
-        Invoke-NativeChecked "Git config $RelativePath" { git -C $temporary config core.autocrlf false }
         Invoke-NativeChecked "Git remote $RelativePath" { git -C $temporary remote add origin $RepositoryUri }
         Invoke-NativeChecked "Git fetch $RelativePath" { git -C $temporary fetch --quiet --depth 1 origin $Commit }
 
@@ -114,21 +114,25 @@ function Ensure-PinnedGitDependencyTree {
             throw "Pinned dependency commit mismatch for $RelativePath expected $expectedCommit but got $resolvedCommit"
         }
 
-        Invoke-NativeChecked "Git checkout $RelativePath" { git -C $temporary checkout --quiet --detach FETCH_HEAD }
-
         $global:LASTEXITCODE = 0
         $treeEntries = @(& git -C $temporary ls-tree -r $Commit)
         if ($LASTEXITCODE -ne 0 -or $treeEntries.Count -eq 0) {
             throw "Unable to enumerate pinned tree for $RelativePath"
         }
 
+        # Do not use a Windows working-tree checkout here. Git's text checkout
+        # conversion can change CRLF/LF bytes even when the committed blob is
+        # correct. git archive emits the committed blob payloads directly, so
+        # the byte-level Git blob verification below remains deterministic.
+        Invoke-NativeChecked "Git archive $RelativePath" {
+            git -C $temporary archive --format=zip "--output=$archivePath" $Commit
+        }
+
         if (Test-Path -LiteralPath $destination) {
             Remove-Item -LiteralPath $destination -Recurse -Force
         }
         New-Item -ItemType Directory -Force -Path $destination | Out-Null
-        Get-ChildItem -LiteralPath $temporary -Force |
-            Where-Object { $_.Name -ne '.git' } |
-            Copy-Item -Destination $destination -Recurse -Force
+        Expand-Archive -LiteralPath $archivePath -DestinationPath $destination -Force
 
         $verifiedBlobCount = 0
         foreach ($entry in $treeEntries) {

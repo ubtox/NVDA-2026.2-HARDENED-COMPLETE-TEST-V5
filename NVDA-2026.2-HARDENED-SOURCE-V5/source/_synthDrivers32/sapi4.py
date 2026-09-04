@@ -6,7 +6,6 @@
 from datetime import datetime
 from enum import IntEnum
 from functools import wraps
-import locale
 from collections import OrderedDict, deque
 import queue
 import threading
@@ -15,6 +14,7 @@ import winreg
 import winBindings.ole32
 from winBindings import user32
 import winBindings.winmm
+import languageHandler
 from winBindings.mmeapi import WAVEFORMATEX
 from comtypes import CoCreateInstance, CoInitialize, COMObject, COMError, GUID, hresult, ReturnHRESULT
 from ctypes import (
@@ -1173,10 +1173,7 @@ class SynthDriver(SynthDriver):
 		for mode in self._enginesList:
 			ID = str(mode.gModeID)
 			name = "%s - %s" % (mode.szModeName, mode.szProductName)
-			try:
-				language = locale.windows_locale[mode.language.LanguageID]
-			except KeyError:
-				language = None
+			language = languageHandler.windowsLCIDToLocaleName(mode.language.LanguageID)
 			voices[ID] = VoiceInfo(ID, name, language)
 		return voices
 

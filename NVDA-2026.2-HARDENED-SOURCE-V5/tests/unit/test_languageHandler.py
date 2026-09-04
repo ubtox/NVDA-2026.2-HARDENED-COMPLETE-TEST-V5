@@ -8,9 +8,19 @@
 import unittest
 import winBindings.kernel32
 import languageHandler
-from languageHandler import LCID_NONE, LCIDS_TO_TRANSLATED_LOCALES
+from languageHandler import LCID_NONE
 from localesData import LANG_NAMES_TO_LOCALIZED_DESCS
 import locale
+
+
+def generateWindowsLocales():
+	"""Generate the locale names reported by Windows for all 16-bit locale identifiers."""
+	locales = set()
+	for lcid in range(0x10000):
+		localeName = languageHandler.windowsLCIDToLocaleName(lcid)
+		if localeName:
+			locales.add(localeName)
+	return locales
 
 
 def generateUnsupportedWindowsLocales():
@@ -26,9 +36,12 @@ def generateUnsupportedWindowsLocales():
 
 
 LCID_ENGLISH_US = 0x0409
+LCID_CENTRAL_KURDISH = 0x0492
+LCID_KHMER_CAMBODIA = 0x0453
+LCID_INVALID = 0xFFFF
 UNSUPPORTED_WIN_LANGUAGES = generateUnsupportedWindowsLocales()
 TRANSLATABLE_LANGS = set(l[0] for l in languageHandler.getAvailableLanguages()) - {"Windows"}  # noqa: E741
-WINDOWS_LANGS = set(locale.windows_locale.values()).union(LCIDS_TO_TRANSLATED_LOCALES.values())
+WINDOWS_LANGS = generateWindowsLocales()
 
 
 class TestLocaleNameToWindowsLCID(unittest.TestCase):
@@ -48,6 +61,20 @@ class TestLocaleNameToWindowsLCID(unittest.TestCase):
 	def test_invalidLocale(self):
 		lcid = languageHandler.localeNameToWindowsLCID("zzzz")
 		self.assertEqual(lcid, LCID_NONE)
+
+
+class TestWindowsLCIDToLocaleName(unittest.TestCase):
+	def test_knownLocale(self):
+		self.assertEqual(languageHandler.windowsLCIDToLocaleName(LCID_ENGLISH_US), "en_US")
+
+	def test_overriddenLocale(self):
+		self.assertEqual(languageHandler.windowsLCIDToLocaleName(LCID_CENTRAL_KURDISH), "ckb")
+
+	def test_localeNotRequiringAnOverride(self):
+		self.assertEqual(languageHandler.windowsLCIDToLocaleName(LCID_KHMER_CAMBODIA), "km_KH")
+
+	def test_invalidLocale(self):
+		self.assertIsNone(languageHandler.windowsLCIDToLocaleName(LCID_INVALID))
 
 
 class Test_Normalization_For_Win32(unittest.TestCase):

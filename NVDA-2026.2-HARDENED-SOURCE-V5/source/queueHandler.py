@@ -1,6 +1,6 @@
 # queueHandler.py
 # A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2006-2018 NV Access Limited
+# Copyright (C) 2006-2026 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
@@ -10,12 +10,18 @@ from logHandler import log
 import watchdog
 import core
 
-# A queue for calls that should be made on NVDA's main thread
+# A queue for calls that should be made on NVDA's main thread.
 # #11369: We use SimpleQueue rather than Queue here
 # as SimpleQueue is very light-weight, does not use locks
 # and ensures that garbage collection won't unexpectedly happen in the middle of queuing something
-# Which may cause a deadlock.
+# which may cause a deadlock.
 eventQueue = SimpleQueue()
+
+# Immediate work has its own lane. Historically, _immediate only made core.requestPump run sooner,
+# but the queued call still sat behind any existing eventQueue backlog. During large UIA / IA2 event bursts,
+# this could delay focus and input-related work. Keeping a separate internal lane preserves the public queue API
+# while allowing latency-sensitive work to bypass normal backlog at the next pump.
+_immediateEventQueue = SimpleQueue()
 
 generators = {}
 lastGeneratorObjID = 0
@@ -45,11 +51,12 @@ def queueFunction(queue, func, *args, _immediate: bool = False, **kwargs):
 	@param queue: The queue to use. Currently, this can only be
 		L{queueHandler.eventQueue}.
 	@param func: The function to run.
-	@param _immediate: Whether to run this as soon as possible (e.g. input) or
-		to delay it slightly (e.g. events). See the immediate argument to
-		L{core.requestPump}.
+	@param _immediate: Whether this work is latency-sensitive (for example input or focus).
+		Immediate work targeting L{eventQueue} uses a dedicated priority lane and is therefore
+		executed before normal event backlog on the next pump.
 	"""
-	queue.put_nowait((func, args, kwargs))
+	targetQueue = _immediateEventQueue if queue is eventQueue and _immediate else queue
+	targetQueue.put_nowait((func, args, kwargs))
 	core.requestPump(immediate=_immediate)
 
 
@@ -58,7 +65,13 @@ def isRunningGenerators():
 	log.debug("generators running: %s" % res)
 
 
-def flushQueue(queue):
+def _flushSingleQueue(queue):
+	"""Flush the items that were pending when this flush started.
+
+	Items queued while the flush is running are intentionally left for a subsequent pump,
+	matching the historical eventQueue behaviour and preventing an event producer from
+	monopolising NVDA's main thread indefinitely.
+	"""
 	for count in range(queue.qsize() + 1):
 		if not queue.empty():
 			(func, args, kwargs) = queue.get_nowait()
@@ -69,12 +82,18 @@ def flushQueue(queue):
 				log.exception(f"Error in func {func.__qualname__}")
 
 
+def flushQueue(queue):
+	# Latency-sensitive work must bypass normal event backlog.
+	# Keep this special handling private so callers can continue using eventQueue unchanged.
+	if queue is eventQueue:
+		_flushSingleQueue(_immediateEventQueue)
+	_flushSingleQueue(queue)
+
+
 def isPendingItems(queue):
-	if not queue.empty():
-		res = True
-	else:
-		res = False
-	return res
+	if queue is eventQueue and not _immediateEventQueue.empty():
+		return True
+	return not queue.empty()
 
 
 def pumpAll():

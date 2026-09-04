@@ -116,8 +116,8 @@ Write-Host "Source:     $sourceRoot"
 Write-Host "Mode:       $Mode"
 Write-Host "Parallel:   $Parallel"
 
-# The V5 archive flattened this NVDA submodule but omitted its binary DLLs.
-# Restore only the exact files from the signed upstream NV Access commit and
+# The V5 archive flattened several NVDA submodules but omitted binary files.
+# Restore only exact files from the pinned upstream NV Access commits and
 # verify Git blob identities before SCons is allowed to consume them.
 $javaAccessBridgeCommit = '0cc5c9d0da3506eec03300d5118fd1db1097d903'
 $javaAccessBridgeBaseUri = "https://raw.githubusercontent.com/nvaccess/javaAccessBridge32-bin/$javaAccessBridgeCommit"
@@ -129,6 +129,25 @@ Ensure-PinnedDependencyFile `
     -RelativePath 'include\javaAccessBridge32\windowsaccessbridge-64.dll' `
     -Uri "$javaAccessBridgeBaseUri/windowsaccessbridge-64.dll" `
     -ExpectedBlobSha 'ed5378f9750130a7c134e5463485cd0130ed9239'
+
+$miscDepsCommit = '67c2e36deb524eff89d202e807d00c8d98f2a5b3'
+$miscDepsBaseUri = "https://raw.githubusercontent.com/nvaccess/nvda-misc-deps/$miscDepsCommit/tools"
+Ensure-PinnedDependencyFile `
+    -RelativePath 'miscDeps\tools\m4.exe' `
+    -Uri "$miscDepsBaseUri/m4.exe" `
+    -ExpectedBlobSha 'd9d33adde4a6113bcc5cc0848b2141548fb8711e'
+Ensure-PinnedDependencyFile `
+    -RelativePath 'miscDeps\tools\msgfmt.exe' `
+    -Uri "$miscDepsBaseUri/msgfmt.exe" `
+    -ExpectedBlobSha '0d55ee250b99ed2f6d145eab8bed48740881e439'
+Ensure-PinnedDependencyFile `
+    -RelativePath 'miscDeps\tools\regex2.dll' `
+    -Uri "$miscDepsBaseUri/regex2.dll" `
+    -ExpectedBlobSha 'f84a847a0de92fc59fa2ff8494ff700e62b87326'
+Ensure-PinnedDependencyFile `
+    -RelativePath 'miscDeps\tools\xgettext.exe' `
+    -Uri "$miscDepsBaseUri/xgettext.exe" `
+    -ExpectedBlobSha '57b6bad5d119c5fe9d6d80375b703dd163f42432'
 
 Invoke-NativeChecked 'Git integrity (diff --check)' { git diff --check }
 Invoke-NativeChecked 'uv lock verification' { uv lock --check }

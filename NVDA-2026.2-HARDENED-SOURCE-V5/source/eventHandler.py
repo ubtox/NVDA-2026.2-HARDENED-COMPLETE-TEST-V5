@@ -40,10 +40,12 @@ _pendingEventCountsLock = threading.RLock()
 
 # Only state-notification events whose handler observes the object's current state are eligible.
 # Focus, caret, text, live-region and payload-carrying events must never be coalesced here.
-_COALESCIBLE_EVENT_NAMES = frozenset({
-	"locationChange",
-	"visibleDataChange",
-})
+_COALESCIBLE_EVENT_NAMES = frozenset(
+	{
+		"locationChange",
+		"visibleDataChange",
+	}
+)
 
 #: the last object queued for a gainFocus event. Useful for code running outside NVDA's core queue
 lastQueuedFocusObject = None

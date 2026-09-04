@@ -17,7 +17,7 @@ Known validation evidence currently includes successful Chrome and VS Code compa
 ## Requirements
 
 - Windows 11 recommended
-- CPython 3.13.13 x64
+- CPython 3.13.15 x64
 - `uv`
 - Visual Studio 2022/2026 build tools with the NVDA C++/SDK components
 

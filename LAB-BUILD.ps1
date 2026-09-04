@@ -319,8 +319,8 @@ if ($LASTEXITCODE -ne 0) {
 }
 $pythonInfo = $pythonInfoJson | ConvertFrom-Json
 $pythonInfo | Format-List | Out-Host
-if ($pythonInfo.version -ne '3.13.13') {
-    throw "Expected CPython 3.13.13, got $($pythonInfo.version)"
+if ($pythonInfo.version -ne '3.13.15') {
+    throw "Expected CPython 3.13.15, got $($pythonInfo.version)"
 }
 if ([int]$pythonInfo.bits -ne 64) {
     throw "Expected a 64-bit Python runtime, got $($pythonInfo.bits)-bit"

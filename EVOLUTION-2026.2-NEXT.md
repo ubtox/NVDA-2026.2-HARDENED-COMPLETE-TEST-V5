@@ -150,6 +150,7 @@ Status:
 - Full build, unit, Ruff, format, Pyright, source, dist and launcher validation is executed by LAB-BUILD.
 - Evolution binaries identify themselves as `2026.2.0dev-evolution`; CI rejects ambiguous installer identities.
 - Event-pipeline stress coverage and queue-pressure diagnostics are active in the normal unit/validation pipeline.
+- NV Access Python 3.13.15 toolchain update (#20634) ported across the Evolution runtime, x86 synth-host builder, upstream CI pins and LAB validation; the frozen RC2 one-shot workflow intentionally retains its original 3.13.13 pin.
 - Quantitative performance baselines and trend comparison remain planned.
 
 ## Promotion model

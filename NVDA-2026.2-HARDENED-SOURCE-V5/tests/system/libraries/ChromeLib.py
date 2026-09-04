@@ -185,7 +185,7 @@ class ChromeLib:
 		windowsLib.taskSwitchToItemMatching(targetWindowNamePattern=targetWindowPattern)
 		if not windowsLib.isWindowInForeground(chromeWindow):
 			raise AssertionError(
-			"Unable to restore Chrome test window foreground: "
+				"Unable to restore Chrome test window foreground: "
 				f"{chromeWindow.title} - {chromeWindow.hwndVal}"
 			)
 

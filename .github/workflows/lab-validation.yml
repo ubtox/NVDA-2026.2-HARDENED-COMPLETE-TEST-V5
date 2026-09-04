@@ -79,7 +79,19 @@ jobs:
 
       - name: Run LAB validation
         shell: pwsh
-        run: .\LAB-BUILD.ps1 -Mode '${{ steps.mode.outputs.mode }}'
+        run: |
+          $logRoot = Join-Path $PWD 'LAB-LOCAL-OUTPUT'
+          New-Item -ItemType Directory -Force -Path $logRoot | Out-Null
+          $workflowLog = Join-Path $logRoot 'LAB-WORKFLOW-COMPLETE.log'
+          try {
+            & .\LAB-BUILD.ps1 -Mode '${{ steps.mode.outputs.mode }}' *>&1 |
+              Tee-Object -FilePath $workflowLog
+          } catch {
+            $_ | Out-String |
+              Tee-Object -FilePath $workflowLog -Append |
+              Write-Host
+            throw
+          }
 
       - name: Upload validation evidence
         if: always()

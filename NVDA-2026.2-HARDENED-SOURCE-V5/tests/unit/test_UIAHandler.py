@@ -107,6 +107,38 @@ class TestUIATextAttributeNormalization(TestCase):
 		self.assertEqual(fetcher.getValue(123), "😀")
 
 
+class TestUIAProviderTextBoundaryRegressions(TestCase):
+	def test_remoteHeadingLabelNormalization(self):
+		import UIAHandler.remote as remote
+
+		self.assertEqual(remote._normalizeProviderText("A\ud83dB"), "A\ufffdB")
+
+	def test_visualStudioLineNumberUsesNormalizedRetrieval(self):
+		from appModules.devenv import VsWpfTextViewTextInfo
+
+		textInfo = object.__new__(VsWpfTextViewTextInfo)
+		textRange = Mock()
+		lineNumberRange = Mock()
+		textRange.Clone.return_value = lineNumberRange
+		lineNumberRange.getText.return_value = "12\ud83d"
+
+		self.assertEqual(textInfo._getLineNumberString(textRange), "12\ufffd")
+		lineNumberRange.getText.assert_called_once_with(-1)
+
+	def test_consoleOffsetUsesNormalizedRetrieval(self):
+		from NVDAObjects.UIA.winConsoleUIA import ConsoleUIATextInfoWorkaroundEndInclusive
+
+		textInfo = object.__new__(ConsoleUIATextInfoWorkaroundEndInclusive)
+		lineInfo = Mock()
+		charInfo = Mock()
+		lineInfo.copy.return_value = charInfo
+		charInfo._rangeObj = Mock()
+		charInfo._getTextFromUIARange.return_value = "A\ufffd"
+
+		self.assertEqual(textInfo._getCurrentOffsetInThisLine(lineInfo), 2)
+		charInfo._getTextFromUIARange.assert_called_once_with(charInfo._rangeObj)
+
+
 class TestUIATextRangeFromElement(TestCase):
 	def test_standardRangeFromChildHasPriority(self):
 		textPattern = Mock()

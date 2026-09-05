@@ -1196,7 +1196,14 @@ class UIA(Window):
 		if len(IDs) < 2:
 			return
 
-		cacheRequest = UIAHandler.handler.clientObject.createCacheRequest()
+		try:
+			cacheRequest = UIAHandler.handler.clientObject.createCacheRequest()
+		except COMError:
+			log.debugWarning(
+				"IUIAutomation.createCacheRequest failed; falling back to current property reads",
+				exc_info=True,
+			)
+			return
 		acceptedIDs = set()
 		for ID in IDs:
 			try:

@@ -35,6 +35,19 @@ class TestUIACacheBatching(unittest.TestCase):
 		self.assertEqual({101, 103}, set(elementCache))
 		self.assertNotIn(102, elementCache)
 
+	def test_cacheRequestCreationFailureLeavesCacheEmpty(self) -> None:
+		elementCache = {}
+		handler = Mock()
+		handler.clientObject.createCacheRequest.side_effect = COMError(-1, "failure", None)
+		uiObject = Mock()
+		uiObject._coreCycleUIAPropertyCacheElementCache = elementCache
+
+		with patch.object(UIAHandler, "handler", handler):
+			UIA._prefetchUIACacheForPropertyIDs(uiObject, {101, 103})
+
+		self.assertEqual({}, elementCache)
+		uiObject.UIAElement.buildUpdatedCache.assert_not_called()
+
 	def test_buildFailureLeavesCacheEmpty(self) -> None:
 		elementCache = {}
 		cacheRequest = Mock()

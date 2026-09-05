@@ -1,4 +1,5 @@
 name: NVDA Evolution validation
+run-name: NVDA Evolution ${{ github.ref_name }} @ ${{ github.sha }}
 
 on:
   push:
@@ -33,6 +34,19 @@ jobs:
 
       - name: Checkout evolution source
         uses: actions/checkout@v6
+
+      - name: Record exact certification target
+        shell: pwsh
+        run: |
+          $logRoot = Join-Path $PWD 'LAB-LOCAL-OUTPUT'
+          New-Item -ItemType Directory -Force -Path $logRoot | Out-Null
+          @(
+            "repository=$env:GITHUB_REPOSITORY"
+            "ref=$env:GITHUB_REF"
+            "sha=$env:GITHUB_SHA"
+            "run_id=$env:GITHUB_RUN_ID"
+            "run_attempt=$env:GITHUB_RUN_ATTEMPT"
+          ) | Set-Content -LiteralPath (Join-Path $logRoot 'EVOLUTION-CI-CERTIFICATION.txt') -Encoding utf8
 
       - name: Install CPython 3.13.15 x64
         uses: actions/setup-python@v6
@@ -90,7 +104,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: nvda-evolution-${{ github.run_id }}
+          name: nvda-evolution-${{ github.sha }}-${{ github.run_id }}
           if-no-files-found: warn
           retention-days: 14
           path: |

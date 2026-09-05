@@ -92,7 +92,7 @@ def _addSpeechDictionaries():
 				_speechDictDefinitions.append(definition)
 
 
-def _getDictionaryDefinition(source: DictionaryType | str) -> SpeechDictDefinition:
+def getDictionaryDefinition(source: DictionaryType | str) -> SpeechDictDefinition:
 	"""Get the speech dictionary definition for a given source.
 	:param source: The source of the speech dictionary, which can be a DictionaryType or a string (e.g., add-on name).
 	:return: The corresponding SpeechDictDefinition.
@@ -102,6 +102,10 @@ def _getDictionaryDefinition(source: DictionaryType | str) -> SpeechDictDefiniti
 		if definition.source == source:
 			return definition
 	raise KeyError(f"No speech dictionary definition found for source {source!r}")
+
+
+# Compatibility alias for existing core and add-on code that still uses the former private API.
+_getDictionaryDefinition = getDictionaryDefinition
 
 
 def loadVoiceDict(synth: "synthDriverHandler.SynthDriver") -> None:

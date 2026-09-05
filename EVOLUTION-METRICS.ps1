@@ -58,6 +58,7 @@ function Get-UnitTestMetrics {
         return [ordered]@{
             present = $false
             path = $null
+            suite_count = 0
             tests = $null
             failures = $null
             errors = $null
@@ -68,14 +69,47 @@ function Get-UnitTestMetrics {
 
     [xml]$xml = Get-Content -LiteralPath $path -Raw
     $root = $xml.DocumentElement
+    if ($null -eq $root) {
+        throw "Unit test XML has no document element: $path"
+    }
+
+    $suites = if ($root.LocalName -eq 'testsuite') {
+        @($root)
+    } elseif ($root.LocalName -eq 'testsuites') {
+        @($root.SelectNodes('testsuite'))
+    } else {
+        throw "Unsupported unit test XML root '$($root.LocalName)' in $path"
+    }
+
+    $totals = [ordered]@{
+        tests = [int64]0
+        failures = [int64]0
+        errors = [int64]0
+        skipped = [int64]0
+        time_seconds = [double]0
+    }
+    foreach ($suite in $suites) {
+        foreach ($key in @('tests', 'failures', 'errors', 'skipped')) {
+            $value = $suite.GetAttribute($key)
+            if (-not [string]::IsNullOrWhiteSpace($value)) {
+                $totals[$key] += [int64]::Parse($value, [Globalization.CultureInfo]::InvariantCulture)
+            }
+        }
+        $timeValue = $suite.GetAttribute('time')
+        if (-not [string]::IsNullOrWhiteSpace($timeValue)) {
+            $totals['time_seconds'] += [double]::Parse($timeValue, [Globalization.CultureInfo]::InvariantCulture)
+        }
+    }
+
     return [ordered]@{
         present = $true
         path = $path.Substring($repoRoot.Length).TrimStart('\')
-        tests = if ($null -ne $root.tests -and "$($root.tests)" -ne '') { [int]$root.tests } else { $null }
-        failures = if ($null -ne $root.failures -and "$($root.failures)" -ne '') { [int]$root.failures } else { $null }
-        errors = if ($null -ne $root.errors -and "$($root.errors)" -ne '') { [int]$root.errors } else { $null }
-        skipped = if ($null -ne $root.skipped -and "$($root.skipped)" -ne '') { [int]$root.skipped } else { $null }
-        time_seconds = if ($null -ne $root.time -and "$($root.time)" -ne '') { [double]$root.time } else { $null }
+        suite_count = [int64]$suites.Count
+        tests = $totals['tests']
+        failures = $totals['failures']
+        errors = $totals['errors']
+        skipped = $totals['skipped']
+        time_seconds = [Math]::Round($totals['time_seconds'], 3)
     }
 }
 

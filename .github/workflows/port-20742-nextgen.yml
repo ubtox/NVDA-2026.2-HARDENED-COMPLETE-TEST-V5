@@ -1,9 +1,11 @@
-name: Stage NextGen locale smoke port
+name: Stage NextGen locale smoke source port
 
 on:
   push:
     branches:
       - 'automation/port-20742-nextgen'
+    paths:
+      - '.github/workflows/port-20742-nextgen.yml'
 
 permissions:
   contents: write
@@ -34,7 +36,7 @@ jobs:
           git fetch --no-tags https://github.com/nvaccess/nvda.git 77973a3015e9a58dc8638d9a6dc61b9f60e853b4
           git rev-parse FETCH_HEAD
 
-      - name: Apply surgical locale smoke port
+      - name: Apply surgical locale smoke source port
         shell: pwsh
         run: |
           @'
@@ -62,7 +64,6 @@ jobs:
           nvda_lib_path = source_root / "tests/system/libraries/NvdaLib.py"
           current_nvda_lib = nvda_lib_path.read_text(encoding="utf-8")
           upstream_nvda_lib = upstream_text("tests/system/libraries/NvdaLib.py")
-
           replacements = (
               ("\tdef _startNVDAProcess(", "\tdef _startNVDAInstallerProcess("),
               ("\tdef start_NVDA(", "\tdef save_NVDA_log("),
@@ -78,69 +79,12 @@ jobs:
                   raise RuntimeError(f"Refusing to overwrite pre-existing {target}")
               target.parent.mkdir(parents=True, exist_ok=True)
               target.write_text(upstream_text(rel), encoding="utf-8", newline="")
-
-          workflow_path = root / ".github/workflows/evolution-validation.yml"
-          workflow = workflow_path.read_text(encoding="utf-8")
-          smoke_marker = "      - name: Smoke test all locales\n"
-          if smoke_marker in workflow:
-              raise RuntimeError("Locale smoke step already exists")
-
-          upload_marker = "      - name: Upload evolution evidence and binaries\n"
-          if upload_marker not in workflow:
-              raise RuntimeError("Evolution artifact upload marker not found")
-
-          smoke_lines = [
-              "      - name: Smoke test all locales",
-              "        shell: pwsh",
-              "        run: |",
-              "          $sourceRoot = Join-Path $PWD 'NVDA-2026.2-HARDENED-SOURCE-V5'",
-              "          Push-Location $sourceRoot",
-              "          try {",
-              "            $outputRoot = Join-Path $sourceRoot 'output'",
-              "            $launchers = @(Get-ChildItem -LiteralPath $outputRoot -Filter 'nvda*.exe' -File -ErrorAction Stop)",
-              "            if ($launchers.Count -eq 0) {",
-              "              throw 'No Evolution launcher available for locale smoke testing.'",
-              "            }",
-              "",
-              "            $launcherDir = Join-Path $env:RUNNER_TEMP 'nvda-l10n-launcher'",
-              "            Remove-Item -LiteralPath $launcherDir -Recurse -Force -ErrorAction SilentlyContinue",
-              "            New-Item -ItemType Directory -Force -Path $launcherDir | Out-Null",
-              "            Copy-Item -LiteralPath $launchers[0].FullName -Destination $launcherDir",
-              "",
-              "            New-Item -ItemType Directory -Force -Path '.\\testOutput\\install' | Out-Null",
-              "            $env:nvdaLauncherDir = $launcherDir",
-              "            & .\\ci\\scripts\\installNVDA.ps1",
-              "            if ($LASTEXITCODE -ne 0) {",
-              "              throw 'NVDA silent installation failed before locale smoke testing.'",
-              "            }",
-              "",
-              "            $env:INCLUDE_SYSTEM_TEST_TAGS = 'l10n'",
-              "            & .\\ci\\scripts\\tests\\systemTests.ps1",
-              "            if ($LASTEXITCODE -ne 0) {",
-              "              throw 'Locale smoke test failed.'",
-              "            }",
-              "          } finally {",
-              "            Pop-Location",
-              "          }",
-              "",
-          ]
-          smoke_step = "\n".join(smoke_lines) + "\n"
-          workflow = workflow.replace(upload_marker, smoke_step + upload_marker, 1)
-
-          unit_artifact = "            NVDA-2026.2-HARDENED-SOURCE-V5/testOutput/unit/**\n"
-          system_artifact = "            NVDA-2026.2-HARDENED-SOURCE-V5/testOutput/system/**\n"
-          if unit_artifact not in workflow:
-              raise RuntimeError("Unit-test artifact marker not found")
-          if system_artifact not in workflow:
-              workflow = workflow.replace(unit_artifact, unit_artifact + system_artifact, 1)
-          workflow_path.write_text(workflow, encoding="utf-8", newline="")
           '@ | python -
 
-      - name: Verify staged scope
+      - name: Verify source scope
         shell: pwsh
         run: |
           $expected = @(
-            '.github/workflows/evolution-validation.yml',
             'NVDA-2026.2-HARDENED-SOURCE-V5/tests/system/libraries/NvdaLib.py',
             'NVDA-2026.2-HARDENED-SOURCE-V5/tests/system/robot/l10nTests.py',
             'NVDA-2026.2-HARDENED-SOURCE-V5/tests/system/robot/l10nTests.robot'
@@ -149,28 +93,14 @@ jobs:
           $unexpected = @($actual | Where-Object { $_ -notin $expected })
           $missing = @($expected | Where-Object { $_ -notin $actual })
           if ($unexpected.Count -gt 0 -or $missing.Count -gt 0) {
-            throw "Staged scope mismatch. Unexpected=[$($unexpected -join ', ')] Missing=[$($missing -join ', ')]"
+            throw "Source scope mismatch. Unexpected=[$($unexpected -join ', ')] Missing=[$($missing -join ', ')]"
           }
           git diff --check
 
-      - name: Commit clean staging result
+      - name: Commit source staging result
         shell: pwsh
         run: |
-          Remove-Item -LiteralPath '.github/workflows/port-20742-nextgen.yml' -Force
-          git add -A
-          $changed = @(git diff --cached --name-only)
-          $expected = @(
-            '.github/workflows/evolution-validation.yml',
-            '.github/workflows/port-20742-nextgen.yml',
-            'NVDA-2026.2-HARDENED-SOURCE-V5/tests/system/libraries/NvdaLib.py',
-            'NVDA-2026.2-HARDENED-SOURCE-V5/tests/system/robot/l10nTests.py',
-            'NVDA-2026.2-HARDENED-SOURCE-V5/tests/system/robot/l10nTests.robot'
-          )
-          $unexpected = @($changed | Where-Object { $_ -notin $expected })
-          $missing = @($expected | Where-Object { $_ -notin $changed })
-          if ($unexpected.Count -gt 0 -or $missing.Count -gt 0) {
-            throw "Final scope mismatch. Unexpected=[$($unexpected -join ', ')] Missing=[$($missing -join ', ')]"
-          }
+          git add -- 'NVDA-2026.2-HARDENED-SOURCE-V5/tests/system/libraries/NvdaLib.py' 'NVDA-2026.2-HARDENED-SOURCE-V5/tests/system/robot/l10nTests.py' 'NVDA-2026.2-HARDENED-SOURCE-V5/tests/system/robot/l10nTests.robot'
           git diff --cached --check
-          git commit -m "NextGen: smoke-test all locales (#20742)"
+          git commit -m "NextGen: stage locale smoke source files (#20742)"
           git push origin HEAD:automation/port-20742-nextgen

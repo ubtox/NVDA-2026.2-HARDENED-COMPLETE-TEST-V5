@@ -1,0 +1,61 @@
+name: Port NVDA 20698 to NextGen
+
+on:
+  push:
+    branches:
+      - automation/port-20698-nextgen
+
+permissions:
+  contents: write
+
+jobs:
+  port:
+    name: Apply exact upstream 20698 patch
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - name: Checkout staging branch
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Apply and verify upstream patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/nvaccess/nvda.git
+          git fetch --no-tags upstream \
+            408ff7b73a046fc912934321097dd6f17445bac4 \
+            acb904f88ebdbfb7415cddc2188a38f36a675243
+
+          files=(
+            "source/NVDAObjects/IAccessible/__init__.py"
+            "source/locationHelper.py"
+            "source/winBindings/user32.py"
+            "source/windowUtils.py"
+            "tests/unit/test_locationHelper.py"
+          )
+
+          git diff --binary \
+            408ff7b73a046fc912934321097dd6f17445bac4 \
+            acb904f88ebdbfb7415cddc2188a38f36a675243 \
+            -- "${files[@]}" \
+            | git apply --3way --index --directory=NVDA-2026.2-HARDENED-SOURCE-V5 -
+
+          git diff --cached --check
+
+          expected=$(printf 'NVDA-2026.2-HARDENED-SOURCE-V5/%s\n' "${files[@]}" | sort)
+          actual=$(git diff --cached --name-only | sort)
+          if [[ "$actual" != "$expected" ]]; then
+            echo "Unexpected staged paths:" >&2
+            git diff --cached --name-status >&2
+            exit 1
+          fi
+
+          rm .github/workflows/port-20698-nextgen.yml
+          git add -A
+          git diff --cached --check
+          git commit -m "NextGen: fix x64 Win32 menu DPI mapping (#20698)"
+          git push origin HEAD:automation/port-20698-nextgen

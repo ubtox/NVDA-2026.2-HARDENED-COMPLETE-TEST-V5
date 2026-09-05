@@ -1,0 +1,60 @@
+name: NVDA NextGen security
+
+on:
+  push:
+    branches:
+      - 'evolution/2026.2-nextgen'
+  pull_request:
+    branches:
+      - 'evolution/2026.2-nextgen'
+      - 'evolution/2026.2-final'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nvda-nextgen-security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  codeql-python:
+    name: CodeQL Python security-extended
+    runs-on: windows-2022
+    timeout-minutes: 60
+    permissions:
+      security-events: write
+      packages: read
+      contents: read
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: python
+          queries: security-extended
+
+      - name: Analyze Python security
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: '/language:python'
+
+  dependency-review:
+    name: Dependency vulnerability review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+
+      - name: Review dependency changes
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate

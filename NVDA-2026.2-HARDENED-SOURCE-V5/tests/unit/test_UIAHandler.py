@@ -83,6 +83,19 @@ class TestUIAPropertyValueNormalization(TestCase):
 		self.assertIs(UIA._getUIACacheablePropertyValue(uiObject, 123), value)
 
 
+class TestUIASelectionContainer(TestCase):
+	def test_COMErrorIsTreatedAsNoSelectionContainer(self):
+		class FailingSelectionItemPattern:
+			@property
+			def currentSelectionContainer(self):
+				raise COMError(-1, "failure", None)
+
+		uiObject = Mock()
+		uiObject.UIASelectionItemPattern = FailingSelectionItemPattern()
+
+		self.assertIsNone(UIA._get_selectionContainer(uiObject))
+
+
 class TestUIATextAttributeNormalization(TestCase):
 	def test_directAttributeStringIsNormalized(self):
 		textRange = Mock()

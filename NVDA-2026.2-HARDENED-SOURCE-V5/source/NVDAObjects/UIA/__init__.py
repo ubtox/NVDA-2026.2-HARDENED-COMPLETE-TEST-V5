@@ -132,6 +132,10 @@ class UIATextInfo(textInfos.TextInfo):
 		UIAHandler.UIA_AriaPropertiesPropertyId,
 		UIAHandler.UIA_LevelPropertyId,
 		UIAHandler.UIA_IsEnabledPropertyId,
+		UIAHandler.UIA.UIA_SelectionCanSelectMultiplePropertyId,
+		UIAHandler.UIA_IsOffscreenPropertyId,
+		UIAHandler.UIA_AnnotationTypesPropertyId,
+		UIAHandler.UIA_DragIsGrabbedPropertyId,
 	}
 
 	def _get__controlFieldUIACacheRequest(self):
@@ -1180,17 +1184,20 @@ class UIA(Window):
 		return normalizeUIAText(value) if isinstance(value, str) else value
 
 	def _prefetchUIACacheForPropertyIDs(self, IDs):
-		"""
-		Fetch values for all the given UI Automation property IDs in one cache request, making them available for this core cycle.
+		"""Fetch several UIA properties in one fresh cache request for this core cycle.
+
+		Only properties accepted by the provider are registered as cached. A failed
+		BuildUpdatedCache call leaves the existing cache untouched.
 		"""
 		elementCache = self._coreCycleUIAPropertyCacheElementCache
+		IDs = set(IDs)
 		if elementCache:
-			# Ignore any IDs we already have cached values or cache UIAElements for
-			IDs = {x for x in IDs if x not in elementCache}
+			IDs.difference_update(elementCache)
 		if len(IDs) < 2:
-			# Creating  a UIA cache request for 1 or 0 properties is pointless
 			return
+
 		cacheRequest = UIAHandler.handler.clientObject.createCacheRequest()
+		acceptedIDs = set()
 		for ID in IDs:
 			try:
 				cacheRequest.addProperty(ID)
@@ -1199,12 +1206,17 @@ class UIA(Window):
 					"Couldn't add property ID %d to cache request, most likely unsupported on this version of Windows"
 					% ID,
 				)
+			else:
+				acceptedIDs.add(ID)
+		if len(acceptedIDs) < 2:
+			return
+
 		try:
 			cacheElement = self.UIAElement.buildUpdatedCache(cacheRequest)
 		except COMError:
-			log.debugWarning("IUIAutomationElement.buildUpdatedCache failed given IDs of %s" % IDs)
+			log.debugWarning("IUIAutomationElement.buildUpdatedCache failed given IDs of %s" % acceptedIDs)
 			return
-		for ID in IDs:
+		for ID in acceptedIDs:
 			elementCache[ID] = cacheElement
 
 	# C901 'findOverlayClasses' is too complex
@@ -1589,6 +1601,7 @@ class UIA(Window):
 
 	def event_gainFocus(self):
 		UIAHandler.handler.addLocalEventHandlerGroupToElement(self.UIAElement, isFocus=True)
+		self._prefetchUIACacheForPropertyIDs(self._focusPrefetchUIAPropertyIDs | self._UIAStatesPropertyIDs)
 		super().event_gainFocus()
 
 	def event_loseFocus(self):
@@ -1929,6 +1942,23 @@ class UIA(Window):
 		UIAHandler.UIA_AnnotationTypesPropertyId,
 		UIAHandler.UIA_DragIsGrabbedPropertyId,
 	}
+
+	_focusPrefetchUIAPropertyIDs = {
+		UIAHandler.UIA_FullDescriptionPropertyId,
+		UIAHandler.UIA_HelpTextPropertyId,
+		UIAHandler.UIA_AccessKeyPropertyId,
+		UIAHandler.UIA_AcceleratorKeyPropertyId,
+		UIAHandler.UIA_PositionInSetPropertyId,
+		UIAHandler.UIA_SizeOfSetPropertyId,
+		UIAHandler.UIA_LevelPropertyId,
+		UIAHandler.UIA.UIA_ValueValuePropertyId,
+		UIAHandler.UIA.UIA_RangeValueValuePropertyId,
+		UIAHandler.UIA_ToggleToggleStatePropertyId,
+		UIAHandler.UIA_BoundingRectanglePropertyId,
+	}
+	"""Properties fetched together from a fresh UIA cache when focus is gained.
+	This intentionally does not reuse an event sender cache, which may be stale.
+	"""
 
 	def _get_states(self):
 		states = set()

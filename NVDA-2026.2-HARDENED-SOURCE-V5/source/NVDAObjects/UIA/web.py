@@ -349,6 +349,12 @@ class UIAWebTextInfo(UIATextInfo):
 class UIAWeb(UIA):
 	_TextInfo = UIAWebTextInfo
 
+	_focusPrefetchUIAPropertyIDs = UIA._focusPrefetchUIAPropertyIDs | {
+		UIAHandler.UIA_AriaPropertiesPropertyId,
+		UIAHandler.UIA_AriaRolePropertyId,
+		UIAHandler.UIA_LandmarkTypePropertyId,
+	}
+
 	def _isIframe(self):
 		role = super().role
 		return role == controlTypes.Role.PANE and self.UIATextPattern
@@ -381,7 +387,9 @@ class UIAWeb(UIA):
 		return states
 
 	def _get_ariaProperties(self):
-		return splitUIAElementAttribs(self.UIAElement.currentAriaProperties)
+		return splitUIAElementAttribs(
+			self._getUIACacheablePropertyValue(UIAHandler.UIA_AriaPropertiesPropertyId),
+		)
 
 	# RegEx to get the value for the aria-current property. This will be looking for a the value of 'current'
 	# in a list of strings like "something=true;current=date;". We want to capture one group, after the '='

@@ -27,411 +27,36 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Apply upstream 20698 surgically
+      - name: Apply upstream 20698 with three-way merge
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
           $expected = '4fd3f91381c71ae4595eeb9eee765686a31f1a97'
           $actual = (git rev-parse HEAD).Trim()
-          if ($actual -ne $expected) { throw "Target branch moved: expected $expected, got $actual" }
+          if ($actual -ne $expected) {
+            throw "Target branch moved: expected $expected, got $actual"
+          }
 
-          git fetch --no-tags --depth=1 https://github.com/nvaccess/nvda.git acb904f88ebdbfb7415cddc2188a38f36a675243
+          git fetch --no-tags --depth=2 https://github.com/nvaccess/nvda.git acb904f88ebdbfb7415cddc2188a38f36a675243
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to fetch upstream #20698 history' }
 
-          @'
-          from __future__ import annotations
+          $patch = Join-Path $env:RUNNER_TEMP '20698.patch'
+          curl.exe -fsSL 'https://github.com/nvaccess/nvda/pull/20698.patch' -o $patch
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to download upstream #20698 patch' }
 
-          from pathlib import Path
-          import subprocess
+          git apply --3way --directory=NVDA-2026.2-HARDENED-SOURCE-V5 --exclude=user_docs/en/changes.md $patch
+          if ($LASTEXITCODE -ne 0) { throw 'Three-way application of #20698 failed' }
 
-          ROOT = Path("NVDA-2026.2-HARDENED-SOURCE-V5")
-
-          def read(path: str) -> str:
-              return (ROOT / path).read_text(encoding="utf-8")
-
-          def write(path: str, text: str) -> None:
-              (ROOT / path).write_text(text, encoding="utf-8", newline="\n")
-
-          def replace_once(path: str, old: str, new: str) -> None:
-              text = read(path)
-              count = text.count(old)
-              if count != 1:
-                  raise RuntimeError(f"{path}: expected one anchor, found {count}: {old[:100]!r}")
-              write(path, text.replace(old, new, 1))
-
-          def copy_from_upstream(path: str) -> None:
-              content = subprocess.check_output(
-                  ["git", "show", f"FETCH_HEAD:{path}"],
-              )
-              (ROOT / path).write_bytes(content)
-
-          # These two target blobs are byte-identical to the parent of upstream #20698,
-          # therefore using the post-merge blobs is an exact one-commit transformation.
-          copy_from_upstream("source/locationHelper.py")
-          copy_from_upstream("source/windowUtils.py")
-
-          # winBindings/user32.py: preserve the local file and add only the five APIs used by #20698.
-          user32 = "source/winBindings/user32.py"
-          replace_once(
-              user32,
-              "# Copyright (C) 2025 NV Access Limited",
-              "# Copyright (C) 2025-2026 NV Access Limited, Christopher Proß",
-          )
-          replace_once(
-              user32,
-              "SetProcessDpiAwarenessContext.argtypes = (\n\tDPI_AWARENESS_CONTEXT,  # value: A DPI_AWARENESS_CONTEXT handle to set\n)\n\nSetProcessDPIAware =",
-              '''SetProcessDpiAwarenessContext.argtypes = (
-\tDPI_AWARENESS_CONTEXT,  # value: A DPI_AWARENESS_CONTEXT handle to set
-)
-
-SetThreadDpiAwarenessContext = WINFUNCTYPE(None)(("SetThreadDpiAwarenessContext", dll))
-"""
-Set the DPI awareness for the current thread to the provided value.
-
-.. seealso::
-\thttps://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setthreaddpiawarenesscontext
-"""
-SetThreadDpiAwarenessContext.restype = DPI_AWARENESS_CONTEXT
-SetThreadDpiAwarenessContext.argtypes = (
-\tDPI_AWARENESS_CONTEXT,  # dpiContext: The new DPI_AWARENESS_CONTEXT for the current thread
-)
-
-GetWindowDpiAwarenessContext = WINFUNCTYPE(None)(("GetWindowDpiAwarenessContext", dll))
-"""
-Returns the DPI_AWARENESS_CONTEXT associated with a window.
-
-.. seealso::
-\thttps://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowdpiawarenesscontext
-"""
-GetWindowDpiAwarenessContext.restype = DPI_AWARENESS_CONTEXT
-GetWindowDpiAwarenessContext.argtypes = (
-\tHWND,  # hwnd: The window to query
-)
-
-SetProcessDPIAware =''',
-          )
-          replace_once(
-              user32,
-              "GetWindowRect.argtypes = (\n\tHWND,  # hWnd: Handle to the window\n\tLPRECT,  # lpRect: RECT that receives the screen coordinates of the upper-left and lower-right corners of the window\n)\nIsWindowUnicode =",
-              '''GetWindowRect.argtypes = (
-\tHWND,  # hWnd: Handle to the window
-\tLPRECT,  # lpRect: RECT that receives the screen coordinates of the upper-left and lower-right corners of the window
-)
-
-
-GetMenu = WINFUNCTYPE(None)(("GetMenu", dll))
-"""
-Retrieves a handle to the menu assigned to the specified window.
-
-.. seealso::
-\thttps://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmenu
-"""
-GetMenu.restype = HMENU
-GetMenu.argtypes = (
-\tHWND,  # hWnd: Handle to the window whose menu handle is to be retrieved
-)
-
-GetMenuItemCount = WINFUNCTYPE(None)(("GetMenuItemCount", dll))
-"""
-Determines the number of items in the specified menu.
-
-.. seealso::
-\thttps://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmenuitemcount
-"""
-GetMenuItemCount.restype = c_int
-GetMenuItemCount.argtypes = (
-\tHMENU,  # hMenu: Handle to the menu to be examined
-)
-
-GetMenuItemRect = WINFUNCTYPE(None)(("GetMenuItemRect", dll))
-"""
-Retrieves the bounding rectangle of the specified menu item.
-
-.. seealso::
-\thttps://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmenuitemrect
-"""
-GetMenuItemRect.restype = BOOL
-GetMenuItemRect.argtypes = (
-\tHWND,  # hWnd: Handle to the window containing the menu
-\tHMENU,  # hMenu: Handle to the menu
-\tUINT,  # uItem: Zero-based position of the menu item
-\tLPRECT,  # lprcItem: RECT that receives the bounding rectangle in screen coordinates
-)
-
-IsWindowUnicode =''',
-          )
-
-          # IAccessible: the local blob is exactly release-2026.2; apply only #20698's imports/helpers/MenuItem override.
-          ia = "source/NVDAObjects/IAccessible/__init__.py"
-          replace_once(
-              ia,
-              "# Copyright (C) 2006-2025 NV Access Limited, Babbage B.V., Cyrille Bougot",
-              "# Copyright (C) 2006-2026 NV Access Limited, Babbage B.V., Cyrille Bougot, Christopher Proß",
-          )
-          replace_once(ia, "import ctypes\nimport os", "import ctypes\nimport ctypes.wintypes\nimport os")
-          replace_once(ia, "import displayModel\nimport IAccessibleHandler", "import displayModel\nimport windowUtils\nimport IAccessibleHandler")
-          replace_once(
-              ia,
-              "from locationHelper import RectLTWH\nimport NVDAHelper",
-              "import locationHelper\nfrom locationHelper import RectLTRB, RectLTWH\nimport NVDAHelper",
-          )
-
-          helper_block = r'''#: Window message asking a popup menu window for the handle of the menu it displays,
-          #: defined in winuser.h.
-          _MN_GETHMENU = 0x01E1
-          #: The system window class of popup menu windows.
-          _MENU_POPUP_WINDOW_CLASS = "#32768"
-          #: Menu handles of popup menu windows, cached to avoid repeated cross process messages.
-          _menuHandleCache: dict[int, int] = {}
-          #: Maximum number of cached menu handles. The cache is cleared wholesale beyond this,
-          #: it only needs to cover the handful of popup windows alive at any moment.
-          _MENU_HANDLE_CACHE_LIMIT = 8
-          #: How long to wait for a popup menu window to answer the menu handle query, in milliseconds.
-          _MENU_HANDLE_FETCH_TIMEOUT_MS = 500
-          #: Maximum per edge difference in pixels for an MSAA menu location to still count as
-          #: matching the raw Win32 menu item rectangle, allowing for independent rounding of edges.
-          _MENU_ITEM_RECT_TOLERANCE_PX = 1
-
-
-          def _rectsMatchWithinTolerance(first: RectLTRB, second: RectLTRB) -> bool:
-          \t"""Whether two rectangles are equal within the per edge menu item tolerance."""
-          \treturn all(
-          \t\tabs(firstEdge - secondEdge) <= _MENU_ITEM_RECT_TOLERANCE_PX
-          \t\tfor firstEdge, secondEdge in zip(first, second)
-          \t)
-
-
-          def _getPopupMenuHandle(window: int, ignoreCache: bool = False) -> int | None:
-          \t"""Fetch the menu handle of a #32768 popup menu window, with a small cache per window handle.
-
-          \t:param window: The popup menu window.
-          \t:param ignoreCache: Bypass and refresh the cached handle,
-          \t\tused after a cached handle turned out to be stale.
-          \t:return: The menu handle, or None if it cannot be fetched.
-          \t"""
-          \tif not ignoreCache:
-          \t\tcached = _menuHandleCache.get(window)
-          \t\tif cached:
-          \t\t\treturn cached
-          \tmenuHandleResult = ctypes.c_size_t()
-          \tif not user32.SendMessageTimeout(
-          \t\twindow,
-          \t\t_MN_GETHMENU,
-          \t\t0,
-          \t\t0,
-          \t\twinUser.SMTO_ABORTIFHUNG,
-          \t\t_MENU_HANDLE_FETCH_TIMEOUT_MS,
-          \t\tctypes.byref(menuHandleResult),
-          \t):
-          \t\treturn None
-          \tmenuHandle = menuHandleResult.value
-          \tif menuHandle:
-          \t\tif len(_menuHandleCache) >= _MENU_HANDLE_CACHE_LIMIT:
-          \t\t\t_menuHandleCache.clear()
-          \t\t_menuHandleCache[window] = menuHandle
-          \treturn menuHandle
-
-
-          def _getMenuItemRectsInWindowDpiContext(
-          \twindow: int,
-          \tisPopupWindow: bool,
-          \titemIndex: int | None = None,
-          ) -> list[RectLTRB] | None:
-          \t"""Fetch Win32 menu item rectangles as seen from the menu window's own DPI awareness context."""
-
-          \tdef fetchRects(menuHandle: int) -> list[RectLTRB] | None:
-          \t\tif itemIndex is None:
-          \t\t\titemCount = user32.GetMenuItemCount(menuHandle)
-          \t\t\tif itemCount < 0:
-          \t\t\t\treturn None
-          \t\t\titemIndexes = range(itemCount)
-          \t\telse:
-          \t\t\titemIndexes = (itemIndex,)
-          \t\trects = []
-          \t\ttry:
-          \t\t\twith windowUtils.threadDpiAwarenessContextOfWindow(window):
-          \t\t\t\tfor index in itemIndexes:
-          \t\t\t\t\trect = ctypes.wintypes.RECT()
-          \t\t\t\t\tif not user32.GetMenuItemRect(window, menuHandle, index, ctypes.byref(rect)):
-          \t\t\t\t\t\treturn None
-          \t\t\t\t\trects.append(RectLTRB.fromCompatibleType(rect))
-          \t\texcept OSError:
-          \t\t\tlog.debugWarning(f"Could not apply the DPI awareness context of window {window}")
-          \t\t\treturn None
-          \t\treturn rects
-
-          \tif isPopupWindow:
-          \t\tmenuHandle = _getPopupMenuHandle(window)
-          \telse:
-          \t\tmenuHandle = user32.GetMenu(window)
-          \tif not menuHandle:
-          \t\tlog.debugWarning(f"No menu handle for window {window}, isPopupWindow={isPopupWindow}")
-          \t\treturn None
-          \titemRects = fetchRects(menuHandle)
-          \tif itemRects is None and isPopupWindow and itemIndex is None:
-          \t\tmenuHandle = _getPopupMenuHandle(window, ignoreCache=True)
-          \t\tif menuHandle:
-          \t\t\titemRects = fetchRects(menuHandle)
-          \tif itemRects is None:
-          \t\tlog.debugWarning(
-          \t\t\tf"Could not fetch the menu item rectangles for window {window}, itemIndex={itemIndex}",
-          \t\t)
-          \treturn itemRects
-
-
-          def _physicalLocationFromMenuLocation(
-          \twindow: int,
-          \tchildID: int,
-          \tisPopupWindow: bool,
-          \tlocation: RectLTWH,
-          ) -> RectLTWH:
-          \t"""Convert an MSAA menu location to physical screen coordinates when needed."""
-          \ttry:
-          \t\tphysRect = windowUtils.getPhysicalWindowRect(window)
-          \t\tunawareRect = windowUtils.getWindowRectInUnawareDpiContext(window)
-          \texcept OSError:
-          \t\tlog.debugWarning(f"Could not fetch the window rectangles for window {window}")
-          \t\treturn location
-          \tif unawareRect == physRect:
-          \t\treturn location
-          \tif unawareRect.width <= 0 or unawareRect.height <= 0:
-          \t\treturn location
-          \ttry:
-          \t\twinContextRect = windowUtils.getWindowRectInWindowDpiContext(window)
-          \texcept OSError:
-          \t\tlog.debugWarning(f"Could not fetch the window DPI context rectangle for window {window}")
-          \t\treturn location
-          \tif winContextRect.width <= 0 or winContextRect.height <= 0:
-          \t\treturn location
-          \tcandidateRects = None
-          \tif childID >= 1:
-          \t\tcandidateRects = _getMenuItemRectsInWindowDpiContext(window, isPopupWindow, itemIndex=childID - 1)
-          \tif not candidateRects:
-          \t\tcandidateRects = _getMenuItemRectsInWindowDpiContext(window, isPopupWindow)
-          \tif not candidateRects:
-          \t\treturn location
-          \ttry:
-          \t\tlocationLTRB = location.toLTRB()
-          \texcept ValueError:
-          \t\tlog.debugWarning(f"MSAA reported the invalid menu location {location} for window {window}")
-          \t\treturn location
-          \tfor itemRect in candidateRects:
-          \t\titemRectPhysical = locationHelper._remapRectByAnchors(itemRect, winContextRect, physRect)
-          \t\tif _rectsMatchWithinTolerance(locationLTRB, itemRectPhysical):
-          \t\t\treturn location
-          \tfor itemRect in candidateRects:
-          \t\titemRectUnaware = locationHelper._remapRectByAnchors(itemRect, winContextRect, unawareRect)
-          \t\tif _rectsMatchWithinTolerance(locationLTRB, itemRectUnaware):
-          \t\t\treturn locationHelper._remapRectByAnchors(locationLTRB, unawareRect, physRect).toLTWH()
-          \tlog.debugWarning(
-          \t\tf"MSAA menu location {locationLTRB} matches no menu item rectangle of window {window} "
-          \t\t"in either coordinate space, leaving it untouched",
-          \t)
-          \treturn location'''.replace("          ", "").replace("\\t", "\t")
-
-          replace_once(
-              ia,
-              "\n\nclass MenuItem(IAccessible):\n",
-              "\n\n" + helper_block + "\n\n\nclass MenuItem(IAccessible):\n",
-          )
-          replace_once(
-              ia,
-              "class MenuItem(IAccessible):\n\tdef _get_description(self):",
-              '''class MenuItem(IAccessible):
-\tdef _get_location(self) -> RectLTWH | None:
-\t\tlocation = super()._get_location()
-\t\tif not location or not self.windowHandle:
-\t\t\treturn location
-\t\treturn _physicalLocationFromMenuLocation(
-\t\t\tself.windowHandle,
-\t\t\tself.IAccessibleChildID,
-\t\t\tself.windowClassName == _MENU_POPUP_WINDOW_CLASS,
-\t\t\tlocation,
-\t\t)
-
-\tdef _get_description(self):''',
-          )
-
-          # Unit tests: preserve the release-2026.2 test file and add only #20698 coverage.
-          test = "tests/unit/test_locationHelper.py"
-          replace_once(
-              test,
-              "# Copyright (C) 2017-2021 NV Access Limited, Babbage B.V., Łukasz Golonka",
-              "# Copyright (C) 2017-2026 NV Access Limited, Babbage B.V., Łukasz Golonka, Christopher Proß",
-          )
-          replace_once(
-              test,
-              "from locationHelper import Point, RectLTRB, RectLTWH",
-              "from locationHelper import Point, RectLTRB, RectLTWH, _remapRectByAnchors",
-          )
-          tests_block = r'''
-
-          class TestRemapRectByAnchors(unittest.TestCase):
-          \t"""Tests for the anchor based rectangle mapping used to convert DPI virtualized
-          \tmenu locations to physical screen coordinates (#19225).
-          \tThe scaled fixtures are real values measured on a 32-bit DPI unaware application."""
-
-          \tdef test_identityAnchors(self):
-          \t\tanchor = RectLTRB(left=100, top=100, right=500, bottom=400)
-          \t\trect = RectLTRB(left=150, top=150, right=250, bottom=200)
-          \t\tself.assertEqual(_remapRectByAnchors(rect, anchor, anchor), rect)
-
-          \tdef test_measured125PercentScaling(self):
-          \t\tvirtualWindow = RectLTRB(left=308, top=250, right=404, bottom=319)
-          \t\tphysicalWindow = RectLTRB(left=385, top=313, right=505, bottom=399)
-          \t\tvirtualItem = RectLTRB(left=311, top=295, right=401, bottom=316)
-          \t\tself.assertEqual(
-          \t\t\t_remapRectByAnchors(virtualItem, virtualWindow, physicalWindow),
-          \t\t\tRectLTRB(left=389, top=369, right=501, bottom=395),
-          \t\t)
-
-          \tdef test_measured150PercentScaling(self):
-          \t\tvirtualWindow = RectLTRB(left=308, top=250, right=404, bottom=319)
-          \t\tphysicalWindow = RectLTRB(left=462, top=375, right=606, bottom=479)
-          \t\tvirtualItem = RectLTRB(left=311, top=295, right=401, bottom=316)
-          \t\tself.assertEqual(
-          \t\t\t_remapRectByAnchors(virtualItem, virtualWindow, physicalWindow),
-          \t\t\tRectLTRB(left=467, top=443, right=602, bottom=474),
-          \t\t)
-
-          \tdef test_negativeCoordinates(self):
-          \t\tvirtualWindow = RectLTRB(left=-400, top=-300, right=-200, bottom=-100)
-          \t\tphysicalWindow = RectLTRB(left=-600, top=-450, right=-300, bottom=-150)
-          \t\tvirtualRect = RectLTRB(left=-390, top=-290, right=-210, bottom=-110)
-          \t\tself.assertEqual(
-          \t\t\t_remapRectByAnchors(virtualRect, virtualWindow, physicalWindow),
-          \t\t\tRectLTRB(left=-585, top=-435, right=-315, bottom=-165),
-          \t\t)
-
-          \tdef test_roundsHalfUp(self):
-          \t\toldAnchor = RectLTRB(left=0, top=0, right=4, bottom=4)
-          \t\tnewAnchor = RectLTRB(left=0, top=0, right=5, bottom=5)
-          \t\trect = RectLTRB(left=2, top=2, right=4, bottom=4)
-          \t\tself.assertEqual(
-          \t\t\t_remapRectByAnchors(rect, oldAnchor, newAnchor),
-          \t\t\tRectLTRB(left=3, top=3, right=5, bottom=5),
-          \t\t)
-
-          \tdef test_zeroAreaAnchorRaises(self):
-          \t\temptyAnchor = RectLTRB(left=10, top=10, right=10, bottom=40)
-          \t\ttarget = RectLTRB(left=0, top=0, right=100, bottom=100)
-          \t\trect = RectLTRB(left=10, top=10, right=10, bottom=20)
-          \t\tself.assertRaises(ValueError, _remapRectByAnchors, rect, emptyAnchor, target)
-          '''.replace("          ", "").replace("\\t", "\t")
-          test_text = read(test)
-          if "class TestRemapRectByAnchors" in test_text:
-              raise RuntimeError("test block already present")
-          write(test, test_text.rstrip() + tests_block + "\n")
-
-          # Document the backport under the local 2026.2 Bug Fixes section.
-          changes = "user_docs/en/changes.md"
-          replace_once(
-              changes,
-              "### Bug Fixes\n\n",
-              "### Bug Fixes\n\n* 64-bit NVDA now reports the correct location and label for Win32 menu items of 32-bit applications when display scaling is above 100%. (#19225, #20158, @christopherpross)\n",
-          )
-          '@ | Set-Content -Encoding UTF8 .git/backport20698.py
-
-          python .git/backport20698.py
+          $changes = 'NVDA-2026.2-HARDENED-SOURCE-V5/user_docs/en/changes.md'
+          $text = [IO.File]::ReadAllText($changes)
+          $nl = if ($text.Contains("`r`n")) { "`r`n" } else { "`n" }
+          $needle = "### Bug Fixes${nl}${nl}"
+          if ($text.IndexOf($needle) -lt 0 -or $text.IndexOf($needle) -ne $text.LastIndexOf($needle)) {
+            throw 'Expected exactly one local 2026.2 Bug Fixes anchor'
+          }
+          $bullet = '* 64-bit NVDA now reports the correct location and label for Win32 menu items of 32-bit applications when display scaling is above 100%. (#19225, #20158, @christopherpross)' + $nl
+          $text = $text.Replace($needle, $needle + $bullet)
+          [IO.File]::WriteAllText($changes, $text, [Text.UTF8Encoding]::new($false))
 
           python -m py_compile `
             NVDA-2026.2-HARDENED-SOURCE-V5/source/locationHelper.py `
@@ -439,8 +64,10 @@ IsWindowUnicode =''',
             NVDA-2026.2-HARDENED-SOURCE-V5/source/winBindings/user32.py `
             NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/IAccessible/__init__.py `
             NVDA-2026.2-HARDENED-SOURCE-V5/tests/unit/test_locationHelper.py
+          if ($LASTEXITCODE -ne 0) { throw 'Python syntax validation failed' }
 
-          git diff --check
+          git diff --check HEAD
+          if ($LASTEXITCODE -ne 0) { throw 'git diff --check failed' }
 
           $expectedFiles = @(
             'NVDA-2026.2-HARDENED-SOURCE-V5/source/NVDAObjects/IAccessible/__init__.py',
@@ -450,16 +77,23 @@ IsWindowUnicode =''',
             'NVDA-2026.2-HARDENED-SOURCE-V5/tests/unit/test_locationHelper.py',
             'NVDA-2026.2-HARDENED-SOURCE-V5/user_docs/en/changes.md'
           ) | Sort-Object
-          $actualFiles = @(git diff --name-only) | Sort-Object
-          if (Compare-Object $expectedFiles $actualFiles) {
+          $actualFiles = @(git diff --name-only HEAD) | Sort-Object
+          $unexpected = Compare-Object $expectedFiles $actualFiles
+          if ($unexpected) {
             throw "Unexpected changed-file set: $($actualFiles -join ', ')"
           }
 
-          $remote = (git ls-remote origin refs/heads/evolution/2026.2-nextgen).Split("`t")[0]
-          if ($remote -ne $expected) { throw "Target branch moved before push: expected $expected, got $remote" }
+          $remoteLine = git ls-remote origin refs/heads/evolution/2026.2-nextgen
+          if ($LASTEXITCODE -ne 0 -or -not $remoteLine) { throw 'Unable to re-read protected target HEAD' }
+          $remote = ($remoteLine -split "`t")[0]
+          if ($remote -ne $expected) {
+            throw "Target branch moved before push: expected $expected, got $remote"
+          }
 
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- $expectedFiles
           git commit -m 'Backport #20698: fix x86 Win32 menu locations at high DPI'
+          if ($LASTEXITCODE -ne 0) { throw 'Backport commit failed' }
           git push origin HEAD:evolution/2026.2-nextgen
+          if ($LASTEXITCODE -ne 0) { throw 'Backport push failed' }

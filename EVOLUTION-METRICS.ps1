@@ -1,5 +1,8 @@
 [CmdletBinding()]
-param()
+param(
+    [string]$RunId = '',
+    [string]$OutputPath = ''
+)
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
@@ -9,9 +12,20 @@ $sourceRoot = Join-Path $repoRoot 'NVDA-2026.2-HARDENED-SOURCE-V5'
 $logRoot = Join-Path $repoRoot 'LAB-LOCAL-OUTPUT'
 $certificationPath = Join-Path $logRoot 'EVOLUTION-CI-CERTIFICATION.txt'
 $workflowLogPath = Join-Path $logRoot 'EVOLUTION-WORKFLOW-COMPLETE.log'
-$metricsPath = Join-Path $logRoot 'EVOLUTION-METRICS.json'
+$defaultMetricsPath = Join-Path $logRoot 'EVOLUTION-METRICS.json'
+$metricsPath = if ([string]::IsNullOrWhiteSpace($OutputPath)) {
+    $defaultMetricsPath
+} elseif ([System.IO.Path]::IsPathRooted($OutputPath)) {
+    $OutputPath
+} else {
+    Join-Path $repoRoot $OutputPath
+}
 
 New-Item -ItemType Directory -Force -Path $logRoot | Out-Null
+$metricsDirectory = Split-Path -Parent $metricsPath
+if ($metricsDirectory) {
+    New-Item -ItemType Directory -Force -Path $metricsDirectory | Out-Null
+}
 
 function Read-KeyValueFile {
     param([Parameter(Mandatory)][string]$Path)
@@ -136,7 +150,7 @@ $report = [ordered]@{
     repository = if ($env:GITHUB_REPOSITORY) { $env:GITHUB_REPOSITORY } elseif ($cert.ContainsKey('repository')) { $cert['repository'] } else { $null }
     ref = if ($env:GITHUB_REF) { $env:GITHUB_REF } elseif ($cert.ContainsKey('ref')) { $cert['ref'] } else { $null }
     sha = $gitSha
-    run_id = if ($env:GITHUB_RUN_ID) { $env:GITHUB_RUN_ID } elseif ($cert.ContainsKey('run_id')) { $cert['run_id'] } else { $null }
+    run_id = if ($RunId) { $RunId } elseif ($env:GITHUB_RUN_ID) { $env:GITHUB_RUN_ID } elseif ($cert.ContainsKey('run_id')) { $cert['run_id'] } else { $null }
     run_attempt = if ($env:GITHUB_RUN_ATTEMPT) { $env:GITHUB_RUN_ATTEMPT } elseif ($cert.ContainsKey('run_attempt')) { $cert['run_attempt'] } else { $null }
     validation = [ordered]@{
         started_utc = if ($null -ne $startUtc) { $startUtc.ToString('o') } else { $null }

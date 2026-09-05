@@ -46,6 +46,7 @@ jobs:
             "sha=$env:GITHUB_SHA"
             "run_id=$env:GITHUB_RUN_ID"
             "run_attempt=$env:GITHUB_RUN_ATTEMPT"
+            "started_utc=$([DateTime]::UtcNow.ToString('o'))"
           ) | Set-Content -LiteralPath (Join-Path $logRoot 'EVOLUTION-CI-CERTIFICATION.txt') -Encoding utf8
 
       - name: Install CPython 3.13.15 x64
@@ -129,6 +130,10 @@ jobs:
           $installers | ForEach-Object {
             Write-Host "Evolution installer verified: $($_.Name)"
           }
+
+      - name: Write NextGen validation metrics
+        shell: pwsh
+        run: .\EVOLUTION-METRICS.ps1
 
       - name: Upload evolution evidence and binaries
         if: always()

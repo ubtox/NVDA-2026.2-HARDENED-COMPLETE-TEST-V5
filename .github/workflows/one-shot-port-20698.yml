@@ -1,0 +1,71 @@
+name: One-shot stage NV Access 20698
+
+on:
+  push:
+    branches:
+      - evolution/2026.2-next
+
+permissions:
+  contents: write
+
+jobs:
+  stage-port:
+    if: contains(github.event.head_commit.message, 'CI: stage NV Access #20698')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout staging branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild tree from certified NextGen base and apply upstream patch
+        shell: bash
+        env:
+          BASE_SHA: 4fd3f91381c71ae4595eeb9eee765686a31f1a97
+          UPSTREAM_SHA: acb904f88ebdbfb7415cddc2188a38f36a675243
+          SOURCE_ROOT: NVDA-2026.2-HARDENED-SOURCE-V5
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin "$BASE_SHA"
+
+          # Keep the staging commit as parent, but make the resulting tree start
+          # exactly from the certified NextGen base.
+          git read-tree --reset -u "$BASE_SHA"
+
+          patchFile="$RUNNER_TEMP/nvda-20698.patch"
+          curl --fail --location --silent --show-error \
+            "https://github.com/nvaccess/nvda/commit/${UPSTREAM_SHA}.patch" \
+            --output "$patchFile"
+
+          applyArgs=(
+            --directory="$SOURCE_ROOT"
+            --exclude='user_docs/en/changes.md'
+            "$patchFile"
+          )
+          git apply --check "${applyArgs[@]}"
+          git apply "${applyArgs[@]}"
+
+          mapfile -t actual < <(git diff --name-only "$BASE_SHA" | sort)
+          expected=(
+            "$SOURCE_ROOT/source/NVDAObjects/IAccessible/__init__.py"
+            "$SOURCE_ROOT/source/locationHelper.py"
+            "$SOURCE_ROOT/source/winBindings/user32.py"
+            "$SOURCE_ROOT/source/windowUtils.py"
+            "$SOURCE_ROOT/tests/unit/test_locationHelper.py"
+          )
+          mapfile -t expectedSorted < <(printf '%s\n' "${expected[@]}" | sort)
+
+          printf 'Files changed from certified base:\n'
+          printf '  %s\n' "${actual[@]}"
+          if [[ "$(printf '%s\n' "${actual[@]}")" != "$(printf '%s\n' "${expectedSorted[@]}")" ]]; then
+            echo 'Unexpected file set after applying #20698.' >&2
+            exit 1
+          fi
+
+          git diff --check "$BASE_SHA"
+          git diff --stat "$BASE_SHA"
+          git add -A
+          git commit -m 'STAGE NextGen: fix x64 Win32 menu DPI mapping'
+          git push origin HEAD:evolution/2026.2-next
